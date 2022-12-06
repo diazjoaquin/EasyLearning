@@ -1,0 +1,14 @@
+.bg {
+    background-color: beige;
+}
+
+
+.span1 {
+    color:blue
+
+}
+
+.span2 {
+    background-color: aquamarine;
+    display: flex;
+}
