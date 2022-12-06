@@ -34,4 +34,13 @@ export const courses = [
         Rating: "1.5",
         Video: ["https://www.youtube.com/watch?v=SOTamWNgDKc", "https://www.youtube.com/watch?v=Z0EtjKNRdR4", "https://www.youtube.com/watch?v=g2JOHLHh4rI",]
     },
+
+    {
+        idCourse: 5,
+        Description: "El mejor curso en español del mercado, aprenderás las mejores tecnicas de estafa piramidal y negocios fraudulentos",
+        Teacher: "Benja Gangolo",
+        Students: ["Fermin", "Franco Cartucho", "Santi5"],
+        Rating: "5.0",
+        Video: ["https://www.youtube.com/watch?v=6haYNo_9174", "https://www.youtube.com/watch?v=GMeNfBPmegs", "https://www.youtube.com/watch?v=dVRlWEkiTRc",]
+    },
 ]
