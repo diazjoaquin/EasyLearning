@@ -15,12 +15,6 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
     },
-    {
-      reviews: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-    },
     { timestamps: false }
   );
 };
