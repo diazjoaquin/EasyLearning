@@ -1,8 +1,7 @@
 const { Router } = require("express");
-const axios = require("axios");
 const router = Router();
-const getByName = require("./controllers").default
+const getByName = require("./controllers");
 
-router.get("/", getByName)
+router.get("/", getByName);
 
 module.exports = router;

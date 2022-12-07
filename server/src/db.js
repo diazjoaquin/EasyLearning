@@ -1,6 +1,8 @@
 require("dotenv").config();
 const { DB_USER, DB_PASSWORD, DB_HOST } = process.env;
 const { Sequelize } = require("sequelize");
+const fs = require("fs");
+const path = require("path");
 
 //const fs = require('fs');
 
@@ -37,7 +39,7 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
-const { Category, Course, Rating, Review, User, Video } = sequelize.models;
+const { Category, Course, Rating, Review, User, Video, Rol } = sequelize.models;
 
 User.belongsToMany(Course, { through: "User_Course", timestamps: false });
 User.belongsToMany(Rol, { through: "User_Rol", timestamps: false });
@@ -45,15 +47,12 @@ Category.belongsToMany(Course, {
   through: "Category_Course",
   timestamps: false,
 });
-
-//user -> review, rating
-//course -> rating, video, review
-//video -> review
-
-
-
-
-
+User.belongsTo(Review, { through: "User_Review", timestamps: false });
+User.belongsTo(Rating, { through: "User_Rating", timestamps: false });
+Course.belongsTo(Rating, { through: "Course_Rating", timestamps: false });
+Course.belongsTo(Video, { through: "Course_Video", timestamps: false });
+Course.belongsTo(Review, { through: "Course_Review", timestamps: false });
+Video.belongsTo(Review, { through: "Video_Review", timestamps: false });
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');

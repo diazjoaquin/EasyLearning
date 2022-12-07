@@ -1,8 +1,7 @@
 const { Router } = require("express");
-const axios = require("axios");
 const router = Router();
-const createCourse = require("./controllers").default
+const createCourse = require("./controllers");
 
-router.post("/", createCourse )
+router.post("/", createCourse);
 
 module.exports = router;
