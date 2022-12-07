@@ -17,7 +17,7 @@ export default function SearchBar() {
     //     setName(e.target.value);
     // };
 
-    // const handleSubmit = () => {
+    // const handleSubmit = () =>  {
     //     if (name) {
     //         dispatch(getCourseByName(name));
     //         setName("");
