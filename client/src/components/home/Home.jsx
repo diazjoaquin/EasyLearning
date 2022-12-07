@@ -4,7 +4,7 @@ import style from "./Home.module.css"
 import SearchBar from "../searchbar/SearchBar.jsx";
 import CourseCard from '../card/CourseCard.jsx';
 import { courses } from "../../mockup";
-// import Carousel from "../carousel/Carousel";
+import Carousel from "../carousel/Carousel";
 
 
 export default function Home() {
@@ -17,23 +17,23 @@ export default function Home() {
                 </Navbar>
             </div>
             <div>
-                <span calssName={style.span1}>
+                <span className={style.span1}>
                     START TO SUCCESS
                 </span>
                 <span className={style.span2}> Acceso To 5000+ Courses from
                     300 Instructor & Institutions
                 </span>
                 <span>
-                    Varius version have envolved over the years, sometimes by accident, 
+                    Varius version have envolved over the years, sometimes by accident,
                 </span>
                 <SearchBar>
                 </SearchBar>
             </div>
             <div title="carousel">
-                {/* <Carousel>
+                <Carousel>
 
-                </Carousel> */}
-                <div className={style.coursecont}>
+                </Carousel>
+                {/* <div className={style.coursecont}>
                     {
                         courses.map((course) => {
                             return (
@@ -46,7 +46,7 @@ export default function Home() {
                             />)
                         })
                     }
-                </div>
+                </div> */}
             </div>
             <br />
         </div>

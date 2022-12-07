@@ -19,7 +19,7 @@ export default function SearchBar() {
 
     // const handleSubmit = () => {
     //     if (name) {
-    //         dispatch(getCourseByName(name));
+    //         dispatch(byName(name));
     //         setName("");
     //         dispatch(loadingAction(true));
     //         setTimeout(() => {

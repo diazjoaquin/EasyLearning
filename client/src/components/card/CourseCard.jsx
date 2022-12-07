@@ -16,7 +16,7 @@ const CourseCard = () => {
                     src={courses[0].Video[0]}
                     title={courses[0].idCourse}/> */}
                     <iframe id="ytplayer" type="text/html" width="330" height="220"
-                    src="http://www.youtube.com/embed/M7lc1UVf-VE?autoplay=1&origin=http://example.com"
+                    src="http://www.youtube.com/embed/M7lc1UVf-VE?autoplay=0&origin=http://example.com"
                     frameborder="0"/>
                 <Stack mt='6' spacing='3'>
                 <Heading size='md'>Course Name</Heading>

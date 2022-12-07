@@ -1,0 +1,54 @@
+.bg {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 10px;
+}
+
+/*botones*/
+.bg button {
+    border-radius: 5px;
+    margin: 2px;
+    height: 25px;
+    width: 25px;
+    border: 1px solid black;
+    text-align: center;
+    font-family: "DM Sans", sans-serif;
+    /* background: rgba(209, 196, 189, 0.69); */
+    background: rgba(178, 165, 157, 0.69);
+    font-size: 18px;
+    /* font-weight: bold; */
+  }
+  
+  .bg button:hover {
+    cursor: pointer;
+    transition: background-color 0.5s;
+    background-color: white;
+    color: black;
+    font-weight: bold;
+    border: 1px solid #313131;
+  }
+  
+  /* .bg button:active {
+    cursor: pointer;
+    background-color: white;
+    color: black;
+    font-weight: bold;
+    border: 1px solid #313131;
+  } */
+  
+  .btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+  }
+  
+  /* .btn button:focus {
+    cursor: pointer;
+    background-color: white;
+    color: black;
+    font-weight: bold;
+    border: 1px solid #313131;
+  } */
+  
