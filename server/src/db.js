@@ -39,15 +39,11 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
-const { Category, Course, Rating, Review, User, Video, Rol } = sequelize.models;
+const { Category, Course, Rating, Review, User, Video } = sequelize.models;
 
 //muchos a muchos
 User.belongsToMany(Course, { through: "User_Course", timestamps: false });
 Course.belongsToMany(User, { through: "User_Course", timestamps: false });
-
-//muchos a muchos
-User.belongsToMany(Rol, { through: "User_Rol", timestamps: false });
-Rol.belongsToMany(User, { through: "User_Rol", timestamps: false });
 
 //muchos a muchos
 Category.belongsToMany(Course, {
@@ -59,17 +55,40 @@ Course.belongsToMany(Category, {
   timestamps: false,
 });
 
-User.belongsTo(Review, { through: "User_Review", timestamps: false });
+//A.belongsTo(B) One-To-One relationship with the foreign key being defined in the source model (A).
+//A.hasOne(B) association means that a One-To-One relationship exists between A and B, 
+//with the foreign key being defined in the target model (B).
 
-User.belongsTo(Rating, { through: "User_Rating", timestamps: false });
+//For consistency, the ON DELETE RESTRICT can be translated to the (less aggresive) You Can't Kill Parents!
+// Only childless rows can be killed (deleted.)
 
-Course.belongsTo(Rating, { through: "Course_Rating", timestamps: false });
+User.hasMany(Review, {onDelete: 'RESTRICT'} );
+Review.belongsTo(User);
 
-Course.belongsTo(Video, { through: "Course_Video", timestamps: false });
+// User.belongsTo(Review, { through: "User_Review", timestamps: false });
 
-Course.belongsTo(Review, { through: "Course_Review", timestamps: false });
+User.hasMany(Rating, {onDelete: 'RESTRICT'} );
+Rating.belongsTo(User);
 
-Video.belongsTo(Review, { through: "Video_Review", timestamps: false });
+// User.belongsTo(Rating, { through: "User_Rating", timestamps: false });
+
+Course.hasMany(Rating, {onDelete: 'RESTRICT'});
+Rating.belongsTo(Course);
+
+// Course.belongsTo(Rating, { through: "Course_Rating", timestamps: false });
+
+Course.hasMany(Video);
+Video.belongsTo(Course);
+
+// Course.belongsTo(Video, { through: "Course_Video", timestamps: false });
+
+Course.hasMany(Review, {onDelete: 'RESTRICT'});
+Review.belongsTo(Course);
+
+// Course.belongsTo(Review, { through: "Course_Review", timestamps: false });
+// Video.belongsTo(Review, { through: "Video_Review", timestamps: false });
+
+
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
