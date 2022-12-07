@@ -1,14 +1,24 @@
-FINAL PROJECT FROM HENRY BOOTCAMP:
+__FINAL PROJECT FROM HENRY BOOTCAMP:__
+----
 
-EasyLearning - 
 
 
-Group Members:
+__EasyLearning__
+
+
+**Group Members:**
+----
 
 Fermín Solebarrieta
+
 Santiago Rosso
+
 German Golder
+
 Franco Rantucho
+
 Benjamín Gangolo
-Bianca
+
+Bianca Benitez
+
 Díaz Joaquín
