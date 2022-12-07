@@ -1,4 +1,11 @@
-const { Course, Category, User, Review, Rating, Video } = require("../db.js");
+const {
+  Course,
+  Category,
+  User,
+  Review,
+  Rating,
+  Video,
+} = require("../../db.js");
 
 const getCourseById = async (id) => {
   let course = await Course.findOne({
@@ -13,4 +20,8 @@ const getCourseById = async (id) => {
   });
 
   return course;
+};
+
+module.exports = {
+  getCourseById,
 };

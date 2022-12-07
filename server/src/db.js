@@ -2,6 +2,8 @@ require("dotenv").config();
 const { DB_USER, DB_PASSWORD, DB_HOST } = process.env;
 const { Sequelize } = require("sequelize");
 
+//const fs = require('fs');
+
 const sequelize = new Sequelize(
   `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/elearning`,
   {
@@ -47,6 +49,11 @@ Category.belongsToMany(Course, {
 //user -> review, rating
 //course -> rating, video, review
 //video -> review
+
+
+
+
+
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');

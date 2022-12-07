@@ -1,9 +1,8 @@
 const { Router } = require("express");
-const axios = require("axios");
 const router = Router();
 const { getCourseById } = require("./controllers");
 
-router.get("/getDetail", async (req, res) => {
+router.get("/", async (req, res) => {
   const { id } = req.params;
 
   try {
