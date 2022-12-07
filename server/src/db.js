@@ -2,6 +2,8 @@ require("dotenv").config();
 const { DB_USER, DB_PASSWORD, DB_HOST } = process.env;
 const { Sequelize } = require("sequelize");
 
+//const fs = require('fs');
+
 const sequelize = new Sequelize(
   `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/elearning`,
   {
@@ -9,6 +11,11 @@ const sequelize = new Sequelize(
     native: false, // lets Sequelize know we can use pg-native for ~30% more speed
   }
 );
+
+
+
+
+
 
 module.exports = {
   conn: sequelize,
