@@ -1,9 +1,15 @@
 import React from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import {getCourseByName, loadingAction, byName} from "../../redux/actions"
+import { getCourseByName, loadingAction, byName } from "../../redux/actions"
 import Lupa from "../../image/lupa.png"
 import searchbar from "../../image/searchbar.png"
+import style from "./SearchBar.module.css";
+import { IconButton } from '@chakra-ui/react'
+import { SearchIcon } from '@chakra-ui/icons'
+
+
+
 
 
 
@@ -17,16 +23,16 @@ export default function SearchBar() {
         setName(e.target.value);
     };
 
-    const handleSubmit = () =>  {
+    const handleSubmit = () => {
         if (name) {
             dispatch(byName(name));
             setName("");
-    //         dispatch(loadingAction(true));
-    //         setTimeout(() => {
-    //             dispatch(loadingAction(false));
-    //         }, 3000);
+            //         dispatch(loadingAction(true));
+            //         setTimeout(() => {
+            //             dispatch(loadingAction(false));
+            //         }, 3000);
         } else {
-            alert("Debes escribir algo...");
+            alert("Please complete the search input");
         }
     };
 
@@ -34,17 +40,24 @@ export default function SearchBar() {
 
     return (
         // <div>
-            
+
         //     <img src={searchbar} alt="SearchBar"/>
 
         // </div>
-        <div>
-            <input type="text" placeholder="Search..." onChange={handleInputChange} value={name} />
-            <div>
-                <img src={Lupa} alt="Search" onClick={(e) => handleSubmit(e)} />
+        <div className={style.searchbar}>
+            <input title="Please complete with the name of the course" type="text" placeholder="What do you whant to learn? " onChange={handleInputChange} value={name} />
+            <div className={style.searchbutton}>               
+                <IconButton
+                    colorScheme='blue'
+                    aria-label='Search database'
+                    icon={<SearchIcon />}
+                    title="Click to search"
+                    onClick={(e)=> handleSubmit(e)}
+                />
             </div>
 
 
         </div>
     )
 }
+
