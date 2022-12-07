@@ -5,7 +5,7 @@
 // export function getCourseByName(name) {
 //     return async function (dispatch) {
 //         try {
-//             const recipeName = await axios("completar ruta");
+//             const courseName = await axios("completar ruta");
 //             return dispatch({
 //                 type: GET_COURSE_BY_NAME,
 //                 payload: courseName.data

@@ -5,7 +5,7 @@ export const courses = [
         Teacher: "Franco Cartucho",
         Students: ["German", "Bianca", "Fermin"],
         Rating: "4.5",
-        Video: ["https://www.youtube.com/watch?v=C6IjS7jKnjQ", "https://www.youtube.com/watch?v=vlCXdvcgiE0", "https://www.youtube.com/watch?v=DinilgacaWs",]
+        Video: ["https://www.youtube.com/embed?v=l6dC6UgHzHw?autoplay=1&origin=http://example.com", "https://www.youtube.com/watch?v=vlCXdvcgiE0", "https://www.youtube.com/watch?v=DinilgacaWs",]
     },
 
     {

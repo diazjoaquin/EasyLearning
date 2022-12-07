@@ -5,8 +5,17 @@
     justify-content:space-evenly;
     border-style: double;
     border-color: black;
-    
-    
+  }
+
+  .buttons {
+    width: 180px;
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .navcont {
+    position: relative;
+    top: 0;
   }
 
   
@@ -21,7 +30,6 @@
     margin-right: 10px;
     height: 80px;
     width: 120px;
-
   }
 
 
