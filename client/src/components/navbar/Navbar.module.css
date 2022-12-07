@@ -1,0 +1,42 @@
+.botones {
+    padding: 10px;
+    margin-top: 50px;
+    display: flex;
+    justify-content:space-evenly;
+    border-style: double;
+    border-color: black;
+  }
+
+  .buttons {
+    width: 180px;
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .navcont {
+    position: relative;
+    top: 0;
+  }
+
+  
+  .logo_content {
+    height: 1em;
+    width: 1em;
+  }
+
+  .botones img {
+    border-radius: 15px;
+    margin-left: 10px;
+    margin-right: 10px;
+    height: 80px;
+    width: 120px;
+  }
+
+
+
+  .logo {
+    max-height: fit-content;
+    max-width: fit-content;
+  }
+
+  

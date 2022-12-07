@@ -41,17 +41,34 @@ sequelize.models = Object.fromEntries(capsEntries);
 // Para relacionarlos hacemos un destructuring
 const { Category, Course, Rating, Review, User, Video, Rol } = sequelize.models;
 
+//muchos a muchos
 User.belongsToMany(Course, { through: "User_Course", timestamps: false });
+Course.belongsToMany(User, { through: "User_Course", timestamps: false });
+
+//muchos a muchos
 User.belongsToMany(Rol, { through: "User_Rol", timestamps: false });
+Rol.belongsToMany(User, { through: "User_Rol", timestamps: false });
+
+//muchos a muchos
 Category.belongsToMany(Course, {
   through: "Category_Course",
   timestamps: false,
 });
+Course.belongsToMany(Category, {
+  through: "Category_Course",
+  timestamps: false,
+});
+
 User.belongsTo(Review, { through: "User_Review", timestamps: false });
+
 User.belongsTo(Rating, { through: "User_Rating", timestamps: false });
+
 Course.belongsTo(Rating, { through: "Course_Rating", timestamps: false });
+
 Course.belongsTo(Video, { through: "Course_Video", timestamps: false });
+
 Course.belongsTo(Review, { through: "Course_Review", timestamps: false });
+
 Video.belongsTo(Review, { through: "Video_Review", timestamps: false });
 
 module.exports = {

@@ -1,0 +1,21 @@
+.bg {
+    background-color: beige;
+}
+
+
+.span1 {
+    color:blue
+
+}
+
+.span2 {
+    background-color: aquamarine;
+    display: flex;
+}
+
+.coursecont {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 500px;
+    gap: 30px;
+}
