@@ -8,18 +8,26 @@ const {
 } = require("../../db.js");
 
 const getCourseById = async (id) => {
-  let course = await Course.findOne({
-    where: {
-      id: id,
-    },
-    include: Category,
-    User,
-    Review,
-    Rating,
-    Video,
-  });
+  try {
+    let courseDB = await Course.findOne({
+      where: {
+        id,
+      },
+      include: {
+        model: Category,
+        User,
+        Review,
+        Rating,
+        Video,
+        attributes: ["name"],
+        through: { attributes: [] },
+      },
+    });
 
-  return course;
+    return courseDB;
+  } catch (error) {
+    return error;
+  }
 };
 
 module.exports = {
