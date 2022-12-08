@@ -4,7 +4,9 @@ import style from "./Home.module.css"
 import SearchBar from "../searchbar/SearchBar.jsx";
 import CourseCard from '../card/CourseCard.jsx';
 import { courses } from "../../mockup";
-// import Carousel from "../carousel/Carousel";
+import Carousel from "../carousel/Carousel";
+import { Heading, Box, Text, Image } from '@chakra-ui/react'
+import mainpicture from "../../image/maintextimage.png"
 
 
 export default function Home() {
@@ -16,19 +18,30 @@ export default function Home() {
                 <Navbar>
                 </Navbar>
             </div>
-            <div>
-                <span calssName={style.span1}>
-                    START TO SUCCESS
-                </span>
-                <span className={style.span2}> Acceso To 5000+ Courses from
-                    300 Instructor & Institutions
-                </span>
-                <span>
-                    Varius version have envolved over the years, sometimes by accident, 
-                </span>
-                <SearchBar>
-                </SearchBar>
+            <div className={style.maintext}>
+                <Box maxW='32rem'>
+                    <Text fontSize='xl'>
+                        START TO SUCCESS
+                    </Text>
+                    <Heading mb={4}>Acceso To 5000+ Courses from
+                        300 Instructor & Institutions</Heading>
+                    <Text fontSize='xl'> Varius version have envolved over the years, sometimes by accident,
+                    </Text>
+                    <SearchBar>
+                    </SearchBar>
+                </Box>
+
+                <div>
+                    <Box boxSize='m'>
+                        <Image src={mainpicture} alt='image' />
+                    </Box>
+
+                </div>
             </div>
+
+            <br>
+            </br>
+
             <div title="carousel">
                 {/* <Carousel>
 
@@ -37,13 +50,13 @@ export default function Home() {
                     {
                         courses.map((course) => {
                             return (
-                            <CourseCard
-                            key={course.idCourse}
-                            idCourse={course.idCourse}
-                            Description={course.Description}
-                            Video={course.Video[0]}
-                            Rating={course.Rating}
-                            />)
+                                <CourseCard
+                                    key={course.idCourse}
+                                    idCourse={course.idCourse}
+                                    Description={course.Description}
+                                    Video={course.Video[0]}
+                                    Rating={course.Rating}
+                                />)
                         })
                     }
                 </div>
