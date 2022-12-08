@@ -10,7 +10,7 @@ const initialState = {
     cart: [],
 }
 
-const rooReducer = (state = initialState, action) => {
+const rootReducer = (state = initialState, action) => {
     switch (action.type) {
 
         case GET_COURSE_BY_NAME:
@@ -40,14 +40,18 @@ const rooReducer = (state = initialState, action) => {
                 courseDetail: [],
             }
         case ADD_TO_CART:
+            let addToCart = state.courses;
+            let cart = addToCart.filter((course) => course.idCourse === action.payload);
             return {
                 ...state,
-                cart: [...state.cart, action.payload]
+                cart: [...state.cart, cart]
             }
         case BUY_NOW:
+            let buyNow = state.courses;
+            let buy = buyNow.filter((course) => course.idCourse === action.payload);
             return {
                 ...state,
-                cart: action.payload
+                cart: buy
             }
         case FILTER_BY_CATEGORY:
             let category = state.filter;
@@ -109,4 +113,4 @@ const rooReducer = (state = initialState, action) => {
     }
 };
 
-export default rooRouter;
+export default rootReducer;

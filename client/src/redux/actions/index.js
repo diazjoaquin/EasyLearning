@@ -84,10 +84,11 @@ export const addToCart = (payload) => async dispatch => {
     }
 }
 
-export const buyNow = () => async dispatch => {
+export const buyNow = (payload) => async dispatch => {
     try {
         return dispatch({
-            type: BUY_NOW
+            type: BUY_NOW,
+            payload
         });
     } catch (error) {
 
