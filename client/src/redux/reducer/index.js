@@ -5,7 +5,7 @@ const initialState = {
     filter: [],
     courseDetail: [],
     categories: [],
-    ranking: [],
+    rating: [],
     proffesors: [],
     cart: [],
 }
