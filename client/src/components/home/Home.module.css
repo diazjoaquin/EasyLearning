@@ -1,21 +1,25 @@
 .bg {
-    background-color: beige;
+    /* background-color: rgb(245, 245, 220); */
+    border-style: double;
+    border-bottom: 3px;
+    border-color: black;
 }
 
-
-.span1 {
-    color:blue
-
-}
-
-.span2 {
-    background-color: aquamarine;
-    display: flex;
+.icon:hover{
+    cursor: pointer;
 }
 
 .coursecont {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-auto-rows: 500px;
-    gap: 30px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+}
+
+.maintext {
+    display: flex;
+    flex-direction:row;
+    padding-left: 200px;
+    padding-top: 70px;
 }
