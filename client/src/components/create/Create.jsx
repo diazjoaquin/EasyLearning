@@ -100,7 +100,7 @@ const Create = () =>{
             //!errors.video
         ) {
             alert("Your course has been created succesfully");
-            dispatch(createCourse(input)) //ver accions (se supone que recibe el input)
+            dispatch(createCourse(input)) 
             setInput({
                 name:"",
                 description: "",
