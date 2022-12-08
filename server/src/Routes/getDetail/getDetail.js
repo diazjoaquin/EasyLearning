@@ -2,14 +2,13 @@ const { Router } = require("express");
 const router = Router();
 const { getCourseById } = require("./controllers");
 
-router.get("/", async (req, res) => {
-  const { id } = req.params;
-
+router.get("/:id", async (req, res) => {
   try {
-    let result = getCourseById(id);
-    res.send(result);
+    const { id } = req.params;
+    let result = await getCourseById(id);
+    res.json(result);
   } catch (error) {
-    res.status(404).send(error);
+    res.json(error);
   }
 });
 
