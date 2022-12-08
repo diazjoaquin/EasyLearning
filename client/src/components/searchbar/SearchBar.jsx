@@ -1,9 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { getCourseByName, loadingAction, byName } from "../../redux/actions"
-import Lupa from "../../image/lupa.png"
-import searchbar from "../../image/searchbar.png"
+import { byName } from "../../redux/actions"
 import style from "./SearchBar.module.css";
 import { IconButton } from '@chakra-ui/react'
 import { SearchIcon } from '@chakra-ui/icons'

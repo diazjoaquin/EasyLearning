@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import style from "./Navbar.module.css"
 import Logo from "../../image/logoE.png"
-import { Button, EmailIcon } from '@chakra-ui/react'
+import { Button } from '@chakra-ui/react'
 // import Login from "../login/Login";
 // import SignUp from "../../components/signup/SignUp"
 // import { IconButton } from '@chakra-ui/react'
