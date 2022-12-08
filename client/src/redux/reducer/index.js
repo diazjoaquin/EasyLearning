@@ -57,12 +57,12 @@ const rooReducer = (state = initialState, action) => {
                 courses: data
             }
         case FILTER_BY_COST:
-            let cost = state.filter;
+            // let cost = state.filter;
             return {
                 ...state,
             }
         case FILTER_BY_PROFESSOR:
-            let professor = state.filter;
+            // let professor = state.filter;
             return {
                 ...state,
             }

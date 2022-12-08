@@ -4,11 +4,10 @@ import style from "./Home.module.css"
 import SearchBar from "../searchbar/SearchBar.jsx";
 import CourseCard from '../card/CourseCard.jsx';
 import { courses } from "../../mockup";
-// import Carousel from "../carousel/Carousel";
 import { Heading, Box, Text, Image } from '@chakra-ui/react'
 import mainpicture from "../../image/maintextimage.png"
-import { useSelector } from "react-redux";
 import { Icon, ArrowLeftIcon, ArrowRightIcon } from '@chakra-ui/icons'
+// import { useSelector } from "react-redux";
 
 
 export default function Home() {

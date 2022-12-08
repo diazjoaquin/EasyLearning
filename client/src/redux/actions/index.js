@@ -29,10 +29,10 @@ export const getAllCourses = () => async dispatch => {
 
 export const byName = (name) => async dispatch => {
     try {
-        const name = await axios.get(`/getByName?name=${name}`);
+        const byName = await axios.get(`/getByName?name=${name}`);
         return dispatch({
             type: GET_COURSE_BY_NAME,
-            payload: name.data
+            payload: byName.data
         });
     } catch (error) {
         
