@@ -25,6 +25,12 @@ module.exports = (sequelize) => {
         // allowNull: false,
       },
     },
+    { 
+      admin: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
+  },
     { timestamps: false }
   );
 };
