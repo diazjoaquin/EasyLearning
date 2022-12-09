@@ -1,5 +1,5 @@
 const axios = require("axios");
-const { Course, Category, Teacher, Rating } = require("../../db.js");
+const { Course, Category } = require("../../db.js");
 
 const getAllCourses = async () => {
   try {
@@ -11,10 +11,6 @@ const getAllCourses = async () => {
     // await Course.bulkCreate(courses);
     let coursesDB = await Course.findAll({
       include: [
-        {
-          model: Teacher,
-          attributes: ["userId"],
-        },
         {
           model: Category,
           attributes: ["name"],
