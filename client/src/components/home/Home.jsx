@@ -1,15 +1,35 @@
-import React from "react";
+import React, { useState } from "react";
 import Navbar from '../navbar/Navbar';
 import style from "./Home.module.css"
 import SearchBar from "../searchbar/SearchBar.jsx";
 import CourseCard from '../card/CourseCard.jsx';
 import { courses } from "../../mockup";
-import Carousel from "../carousel/Carousel";
 import { Heading, Box, Text, Image } from '@chakra-ui/react'
 import mainpicture from "../../image/maintextimage.png"
+import { Icon, ArrowLeftIcon, ArrowRightIcon } from '@chakra-ui/icons'
+// import { useSelector } from "react-redux";
 
 
 export default function Home() {
+
+    // carrousel: 
+    // const courses = useSelector(state => state.courses);
+    const [ coursesPerPage ] = useState(3);
+    const [ currentPage, setCurrentPage ] = useState(1);
+    const last = currentPage * coursesPerPage;
+    const first = last - coursesPerPage;
+    const currentCourses = courses.slice(first, last);
+    const numOfPages = courses.length / coursesPerPage;
+
+    const handleNext = (e) => {
+        e.preventDefault();
+        currentPage < numOfPages ? setCurrentPage(currentPage + 1) : setCurrentPage(1);
+    }
+
+    const handlePrevious = (e) => {
+        e.preventDefault();
+        currentPage > 1 ? setCurrentPage(currentPage - 1) : setCurrentPage(numOfPages);
+    }
 
     return (
         //navbar
@@ -47,8 +67,10 @@ export default function Home() {
 
                 </Carousel> */}
                 <div className={style.coursecont}>
+                <Icon as={ArrowLeftIcon} onClick={(e) => handlePrevious(e)}
+                className={style.icon}/>
                     {
-                        courses.map((course) => {
+                        currentCourses.map((course) => {
                             return (
                                 <CourseCard
                                     key={course.idCourse}
@@ -59,16 +81,12 @@ export default function Home() {
                                 />)
                         })
                     }
+                    <Icon as={ArrowRightIcon} onClick={(e) => handleNext(e)}
+                    className={style.icon}/>
                 </div>
             </div>
             <br />
         </div>
-
-
-
         //Texto pincipal 
-
-
     );
-
 }

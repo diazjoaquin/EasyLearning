@@ -5,13 +5,16 @@
     border-color: black;
 }
 
-
+.icon:hover{
+    cursor: pointer;
+}
 
 .coursecont {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-auto-rows: 500px;
-    gap: 30px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
 }
 
 .maintext {

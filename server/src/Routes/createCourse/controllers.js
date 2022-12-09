@@ -1,19 +1,45 @@
-const { Course } = require("../../db.js");
+const { Course, Category, Rating } = require("../../db.js");
+const { Op } = require("sequelize");
 
 const createCourse = async (req, res) => {
-  const { name, category, description, rating, video } = req.body;
   try {
-    const newCourse = await Course.create({
-      name,
-      description,
-    });
-    //crear en la base de datos category, rating y video. findOrCreate
-    //agregar teacher
-    // await newCourse.addCategory(categoryDb);
-    // await newCourse.addVideo(videoDb);
-    // await newCourse.addRating(ratingDb);
+    const { name, description, teacher, category } = req.body;
 
-    res.status(201).json(newCourse).send({ msg: "Course created" });
+    if (name && description && teacher && category) {
+      const [course, createdCourse] = await Course.findOrCreate({
+        where: { name: { [Op.iLike]: name } },
+        defaults: {
+          name,
+          description,
+          teacher,
+        },
+      });
+
+      const [categoryDB, createdCategory] = await Category.findOrCreate({
+        where: { name: { [Op.iLike]: category } },
+        defaults: {
+          name: category.slice(0, 1).toUpperCase().concat(category.slice(1)),
+        },
+      });
+
+      const ratingDB = await Rating.create({
+        score: "undefined",
+      });
+
+      await course.addCategory(categoryDB);
+      await course.setRating(ratingDB);
+
+      res.json(
+        createdCourse
+          ? "Curso creado exitosamente."
+          : "Ya existe un curso con ese nombre."
+      );
+    } else {
+      res.json({
+        message:
+          "Alguna de las propiedades de curso es null [name/description/teacher/category]",
+      });
+    }
   } catch (error) {
     res.status(400).json(error);
   }
