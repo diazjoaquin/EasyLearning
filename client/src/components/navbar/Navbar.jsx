@@ -19,7 +19,7 @@ export default function Navbar() {
                     <Link to="/about">About</Link>
                     <Link to="/course">Course</Link>
                     <Link to="/blog">Blog</Link>
-                    <Link to="/about">Contact</Link>
+                    <Link to="/contact">Contact</Link>
                     <div className={style.buttons}>
                         <Link to="/login">
                             <Button colorScheme='gray'>
