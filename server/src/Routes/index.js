@@ -5,13 +5,19 @@ const createCourse = require("./createCourse/createCourse.js");
 const getByName = require("./getByName/getByName.js");
 const getDetail = require("./getDetail/getDetail.js");
 const getAllCategories = require("./getAllCategories/getAllCategories.js");
-const createdCursos = require("./test/test.js");
+const updateCourse = require("./updateCourse/updateCourse.js");
+const createUser = require("./createUser/createUser.js");
+const createRating = require("./createRating/createRating.js");
+// const createUser = require("./test/test.js");
 
 router.use("/getAllCourses", getAllCourses);
 router.use("/getDetail", getDetail);
 router.use("/createCourse", createCourse);
 router.use("/getByName", getByName);
 router.use("/categories", getAllCategories);
-router.use("/createdCursos", createdCursos);
+router.use("/updateCourse", updateCourse);
+router.use("/createUser", createUser);
+// router.use("/createUser", createUser);
+router.use("/createRating", createRating);
 
 module.exports = router;

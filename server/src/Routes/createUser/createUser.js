@@ -1,10 +1,11 @@
 const { Router } = require("express");
 const router = Router();
-const { createCourse } = require("./controllers");
+const { createUser } = require("./controllers.js");
 
+//ruta creada para testear
 router.post("/", async (req, res) => {
   try {
-    res.json(await createCourse(req.body));
+    res.json(await createUser(req.body));
   } catch (error) {
     res.json(error);
   }

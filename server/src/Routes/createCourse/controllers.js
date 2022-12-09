@@ -1,48 +1,51 @@
-const { Course, Category, Rating } = require("../../db.js");
+const { Course, Category, Rating, Teacher, User } = require("../../db.js");
 const { Op } = require("sequelize");
 
-const createCourse = async (req, res) => {
+const createCourse = async ({ name, description, userId, category }) => {
   try {
-    const { name, description, teacher, category } = req.body;
-
-    if (name && description && teacher && category) {
+    if (name && description && category) {
       const [course, createdCourse] = await Course.findOrCreate({
         where: { name: { [Op.iLike]: name } },
         defaults: {
           name,
           description,
-          teacher,
         },
       });
 
+      //Lo que falta es, en la tabla course, poder asignarle a la llave foranea teacherId, el usuario que es el respectivo teacher
+      // const userDB = await User.findOne({
+      //   where: { id: userId },
+      // });
+      // await course.setTeacher(userDB);
+
+      //Si agrega mas de una categoria, esto tendria que ser un map.
       const [categoryDB, createdCategory] = await Category.findOrCreate({
         where: { name: { [Op.iLike]: category } },
         defaults: {
           name: category.slice(0, 1).toUpperCase().concat(category.slice(1)),
         },
       });
+      await course.addCategory(categoryDB);
 
-      const ratingDB = await Rating.create({
-        score: "undefined",
+      //Vincular al curso el teacher
+      await Teacher.create({
+        userId: userId,
+        courseId: course.id,
+        teacerId: userId,
       });
 
-      await course.addCategory(categoryDB);
-      await course.setRating(ratingDB);
-
-      res.json(
-        createdCourse
-          ? "Curso creado exitosamente."
-          : "Ya existe un curso con ese nombre."
-      );
+      return createdCourse
+        ? "Curso creado exitosamente."
+        : "Ya existe un curso con ese nombre.";
     } else {
-      res.json({
+      return {
         message:
           "Alguna de las propiedades de curso es null [name/description/teacher/category]",
-      });
+      };
     }
   } catch (error) {
-    res.status(400).json(error);
+    return error;
   }
 };
 
-module.exports = createCourse;
+module.exports = { createCourse };

@@ -30,7 +30,11 @@ module.exports = (sequelize) => {
     {
       avatar: {
         type: DataTypes.STRING,
-        allowNull: false,
+        // allowNull: false,
+      },
+      courses: {
+        type: DataTypes.ARRAY(DataTypes.INTEGER),
+        // allowNull: false,
       },
     },
     { timestamps: false }

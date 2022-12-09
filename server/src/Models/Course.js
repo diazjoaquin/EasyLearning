@@ -12,10 +12,10 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      teacher: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
+      // teacher: {
+      //   type: DataTypes.STRING,
+      //   allowNull: false,
+      // },
     },
     { timestamps: false }
   );
