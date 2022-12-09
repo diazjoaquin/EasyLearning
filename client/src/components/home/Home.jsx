@@ -23,7 +23,7 @@ export default function Home() {
                     <Text fontSize='xl'>
                         START TO SUCCESS
                     </Text>
-                    <Heading mb={4}>Acceso To 5000+ Courses from
+                    <Heading mb={4}>Acces To 5000+ Courses from
                         300 Instructor & Institutions</Heading>
                     <Text fontSize='xl'> Varius version have envolved over the years, sometimes by accident,
                     </Text>
