@@ -2,13 +2,13 @@ const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
   sequelize.define(
-    "review",
+    "comments",
     {
       title: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      comments: {
+      description: {
         type: DataTypes.STRING,
         allowNull: false,
       },
