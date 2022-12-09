@@ -8,8 +8,6 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-    },
-    {
       comments: {
         type: DataTypes.STRING,
         allowNull: false,

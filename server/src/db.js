@@ -4,8 +4,6 @@ const { Sequelize } = require("sequelize");
 const fs = require("fs");
 const path = require("path");
 
-//const fs = require('fs');
-
 const sequelize = new Sequelize(
   `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/elearning`,
   {
@@ -39,7 +37,7 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
-const { Category, Course, Rating, Review, User, Video, Teacher } =
+const { Category, Course, Rating, Review, User, Video, Teacher, Comments } =
   sequelize.models;
 
 //Fermin
@@ -67,6 +65,14 @@ User.hasMany(Rating);
 //Agregan en la tabla teachers, una clave foranea CourseId y UserId
 Course.hasOne(Teacher);
 User.hasOne(Teacher);
+
+//TABLA COMMENTS
+// Video.hasMany(Comments);
+
+//TABLA VIDEO
+Course.hasMany(Video);
+Video.hasMany(Comments);
+// Comments.hasMany(Video);
 
 //Bianca
 // //muchos a muchos
