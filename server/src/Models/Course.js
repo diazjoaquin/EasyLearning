@@ -1,4 +1,5 @@
 const { DataTypes } = require("sequelize");
+const { patch } = require("../routes");
 
 module.exports = (sequelize) => {
   sequelize.define(
@@ -11,6 +12,9 @@ module.exports = (sequelize) => {
       description: {
         type: DataTypes.STRING,
         allowNull: false,
+      },
+      rating: {
+        type: DataTypes.STRING,
       },
     },
     { timestamps: false }

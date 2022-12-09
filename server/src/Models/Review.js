@@ -12,6 +12,9 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
+      score: {
+        type: DataTypes.STRING,
+      },
     },
     { timestamps: false }
   );

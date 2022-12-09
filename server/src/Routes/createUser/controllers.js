@@ -1,6 +1,12 @@
 const { User } = require("../../db.js");
 
-const createUser = async ({ fullName, password, phoneNumber, emailAdress }) => {
+const createUser = async ({
+  fullName,
+  password,
+  phoneNumber,
+  emailAddress,
+  avatar,
+}) => {
   try {
     //Create user
     const [userDB, createdUserDB] = await User.findOrCreate({
@@ -9,7 +15,8 @@ const createUser = async ({ fullName, password, phoneNumber, emailAdress }) => {
         fullName,
         password,
         phoneNumber,
-        emailAdress,
+        emailAddress,
+        avatar,
       },
     });
 

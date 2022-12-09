@@ -28,11 +28,13 @@ const createCourse = async ({ name, description, userId, category }) => {
       await course.addCategory(categoryDB);
 
       //Vincular al curso el teacher
-      await Teacher.create({
-        userId: userId,
-        courseId: course.id,
-        teacerId: userId,
-      });
+      if (createdCourse) {
+        await Teacher.create({
+          userId: userId,
+          courseId: course.id,
+          teacherId: userId,
+        });
+      }
 
       return createdCourse
         ? "Curso creado exitosamente."

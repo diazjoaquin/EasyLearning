@@ -57,9 +57,9 @@ Course.belongsToMany(Category, {
 
 //TABLA RATING
 //Agrega en la tabla ratings una clave foranea CourseId
-Rating.belongsTo(Course);
+// Rating.belongsTo(Course);
 //Agrega en la tabla ratings una clave foranea RatingId
-User.hasMany(Rating);
+// User.hasMany(Rating);
 
 //TABLA TEACHERS
 //Agregan en la tabla teachers, una clave foranea CourseId y UserId
