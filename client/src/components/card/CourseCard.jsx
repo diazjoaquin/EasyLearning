@@ -5,7 +5,7 @@ import { Card, CardBody, CardFooter, Stack, Heading, Text, Divider, ButtonGroup,
 import { useDispatch } from 'react-redux';
 import { addToCart, buyNow } from '../../redux/actions/index.js';
 
-const CourseCard = () => {
+const CourseCard = ({idCourse}) => {
 
     const dispatch = useDispatch();
     // const history = useHistory();
@@ -15,9 +15,9 @@ const CourseCard = () => {
         dispatch(addToCart());
     }
 
-    const handleBuyNow = () => {
+    const handleBuyNow = (idCourse) => {
         // e.preventDefault();
-        dispatch(buyNow());
+        dispatch(buyNow(idCourse));
         // history.push('/purchase');
     }
 
