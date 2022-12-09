@@ -3,7 +3,7 @@ import { GET_COURSE_BY_NAME, GET_ALL_COURSES, GET_CATEGORIES, GET_COURSE_DETAIL,
 const initialState = {
     courses: [],
     filter: [],
-    courseDetail: {},
+    courseDetail: [],
     categories: [],
     ranking: [],
     proffesors: [],
@@ -37,7 +37,7 @@ const rooReducer = (state = initialState, action) => {
         case CLEAR_DETAIL:
             return {
                 ...state,
-                courseDetail: {},
+                courseDetail: [],
             }
         case ADD_TO_CART:
             return {

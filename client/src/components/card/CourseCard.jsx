@@ -1,7 +1,7 @@
-import { Link } from 'react-router-dom';
-import style from './CourseCard.module.css';
+// import { Link } from 'react-router-dom';
+// import style from './CourseCard.module.css';
 import { courses } from '../../mockup.js';
-import { Card, CardHeader, CardBody, CardFooter, Stack, Heading, Text, Divider, ButtonGroup, Button } from '@chakra-ui/react';
+import { Card, CardBody, CardFooter, Stack, Heading, Text, Divider, ButtonGroup, Button } from '@chakra-ui/react';
 
 const CourseCard = () => {
 
@@ -15,9 +15,9 @@ const CourseCard = () => {
                     height="200"
                     src={courses[0].Video[0]}
                     title={courses[0].idCourse}/> */}
-                    <iframe id="ytplayer" type="text/html" width="330" height="220"
-                    src="http://www.youtube.com/embed/M7lc1UVf-VE?autoplay=1&origin=http://example.com"
-                    frameborder="0"/>
+                    <iframe id="ytplayer" type="text/html" title="yt" width="330" height="220"
+                    src="http://www.youtube.com/embed/M7lc1UVf-VE?autoplay=0&origin=http://example.com"
+                    />
                 <Stack mt='6' spacing='3'>
                 <Heading size='md'>Course Name</Heading>
                 <Text>
