@@ -1,15 +1,7 @@
 const { Course, Category, Rating } = require("../../db.js");
 const { Op } = require("sequelize");
 
-const updateCourse = async ({
-  id,
-  name,
-  description,
-  teacher,
-  rating,
-  category,
-  score,
-}) => {
+const updateCourse = async ({ id, name, description, category }) => {
   try {
     let courseDB = await Course.findOne({
       where: { id },
@@ -17,7 +9,6 @@ const updateCourse = async ({
 
     if (name) courseDB.name = name;
     if (description) courseDB.description = description;
-    if (teacher) courseDB.teacher = teacher;
 
     //Category
     if (category) {
@@ -31,7 +22,7 @@ const updateCourse = async ({
       courseDB.addCategory(categoryDB);
     }
 
-    await courseDB.save({ fields: ["name", "description", "teacher"] });
+    await courseDB.save({ fields: ["name", "description"] });
     await courseDB.reload();
 
     // asignacion del rating

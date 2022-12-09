@@ -37,8 +37,7 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
-const { Category, Course, Rating, Review, User, Video, Teacher, Comments } =
-  sequelize.models;
+const { Category, Course, Review, User, Video, Comments } = sequelize.models;
 
 //Fermin
 //muchos a muchos
@@ -55,24 +54,25 @@ Course.belongsToMany(Category, {
   timestamps: false,
 });
 
-//TABLA RATING
-//Agrega en la tabla ratings una clave foranea CourseId
-Rating.belongsTo(Course);
-//Agrega en la tabla ratings una clave foranea RatingId
-User.hasMany(Rating);
-
-//TABLA TEACHERS
-//Agregan en la tabla teachers, una clave foranea CourseId y UserId
-Course.hasOne(Teacher);
-User.hasOne(Teacher);
-
-//TABLA COMMENTS
-// Video.hasMany(Comments);
+//TABLA REVIEWS
+//Course tiene muchos reviews
+Course.hasMany(Review);
+//Review pertenece a un solo curso
+Review.belongsTo(Course);
 
 //TABLA VIDEO
+//Course tiene muchos videos
 Course.hasMany(Video);
+//Video pertenece a un solo curso
+Video.belongsTo(Course);
+
+//TABLA COMMENTS
+//Video tiene muchos comentarios
 Video.hasMany(Comments);
-// Comments.hasMany(Video);
+//Comentario perteneca a un solo video
+Comments.belongsTo(Video);
+
+//TABLA COMMENTS
 
 //Bianca
 // //muchos a muchos
