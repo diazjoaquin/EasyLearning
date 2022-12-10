@@ -25,10 +25,6 @@ export default function SearchBar() {
         if (name) {
             dispatch(byName(name));
             setName("");
-            //         dispatch(loadingAction(true));
-            //         setTimeout(() => {
-            //             dispatch(loadingAction(false));
-            //         }, 3000);
         } else {
             alert("Please complete the search input");
         }

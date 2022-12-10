@@ -14,10 +14,12 @@ export const ORDER_BY_RATING = "ORDER_BY_RATING";
 export const CREATE_COURSE = "CREATE_COURSE";
 export const DELETE_COURSE = "DELETE_COURSE";
 export const ARCHIVE_COURSE = "ARCHIVE_COURSE";
+export const DELETE_COURSE_FROM_CART = "DELETE_COURSE_FROM_CART";
+export const GET_REVIEWS = "GET_REVIEWS";
 
 export const getAllCourses = () => async dispatch => {
     try {
-        const all = await axios.get("/getAllCourses");
+        const all = await axios.get('/getAllCourses');
         return dispatch({
             type: GET_ALL_COURSES,
             payload: all.data
@@ -29,10 +31,10 @@ export const getAllCourses = () => async dispatch => {
 
 export const byName = (name) => async dispatch => {
     try {
-        const name = await axios.get(`/getByName?name=${name}`);
+        const byName = await axios.get(`/getByName?name=${name}`);
         return dispatch({
             type: GET_COURSE_BY_NAME,
-            payload: name.data
+            payload: byName.data
         });
     } catch (error) {
         
@@ -84,10 +86,22 @@ export const addToCart = (payload) => async dispatch => {
     }
 }
 
-export const buyNow = () => async dispatch => {
+export const clearFromCart = (payload) => async dispatch => {
     try {
         return dispatch({
-            type: BUY_NOW
+            type: DELETE_COURSE_FROM_CART,
+            payload
+        })
+    } catch (error) {
+        
+    }
+}
+
+export const buyNow = (payload) => async dispatch => {
+    try {
+        return dispatch({
+            type: BUY_NOW,
+            payload
         });
     } catch (error) {
 
@@ -174,6 +188,16 @@ export const archiveCourse = () => dispatch => {
     try {
         return dispatch({
             type: ARCHIVE_COURSE
+        });
+    } catch (error) {
+        
+    }
+}
+
+export const getReviews = () => dispatch => {
+    try {
+        return dispatch({
+            type: GET_REVIEWS
         });
     } catch (error) {
         

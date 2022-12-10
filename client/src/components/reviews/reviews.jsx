@@ -1,6 +1,7 @@
-import React, { useEffecct } from "react";
-import { useSeletor, useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { getReviews } from "../../redux/actions";
+// import { useParams } from "react-router-dom";
 
 const Reviews = ({id}) => {
     const dispatch = useDispatch();
