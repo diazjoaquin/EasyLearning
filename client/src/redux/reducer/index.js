@@ -16,7 +16,7 @@ const rootReducer = (state = initialState, action) => {
         case GET_COURSE_BY_NAME:
             return {
                 ...state,
-                courses: state.courses.filter((course) => course.name === action.payload)
+                courses: action.payload
             }
         case GET_ALL_COURSES:
             return {
