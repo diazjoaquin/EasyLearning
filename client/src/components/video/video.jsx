@@ -1,24 +1,4 @@
-<<<<<<< HEAD
 
-=======
-<<<<<<< HEAD
-import React from "react";
-import Review from "../reviews/reviews";
->>>>>>> origin/fermin
-
-
-const Video = ({ id, video, review }) => {
-    return (
-       
-        <div>   
-            
-        </div>
-    );
-};
-
-=======
-import React, { useEffect } from "react";
-import Review from "../../../../server/src/Models/Review";
 import Reviews from "../reviews/reviews";
 
 const Video = (/* {id, video, reviews} */) => {
@@ -36,6 +16,6 @@ const Video = (/* {id, video, reviews} */) => {
         </div>
     )
 }
->>>>>>> origin/Santi
+
 
 export default Video;
