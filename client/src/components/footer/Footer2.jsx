@@ -15,9 +15,11 @@ import {
 import { ReactNode } from 'react';
 import { FaTwitter, FaYoutube } from 'react-icons/fa';
 import { BiMailSend } from 'react-icons/bi';
-import Logo from "../../image/easylearning.png"
+// import Logo from "../../image/easylearning.png"
 import { Button, ButtonGroup } from '@chakra-ui/react'
 import { FaFacebook, FaLinkedin, FaInstagram } from "react-icons/fa"
+import Logo from "../footer/easylearning.png"
+
 
 
 const SocialButton = ({
