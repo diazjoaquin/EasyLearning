@@ -5,18 +5,16 @@ import { Card, CardBody, CardFooter, Stack, Heading, Text, Divider, ButtonGroup,
 import { useDispatch } from 'react-redux';
 import { addToCart, buyNow } from '../../redux/actions/index.js';
 
-const CourseCard = ({idCourse}) => {
+const CourseCard = ({}) => {
 
     const dispatch = useDispatch();
     // const history = useHistory();
 
-    const handleAddToCart = () => {
-        // e.preventDefault();
-        dispatch(addToCart());
+    const handleAddToCart = (idCourse) => {
+        dispatch(addToCart(idCourse));
     }
 
     const handleBuyNow = (idCourse) => {
-        // e.preventDefault();
         dispatch(buyNow(idCourse));
         // history.push('/purchase');
     }
@@ -42,11 +40,11 @@ const CourseCard = ({idCourse}) => {
             <CardFooter>
                 <ButtonGroup spacing='2'>
                         <Button variant='solid' colorScheme='blue'
-                        onClick={handleBuyNow()}>
+                        onClick={handleBuyNow(courses[0].idCourse)}>
                             Buy now
                         </Button>
                         <Button variant='ghost' colorScheme='blue'
-                        onClick={handleAddToCart()}>
+                        onClick={handleAddToCart(courses[0].idCourse)}>
                             Add to cart
                         </Button>
                 </ButtonGroup>

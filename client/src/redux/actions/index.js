@@ -14,10 +14,12 @@ export const ORDER_BY_RATING = "ORDER_BY_RATING";
 export const CREATE_COURSE = "CREATE_COURSE";
 export const DELETE_COURSE = "DELETE_COURSE";
 export const ARCHIVE_COURSE = "ARCHIVE_COURSE";
+export const DELETE_COURSE_FROM_CART = "DELETE_COURSE_FROM_CART";
 
 export const getAllCourses = () => async dispatch => {
     try {
-        const all = await axios.get("/getAllCourses");
+        // const all = await axios.get("/getAllCourses");
+        const all = await axios.get("https://e-learning-40b30-default-rtdb.firebaseio.com/courses.json")
         return dispatch({
             type: GET_ALL_COURSES,
             payload: all.data
@@ -79,6 +81,17 @@ export const addToCart = (payload) => async dispatch => {
             type: ADD_TO_CART,
             payload
         });
+    } catch (error) {
+        
+    }
+}
+
+export const clearFromCart = (payload) => async dispatch => {
+    try {
+        return dispatch({
+            type: DELETE_COURSE_FROM_CART,
+            payload
+        })
     } catch (error) {
         
     }
