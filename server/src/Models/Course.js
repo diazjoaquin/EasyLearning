@@ -1,4 +1,5 @@
 const { DataTypes } = require("sequelize");
+const { patch } = require("../routes");
 
 module.exports = (sequelize) => {
   sequelize.define(

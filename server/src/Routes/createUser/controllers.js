@@ -4,7 +4,7 @@ const createUser = async ({
   fullName,
   password,
   phoneNumber,
-  emailAdress,
+  emailAddress,
   avatar,
 }) => {
   try {
@@ -15,7 +15,7 @@ const createUser = async ({
         fullName,
         password,
         phoneNumber,
-        emailAdress,
+        emailAddress,
         avatar,
       },
     });

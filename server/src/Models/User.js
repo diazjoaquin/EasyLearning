@@ -16,20 +16,18 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      emailAdress: {
+      emailAddress: {
         type: DataTypes.STRING,
         allowNull: false,
       },
       avatar: {
         type: DataTypes.STRING,
       },
-    },
-    { 
       admin: {
-      type: DataTypes.BOOLEAN,
-      defaultValue: false,
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+      },
     },
-  },
     { timestamps: false }
   );
 };
