@@ -1,4 +1,4 @@
-import { GET_COURSE_BY_NAME, GET_ALL_COURSES, GET_CATEGORIES, GET_COURSE_DETAIL, CLEAR_DETAIL, ADD_TO_CART, BUY_NOW, FILTER_BY_CATEGORY, FILTER_BY_COST, FILTER_BY_PROFESSOR, ORDER_BY_NAME, ORDER_BY_RATING, CREATE_COURSE, DELETE_COURSE, ARCHIVE_COURSE, DELETE_COURSE_FROM_CART } from "../actions"
+import { GET_COURSE_BY_NAME, GET_ALL_COURSES, GET_CATEGORIES, GET_COURSE_DETAIL, CLEAR_DETAIL, ADD_TO_CART, BUY_NOW, FILTER_BY_CATEGORY, FILTER_BY_COST, FILTER_BY_PROFESSOR, ORDER_BY_NAME, ORDER_BY_RATING, CREATE_COURSE, DELETE_COURSE, ARCHIVE_COURSE, DELETE_COURSE_FROM_CART, GET_REVIEWS } from "../actions"
 
 const initialState = {
     courses: [],
@@ -108,6 +108,10 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
             }
         case ARCHIVE_COURSE:
+            return {
+                ...state,
+            }
+        case GET_REVIEWS:
             return {
                 ...state,
             }

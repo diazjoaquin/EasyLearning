@@ -15,6 +15,7 @@ export const CREATE_COURSE = "CREATE_COURSE";
 export const DELETE_COURSE = "DELETE_COURSE";
 export const ARCHIVE_COURSE = "ARCHIVE_COURSE";
 export const DELETE_COURSE_FROM_CART = "DELETE_COURSE_FROM_CART";
+export const GET_REVIEWS = "GET_REVIEWS";
 
 export const getAllCourses = () => async dispatch => {
     try {
@@ -188,6 +189,16 @@ export const archiveCourse = () => dispatch => {
     try {
         return dispatch({
             type: ARCHIVE_COURSE
+        });
+    } catch (error) {
+        
+    }
+}
+
+export const getReviews = () => dispatch => {
+    try {
+        return dispatch({
+            type: GET_REVIEWS
         });
     } catch (error) {
         

@@ -1,10 +1,10 @@
 const { Router } = require("express");
 const router = Router();
-const { createCourse } = require("./controllers");
+const { createCommentVideo } = require("./controllers.js");
 
 router.post("/", async (req, res) => {
   try {
-    res.json(await createCourse(req.body));
+    res.json(await createCommentVideo(req.body));
   } catch (error) {
     res.json(error);
   }

@@ -2,10 +2,18 @@ const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
   sequelize.define(
-    "rating",
+    "comments",
     {
-      score: {
+      title: {
         type: DataTypes.STRING,
+        allowNull: false,
+      },
+      description: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      userId: {
+        type: DataTypes.INTEGER,
         allowNull: false,
       },
     },
