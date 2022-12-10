@@ -1,23 +1,13 @@
-import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
-
-const Comments = (/* {id, reviews, comments} */) => {
-
-//     useEffect(() => {
-//         dispatch(getCommentsById(id))
-//     },[])
-
-// const comments = useSelector(state => state.comments) 
+const Comments = (/* {video} */) => {
 
 return(
     <div>
         {/* {
-            comments?.map(e => {
+            video.comments?.map(e => {
                 return(
                     <div>
                         <p>{e.tittle}</p>
-                        <p>{e.comments}</p>
+                        <p>{e.description}</p>
                     </div>
                 )
             })
@@ -27,4 +17,4 @@ return(
 )
 }
 
-export default Reviews;
+export default Comments;

@@ -1,17 +1,15 @@
-import Reviews from "../reviews/reviews";
-
-const Video = (/* {id, video, reviews} */) => {
+const Video = (/* {video} */) => {
     return(
         <div>
             {/* {
                 video?.map(e => {
                     return(
-                        <p>{e}</p>
+                        <p>{e.urlVideo}</p>
                     )
                 })
             }
             
-            <Reviews reviews={reviews} id={id}/> */}
+            <Comments video={video} /> */}
         </div>
     )
 }

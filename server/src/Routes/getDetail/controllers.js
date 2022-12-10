@@ -1,4 +1,4 @@
-const { Course, Category, Video, Review } = require("../../db.js");
+const { Course, Category, Video, Review, Comments } = require("../../db.js");
 
 const getCourseById = async (id) => {
   try {
@@ -18,6 +18,9 @@ const getCourseById = async (id) => {
         {
           model: Video,
           attributes: ["id", "urlVideo", "description"],
+          include: {
+            model: Comments,
+          },
         },
       ],
       order: [[{ model: Video }, "id", "ASC"]],

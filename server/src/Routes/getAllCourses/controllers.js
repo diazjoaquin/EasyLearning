@@ -1,5 +1,5 @@
 // const axios = require("axios");
-const { Course, Category, Review, Video } = require("../../db.js");
+const { Course, Category, Review, Video, Comments } = require("../../db.js");
 
 const getAllCourses = async () => {
   try {
@@ -22,6 +22,9 @@ const getAllCourses = async () => {
         {
           model: Video,
           attributes: ["id", "urlVideo", "description"],
+          include: {
+            model: Comments,
+          },
         },
       ],
       order: [[{ model: Video }, "id", "ASC"]],
