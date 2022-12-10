@@ -7,6 +7,26 @@ import { courses } from "../../mockup";
 import { Heading, Box, Text, Image } from '@chakra-ui/react'
 import mainpicture from "../../image/maintextimage.png"
 import { Icon, ArrowLeftIcon, ArrowRightIcon } from '@chakra-ui/icons'
+import {
+
+    Container,
+    Link,
+    SimpleGrid,
+    Stack,
+    Flex,
+    Tag,
+    useColorModeValue,
+
+} from '@chakra-ui/react';
+import { ReactNode } from 'react';
+import Footer from "../footer/Footer";
+import Footer2 from "../footer/Footer2";
+
+import Hola from "../testimonials/Testimonials"
+import BasicStatistics from "../statistic/Statistics"
+import Categorys from "../categorys/Categorys"
+
+
 // import { useSelector } from "react-redux";
 
 
@@ -14,8 +34,8 @@ export default function Home() {
 
     // carrousel: 
     // const courses = useSelector(state => state.courses);
-    const [ coursesPerPage ] = useState(3);
-    const [ currentPage, setCurrentPage ] = useState(1);
+    const [coursesPerPage] = useState(3);
+    const [currentPage, setCurrentPage] = useState(1);
     const last = currentPage * coursesPerPage;
     const first = last - coursesPerPage;
     const currentCourses = courses.slice(first, last);
@@ -31,8 +51,16 @@ export default function Home() {
         currentPage > 1 ? setCurrentPage(currentPage - 1) : setCurrentPage(numOfPages);
     }
 
+    const ListHeader = ({ children }) => {
+        return (
+            <Text fontWeight={'500'} fontSize={'lg'} mb={2}>
+                {children}
+            </Text>
+        );
+    };
+
     return (
-        //navbar
+        
         <div>
             <div className={style.bg}>
                 <Navbar>
@@ -43,7 +71,7 @@ export default function Home() {
                     <Text fontSize='xl'>
                         START TO SUCCESS
                     </Text>
-                    <Heading mb={4}>Acceso To 5000+ Courses from
+                    <Heading mb={4}>Acces To 5000+ Courses from
                         300 Instructor & Institutions</Heading>
                     <Text fontSize='xl'> Varius version have envolved over the years, sometimes by accident,
                     </Text>
@@ -67,8 +95,8 @@ export default function Home() {
 
                 </Carousel> */}
                 <div className={style.coursecont}>
-                <Icon as={ArrowLeftIcon} onClick={(e) => handlePrevious(e)}
-                className={style.icon}/>
+                    <Icon as={ArrowLeftIcon} onClick={(e) => handlePrevious(e)}
+                        className={style.icon} />
                     {
                         currentCourses.map((course) => {
                             return (
@@ -82,11 +110,32 @@ export default function Home() {
                         })
                     }
                     <Icon as={ArrowRightIcon} onClick={(e) => handleNext(e)}
-                    className={style.icon}/>
+                        className={style.icon} />
                 </div>
             </div>
             <br />
+
+            <div>
+                <Categorys>
+                </Categorys>
+            </div>
+
+            <div>
+                <BasicStatistics>
+                </BasicStatistics>
+            </div>
+
+            <div>
+                <Hola>
+                </Hola>
+            </div>
+
+            <div>
+                <Footer2>
+                </Footer2>
+            </div>
+
         </div>
-        //Texto pincipal 
+        
     );
 }
