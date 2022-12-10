@@ -22,7 +22,6 @@ module.exports = (sequelize) => {
       },
       avatar: {
         type: DataTypes.STRING,
-        // allowNull: false,
       },
     },
     { timestamps: false }
