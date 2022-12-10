@@ -1,0 +1,9 @@
+.statistic img {
+    float:right;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    padding-top: 150px;
+    margin: 5px;
+
+}
