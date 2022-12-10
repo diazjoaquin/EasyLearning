@@ -1,4 +1,3 @@
-import React, { useEffect } from "react";
 import Reviews from "../reviews/reviews";
 
 const Video = (/* {id, video, reviews} */) => {
