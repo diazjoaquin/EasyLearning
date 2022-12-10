@@ -19,8 +19,7 @@ export const GET_REVIEWS = "GET_REVIEWS";
 
 export const getAllCourses = () => async dispatch => {
     try {
-        // const all = await axios.get("/getAllCourses");
-        const all = await axios.get("https://e-learning-40b30-default-rtdb.firebaseio.com/courses.json")
+        const all = await axios.get('/getAllCourses');
         return dispatch({
             type: GET_ALL_COURSES,
             payload: all.data

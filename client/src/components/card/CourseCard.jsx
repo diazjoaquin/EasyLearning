@@ -1,11 +1,10 @@
 // import style from './CourseCard.module.css';
-// import { useHistory } from 'react-router-dom';
-import { courses } from '../../mockup.js';
+// import { useHistory } from 'react-router-dom
 import { Card, CardBody, CardFooter, Stack, Heading, Text, Divider, ButtonGroup, Button } from '@chakra-ui/react';
 import { useDispatch } from 'react-redux';
 import { addToCart, buyNow } from '../../redux/actions/index.js';
 
-const CourseCard = ({}) => {
+const CourseCard = ({ id, teacher, name, description, rating, price }) => {
 
     const dispatch = useDispatch();
     // const history = useHistory();
@@ -27,12 +26,12 @@ const CourseCard = ({}) => {
                     src="http://www.youtube.com/embed/M7lc1UVf-VE?autoplay=0&origin=http://example.com"
                     />
                 <Stack mt='6' spacing='3'>
-                <Heading size='md'>Course Name</Heading>
+                <Heading size='md'>{name}</Heading>
                 <Text>
-                    {courses[0].Description}
+                    {description}
                 </Text>
                 <Text color='blue.600' fontSize='2xl'>
-                    USD$30
+                    ${price}
                 </Text>
                 </Stack>
             </CardBody>
@@ -40,11 +39,11 @@ const CourseCard = ({}) => {
             <CardFooter>
                 <ButtonGroup spacing='2'>
                         <Button variant='solid' colorScheme='blue'
-                        onClick={handleBuyNow(courses[0].idCourse)}>
+                        onClick={handleBuyNow(id)}>
                             Buy now
                         </Button>
                         <Button variant='ghost' colorScheme='blue'
-                        onClick={handleAddToCart(courses[0].idCourse)}>
+                        onClick={handleAddToCart(id)}>
                             Add to cart
                         </Button>
                 </ButtonGroup>
