@@ -1,4 +1,3 @@
-// import React from 'react';
 import { Route } from "react-router-dom";
 import Home from "./components/home/Home";
 import Cart from "./components/cart/Cart"
@@ -26,7 +25,6 @@ function App() {
         <Route exact path="/login" component={Login}/>
         <Route exact path="/course" component={Course}/>
         <Route exact path="/about" component={About}/>
-
     </ChakraProvider>
   );
 }

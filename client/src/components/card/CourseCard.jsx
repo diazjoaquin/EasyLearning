@@ -2,6 +2,7 @@
 // import { useHistory } from 'react-router-dom
 import { Card, CardBody, CardFooter, Stack, Heading, Text, Divider, ButtonGroup, Button } from '@chakra-ui/react';
 import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { addToCart, buyNow } from '../../redux/actions/index.js';
 
 const CourseCard = ({ id, teacher, name, description, rating, price }) => {
@@ -22,11 +23,13 @@ const CourseCard = ({ id, teacher, name, description, rating, price }) => {
     return (
         <Card maxW='sm'>
             <CardBody>
-                    <iframe id="ytplayer" type="text/html" title="yt" width="330" height="220"
+                    <iframe id="ytplayer" type="text/html" title="yt" width="300" height="200"
                     src="http://www.youtube.com/embed/M7lc1UVf-VE?autoplay=0&origin=http://example.com"
                     />
                 <Stack mt='6' spacing='3'>
-                <Heading size='md'>{name}</Heading>
+                {/* <Link to={'/detail'}> */}
+                    <Heading size='md'>{name}</Heading>
+                {/* </Link> */}
                 <Text>
                     {description}
                 </Text>
