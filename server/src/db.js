@@ -37,8 +37,7 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
-const { Category, Course, Rating, Review, User, Video, Teacher, Comments } =
-  sequelize.models;
+const { Category, Course, Review, User, Video, Comments } = sequelize.models;
 
 //Fermin
 //muchos a muchos
@@ -55,17 +54,23 @@ Course.belongsToMany(Category, {
   timestamps: false,
 });
 
-User.belongsTo(Review, { through: "User_Review", timestamps: false });
+//TABLA REVIEWS
+//Course tiene muchos reviews
+Course.hasMany(Review);
+//Review pertenece a un solo curso
+Review.belongsTo(Course);
 
-User.belongsTo(Rating, { through: "User_Rating", timestamps: false });
+//TABLA VIDEO
+//Course tiene muchos videos
+Course.hasMany(Video);
+//Video pertenece a un solo curso
+Video.belongsTo(Course);
 
-Course.belongsTo(Rating, { through: "Course_Rating", timestamps: false });
-
-Course.belongsTo(Video, { through: "Course_Video", timestamps: false });
-
-Course.belongsTo(Review, { through: "Course_Review", timestamps: false });
-
-Video.belongsTo(Review, { through: "Video_Review", timestamps: false });
+//TABLA COMMENTS
+//Video tiene muchos comentarios
+Video.hasMany(Comments);
+//Comentario perteneca a un solo video
+Comments.belongsTo(Video);
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
