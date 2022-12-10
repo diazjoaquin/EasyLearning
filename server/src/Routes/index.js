@@ -9,6 +9,7 @@ const updateCourse = require("./updateCourse/updateCourse.js");
 const createUser = require("./createUser/createUser.js");
 const createCommentVideo = require("./createComment_Video/createComment_Video.js");
 const createVideo = require("./createVideo/createVideo.js");
+const createReview = require("./createReview/createReview.js");
 // const createUser = require("./test/test.js");
 
 router.use("/getAllCourses", getAllCourses);
@@ -19,7 +20,8 @@ router.use("/categories", getAllCategories);
 router.use("/updateCourse", updateCourse);
 router.use("/createUser", createUser);
 router.use("/createCommentVideo", createCommentVideo);
-// router.use("/createUser", createUser);
 router.use("/createVideo", createVideo);
+router.use("/createReview", createReview);
+// router.use("/createUser", createUser);
 
 module.exports = router;

@@ -2,32 +2,43 @@
     padding: 10px;
     margin-top: 50px;
     display: flex;
-    justify-content:space-evenly;
-    border-style: double;
-    border-color: black;
+    flex-direction: row;
+    /* justify-content:space-evenly; */
+    /* border-style: double;
+    border-color: black; */
+  }
+
+  .menu {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    height: 50px;
+    width: 10000px;
+    margin-top: 28px;
   }
 
   .buttons {
     width: 180px;
     display: flex;
     justify-content: space-around;
+    height:auto;
   }
 
-  .navcont {
+  /* .navcont {
     position: relative;
     top: 0;
-  }
+  } */
 
   
-  .logo_content {
+  /* .logo_content {
     height: 1em;
     width: 1em;
-  }
+  } */
 
   .botones img {
     border-radius: 15px;
-    margin-left: 10px;
-    margin-right: 10px;
+    margin-left: 1px;
+    margin-right: 1px;
     height: 80px;
     width: 120px;
   }
