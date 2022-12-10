@@ -25,6 +25,7 @@ export default function Navbar() {
                             <Button colorScheme='gray'>
                                 Login
                             </Button></Link>
+                        
                         <Link to="/signup">
                             <Button colorScheme='teal' variant='solid'>
                                 Sign Up

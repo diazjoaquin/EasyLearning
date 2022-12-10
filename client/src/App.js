@@ -14,6 +14,7 @@ import Course from "./components/pages/course/Course";
 import About from "./components/pages/about/About"
 
 
+
 function App() {
   return (
     <ChakraProvider>
