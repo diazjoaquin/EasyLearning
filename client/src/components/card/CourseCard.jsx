@@ -23,32 +23,32 @@ const CourseCard = ({ id, teacher, name, description, rating, price }) => {
     return (
         <Card maxW='sm'>
             <CardBody>
-                    <iframe id="ytplayer" type="text/html" title="yt" width="300" height="200"
+                <iframe id="ytplayer" type="text/html" title="yt" width="300" height="200"
                     src="http://www.youtube.com/embed/M7lc1UVf-VE?autoplay=0&origin=http://example.com"
-                    />
+                />
                 <Stack mt='6' spacing='3'>
-                {/* <Link to={'/detail'}> */}
-                    <Heading size='md'>{name}</Heading>
-                {/* </Link> */}
-                <Text>
-                    {description}
-                </Text>
-                <Text color='blue.600' fontSize='2xl'>
-                    ${price}
-                </Text>
+                    <Link to={`/detail/${id}`}>
+                        <Heading size='md'>{name}</Heading>
+                    </Link>
+                    <Text>
+                        {description}
+                    </Text>
+                    <Text color='blue.600' fontSize='2xl'>
+                        ${price}
+                    </Text>
                 </Stack>
             </CardBody>
             <Divider />
             <CardFooter>
                 <ButtonGroup spacing='2'>
-                        <Button variant='solid' colorScheme='blue'
+                    <Button variant='solid' colorScheme='blue'
                         onClick={handleBuyNow(id)}>
-                            Buy now
-                        </Button>
-                        <Button variant='ghost' colorScheme='blue'
+                        Buy now
+                    </Button>
+                    <Button variant='ghost' colorScheme='blue'
                         onClick={handleAddToCart(id)}>
-                            Add to cart
-                        </Button>
+                        Add to cart
+                    </Button>
                 </ButtonGroup>
             </CardFooter>
         </Card>
