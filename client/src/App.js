@@ -4,7 +4,7 @@ import Cart from "./components/cart/Cart";
 import * as React from "react";
 // 1. import `ChakraProvider` component
 import { ChakraProvider } from "@chakra-ui/react";
-import Video from "./components/video/video";
+import Videos from "./components/Carpeta videos/videos/Videos";
 import Blog from "./components/pages/Blog/Blog";
 import Contact from "./components/pages/contaact/Contact";
 import Login from "./components/pages/login/Login";
@@ -17,7 +17,6 @@ function App() {
   return (
     <ChakraProvider>
       <Route exact path="/" component={Home} />
-      <Route exact path="/video" component={Video} />
       <Route exact path="/cart" component={Cart} />
       <Route exact path="/blog" component={Blog} />
       <Route exact path="/contact" component={Contact} />
@@ -26,7 +25,7 @@ function App() {
       <Route exact path="/course" component={Course} />
       <Route exact path="/about" component={About} />
       <Route exact path="/detail/:id" component={Detail} />
-      <Route exact path="/detail/:id/videos" component={Video} />
+      <Route exact path="/detail/:id/videos" component={Videos} />
     </ChakraProvider>
   );
 }

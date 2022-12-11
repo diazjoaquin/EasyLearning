@@ -54,6 +54,7 @@ export default function Detail() {
                 <Link to={`/detail/${id}/videos`}>
                   <button>Ver todos los videos de este curso</button>
                 </Link>
+                {/* <Video videos={myCourse.video}/> */}
               </div>
               <br />
               <div>
