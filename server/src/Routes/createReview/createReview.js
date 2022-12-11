@@ -9,9 +9,10 @@ router.post("/", async (req, res) => {
       score: req.body.score,
       title: req.body.title,
       comments: req.body.comments,
+      userId: req.body.userId,
     };
-    const review = await createReview(courseId, reviewData);
-    return res.json("Reseña creada");
+    // const review = await createReview(courseId, reviewData);
+    return res.json(await createReview(courseId, reviewData));
   } catch (err) {
     return res.json(err);
   }

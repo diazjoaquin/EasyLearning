@@ -11,6 +11,8 @@ const updateCourse = async ({ id, name, description, category }) => {
     if (description) courseDB.description = description;
 
     //Category
+    //RESPECTO A CATEGORIA, FALTARIA HACER LA LOGICA SI LA PERSONA LE QUIERE ELIMINAR UNA CATEGORIA AL CURSO
+    //LA LOGICA DEL IF DE ABAJIO, ES SOLAMENTE POR SI LA PERDONA LE QUIERE AGREGAR UNA CATEGORIA.
     if (category) {
       const [categoryDB, categoryCeated] = await Category.findOrCreate({
         where: { name: category },
@@ -24,15 +26,6 @@ const updateCourse = async ({ id, name, description, category }) => {
 
     await courseDB.save({ fields: ["name", "description"] });
     await courseDB.reload();
-
-    // asignacion del rating
-    // const ratingDB = await Rating.create({
-    //   score,
-    // });
-
-    // console.log(ratingDB);
-    // await Course.addRating(ratingDB);
-    // await Rating.addCourse(courseDB);
 
     return "Actualizado";
   } catch (error) {
