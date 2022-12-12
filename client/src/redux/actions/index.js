@@ -14,6 +14,7 @@ export const DELETE_COURSE = "DELETE_COURSE";
 export const ARCHIVE_COURSE = "ARCHIVE_COURSE";
 export const DELETE_COURSE_FROM_CART = "DELETE_COURSE_FROM_CART";
 export const GET_REVIEWS = "GET_REVIEWS";
+export const POST_REVIEW = "POST_REVIEW";
 
 export const getAllCourses = () => async (dispatch) => {
   try {
@@ -129,15 +130,6 @@ export const createCourse = (form) => async (dispatch) => {
   } catch (error) {}
 };
 
-export const deleteCourse = (id) => async (dispatch) => {
-  try {
-    await axios.delete("/");
-    return dispatch({
-      type: DELETE_COURSE,
-    });
-  } catch (error) {}
-};
-
 export const archiveCourse = () => (dispatch) => {
   try {
     return dispatch({
@@ -152,4 +144,23 @@ export const getReviews = () => (dispatch) => {
       type: GET_REVIEWS,
     });
   } catch (error) {}
+};
+export const deleteCourse = (id) => async (dispatch) => {
+  try {
+    await axios.delete("/");
+    return dispatch({
+      type: DELETE_COURSE,
+    });
+  } catch (error) {}
+};
+
+export const postReview = (payload) => {
+  return async function (dispatch) {
+    try {
+      var json = await axios.post("/createReview", payload);
+      return json;
+    } catch (error) {
+      console.log(error);
+    }
+  };
 };

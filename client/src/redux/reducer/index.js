@@ -6,14 +6,12 @@ import {
   CLEAR_DETAIL,
   ADD_TO_CART,
   BUY_NOW,
-  // FILTER_BY_CATEGORY,
-  // FILTER_BY_COST,
-  // FILTER_BY_PROFESSOR,
   ORDER_BY_NAME,
   ORDER_BY_RATING,
   CREATE_COURSE,
   DELETE_COURSE,
   ARCHIVE_COURSE,
+  POST_REVIEW,
   DELETE_COURSE_FROM_CART,
   GET_REVIEWS,
   FILTERS,
@@ -24,9 +22,9 @@ const initialState = {
   filter: [],
   courseDetail: {},
   categories: [],
-  rating: [],
-  proffesors: [],
   cart: [],
+  reviews: [],
+  allUsers: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -139,6 +137,10 @@ const rootReducer = (state = initialState, action) => {
         ...state,
       };
     case GET_REVIEWS:
+      return {
+        ...state,
+      };
+    case POST_REVIEW:
       return {
         ...state,
       };
