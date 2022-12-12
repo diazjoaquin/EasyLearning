@@ -13,9 +13,7 @@ export const BUY_NOW = "BUY_NOW";
 export const DELETE_COURSE_FROM_CART = "DELETE_COURSE_FROM_CART";
 
 // filtering & ordering:
-export const FILTER_BY_CATEGORY = "FILTER_BY_CATEGORY";
-export const FILTER_BY_COST = "FILTER_BY_COST";
-export const FILTER_BY_PROFESSOR = "FILTER_BY_PROFESSOR";
+export const FILTERS = "FILTERS";
 export const ORDER_BY_NAME = "ORDER_BY_NAME";
 export const ORDER_BY_RATING = "ORDER_BY_RATING";
 
@@ -29,192 +27,156 @@ export const DELETE_REVIEW = "DELETE_REVIEW";
 export const GET_VIDEOS = "GET_VIDEOS";
 export const CREATE_VIDEO = "CREATE_VIDEO";
 export const DELETE_VIDEO = "DELETE_VIDEO";
+export const POST_REVIEW = "POST_REVIEW";
 
 
-export const getAllCourses = () => async dispatch => {
+export const getAllCourses = () => async (dispatch) => {
+  try {
+    const all = await axios.get("/getAllCourses");
+    return dispatch({
+      type: GET_ALL_COURSES,
+      payload: all.data,
+    });
+  } catch (error) {}
+};
+
+export const byName = (name) => async (dispatch) => {
+  try {
+    const byName = await axios.get(`/getByName?name=${name}`);
+    return dispatch({
+      type: GET_COURSE_BY_NAME,
+      payload: byName.data,
+    });
+  } catch (error) {}
+};
+
+export const getCourseDetail = (id) => async (dispatch) => {
+  try {
+    const detail = await axios.get(`/getDetail/${id}`);
+    return dispatch({
+      type: GET_COURSE_DETAIL,
+      payload: detail.data,
+    });
+  } catch (error) {}
+};
+
+export const clearDetail = () => async (dispatch) => {
+  try {
+    return dispatch({
+      type: CLEAR_DETAIL,
+    });
+  } catch (error) {}
+};
+
+export const getCategories = () => async (dispatch) => {
+  try {
+    const categories = await axios.get("/categories");
+    return dispatch({
+      type: GET_CATEGORIES,
+      payload: categories.data,
+    });
+  } catch (error) {}
+};
+
+export const addToCart = (payload) => async (dispatch) => {
+  try {
+    return dispatch({
+      type: ADD_TO_CART,
+      payload,
+    });
+  } catch (error) {}
+};
+
+export const clearFromCart = (payload) => async (dispatch) => {
+  try {
+    return dispatch({
+      type: DELETE_COURSE_FROM_CART,
+      payload,
+    });
+  } catch (error) {}
+};
+
+export const buyNow = (payload) => async (dispatch) => {
+  try {
+    return dispatch({
+      type: BUY_NOW,
+      payload,
+    });
+  } catch (error) {}
+};
+
+export const filters = (payload) => async (dispatch) => {
+  try {
+    return dispatch({
+      type: FILTERS,
+      payload,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const orderByName = (payload) => async (dispatch) => {
+  try {
+    return dispatch({
+      type: ORDER_BY_NAME,
+      payload,
+    });
+  } catch (error) {}
+};
+
+export const orderByRating = (payload) => async (dispatch) => {
+  try {
+    return dispatch({
+      type: ORDER_BY_RATING,
+      payload,
+    });
+  } catch (error) {}
+};
+
+export const createCourse = (form) => async (dispatch) => {
+  try {
+    const data = await axios.post("/", form);
+    return dispatch({
+      type: CREATE_COURSE,
+      payload: data,
+    });
+  } catch (error) {}
+};
+
+export const archiveCourse = () => (dispatch) => {
+  try {
+    return dispatch({
+      type: ARCHIVE_COURSE,
+    });
+  } catch (error) {}
+};
+
+export const getReviews = () => (dispatch) => {
+  try {
+    return dispatch({
+      type: GET_REVIEWS,
+    });
+  } catch (error) {}
+};
+
+export const deleteCourse = (id) => async (dispatch) => {
+  try {
+    await axios.delete("/");
+    return dispatch({
+      type: DELETE_COURSE,
+    });
+  } catch (error) {}
+};
+
+export const postReview = (payload) => {
+  return async function (dispatch) {
     try {
-        const all = await axios.get('/getAllCourses');
-        return dispatch({
-            type: GET_ALL_COURSES,
-            payload: all.data
-        });
+      var json = await axios.post("/createReview", payload);
+      return json;
     } catch (error) {
-        
+      console.log(error);
     }
-}
-
-export const byName = (name) => async dispatch => {
-    try {
-        const byName = await axios.get(`/getByName?name=${name}`);
-        return dispatch({
-            type: GET_COURSE_BY_NAME,
-            payload: byName.data
-        });
-    } catch (error) {
-        
-    }
-}
-
-export const getCourseDetail = (id) => async dispatch => {
-    try {
-        const detail = await axios.get(`/getDetail/${id}`);
-        return dispatch({
-            type: GET_COURSE_DETAIL,
-            payload: detail.data
-        });
-    } catch (error) {
-        
-    }
-}
-
-export const clearDetail = () => async dispatch => {
-    try {
-        return dispatch({
-            type: CLEAR_DETAIL
-        });
-    } catch (error) {
-        
-    }
-}
-
-export const getCategories = () => async dispatch => {
-    try {
-        const categories = await axios.get('/categories');
-        return dispatch({
-            type: GET_CATEGORIES,
-            payload: categories.data
-        });
-    } catch (error) {
-        
-    }
-}
-
-export const addToCart = (payload) => async dispatch => {
-    try {
-        return dispatch({
-            type: ADD_TO_CART,
-            payload
-        });
-    } catch (error) {
-        
-    }
-}
-
-export const clearFromCart = (payload) => async dispatch => {
-    try {
-        return dispatch({
-            type: DELETE_COURSE_FROM_CART,
-            payload
-        })
-    } catch (error) {
-        
-    }
-}
-
-export const buyNow = (payload) => async dispatch => {
-    try {
-        return dispatch({
-            type: BUY_NOW,
-            payload
-        });
-    } catch (error) {
-
-    }
-}
-
-export const filterByCat = (payload) => async dispatch => {
-    try {
-        return dispatch({
-            type: FILTER_BY_CATEGORY,
-            payload
-        });
-    } catch (error) {
-        
-    }
-}
-
-export const filterByCost = (payload) => async dispatch => {
-    try {
-        return dispatch({
-            type: FILTER_BY_COST,
-            payload
-        });
-    } catch (error) {
-        
-    }
-}
-
-export const filterByProfessor = (payload) => async dispatch => {
-    try {
-        return dispatch({
-            type: FILTER_BY_PROFESSOR,
-            payload
-        });
-    } catch (error) {
-        
-    }
-}
-
-export const orderByName = (payload) => async dispatch => {
-    try {
-        return dispatch({
-            type: ORDER_BY_NAME
-        });
-    } catch (error) {
-        
-    }
-}
-
-export const orderByRating = (payload) => async dispatch => {
-    try {
-        return dispatch({
-            type: ORDER_BY_RATING
-        });
-    } catch (error) {
-        
-    }
-}
-
-export const createCourse = (form) => async dispatch => {
-    try {
-        const data = await axios.post('/', form);
-        return dispatch({
-            type: CREATE_COURSE,
-            payload: data
-        });
-    } catch (error) {
-        
-    }
-}
-
-export const deleteCourse = (id) => async dispatch => {
-    try {
-        await axios.delete('/');
-        return dispatch({
-            type: DELETE_COURSE
-        });
-    } catch (error) {
-        
-    }
-}
-
-export const archiveCourse = () => dispatch => {
-    try {
-        return dispatch({
-            type: ARCHIVE_COURSE
-        });
-    } catch (error) {
-        
-    }
-}
-
-export const getReviews = () => dispatch => {
-    try {
-        return dispatch({
-            type: GET_REVIEWS
-        });
-    } catch (error) {
-        
-    }
-}
+  }
+};
 

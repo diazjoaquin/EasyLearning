@@ -3,9 +3,9 @@ const { getAllCourses } = require("../getAllCourses/controllers");
 const getByName = async (req, res) => {
   const { name } = req.query;
   try {
-    var allCourses = await getAllCourses();
+    const allCourses = await getAllCourses();
     if (name) {
-      var searchName = allCourses.filter((course) =>
+      const searchName = allCourses.filter((course) =>
         course.name.toLowerCase().includes(name.toLowerCase())
       );
       searchName.length > 0

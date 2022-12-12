@@ -6,6 +6,7 @@ module.exports = (sequelize) => {
     "course",
     {
       teacher: {
+        // type: DataTypes.INTEGER,
         type: DataTypes.STRING,
         allowNull: false,
       },
@@ -14,11 +15,11 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
       description: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
         allowNull: false,
       },
       rating: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.FLOAT,
         defaultValue: null,
       },
       price: {
