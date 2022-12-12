@@ -37,7 +37,7 @@ export default function Course() {
                 id={course.id}
                 Description={course.description}
                 price={course.price}
-                Rating={course.rating}
+                rating={course.rating}
                 categories={course.categories}
               />)
           })

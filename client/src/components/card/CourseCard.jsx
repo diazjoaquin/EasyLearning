@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { addToCart, buyNow } from '../../redux/actions/index.js';
 
-const CourseCard = ({ id, teacher, name, description, rating, price }) => {
+const CourseCard = ({ id, teacher, name, description, rating, price, categories }) => {
 
     const dispatch = useDispatch();
     // const history = useHistory();
@@ -35,6 +35,15 @@ const CourseCard = ({ id, teacher, name, description, rating, price }) => {
                     </Text>
                     <Text color='blue.600' fontSize='2xl'>
                         ${price}
+                    </Text>
+                    <Text>
+                        Categories: {categories?.map(e => `${e} `)}
+                    </Text>
+                    <Text>
+                        Teacher: {teacher}
+                    </Text>
+                    <Text>
+                        Rating: {rating}
                     </Text>
                 </Stack>
             </CardBody>
