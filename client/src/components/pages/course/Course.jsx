@@ -6,6 +6,8 @@ import { useEffect } from 'react';
 import { getAllCourses } from "../../../redux/actions/index.js";
 import style from './Course.module.css';
 import Filters from "../../filters/filters.jsx";
+import Footer2 from "../../footer/Footer2"
+
 
 export default function Course() {
 
@@ -40,8 +42,8 @@ export default function Course() {
               />)
           })
         }
-
       </div>
+      <Footer2 />
     </div>
   )
 }

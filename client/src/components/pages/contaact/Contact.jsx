@@ -21,6 +21,7 @@ import {
   import { BsGithub, BsLinkedin, BsPerson, BsTwitter } from 'react-icons/bs';
   import { MdEmail, MdOutlineEmail } from 'react-icons/md';
 import Navbar from '../../navbar/Navbar';
+import Footer2 from "../../footer/Footer2"
   
   const confetti = {
     light: {
@@ -195,6 +196,12 @@ import Navbar from '../../navbar/Navbar';
           </Box>
         </Box>
       </Flex>
+      <div>
+        <Footer2>
+
+        </Footer2>
+
+      </div>
       </div>
     );
   }
