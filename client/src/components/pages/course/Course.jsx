@@ -1,25 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "../../navbar/Navbar";
 import CourseCard from "../../card/CourseCard";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from 'react';
 import { getAllCourses } from "../../../redux/actions/index.js";
 import style from './Course.module.css';
+import Filters from "../../filters/Filters";
 
 export default function Course() {
 
     const courses = useSelector(state => state.courses);
     const dispatch = useDispatch();
-
+    const[update, setUpdate] = useState(false);
     
     useEffect(() => {
-        dispatch(getAllCourses());
+        if(!courses.length){
+           dispatch(getAllCourses()); 
+        }
     }, [dispatch])
 
 
     return (
         <div>
             <Navbar/>
+            <Filters update={update} setUpdate={setUpdate}/>
             <div className={style.cards}>
                 {
                     courses.map((course) => {
@@ -32,7 +36,7 @@ export default function Course() {
                                 Description={course.description}
                                 price={course.price}
                                 Rating={course.rating}
-                                categories={course.categories[0].name}
+                                categories={course.categories}
                             />)
                         })
                 }

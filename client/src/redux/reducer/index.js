@@ -6,9 +6,9 @@ import {
   CLEAR_DETAIL,
   ADD_TO_CART,
   BUY_NOW,
-  FILTER_BY_CATEGORY,
-  FILTER_BY_COST,
-  FILTER_BY_PROFESSOR,
+  // FILTER_BY_CATEGORY,
+  // FILTER_BY_COST,
+  // FILTER_BY_PROFESSOR,
   ORDER_BY_NAME,
   ORDER_BY_RATING,
   CREATE_COURSE,
@@ -16,6 +16,7 @@ import {
   ARCHIVE_COURSE,
   DELETE_COURSE_FROM_CART,
   GET_REVIEWS,
+  FILTERS,
 } from "../actions";
 
 const initialState = {
@@ -77,25 +78,43 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         cart: buy,
       };
-    case FILTER_BY_CATEGORY:
-      let category = state.filter;
-      let data = category.filter(
-        (course) => course.category === action.payload
-      );
+    case FILTERS:
+      let filtros;
+      if (action.payload.category) {
+        filtros = state.filter.filter((e) =>
+          e.categories.includes(action.payload.category)
+        );
+      }
+      if (action.payload.price) {
+        filtros = filtros.filter(
+          (e) => parseInt(action.payload.price) === e.price
+        );
+      }
+      // if (action.payload.teacher) {
+      // }
       return {
         ...state,
-        courses: data,
+        courses: filtros,
       };
-    case FILTER_BY_COST:
-      // let cost = state.filter;
-      return {
-        ...state,
-      };
-    case FILTER_BY_PROFESSOR:
-      // let professor = state.filter;
-      return {
-        ...state,
-      };
+    // case FILTER_BY_CATEGORY:
+    //   let category = state.filter;
+    //   let data = category.filter(
+    //     (course) => course.category === action.payload
+    //   );
+    //   return {
+    //     ...state,
+    //     courses: data,
+    //   };
+    // case FILTER_BY_COST:
+    //   // let cost = state.filter;
+    //   return {
+    //     ...state,
+    //   };
+    // case FILTER_BY_PROFESSOR:
+    //   // let professor = state.filter;
+    //   return {
+    //     ...state,
+    //   };
     case ORDER_BY_NAME:
       const byName =
         action.payload === "A-Z"

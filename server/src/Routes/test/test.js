@@ -69,6 +69,9 @@ router.post("/", async (req, res) => {
       {
         name: "Marketing",
       },
+      {
+        name: "Programming",
+      },
     ];
 
     //Lista de Cursos
@@ -97,7 +100,7 @@ router.post("/", async (req, res) => {
       {
         name: "Curso de Franco",
         description: "nada de description",
-        category: 4,
+        category: 5,
         teacher: "Franco", //Desde el front llegaria como id y tenemos que enviarlo a la base de datos como nombre.
         price: 900,
       },
@@ -361,8 +364,9 @@ router.post("/", async (req, res) => {
     await listCoursesDB[2].addCategory(listCategoriesDB[2]);
     await listCoursesDB[2].addCategory(listCategoriesDB[3]);
     await listCoursesDB[2].addCategory(listCategoriesDB[4]);
-    await listCoursesDB[3].addCategory(listCategoriesDB[3]);
+    // await listCoursesDB[3].addCategory(listCategoriesDB[3]);
     await listCoursesDB[4].addCategory(listCategoriesDB[4]);
+    await listCoursesDB[3].addCategory(listCategoriesDB[5]);
 
     //Create Videos
     const listVideosDB = await Video.bulkCreate(listVideos);
