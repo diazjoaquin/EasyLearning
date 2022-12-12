@@ -1,0 +1,27 @@
+.bg {
+    /* background-color: rgb(245, 245, 220); */
+    border-style: double;
+    border-bottom: 3px;
+    border-color: black;
+}
+
+.icon:hover{
+    cursor: pointer;
+}
+
+.coursecont {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+    background-color: rgba(128, 128, 128, 0.107);
+    padding: 50px;
+}
+
+.maintext {
+    display: flex;
+    flex-direction:row;
+    padding-left: 200px;
+    padding-top: 70px;
+}
