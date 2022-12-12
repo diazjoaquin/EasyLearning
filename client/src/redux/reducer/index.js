@@ -10,7 +10,7 @@ const initialState = {
     cart: [],
 }
 
-const rooReducer = (state = initialState, action) => {
+const rootReducer = (state = initialState, action) => {
     switch (action.type) {
 
         case GET_COURSE_BY_NAME:
@@ -109,4 +109,4 @@ const rooReducer = (state = initialState, action) => {
     }
 };
 
-export default rooRouter;
+export default rootReducer;
