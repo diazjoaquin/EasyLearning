@@ -1,42 +1,54 @@
-// import { Link } from 'react-router-dom';
 // import style from './CourseCard.module.css';
-import { courses } from '../../mockup.js';
+// import { useHistory } from 'react-router-dom
 import { Card, CardBody, CardFooter, Stack, Heading, Text, Divider, ButtonGroup, Button } from '@chakra-ui/react';
+import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { addToCart, buyNow } from '../../redux/actions/index.js';
 
-const CourseCard = () => {
+const CourseCard = ({ id, teacher, name, description, rating, price }) => {
+
+    const dispatch = useDispatch();
+    // const history = useHistory();
+
+    const handleAddToCart = (idCourse) => {
+        dispatch(addToCart(idCourse));
+    }
+
+    const handleBuyNow = (idCourse) => {
+        dispatch(buyNow(idCourse));
+        // history.push('/purchase');
+    }
 
 
     return (
         <Card maxW='sm'>
             <CardBody>
-                {/* <iframe id="ytplayer"
-                    type="text/html"
-                    width="300"
-                    height="200"
-                    src={courses[0].Video[0]}
-                    title={courses[0].idCourse}/> */}
-                    <iframe id="ytplayer" type="text/html" title="yt" width="330" height="220"
+                <iframe id="ytplayer" type="text/html" title="yt" width="300" height="200"
                     src="http://www.youtube.com/embed/M7lc1UVf-VE?autoplay=0&origin=http://example.com"
-                    />
+                />
                 <Stack mt='6' spacing='3'>
-                <Heading size='md'>Course Name</Heading>
-                <Text>
-                    {courses[0].Description}
-                </Text>
-                <Text color='blue.600' fontSize='2xl'>
-                    $Course Price
-                </Text>
+                    <Link to={`/detail/${id}`}>
+                        <Heading size='md'>{name}</Heading>
+                    </Link>
+                    <Text>
+                        {description}
+                    </Text>
+                    <Text color='blue.600' fontSize='2xl'>
+                        ${price}
+                    </Text>
                 </Stack>
             </CardBody>
             <Divider />
             <CardFooter>
                 <ButtonGroup spacing='2'>
-                <Button variant='solid' colorScheme='blue'>
-                    Buy now
-                </Button>
-                <Button variant='ghost' colorScheme='blue'>
-                    Add to cart
-                </Button>
+                    <Button variant='solid' colorScheme='blue'
+                        onClick={handleBuyNow(id)}>
+                        Buy now
+                    </Button>
+                    <Button variant='ghost' colorScheme='blue'
+                        onClick={handleAddToCart(id)}>
+                        Add to cart
+                    </Button>
                 </ButtonGroup>
             </CardFooter>
         </Card>

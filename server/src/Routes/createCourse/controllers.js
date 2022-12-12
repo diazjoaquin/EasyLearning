@@ -1,48 +1,49 @@
-const { Course, Category, Rating } = require("../../db.js");
+const { Course, Category } = require("../../db.js");
 const { Op } = require("sequelize");
 
-const createCourse = async (req, res) => {
+const createCourse = async ({
+  name,
+  description,
+  category,
+  teacher,
+  price,
+}) => {
   try {
-    const { name, description, teacher, category } = req.body;
-
-    if (name && description && teacher && category) {
+    if (name && description && category && teacher) {
       const [course, createdCourse] = await Course.findOrCreate({
         where: { name: { [Op.iLike]: name } },
         defaults: {
           name,
           description,
           teacher,
+          price,
         },
       });
 
-      const [categoryDB, createdCategory] = await Category.findOrCreate({
-        where: { name: { [Op.iLike]: category } },
-        defaults: {
-          name: category.slice(0, 1).toUpperCase().concat(category.slice(1)),
-        },
-      });
+      //Si el curso fue creado
+      if (createdCourse) {
+        //Si agrega mas de una categoria, esto tendria que ser un map.
+        const [categoryDB, createdCategory] = await Category.findOrCreate({
+          where: { name: { [Op.iLike]: category } },
+          defaults: {
+            name: category.slice(0, 1).toUpperCase().concat(category.slice(1)),
+          },
+        });
+        await course.addCategory(categoryDB);
+      }
 
-      const ratingDB = await Rating.create({
-        score: "undefined",
-      });
-
-      await course.addCategory(categoryDB);
-      await course.setRating(ratingDB);
-
-      res.json(
-        createdCourse
-          ? "Curso creado exitosamente."
-          : "Ya existe un curso con ese nombre."
-      );
+      return createdCourse
+        ? "Curso creado exitosamente."
+        : "Ya existe un curso con ese nombre.";
     } else {
-      res.json({
+      return {
         message:
           "Alguna de las propiedades de curso es null [name/description/teacher/category]",
-      });
+      };
     }
   } catch (error) {
-    res.status(400).json(error);
+    return error;
   }
 };
 
-module.exports = createCourse;
+module.exports = { createCourse };
