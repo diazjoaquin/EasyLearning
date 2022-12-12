@@ -6,9 +6,6 @@ export const CLEAR_DETAIL = "CLEAR_DETAIL";
 export const GET_CATEGORIES = "GET_CATEGORIES";
 export const ADD_TO_CART = "ADD_TO_CART";
 export const BUY_NOW = "BUY_NOW";
-// export const FILTER_BY_CATEGORY = "FILTER_BY_CATEGORY";
-// export const FILTER_BY_COST = "FILTER_BY_COST";
-// export const FILTER_BY_PROFESSOR = "FILTER_BY_PROFESSOR";
 export const FILTERS = "FILTERS";
 export const ORDER_BY_NAME = "ORDER_BY_NAME";
 export const ORDER_BY_RATING = "ORDER_BY_RATING";
@@ -104,37 +101,11 @@ export const filters = (payload) => async (dispatch) => {
   }
 };
 
-// export const filterByCat = (payload) => async (dispatch) => {
-//   try {
-//     return dispatch({
-//       type: FILTER_BY_CATEGORY,
-//       payload,
-//     });
-//   } catch (error) {}
-// };
-
-// export const filterByCost = (payload) => async (dispatch) => {
-//   try {
-//     return dispatch({
-//       type: FILTER_BY_COST,
-//       payload,
-//     });
-//   } catch (error) {}
-// };
-
-// export const filterByProfessor = (payload) => async (dispatch) => {
-//   try {
-//     return dispatch({
-//       type: FILTER_BY_PROFESSOR,
-//       payload,
-//     });
-//   } catch (error) {}
-// };
-
 export const orderByName = (payload) => async (dispatch) => {
   try {
     return dispatch({
       type: ORDER_BY_NAME,
+      payload,
     });
   } catch (error) {}
 };
@@ -143,6 +114,7 @@ export const orderByRating = (payload) => async (dispatch) => {
   try {
     return dispatch({
       type: ORDER_BY_RATING,
+      payload,
     });
   } catch (error) {}
 };

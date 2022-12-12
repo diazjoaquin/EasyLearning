@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { filters, getAllCourses, getCategories } from "../../redux/actions";
+import { filters, getAllCourses, getCategories, orderByName, orderByRating } from "../../redux/actions";
 
 const Filters = ({update, setUpdate}) => {
 
@@ -34,6 +34,16 @@ const Filters = ({update, setUpdate}) => {
         dispatch(filters(filterValue));
         setUpdate(!update);
         console.log("filter", filterValue)
+    }
+
+    function handleSort(e){
+        dispatch(orderByName(e.target.value))
+        setUpdate(!update);
+    }
+
+    function handleRating(e){
+        dispatch(orderByRating(e.target.value))
+        setUpdate(!update);
     }
 
     return(
@@ -72,6 +82,18 @@ const Filters = ({update, setUpdate}) => {
             <button onClick={handleClick}>Aplicar Filtros</button>
 
             <h4>OrderBy</h4>
+            <div>
+                            <select name="Sort" onChange={handleSort}>
+                                <option value="sort">Alphabet</option>
+                                <option value="A-Z">A-Z</option>
+                                <option value="Z-A">Z-A</option>
+                            </select>
+                            <select name="Rating" onChange={handleRating}>
+                                <option value="rating">Rating</option>
+                                <option value="min">Minor-Major</option>
+                                <option value="max">Major-Minor</option>
+                            </select>
+                        </div>
         </div>
     )
 

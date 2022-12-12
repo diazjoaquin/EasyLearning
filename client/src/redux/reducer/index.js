@@ -96,25 +96,6 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         courses: filtros,
       };
-    // case FILTER_BY_CATEGORY:
-    //   let category = state.filter;
-    //   let data = category.filter(
-    //     (course) => course.category === action.payload
-    //   );
-    //   return {
-    //     ...state,
-    //     courses: data,
-    //   };
-    // case FILTER_BY_COST:
-    //   // let cost = state.filter;
-    //   return {
-    //     ...state,
-    //   };
-    // case FILTER_BY_PROFESSOR:
-    //   // let professor = state.filter;
-    //   return {
-    //     ...state,
-    //   };
     case ORDER_BY_NAME:
       const byName =
         action.payload === "A-Z"
@@ -123,11 +104,13 @@ const rootReducer = (state = initialState, action) => {
               if (a.name < b.name) return -1;
               return 0;
             })
-          : state.courses.sort((a, b) => {
+          : action.payload === "Z-A"
+          ? state.courses.sort((a, b) => {
               if (a.name < b.name) return 1;
               if (a.name > b.name) return -1;
               return 0;
-            });
+            })
+          : [...state.courses];
       return {
         ...state,
         courses: byName,
@@ -135,12 +118,10 @@ const rootReducer = (state = initialState, action) => {
     case ORDER_BY_RATING:
       const byRating =
         action.payload === "min"
-          ? state.courses.sort((a, b) => {
-              return a.rating - b.rating;
-            })
-          : state.courses.sort((a, b) => {
-              return b.rating - a.rating;
-            });
+          ? state.courses.sort((a, b) => a.rating - b.rating)
+          : action.payload === "max"
+          ? state.courses.sort((a, b) => b.rating - a.rating)
+          : [...state.courses];
       return {
         ...state,
         courses: byRating,
