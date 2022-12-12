@@ -15,9 +15,11 @@ import {
 import { ReactNode } from 'react';
 import { FaTwitter, FaYoutube } from 'react-icons/fa';
 import { BiMailSend } from 'react-icons/bi';
-import Logo from "../../image/easylearning.png"
+// import Logo from "../../image/easylearning.png"
 import { Button, ButtonGroup } from '@chakra-ui/react'
 import { FaFacebook, FaLinkedin, FaInstagram } from "react-icons/fa"
+import Logo from "../footer/easylearning.png"
+
 
 
 const SocialButton = ({
@@ -87,9 +89,12 @@ export default function Footer2() {
 
                         </Text>
                         <Stack direction={'row'} spacing={6}>
-                            <Button colorScheme='facebook' leftIcon={<FaFacebook />}>Facebook</Button>
-                            <Button colorScheme="linkedin" leftIcon={<FaLinkedin />}>Linkedin </Button>
-                            <Button colorSchme="instagram" leftIcon={<FaInstagram />}>Instagram </Button>
+
+                            <Button colorScheme='facebook' leftIcon={<FaFacebook />}> <a href="https://es-la.facebook.com/" target="_blank">Facebook</a></Button>
+                            <Button colorScheme="linkedin" leftIcon={<FaLinkedin />} > <a href="https://www.linkedin.com/feed/" target="_blank">Linkedin</a></Button>
+                            <Button colorScheme="instagram" leftIcon={<FaInstagram />}> <a href="https://www.instagram.com/" target="_blank">Instagram</a></Button>
+
+
 
                         </Stack>
                     </Stack>
@@ -133,6 +138,6 @@ export default function Footer2() {
                     </Stack>
                 </SimpleGrid>
             </Container>
-        </Box>
+        </Box >
     );
 }

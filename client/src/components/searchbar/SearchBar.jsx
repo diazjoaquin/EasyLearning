@@ -25,10 +25,6 @@ export default function SearchBar() {
         if (name) {
             dispatch(byName(name));
             setName("");
-            //         dispatch(loadingAction(true));
-            //         setTimeout(() => {
-            //             dispatch(loadingAction(false));
-            //         }, 3000);
         } else {
             alert("Please complete the search input");
         }
@@ -37,11 +33,6 @@ export default function SearchBar() {
 
 
     return (
-        // <div>
-
-        //     <img src={searchbar} alt="SearchBar"/>
-
-        // </div>
         <div className={style.searchbar}>
             <input title="Please complete with the name of the course" type="text" placeholder="What do you whant to learn? " onChange={handleInputChange} value={name} />
             <div className={style.searchbutton}>               
@@ -53,8 +44,6 @@ export default function SearchBar() {
                     onClick={(e)=> handleSubmit(e)}
                 />
             </div>
-
-
         </div>
     )
 }

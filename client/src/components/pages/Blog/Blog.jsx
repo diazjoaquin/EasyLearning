@@ -16,6 +16,7 @@ import {
   VStack,
 } from '@chakra-ui/react';
 import Navbar from '../../navbar/Navbar';
+import Footer2 from '../../footer/Footer2';
 
 interface IBlogTags {
   tags: Array<string>;
@@ -203,6 +204,12 @@ const ArticleList = () => {
         </Text>
       </VStack>
     </Container>
+
+    <div>
+      <Footer2>
+        
+      </Footer2>
+    </div>
     </div>
   );
 };
