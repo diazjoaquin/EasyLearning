@@ -112,9 +112,6 @@ export default function Detail() {
                             ></Drawer>
 
 
-
-
-
                             <Drawer
                               isOpen={isOpen}
                               placement='right'
@@ -144,7 +141,8 @@ export default function Detail() {
                           </Box>
                           <Box>
 
-                            <h3>Category: </h3>
+                            <h3> <strong> Category: </strong> </h3>
+                            
                             {myCourse.categories?.map((e, i) => <h1 key={i}>{e.name}</h1>)}
 
                           </Box>
