@@ -1,7 +1,26 @@
 import { useState } from "react";
 import axios from "axios";
+import { Button, FormControl, FormLabel, Input } from '@chakra-ui/react'
 
-const Comments = ({ comments, videoId }) => {
+//CAMBIAR NOMBRE DE COMPONENTE POR FORMCOMMENTS
+//CAMBIAR NOMBRE DE COMPONENTE POR FORMCOMMENTS
+//CAMBIAR NOMBRE DE COMPONENTE POR FORMCOMMENTS
+//CAMBIAR NOMBRE DE COMPONENTE POR FORMCOMMENTS
+//CAMBIAR NOMBRE DE COMPONENTE POR FORMCOMMENTS
+//CAMBIAR NOMBRE DE COMPONENTE POR FORMCOMMENTS
+//CAMBIAR NOMBRE DE COMPONENTE POR FORMCOMMENTS
+//CAMBIAR NOMBRE DE COMPONENTE POR FORMCOMMENTS
+//CAMBIAR NOMBRE DE COMPONENTE POR FORMCOMMENTS
+//CAMBIAR NOMBRE DE COMPONENTE POR FORMCOMMENTS
+//CAMBIAR NOMBRE DE COMPONENTE POR FORMCOMMENTS
+//CAMBIAR NOMBRE DE COMPONENTE POR FORMCOMMENTS
+//CAMBIAR NOMBRE DE COMPONENTE POR FORMCOMMENTS
+//CAMBIAR NOMBRE DE COMPONENTE POR FORMCOMMENTS
+//CAMBIAR NOMBRE DE COMPONENTE POR FORMCOMMENTS
+//CAMBIAR NOMBRE DE COMPONENTE POR FORMCOMMENTS
+//CAMBIAR NOMBRE DE COMPONENTE POR FORMCOMMENTS
+//CAMBIAR NOMBRE DE COMPONENTE POR FORMCOMMENTS
+const Comments = ({ videoId, comments }) => {
 
   const [comment, setComment] = useState({
     videoId,
@@ -15,19 +34,19 @@ const Comments = ({ comments, videoId }) => {
       ...comment,
       [e.target.name]: e.target.value
     });
+    console.log(comment);
   }
 
   const handleSubmit = async (e) => {
     //e.preventDefault() //hay que cambiar esto por un estado local, para que se actualice solamente los comentarios cada vez que alguien comenta.
     await axios.post("http://localhost:3001/createCommentVideo", comment);
+    console.log("llega al handlesubmit");
   }
 
   return (
     <div>
-      <h2>Comentarios: </h2>
-      {/* form create comments */}
       <form onSubmit={handleSubmit} >
-        <label>Crear comentarios</label>
+        <label>Crear comentario:</label>
         <br />
         <label>userId: </label>
         <input type="number" name="userId" onChange={handleChange} />
@@ -39,6 +58,7 @@ const Comments = ({ comments, videoId }) => {
         <input type="text" name="description" onChange={handleChange} />
         <br />
         <button type="submit">Comentar</button>
+
       </form>
       {
         comments?.map((el, i) => {
