@@ -2,6 +2,8 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { filters, getAllCourses, getCategories, orderByName, orderByRating } from "../../redux/actions";
+import style from './Filters.module.css';
+import { Button } from "@chakra-ui/button";
 
 const Filters = ({update, setUpdate}) => {
 
@@ -47,42 +49,50 @@ const Filters = ({update, setUpdate}) => {
     }
 
     return(
-        <div>
-            <h4>Filters</h4>
-            <h5>By Categories</h5>
-            <div>
-               <select name="category" onChange={handleChange}>
-                        <option value="Categories">Categories</option>
+        <div className={style.cont}>
+            <div className={style.filters}>
+                <h4>Filters:</h4>
+                <h5>By Categories</h5>
+                <div className={style.categories}>
+                <select name="category" onChange={handleChange}>
+                            <option value="Categories">Categories</option>
+                            {
+                                categories?.map(e => {
+                                    return(
+                                        <option value={e.name}>{e.name}</option>
+                                    )
+                                })
+                            }
+                    </select>
+                </div>
+                <h5>By Price</h5>
+                <div>
+                    <select name="price" onChange={handleChange}>
+                        <option value="prices">P</option>
+                        <option value="100">100</option>
+                        <option value="200">200</option>
+                        <option value="500">500</option>
+                    </select>
+                </div>
+                {/* <h5>By Teachers</h5>*/}
+                {/* <div>
+                    <section name="teacher" onChange={handleChange}>
                         {
-                            categories?.map(e => {
-                                return(
-                                    <option value={e.name}>{e.name}</option>
-                                )
-                            })
+
                         }
-                </select>
+                    </section>
+                </div> */} 
+                {/* <button onClick={handleClick}>Aplicar Filtros</button> */}
+                <Button colorScheme='teal' variant='link'
+                onClick={handleClick}>
+                    Aplicar Filtros
+                </Button>
             </div>
-            <h5>By Price</h5>
-            <div>
-                <select name="price" onChange={handleChange}>
-                    <option value="prices">P</option>
-                    <option value="100">100</option>
-                    <option value="200">200</option>
-                    <option value="500">500</option>
-                </select>
-            </div>
-            {/* <h5>By Teachers</h5>*/}
-            {/* <div>
-                <section name="teacher" onChange={handleChange}>
-                    {
 
-                    }
-                </section>
-            </div> */} 
-            <button onClick={handleClick}>Aplicar Filtros</button>
 
-            <h4>OrderBy</h4>
-            <div>
+            <div className={style.order}>
+            <h4>Order By:</h4>
+                        <div>
                             <select name="Sort" onChange={handleSort}>
                                 <option value="sort">Alphabet</option>
                                 <option value="A-Z">A-Z</option>
@@ -94,6 +104,7 @@ const Filters = ({update, setUpdate}) => {
                                 <option value="max">Major-Minor</option>
                             </select>
                         </div>
+            </div>
         </div>
     )
 

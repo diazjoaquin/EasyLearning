@@ -1,20 +1,34 @@
 import axios from "axios";
+
+// courses
 export const GET_ALL_COURSES = "GET_ALL_COURSES";
 export const GET_COURSE_BY_NAME = "GET_COURSE_BY_NAME";
 export const GET_COURSE_DETAIL = "GET_COURSE_DETAIL";
 export const CLEAR_DETAIL = "CLEAR_DETAIL";
 export const GET_CATEGORIES = "GET_CATEGORIES";
+
+// cart:
 export const ADD_TO_CART = "ADD_TO_CART";
 export const BUY_NOW = "BUY_NOW";
+export const DELETE_COURSE_FROM_CART = "DELETE_COURSE_FROM_CART";
+
+// filtering & ordering:
 export const FILTERS = "FILTERS";
 export const ORDER_BY_NAME = "ORDER_BY_NAME";
 export const ORDER_BY_RATING = "ORDER_BY_RATING";
+
+// create & mannage course:
 export const CREATE_COURSE = "CREATE_COURSE";
 export const DELETE_COURSE = "DELETE_COURSE";
 export const ARCHIVE_COURSE = "ARCHIVE_COURSE";
-export const DELETE_COURSE_FROM_CART = "DELETE_COURSE_FROM_CART";
 export const GET_REVIEWS = "GET_REVIEWS";
+export const CREATE_REVIEW = "CREATE_REVIEW";
+export const DELETE_REVIEW = "DELETE_REVIEW";
+export const GET_VIDEOS = "GET_VIDEOS";
+export const CREATE_VIDEO = "CREATE_VIDEO";
+export const DELETE_VIDEO = "DELETE_VIDEO";
 export const POST_REVIEW = "POST_REVIEW";
+
 
 export const getAllCourses = () => async (dispatch) => {
   try {
@@ -145,6 +159,7 @@ export const getReviews = () => (dispatch) => {
     });
   } catch (error) {}
 };
+
 export const deleteCourse = (id) => async (dispatch) => {
   try {
     await axios.delete("/");
@@ -162,5 +177,6 @@ export const postReview = (payload) => {
     } catch (error) {
       console.log(error);
     }
-  };
+  }
 };
+
