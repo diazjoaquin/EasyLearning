@@ -14,6 +14,7 @@ export const ORDER_BY_RATING = "ORDER_BY_RATING";
 export const CREATE_COURSE = "CREATE_COURSE";
 export const DELETE_COURSE = "DELETE_COURSE";
 export const ARCHIVE_COURSE = "ARCHIVE_COURSE";
+export const POST_REVIEW = "POST_REVIEW";
 
 export const getAllCourses = () => async dispatch => {
     try {
@@ -177,5 +178,16 @@ export const archiveCourse = () => dispatch => {
         });
     } catch (error) {
         
+    }
+}
+
+export const postReview = (payload) => {
+    return async function (dispatch) {
+       try{
+        var json = await axios.post("/createReview", payload);
+        return json
+       } catch(error) {
+        console.log(error)
+       }
     }
 }
