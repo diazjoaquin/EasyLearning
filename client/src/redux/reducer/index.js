@@ -15,6 +15,7 @@ import {
   DELETE_COURSE_FROM_CART,
   GET_REVIEWS,
   FILTERS,
+  RESET_FILTERS,
 } from "../actions";
 
 const initialState = {
@@ -123,6 +124,11 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         courses: byRating,
+      };
+    case RESET_FILTERS:
+      return {
+        ...state,
+        courses: state.filter,
       };
     case CREATE_COURSE:
       return {
