@@ -3,6 +3,9 @@ import { postReview } from "../../redux/actions";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useDispatch, useSelector } from "react-redux";
 import "./addReview.module.css";
+import { Box, FormControl, FormLabel, Input, Button, FormErrorMessage } from '@chakra-ui/react';
+import Rating from '@mui/material/Rating';
+
 
 const PostReview = ({courseId}) => {
     const [input, setInput] = useState({
@@ -57,7 +60,6 @@ const PostReview = ({courseId}) => {
             [e.target.name]: e.target.value
 
         }));
-
     }
 
     function handleSubmit(e) {
@@ -81,53 +83,112 @@ const PostReview = ({courseId}) => {
     }
 
     return ( 
-        <div>
-            <h1>Rate your course!</h1>
-                <form  onSubmit={(e) => handleSubmit(e)} >
-                <div>
-                <label>Rating : </label>
-                    <input
-                    type = "number"
-                    value= {input.score}
-                    name = "score"
-                    onChange={(e) => handleChange(e)}
-                    />
-                      { errors.score && (
-                    <p>{errors.score}</p>
-                )}
-                </div>
+        <Box 
+        maxW='sm' 
+        borderWidth='1px' 
+        borderRadius='lg' 
+        overflow='hidden'
+        onSubmit={(e) => handleSubmit(e)}
+        >
+          <FormControl isRequired>
+            <FormLabel>Rating: </FormLabel>
+            {/* <Input
+              type = "number"
+              value= {input.score}
+              name = "score"
+              onChange={(e) => handleChange(e)}
+            /> */}
+            <Rating  
+            defaultValue={2.5} precision={0.5} size="large"
+            id="outlined-helperText"
+            label="Puntuación:"
+            htmlFor="score"
+            value={input.score}
+            onChange={(e) => handleChange(e)}
+            name="score"
+            type="number"
+            InputLabelProps={{
+            shrink: true,
+            }}
+            />
 
-                <div>
-                <label>Add a title: </label>
-                    <input
-                    type = "text"
-                    value= {input.title}
-                    name = "title"
-                    onChange={(e) => handleChange(e)}
-                    />
-                      { errors.title && (
-                    <p>{errors.title}</p>
-                )}
-                </div>
+             <FormErrorMessage> { errors.score && ( <p>{errors.score}</p> )}</FormErrorMessage>
 
-                <div>
-                <label>Add your comments: </label>
-                    <input
-                    type = "text"
-                    value= {input.comments}
-                    name = "comments"
-                    onChange={(e) => handleChange(e)}
-                    />
-                      { errors.comments && (
-                    <p>{errors.comments}</p>
-                )}
-                </div>
-                <button type="submit">Send Review</button>
-                <div>
+             <FormLabel>Add a title: </FormLabel>
+              <Input
+              type = "text"
+              value= {input.title}
+              name = "title"
+              onChange={(e) => handleChange(e)}
+            />
+            <FormErrorMessage> { errors.title && ( <p>{errors.title}</p> )}</FormErrorMessage>
 
-                </div>
-            </form>
-            </div>
+            <FormLabel>Add your comments: </FormLabel>
+            <Input
+              type = "text"
+              value= {input.comments}
+              name = "comments"
+              onChange={(e) => handleChange(e)}
+            />
+            <FormErrorMessage> { errors.comments && ( <p>{errors.comments}</p> )}</FormErrorMessage>
+
+            <Button
+            mt={4}
+            colorScheme='teal'
+            // isLoading={props.isSubmitting}
+            type='submit'
+            > Submit </Button>
+          </FormControl>
+        </Box>
+
+
+        // <div>
+        //     <h1>Rate your course!</h1>
+        //         <form  onSubmit={(e) => handleSubmit(e)} >
+        //         <div>
+        //         <label>Rating : </label>
+        //             <input
+        //             type = "number"
+        //             value= {input.score}
+        //             name = "score"
+        //             onChange={(e) => handleChange(e)}
+        //             />
+        //               { errors.score && (
+        //             <p>{errors.score}</p>
+        //         )}
+        //         </div>
+
+        //         <div>
+        //         <label>Add a title: </label>
+        //             <input
+        //             type = "text"
+        //             value= {input.title}
+        //             name = "title"
+        //             onChange={(e) => handleChange(e)}
+        //             />
+        //               { errors.title && (
+        //             <p>{errors.title}</p>
+        //         )}
+        //         </div>
+
+        //         <div>
+        //         <label>Add your comments: </label>
+        //             <input
+        //             type = "text"
+        //             value= {input.comments}
+        //             name = "comments"
+        //             onChange={(e) => handleChange(e)}
+        //             />
+        //               { errors.comments && (
+        //             <p>{errors.comments}</p>
+        //         )}
+        //         </div>
+        //         <button type="submit">Send Review</button>
+        //         <div>
+
+        //         </div>
+        //     </form>
+        //     </div>
 
     )            
 }

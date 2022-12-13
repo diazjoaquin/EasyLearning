@@ -139,6 +139,7 @@ const rootReducer = (state = initialState, action) => {
     case GET_REVIEWS:
       return {
         ...state,
+        reviews: action.payload
       };
     case POST_REVIEW:
       return {

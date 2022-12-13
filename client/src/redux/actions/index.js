@@ -30,6 +30,7 @@ export const DELETE_VIDEO = "DELETE_VIDEO";
 export const POST_REVIEW = "POST_REVIEW";
 
 
+
 export const getAllCourses = () => async (dispatch) => {
   try {
     const all = await axios.get("/getAllCourses");
@@ -152,14 +153,6 @@ export const archiveCourse = () => (dispatch) => {
   } catch (error) {}
 };
 
-export const getReviews = () => (dispatch) => {
-  try {
-    return dispatch({
-      type: GET_REVIEWS,
-    });
-  } catch (error) {}
-};
-
 export const deleteCourse = (id) => async (dispatch) => {
   try {
     await axios.delete("/");
@@ -179,4 +172,18 @@ export const postReview = (payload) => {
     }
   }
 };
+
+export const getReviews = (id) => {
+  return async function (dispatch) {
+    try {
+      var json = await axios.get( "/" + id );
+      return dispatch({
+         type: GET_REVIEWS,
+         payload: json.data,
+      })
+    } catch (error) {
+      console.log(error)
+    } 
+  }
+}
 
