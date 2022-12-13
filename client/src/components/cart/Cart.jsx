@@ -6,22 +6,21 @@ import style from './Cart.module.css';
 
 const Cart = () => {
 
-
     return (
         <section className={style.cart}>
             <div className={style.cont}>
                 <div>
-                <div><h1 className={style.h1}>Shopping Cart</h1></div>
+                    <div><h1 className={style.h1}>Shopping Cart</h1></div>
                     <br></br>
                     <h3 className={style.h3}>1 Course in cart</h3>
                     <Divider orientation='horizontal' />
                     <div w="1000px">
                         <Card
-                        w="600px"
-                        h="150px"
-                        direction={{ base: 'column', sm: 'row' }}
-                        overflow='hidden'
-                        variant='outline'
+                            w="600px"
+                            h="150px"
+                            direction={{ base: 'column', sm: 'row' }}
+                            overflow='hidden'
+                            variant='outline'
                         >
                             <Image
                                 objectFit='cover'
@@ -31,19 +30,19 @@ const Cart = () => {
                             />
 
                             <Stack>
-                                <CloseButton className={style.x}/>
+                                <CloseButton className={style.x} />
                                 <CardBody>
-                                <Heading size='md'>Course Name</Heading>
+                                    <Heading size='md'>Course Name</Heading>
 
-                                <Text py='2'>
-                                    By: Proffesor
-                                </Text>
-                                <Text py='.5'>
-                                    4.5 ⭐⭐⭐⭐⭐ (24,123 ratings)
-                                </Text>
-                                <Text py='.5'>
-                                    $65.00
-                                </Text>
+                                    <Text py='2'>
+                                        By: Proffesor
+                                    </Text>
+                                    <Text py='.5'>
+                                        4.5 ⭐⭐⭐⭐⭐ (24,123 ratings)
+                                    </Text>
+                                    <Text py='.5'>
+                                        $65.00
+                                    </Text>
                                 </CardBody>
                                 <CardFooter>
                                 </CardFooter>
