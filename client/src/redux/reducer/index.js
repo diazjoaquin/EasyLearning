@@ -151,4 +151,4 @@ const rootReducer = (state = initialState, action) => {
   }
 };
 
-export default rooRouter;
+export default rootReducer;
