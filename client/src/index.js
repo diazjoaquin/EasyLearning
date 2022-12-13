@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
@@ -8,18 +8,26 @@ import { Provider } from 'react-redux';
 import store from './redux/store/index.js';
 import axios from 'axios';
 
+// firebase:
+import { FirebaseAppProvider } from 'reactfire';
+import firebaseConfig from './firebase-config';
+
 axios.defaults.baseURL = "http://localhost:3001";
 // axios.defaults.baseURL = "";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <Provider store={store}>
-  <BrowserRouter>
-      <React.StrictMode>
-        <App />
-      </React.StrictMode>
-  </BrowserRouter>
-  </Provider>
+  <FirebaseAppProvider firebaseConfig={firebaseConfig}>
+    <Suspense fallback={'Conecting ...'}>
+      <Provider store={store}>
+        <BrowserRouter>
+            <React.StrictMode>
+              <App />
+            </React.StrictMode>
+        </BrowserRouter>
+      </Provider>
+    </Suspense>
+  </FirebaseAppProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function
