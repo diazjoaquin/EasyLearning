@@ -9,7 +9,7 @@ import { Icon, ArrowLeftIcon, ArrowRightIcon } from '@chakra-ui/icons';
 import Footer2 from "../footer/Footer2";
 import Hola from "../testimonials/Testimonials"
 import BasicStatistics from "../statistic/Statistics"
-import Categorys from "../categorys/Categorys"
+import Categories from "../categories/Categories" //cambio de "categorys"
 import { useEffect } from "react";
 import { getAllCourses } from "../../redux/actions/index.js";
 import { useDispatch, useSelector } from "react-redux";
@@ -116,8 +116,8 @@ export default function Home() {
             <br />
 
             <div>
-                <Categorys>
-                </Categorys>
+                <Categories />
+                
             </div>
 
             <div>

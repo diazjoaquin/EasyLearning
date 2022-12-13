@@ -11,6 +11,7 @@ export const GET_CATEGORIES = "GET_CATEGORIES";
 export const ADD_TO_CART = "ADD_TO_CART";
 export const BUY_NOW = "BUY_NOW";
 export const DELETE_COURSE_FROM_CART = "DELETE_COURSE_FROM_CART";
+export const GET_ORDERS = "GET_ORDERS";
 
 // filtering & ordering:
 export const FILTERS = "FILTERS";
@@ -104,6 +105,19 @@ export const buyNow = (payload) => async (dispatch) => {
     });
   } catch (error) {}
 };
+
+export const getOrders = () => async(dispatch) =>{
+const orders = await axios.get("/orders")//hacer ruta
+try {
+  return dispatch({
+    type: GET_ORDERS,
+    payload: orders.data,
+  });
+} catch (error) {
+  
+}
+}
+
 
 export const filters = (payload) => async (dispatch) => {
   try {
