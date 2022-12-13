@@ -16,6 +16,7 @@ import {
   GET_REVIEWS,
   FILTERS,
   RESET_FILTERS,
+  GET_ORDERS //add
 } from "../actions";
 
 const initialState = {
@@ -26,6 +27,7 @@ const initialState = {
   cart: [],
   reviews: [],
   allUsers: [],
+  allOrders: [], //add
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -150,6 +152,11 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
       };
+    case GET_ORDERS: //add
+      return{
+        ...state,
+        allOrders: action.payload,
+      }
     default:
       return {
         ...state,
