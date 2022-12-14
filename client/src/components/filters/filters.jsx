@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { filters, getAllCourses, getCategories, orderByName, orderByRating, resetFilters } from "../../redux/actions";
+import { filters, getAllCourses, getCategories, getTeachers, orderByName, orderByRating, resetFilters } from "../../redux/actions";
 import style from './Filters.module.css';
 import { Button } from "@chakra-ui/button";
 
@@ -10,6 +10,7 @@ const Filters = ({ update, setUpdate }) => {
     const dispatch = useDispatch();
     const categories = useSelector(state => state.categories);
     const courses = useSelector(state => state.courses);
+    const teachers = useSelector(state => state.teachers);
     const [filterValue, setFilterValue] = useState({
         category: null,
         teacher: null,
@@ -23,7 +24,10 @@ const Filters = ({ update, setUpdate }) => {
         if (!courses) {
             dispatch(getAllCourses())
         }
-    }, [dispatch, categories, courses])
+        if(!teachers.length) {
+            dispatch(getTeachers())
+        }
+    }, [dispatch, categories, courses, teachers])
 
     function handleChange(e) {
         setFilterValue({
@@ -77,15 +81,18 @@ const Filters = ({ update, setUpdate }) => {
                         <option value="500">500</option>
                     </select>
                 </div>
-                {/* <h5>By Teachers</h5>*/}
-                {/* <div>
-                    <section name="teacher" onChange={handleChange}>
+                <h5>By Teachers</h5>
+                <div>
+                    <select name="teacher" onChange={handleChange}>
                         {
-
+                            teachers?.map(e => {
+                                return (
+                                    <option value={e}>{e}</option>
+                                )
+                            })
                         }
-                    </section>
-                </div> */}
-                {/* <button onClick={handleClick}>Aplicar Filtros</button> */}
+                    </select>
+                </div>                
                 <Button colorScheme='teal' variant='link'
                     onClick={handleClick}>
                     Aplicar Filtros

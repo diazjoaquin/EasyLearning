@@ -17,6 +17,7 @@ import {
   FILTERS,
   RESET_FILTERS,
   COURSES_BY_TEACHER,
+  GET_TEACHERS,
 } from "../actions";
 
 const initialState = {
@@ -28,6 +29,7 @@ const initialState = {
   reviews: [],
   allUsers: [],
   coursesCreateUser: [],
+  teachers: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -47,6 +49,11 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         categories: action.payload,
+      };
+    case GET_TEACHERS:
+      return {
+        ...state,
+        teachers: action.payload,
       };
     case GET_COURSE_DETAIL:
       return {
@@ -91,8 +98,10 @@ const rootReducer = (state = initialState, action) => {
           (e) => parseInt(action.payload.price) === e.price
         );
       }
-      // if (action.payload.teacher) {
-      // }
+      console.log(filtros);
+      if (action.payload.teacher) {
+        filtros = filtros.filter((e) => e.teacher === action.payload.teacher);
+      }
       return {
         ...state,
         courses: filtros,
