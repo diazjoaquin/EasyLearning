@@ -9,6 +9,8 @@ import Filters from "../../filters/filters.jsx";
 import Footer2 from "../../footer/Footer2"
 
 
+
+
 export default function Course() {
 
   const courses = useSelector(state => state.courses);

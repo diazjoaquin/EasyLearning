@@ -7,6 +7,9 @@ import './CourseDetail.module.css';
 import Navbar from "../navbar/Navbar";
 import Footer2 from "../footer/Footer2";
 import style from "../detail/CourseDetail.module.css";
+
+import CardReview from "../Review/cardReview";
+import PostReview from "../Review/postReview";
 import { Center, Square, Circle, Box, Badge, useDisclosure, Button, Input, Image } from '@chakra-ui/react';
 import {
   Drawer,
@@ -57,6 +60,7 @@ export default function Detail() {
     <>
       <div>
         <Navbar />
+        
         <Link style={{ textDecoration: 'none' }} to='/course'>
           <Button colorScheme='blue' leftIcon={<RiArrowGoBackLine />}>Back</Button>
           {/* <button className="back">Back</button> */}
@@ -163,6 +167,9 @@ export default function Detail() {
             </div>
             : <p>Loading..</p>
         }
+
+        {/* <CardReview />
+        <PostReview /> */}
 
         <Footer2 />
       </div >
