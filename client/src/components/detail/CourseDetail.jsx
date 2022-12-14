@@ -7,16 +7,13 @@ import './CourseDetail.module.css';
 import Navbar from "../navbar/Navbar";
 import Footer2 from "../footer/Footer2";
 import style from "../detail/CourseDetail.module.css";
-import { Center, Square, Circle, Box, Badge, useDisclosure, Button, Input, Image } from '@chakra-ui/react';
-import {
-  Drawer,
-  DrawerBody,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerOverlay,
-  DrawerContent,
-  DrawerCloseButton,
-} from '@chakra-ui/react';
+
+
+// import CardReview from "../Review/cardReview";
+// import PostReview from "../Review/postReview";
+import { Center, Box, Badge, Button, Image, Accordion, AccordionIcon, AccordionButton,
+AccordionItem, AccordionPanel, Card, Stack, CardBody, Heading, Text } from '@chakra-ui/react';
+
 
 import { RiArrowGoBackLine } from "react-icons/ri";
 
@@ -24,12 +21,15 @@ export default function Detail() {
 
   const dispatch = useDispatch();
 
-  const { id } = useParams();
+  const { id, videoId } = useParams();
+
 
   const myCourse = useSelector(state => state.courseDetail)
   useEffect(() => {
     dispatch(getCourseDetail(id));
   }, [dispatch, id])
+
+  
 
 
   // "category": "Bebe de benja", varias categorias? 
@@ -49,17 +49,18 @@ export default function Detail() {
   // ]
 
 
-  const { isOpen, onOpen, onClose } = useDisclosure()
-  const btnRef = React.useRef()
 
+
+  
 
   return (
     <>
       <div>
         <Navbar />
+        
         <Link style={{ textDecoration: 'none' }} to='/course'>
           <Button colorScheme='blue' leftIcon={<RiArrowGoBackLine />}>Back</Button>
-          {/* <button className="back">Back</button> */}
+          
         </Link>
 
         {
@@ -67,12 +68,59 @@ export default function Detail() {
             <div className={style.content}>
               <div className={style.header}>
 
+                
                 <Box borderWidth='1px' borderRadius='lg' overflow='hidden'>
-                  <Center h='100px' color='black'>
-                    <h1 className={style.title}>{`${myCourse?.name}`}</h1>
-                  </ Center>
+                 
+                    <h1>{`${myCourse?.name}`}</h1>
+                    <h1>{`${myCourse?.rating}`} </h1>
+                    
+                
+                    <Accordion allowMultiple>
+            <AccordionItem>
+              <h2>
+                <AccordionButton>
+                  <Button flex='1' variant='ghost' leftIcon>
+                    Video
+                  </Button>
+                  <AccordionIcon />
+                </AccordionButton>
+              </h2>
+              <AccordionPanel pb={4}>
+              
+                {myCourse.videos?.map((e, i) =>
+                (
+
+                  <Card
+                    direction={{ base: 'column', sm: 'row' }}
+                    overflow='hidden'
+                    variant='outline'
+                    key={i}
+                  >
+                    <Stack>
+                      <CardBody>
+                        <Heading size='sm'>{e.title}</Heading>
+                        <Text py='2'>
+                          {e.name}
+                          {e.description}
+                           <Link to={`/detail/${id}/videos/${videoId}`}>
+                            <button>{e.urlVideo}</button>
+                          </Link>
+                          {e.teacher}
+                        </Text>
+                      </CardBody>
+                    </Stack>
+                  </Card>
+                ))}
+                
+              </AccordionPanel>
+            </AccordionItem>
+          </Accordion>
+        
                   <Box>
                     <Center>
+                        <Box fontWeight='semibold' textTransform='uppercase' >
+                          <p>Descripcion:{myCourse?.description}</p>
+                        </Box>
                       <Image src="https://www.unapiquitos.edu.pe/contenido/opiniones/recursos/docenteClases.jpg" />
                     </Center>
                   </Box>
@@ -94,47 +142,13 @@ export default function Detail() {
 
                           </Box>
                         </Box>
-                        <Box fontWeight='semibold' textTransform='uppercase' >
-                          <p>Descripcion:{myCourse?.description}</p>
-                        </Box>
                         <Box>
-                          <Link to={`/detail/${id}/videos`}>
-                            <button>Ver todos los videos de este curso</button>
-                          </Link>
+                          
                           {/* <Button ref={btnRef} colorScheme='teal' onClick={onOpen}>
                               Open
                             </Button> */}
-                          <Drawer
-                            isOpen={isOpen}
-                            placement='right'
-                            onClose={onClose}
-                            finalFocusRef={btnRef}
-                          ></Drawer>
-
-
-                          <Drawer
-                            isOpen={isOpen}
-                            placement='right'
-                            onClose={onClose}
-                            finalFocusRef={btnRef}
-                          >
-                            <DrawerOverlay />
-                            <DrawerContent>
-                              <DrawerCloseButton />
-                              <DrawerHeader>Create your account</DrawerHeader>
-
-                              <DrawerBody>
-                                <Input placeholder='Type here...' />
-                              </DrawerBody>
-
-                              <DrawerFooter>
-                                <Button variant='outline' mr={3} onClick={onClose}>
-                                  Cancel
-                                </Button>
-                                <Button colorScheme='blue'>Save</Button>
-                              </DrawerFooter>
-                            </DrawerContent>
-                          </Drawer>
+                         
+                           
 
 
                           {/* <Video videos={myCourse.video}/> */}
@@ -163,6 +177,9 @@ export default function Detail() {
             </div>
             : <p>Loading..</p>
         }
+
+        {/* <CardReview />
+        <PostReview /> */}
 
         <Footer2 />
       </div >
