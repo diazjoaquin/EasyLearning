@@ -47,12 +47,10 @@ const Profile = () => {
   }
 
   const handleSubmit = () => {
-    console.log("se submitea");
     // await axios.patch("/userUpdate", user)
   }
 
   const handelDeletUser = () => {
-    console.log("delet user");
     // await axios.delete("/userDelete", user)
   }
 

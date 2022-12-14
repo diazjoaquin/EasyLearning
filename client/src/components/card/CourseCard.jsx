@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
 import { addToCart, buyNow } from '../../redux/actions/index.js';
 
-const CourseCard = ({ id, teacher, name, description, rating, price, categories }) => {
+const CourseCard = ({ id, teacher, name, description, rating, price, categories, image }) => {
 
     const location = useLocation()
     const dispatch = useDispatch();
@@ -24,6 +24,7 @@ const CourseCard = ({ id, teacher, name, description, rating, price, categories 
     return (
         <Card maxW='sm'>
             <CardBody>
+                <img src={image} alt={`image-couse${id}`} />
                 {/* <iframe id="ytplayer" type="text/html" title="yt" width="300" height="200"
                     src="http://www.youtube.com"
                 /> */}

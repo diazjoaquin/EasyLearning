@@ -44,6 +44,7 @@ const getAllCourses = async () => {
       categories: e.categories.map((e) => e.name),
       reviews: e.reviews,
       videos: e.videos,
+      image: e.image,
     }));
 
     return coursesDB.sort((a, b) => a.id - b.id);

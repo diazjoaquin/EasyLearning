@@ -5,11 +5,11 @@ import { filters, getAllCourses, getCategories, orderByName, orderByRating } fro
 import style from './Filters.module.css';
 import { Button } from "@chakra-ui/button";
 
-const Filters = ({update, setUpdate}) => {
+const Filters = ({ update, setUpdate }) => {
 
     const dispatch = useDispatch();
-    const categories = useSelector(state => state.categories);  
-    const courses = useSelector(state => state.courses); 
+    const categories = useSelector(state => state.categories);
+    const courses = useSelector(state => state.courses);
     const [filterValue, setFilterValue] = useState({
         category: null,
         teacher: null,
@@ -17,13 +17,13 @@ const Filters = ({update, setUpdate}) => {
     });
 
     useEffect(() => {
-        if(!categories.length){
-           dispatch(getCategories()) 
+        if (!categories.length) {
+            dispatch(getCategories())
         }
-        if(!courses){
+        if (!courses) {
             dispatch(getAllCourses())
         }
-    },[dispatch, categories, courses])
+    }, [dispatch, categories, courses])
 
     function handleChange(e) {
         setFilterValue({
@@ -32,37 +32,36 @@ const Filters = ({update, setUpdate}) => {
         })
     }
 
-    function handleClick(e){
+    function handleClick(e) {
         dispatch(filters(filterValue));
         setUpdate(!update);
-        console.log("filter", filterValue)
     }
 
-    function handleSort(e){
+    function handleSort(e) {
         dispatch(orderByName(e.target.value))
         setUpdate(!update);
     }
 
-    function handleRating(e){
+    function handleRating(e) {
         dispatch(orderByRating(e.target.value))
         setUpdate(!update);
     }
 
-    return(
+    return (
         <div className={style.cont}>
             <div className={style.filters}>
                 <h4>Filters:</h4>
                 <h5>By Categories</h5>
                 <div className={style.categories}>
-                <select name="category" onChange={handleChange}>
-                            <option value="Categories">Categories</option>
-                            {
-                                categories?.map(e => {
-                                    return(
-                                        <option value={e.name}>{e.name}</option>
-                                    )
-                                })
-                            }
+                    <select name="category" onChange={handleChange}>
+                        <option value="Categories">Categories</option>
+                        {
+                            categories?.map(e => {
+                                return (
+                                    <option value={e.name}>{e.name}</option>
+                                )
+                            })
+                        }
                     </select>
                 </div>
                 <h5>By Price</h5>
@@ -81,29 +80,29 @@ const Filters = ({update, setUpdate}) => {
 
                         }
                     </section>
-                </div> */} 
+                </div> */}
                 {/* <button onClick={handleClick}>Aplicar Filtros</button> */}
                 <Button colorScheme='teal' variant='link'
-                onClick={handleClick}>
+                    onClick={handleClick}>
                     Aplicar Filtros
                 </Button>
             </div>
 
 
             <div className={style.order}>
-            <h4>Order By:</h4>
-                        <div>
-                            <select name="Sort" onChange={handleSort}>
-                                <option value="sort">Alphabet</option>
-                                <option value="A-Z">A-Z</option>
-                                <option value="Z-A">Z-A</option>
-                            </select>
-                            <select name="Rating" onChange={handleRating}>
-                                <option value="rating">Rating</option>
-                                <option value="min">Minor-Major</option>
-                                <option value="max">Major-Minor</option>
-                            </select>
-                        </div>
+                <h4>Order By:</h4>
+                <div>
+                    <select name="Sort" onChange={handleSort}>
+                        <option value="sort">Alphabet</option>
+                        <option value="A-Z">A-Z</option>
+                        <option value="Z-A">Z-A</option>
+                    </select>
+                    <select name="Rating" onChange={handleRating}>
+                        <option value="rating">Rating</option>
+                        <option value="min">Minor-Major</option>
+                        <option value="max">Major-Minor</option>
+                    </select>
+                </div>
             </div>
         </div>
     )
