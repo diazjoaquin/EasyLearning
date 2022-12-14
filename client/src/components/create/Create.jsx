@@ -13,36 +13,49 @@ import {
   Text,
   Alert,
   AlertIcon,
-  Stack,
   HStack,
   Tag,
-  TagLeftIcon,
   TagLabel,
-  TagRightIcon,
   Tooltip,
-  background
+  Select,
+  SimpleGrid,
+  Card,
+  CardHeader,
+  Heading,
+  CardBody,
+  CardFooter
 } from '@chakra-ui/react'
-import { PhoneIcon, AddIcon, WarningIcon, CloseIcon } from '@chakra-ui/icons'
+import { ArrowBackIcon } from '@chakra-ui/icons'
 import axios from "axios"
-import validate from "./validate";
+import { validate, validateVideo } from "./validate";
 
+//FALTAN VALIDACIONES EN EL FORMULARIO DEL VIDEO
+//FALTAN VALIDACIONES EN EL FORMULARIO DEL VIDEO
+//FALTAN VALIDACIONES EN EL FORMULARIO DEL VIDEO
+//FALTAN VALIDACIONES EN EL FORMULARIO DEL VIDEO
+//FALTAN VALIDACIONES EN EL FORMULARIO DEL VIDEO
+//FALTAN VALIDACIONES EN EL FORMULARIO DEL VIDEO
+//FALTAN VALIDACIONES EN EL FORMULARIO DEL VIDEO
+//FALTAN VALIDACIONES EN EL FORMULARIO DEL VIDEO
 const Create = () => {
   const dispatch = useDispatch();
-  const history = useHistory();
-
+  const history = useHistory()
   const categories = useSelector(s => s.categories)
+
+
 
 
   const [input, setInput] = useState({
     name: "",
     description: "",
     teacher: "Fermin", //De momento es hardcode, hasta que tengamos el login y sepamos cual es el user que esta creando el curso.
-    // video: [],
+    video: [],
     category: [],
     price: null
   })
 
   const [inputVideo, setInputVideo] = useState({
+    name: '',
     urlVideo: "",
     description: "",
     courseId: ""
@@ -50,8 +63,10 @@ const Create = () => {
 
   const [errors, setErrors] = useState({})
 
+  const [errorsVideo, setErrorsVideo] = useState({})
+
   const handelChange = (e) => {
-    if (e.target.value === "Select Category") return
+    if (e.target.value === 'category') return
     if (e.target.name === "category") {
       if (!input.category.includes(e.target.value)) {
         setInput({
@@ -75,12 +90,24 @@ const Create = () => {
   }
 
   const handelSubmit = async () => {
-    await axios.post("http://localhost:3001/createCourse", input)
+    const response = await axios.post("http://localhost:3001/createCourse", input)
+    alert(response.data)
     history.push("/profile")
   }
 
   const handelSubmitVideo = () => {
-    console.log(inputVideo);
+    setInput({
+      ...input,
+      video: [...input.video, inputVideo]
+    })
+    setInputVideo({
+      name: '',
+      urlVideo: "",
+      description: "",
+      courseId: ""
+    })
+    document.getElementById("formVideo").reset()
+    // formVideo.reset()
   }
 
   const handelDelete = (e) => {
@@ -94,86 +121,122 @@ const Create = () => {
     })
   }
 
+  const handelDeleteVideo = (name) => {
+    const index = input.video.findIndex(e => e.name === name)
+    let videos = input.video
+    videos.splice(index, 1)
+    setInput({
+      ...input,
+      video: videos
+    })
+  }
+
   useEffect(() => {
     if (!categories.length)
       dispatch(getCategories())
     setErrors(validate(input))
-  }, [dispatch, input])
+    setErrorsVideo(validateVideo(inputVideo, input))
+  }, [dispatch, input, inputVideo])
 
   return (
     <div>
-      <Stack spacing={3}>
-      </Stack>
       <Navbar />
-      <Box display='flex' justifyContent="center" my="20" >
-        <Box w="50%" border="1px" borderRadius="20" p="10">
-          <h1>Falta hardcodear el teacher</h1>
-          <FormControl display='flex' flexDirection="column" alignItems="center" >
-            <FormLabel>Name:</FormLabel>
-            <Input name="name" onChange={handelChange} />
-            {errors["name"] && <Alert justifyContent='center' status='error'>
-              <AlertIcon />
-              {errors.name}
-            </Alert>}
-            <FormLabel>Description:</FormLabel>
-            <Input name="description" onChange={handelChange} />
-            {errors["description"] && <Alert justifyContent='center' mt='3' mb='6' status='error'>
-              <AlertIcon />
-              {errors.description}
-            </Alert>}
-            <FormLabel>Category:</FormLabel>
-            <select name="category" onChange={handelChange}>
-              <option>Select Category</option>
-              {categories.map((e, i) => (
-                <option key={i} value={e}>
-                  {e}
-                </option>
-              ))}
-            </select>
-            {input.category.length !== 0 &&
-              <Box my='5' border='1px' borderRadius="20" p='5'>
-                <HStack spacing={4} display="flex" flexWrap="wrap" justifyContent="center" gap='2'>
-                  {input.category?.map((e) => (
-                    <Tag size={"md"} key={e} variant='subtle' colorScheme='cyan'>
-                      <TagLabel>{e}</TagLabel>
-                      <Tooltip hasArrow label="deleted" placement="top">
-                        <Button name={e} onClick={handelDelete} bg='transparent' _hover={{ background: "transparent" }}> X </Button>
-                      </Tooltip>
-                    </Tag>
-                  ))}
-                </HStack>
-              </Box>
-            }
-            {errors["category"] && <Alert justifyContent='center' status='error'>
-              <AlertIcon />
-              {errors.category}
-            </Alert>}
-            <FormLabel>Price:</FormLabel>
-            <Input name="price" onChange={handelChange} />
-            {errors["price"] && <Alert w='80%' justifyContent='center' status='error'>
-              <AlertIcon />
-              {errors.price}
-            </Alert>}
-            <Box w="100%" border="1px" borderRadius="20" p="10" my="10">
-              <FormLabel display="flex" justifyContent="center">Video:</FormLabel>
+      <Box display='flex'>
+        <Box display='flex' justifyContent="center" my="5" w='45%'  >
+          <Box w="85%" border="1px" borderRadius="20" p="10">
+            <Link to='/profile'>
+              <Button rightIcon={<ArrowBackIcon />} fontSize='30' size='30' colorScheme='teal' variant='outline' />
+            </Link>
+            <h1>Falta hardcodear el teacher</h1>
+            <FormControl display='flex' flexDirection="column" alignItems="center" >
               <FormLabel>Name:</FormLabel>
-              <Input name="name" onChange={handelChangeVideo} />
-              <FormLabel>urlVideo:</FormLabel>
-              <Input name="urlVideo" onChange={handelChangeVideo} />
-              <FormLabel>courseId:</FormLabel>
-              <Text>(hardCode por el momento, tendria que tener una logica de obtener el id que se le genere al curso que se esta creando, para poder relacionarle los videos)</Text>
-              <Input name="courseId" onChange={handelChangeVideo} />
-              <Box display="flex" flexDirection="row-reverse">
-                <Button mt={4} colorScheme='teal' onClick={handelSubmitVideo} >
-                  Add Video
-                </Button>
+              <Input name="name" onChange={handelChange} autoComplete='off' />
+              {errors["name"] && <Alert justifyContent='center' status='error' bg='transparent' color='red'>
+                <AlertIcon />
+                {errors.name}
+              </Alert>}
+              <FormLabel>Description:</FormLabel>
+              <Input name="description" onChange={handelChange} autoComplete='off' />
+              {errors["description"] && <Alert justifyContent='center' mt='3' mb='6' status='error' bg='transparent' color='red'>
+                <AlertIcon />
+                {errors.description}
+              </Alert>}
+              <FormLabel>Category:</FormLabel>
+              <Select name="category" onChange={handelChange}>
+                <option value="category">Select categories</option>
+                {categories.map((e, i) => (
+                  <option key={i} value={e}>
+                    {e}
+                  </option>
+                ))}
+              </Select>
+              {input.category?.length !== 0 &&
+                <Box my='5' border='1px' borderRadius="20" p='5'>
+                  <HStack spacing={4} display="flex" flexWrap="wrap" justifyContent="center" gap='2'>
+                    {input.category?.map((e) => (
+                      <Tag size={"md"} key={e} variant='subtle' colorScheme='cyan'>
+                        <TagLabel>{e}</TagLabel>
+                        <Tooltip hasArrow label="deleted" placement="top">
+                          <Button name={e} onClick={handelDelete} bg='transparent' color='black' _hover={{ background: "transparent" }}> X </Button>
+                        </Tooltip>
+                      </Tag>
+                    ))}
+                  </HStack>
+                </Box>
+              }
+              {errors["category"] && <Alert justifyContent='center' status='error' bg='transparent' color='red'>
+                <AlertIcon />
+                {errors.category}
+              </Alert>}
+              <FormLabel>Price:</FormLabel>
+              <Input name="price" onChange={handelChange} autoComplete='off' />
+              {errors["price"] && <Alert w='80%' justifyContent='center' status='error' bg='transparent' color='red'>
+                <AlertIcon />
+                {errors.price}
+              </Alert>}
+              <Box border="1px" borderRadius="20" p="10" my="10">
+                <form id="formVideo">
+                  <FormLabel display="flex" justifyContent="center">Video:</FormLabel>
+                  <FormLabel>Name:</FormLabel>
+                  <Input name="name" onChange={handelChangeVideo} />
+                  <FormLabel>Description:</FormLabel>
+                  <Input name="description" onChange={handelChangeVideo} />
+                  <FormLabel>urlVideo:</FormLabel>
+                  <Input name="urlVideo" onChange={handelChangeVideo} />
+                  <FormLabel>courseId:</FormLabel>
+                  <Text>(hardCode por el momento, tendria que tener una logica de obtener el id que se le genere al curso que se esta creando, para poder relacionarle los videos)</Text>
+                  <Input name="courseId" onChange={handelChangeVideo} />
+                  <Box display="flex" flexDirection="row-reverse">
+                    <Button mt={4} colorScheme='teal' onClick={handelSubmitVideo} disabled={Object.keys(errorsVideo).length ? true : false}>
+                      Add Video
+                    </Button>
+                  </Box>
+                </form>
+
               </Box>
-            </Box>
-            <Text textAlign="center">(Todos estos datos se podran modificar luego de crear el curso.)</Text>
-            <Button mt={4} colorScheme='teal' onClick={handelSubmit} disabled={Object.keys(errors).length ? true : false}>
-              Submit
-            </Button>
-          </FormControl>
+              <Text textAlign="center">(Todos estos datos se podran modificar luego de crear el curso.)</Text>
+              <Button mt={4} colorScheme='teal' onClick={handelSubmit} disabled={Object.keys(errors).length ? true : false}>
+                Submit
+              </Button>
+            </FormControl>
+          </Box>
+        </Box >
+        <Box w='65%' my="5" display='flex' justifyContent='center'>
+          <Box border='1px' display='flex' justifyContent='center' w='95%' borderRadius='25' gap='10' py='5' flexWrap='wrap'>
+
+            {
+              input.video?.map((e, i) => (
+                <Box w='90%' h='200' bg='red' key={i} borderRadius='20' display='flex' flexDirection='column' alignItems='center' justifyContent='center' m='0' textAlign='center' whiteSpace='initial' overflow='hidden'>
+                  <h1 > {i + 1}</h1>
+                  <h1>{e.name}</h1>
+                  <h4>{e.description}</h4>
+                  <h6>{e.urlVideo}</h6>
+                  <Button colorScheme='red' m='2' onClick={() => handelDeleteVideo(e.name)}> Deleted Video </Button>
+                </Box>
+              ))
+            }
+
+          </Box>
         </Box>
       </Box >
       <Footer2 />
