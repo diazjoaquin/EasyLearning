@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Navbar from '../navbar/Navbar';
 import style from "./Home.module.css"
-import SearchBar from "../searchbar/SearchBar.jsx";
+// import SearchBar from "../searchbar/SearchBar.jsx";
 import CourseCard from '../card/CourseCard.jsx';
 import { Heading, Box, Text, Image } from '@chakra-ui/react'
 import mainpicture from "../../image/maintextimage.png"
@@ -72,8 +72,8 @@ export default function Home() {
                         300 Instructor & Institutions</Heading>
                     <Text fontSize='xl'> Varius version have envolved over the years, sometimes by accident,
                     </Text>
-                    <SearchBar>
-                    </SearchBar>
+                    {/* <SearchBar>
+                    </SearchBar> */}
                 </Box>
 
                 <div>
