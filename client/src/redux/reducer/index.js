@@ -15,6 +15,7 @@ import {
   DELETE_COURSE_FROM_CART,
   GET_REVIEWS,
   FILTERS,
+  COURSES_BY_TEACHER,
 } from "../actions";
 
 const initialState = {
@@ -25,6 +26,7 @@ const initialState = {
   cart: [],
   reviews: [],
   allUsers: [],
+  coursesCreateUser: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -143,6 +145,11 @@ const rootReducer = (state = initialState, action) => {
     case POST_REVIEW:
       return {
         ...state,
+      };
+    case COURSES_BY_TEACHER:
+      return {
+        ...state,
+        coursesCreateUser: action.payload,
       };
     default:
       return {
