@@ -87,9 +87,9 @@ const rootReducer = (state = initialState, action) => {
         cart: buy,
       };
     case FILTERS:
-      let filtros;
+      let filtros = state.filter;
       if (action.payload.category) {
-        filtros = state.filter.filter((e) =>
+        filtros = filtros.filter((e) =>
           e.categories.includes(action.payload.category)
         );
       }
@@ -100,7 +100,7 @@ const rootReducer = (state = initialState, action) => {
       }
       console.log(filtros);
       if (action.payload.teacher) {
-        filtros = filtros.filter((e) => e.teacher === action.payload.teacher);
+        filtros = filtros.filter((e) => action.payload.teacher === e.teacher);
       }
       return {
         ...state,
