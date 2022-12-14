@@ -1,5 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
+import { Button } from "@chakra-ui/react";
+ 
 
 const Comments = ({ videoId, comments }) => {
 
@@ -38,7 +40,15 @@ const Comments = ({ videoId, comments }) => {
         <label>Description: </label>
         <input type="text" name="description" onChange={handleChange} />
         <br />
-        <button type="submit">Comentar</button>
+        <Button type="submit"
+          size='md'
+          height='48px'
+          width='200px'
+          border='2px'
+          borderColor='green.500'
+        >Comentar
+        </Button>
+        {/* <button type="submit">Comentar</button> */}
 
       </form>
       {

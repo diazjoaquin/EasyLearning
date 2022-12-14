@@ -1,7 +1,10 @@
-import React, {useState, useEffect} from "react";
-import {useDispatch, useSelector} from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
-import {createCourse, getCategories} from "../../redux/actions/index"
+import { createCourse, getCategories } from "../../redux/actions/index";
+
+import { Box,  } from '@chakra-ui/react';
+// import { CiStar } from "react-icons";
 
 function validateForm(input) {
     let errors = {} //manejo de errores form
@@ -37,7 +40,7 @@ function validateForm(input) {
         errors.video = "";
     } */
 }
-const Create = () =>{
+const Create = () => {
     const dispatch = useDispatch();
 
     const history = useHistory();
@@ -51,10 +54,10 @@ const Create = () =>{
 
     const [errors, setError] = useState({})
 
-    const [newInput, setNewInput] = useState({name: ""})
+    const [newInput, setNewInput] = useState({ name: "" })
 
     const [input, setInput] = useState({
-        name:"",
+        name: "",
         description: "",
         teacher: "",
         // video: [],
@@ -69,7 +72,7 @@ const Create = () =>{
     function handleChange2(e) {
         setNewInput({
             ...newInput,
-            [e.target.name] : e.target.value
+            [e.target.name]: e.target.value
         })
     }
     function handleChange(e) {
@@ -79,8 +82,8 @@ const Create = () =>{
         });
         setError(
             validateForm({
-            ...input,
-            [e.target.name]: e.target.value,
+                ...input,
+                [e.target.name]: e.target.value,
             })
         )
     }
@@ -94,80 +97,114 @@ const Create = () =>{
         e.preventDefault();
         if (
             !errors.name &&
-            !errors.description&&
-            !errors.teacher&&
+            !errors.description &&
+            !errors.teacher &&
             !errors.category//&&
             //!errors.video
         ) {
             alert("Your course has been created succesfully");
-            dispatch(createCourse(input)) 
+            dispatch(createCourse(input))
             setInput({
-                name:"",
+                name: "",
                 description: "",
                 teacher: "",
                 //video: [],
                 category: [],
             })
-        }else{
+        } else {
             return alert("Someting went wrong. Please try aaing.")
         }
         history.push("/")
     }
-    useEffect(()=>{
+    useEffect(() => {
         dispatch(getCategories())
     }, [dispatch])
 
-    return(
+
+    return (
         <div>
-            <div>
+            <Box maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden'>
                 <div>
-                    <h2>Create your course</h2>
-                </div>
-                <div>
-                    <form onSubmit={(e)=> handleSubmit(e)}>
-                        <div>
-                            <label>Name: </label>
+
+                    <div>
+                        <Box
+                            mt='1'
+                            fontWeight='semibold'
+                            as='h4'
+                            lineHeight='tight'
+                            noOfLines={1}
+                        > Create your course
+                        </Box>
+
+                    </div>
+                    <div>
+                        <form onSubmit={(e) => handleSubmit(e)}>
+                            <div>
+                                <label>Name: </label>
+                                <input
+                                    type="text"
+                                    value={input.name}
+                                    name="name"
+                                    placeholder="HTML course..."
+                                    onChange={(e) => handleChange(e)}
+                                    required
+                                />
+                                <div>
+                                    <p>{errors.name}</p>
+                                </div>
+                            </div>
+                            <div>
+                                <label>Description: </label>
+                                <input
+                                    type="text"
+                                    value={input.name}
+                                    name="description"
+                                    placeholder="Take this course and learn..."
+                                    onChange={(e) => handleChange(e)}
+                                    required
+                                />
+                                <div>
+                                    <p>{errors.description}</p>
+                                </div>
+                            </div>
+                            <div>
+                                <label>Teacher: </label>
+                                <input
+                                    type="text"
+                                    value={input.name}
+                                    name="teacher"
+                                    placeholder="Fermin Solaberrieta..."
+                                    onChange={(e) => handleChange(e)}
+                                    required
+                                />
+                                <div>
+                                    <p>{errors.teacher}</p>
+                                </div>
+                            </div>
+
+                            {/* ******************************* */}
+                            {/* <div>
+                        <label>Category: </label>
                             <input 
                             type="text"
                             value={input.name}
-                            name="name"
-                            placeholder="HTML course..."
+                            name="category"
+                            placeholder="Tejido punto croche"
                             onChange={(e) => handleChange(e)}
                             required
                              />
                              <div>
-                                <p>{errors.name}</p>
+                                <p>{errors.category}</p>
                             </div>
-                        </div>
-                        <div>
-                        <label>Description: </label>
-                            <input 
-                            type="text"
-                            value={input.name}
-                            name="description"
-                            placeholder="Take this course and learn..."
-                            onChange={(e) => handleChange(e)}
-                            required
-                             />
-                             <div>
-                                <p>{errors.description}</p>
-                            </div>
-                        </div>
-                        <div>
-                        <label>Teacher: </label>
-                            <input 
-                            type="text"
-                            value={input.name}
-                            name="teacher"
-                            placeholder="Fermin Solaberrieta..."
-                            onChange={(e) => handleChange(e)}
-                            required
-                             />
-                             <div>
-                                <p>{errors.teacher}</p>
-                            </div>
-                        </div>
-                        <div>
+                            
+                            
+
+
+                        </div> */}
+
+                            {/* ************************************** */}
+
+                            {/* <div>
                         <div>
                         <label>Select Categories</label>
                         <select onChange={(e) => handleSelect(e)}>
@@ -191,8 +228,8 @@ const Create = () =>{
                                 })
                             }
                         </div>
-                        </div> 
-                        <label>Category: </label>
+                        </div>
+                        {/* <label>Category: </label>
                             <input 
                             type="text"
                             value={input.name}
@@ -206,8 +243,8 @@ const Create = () =>{
                             </div> 
                             <button value = {newInput} onClick={(e) => addCategory(e)}></button>
                                                       
-                        </div>
-                        {/* <div>
+                        </div> */}
+                            {/* <div>
                         <label>Video: </label>
                             <input 
                             type="text"
@@ -221,17 +258,36 @@ const Create = () =>{
                                 <p>{errors.video}</p>
                             </div>                           
                         </div> */}
-                        <div>
-                            <Link to="/">
-                                <button>Cancel</button>
-                            </Link>
-                            <button type="submit">
+                            
+                            
+                            {/* <Box display='flex' mt='2' alignItems='center'>
+                                {Array(5)
+                                    .fill('')
+                                    .map((_, i) => (
+                                        <CiStar
+                                            key={i}
+                                            color={i < 5 ? 'teal.500' : 'gray.300'}
+                                        />
+                                    ))}
+                                <Box as='span' ml='2' color='gray.600' fontSize='sm'>
+                                    {4} reviews
+                                </Box>
+                            </Box> */}
+
+                            
+                            <div>
+                                <Link to="/course">
+                                    <button>Cancel</button>
+                                </Link>
+                                <button type="submit">
                                     Create
-                            </button>
-                        </div>
-                    </form>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-            </div>
+            </Box>
+
         </div>
     )
 }
