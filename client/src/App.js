@@ -13,6 +13,7 @@ import Course from "./components/pages/course/Course";
 import About from "./components/pages/about/About";
 import Detail from "./components/detail/CourseDetail";
 import Profile from "./components/pages/profile/profile";
+import Create from "./components/create/Create";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
       <Route exact path="/detail/:id" component={Detail} />
       <Route exact path="/detail/:id/videos" component={Videos} />
       <Route exact path="/profile" component={Profile} />
+      <Route exact path="/formCourse" component={Create} />
     </ChakraProvider>
   );
 }
