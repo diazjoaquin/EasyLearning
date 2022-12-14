@@ -15,7 +15,9 @@ const { Category } = require("../../db.js");
 
 const getCategories = async () => {
   try {
-    return await Category.findAll();
+    let categoriesDB = await Category.findAll();
+    categoriesDB = categoriesDB.map((e) => e.name);
+    return categoriesDB;
   } catch (error) {
     return error;
   }
