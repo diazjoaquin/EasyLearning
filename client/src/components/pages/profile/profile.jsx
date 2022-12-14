@@ -107,7 +107,7 @@ const Profile = () => {
             </Link>
             <GridItem gap='20' colSpan={2} display="flex" flexDirection="row" alignItems="center" mt="5" mb='5'>
               {coursesCreateUser.map(e => (
-                <CourseCard key={e.id} id={e.id} teacher={e.teacher} name={e.name} description={e.description} rating={e.rating} price={e.price} />
+                <CourseCard key={e.id} id={e.id} teacher={e.teacher} name={e.name} description={e.description} rating={e.rating} price={e.price} image={e.image} categories={e.categories} />
               ))}
               <Box display="flex" flexDirection="column">
                 <Link to="/cursosCreados">
