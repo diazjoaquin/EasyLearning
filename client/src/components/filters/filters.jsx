@@ -58,7 +58,7 @@ const Filters = ({ update, setUpdate }) => {
                         {
                             categories?.map(e => {
                                 return (
-                                    <option value={e.name}>{e.name}</option>
+                                    <option value={e}>{e}</option>
                                 )
                             })
                         }
