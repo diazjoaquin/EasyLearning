@@ -12,25 +12,70 @@ import {
   } from '@chakra-ui/react';
 import Footer2 from '../../footer/Footer2';
 import Navbar from '../../navbar/Navbar';
+import { useState } from 'react';
+import { useHistory } from 'react-router-dom';
+
+//firebase
+import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import { auth, provider } from '../../../firebase-config';
+
   
   export default function SplitScreen() {
+
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [error, setError] = useState("");
+    const history = useHistory();
+
+    // google access:
+  const handleGoogle = () => {
+    // signInWithPopup(auth, provider)
+    //   .then((result) => {
+    //   // This gives you a Google Access Token. You can use it to access the Google API.
+    //   const credential = GoogleAuthProvider.credentialFromResult(result);
+    //   const token = credential.accessToken;
+    //   // The signed-in user info.
+    //   const user = result.user;
+    //   // ...
+    //   }).catch((error) => {
+    //   // Handle Errors here.
+    //   const errorCode = error.code;
+    //   const errorMessage = error.message;
+    //   // The email of the user's account used.
+    //   const email = error.customData.email;
+    //   // The AuthCredential type that was used.
+    //   const credential = GoogleAuthProvider.credentialFromError(error);
+    //   // ...
+    // });
+  }
+
+    const handleSubmit =  async () => {
+      try {
+        await signInWithEmailAndPassword(auth, email, password);
+        setError("");
+        setTimeout(function(){
+          history.push("/");
+        }, 2000); 
+      } catch (error) {
+        setError(error.message);
+        console.log(error.message);
+      }
+    };
+
     return (
       <div>
-        <Navbar>
-            
-        </Navbar>
-      
+        <Navbar/>
       <Stack minH={'100vh'} direction={{ base: 'column', md: 'row' }}>
         <Flex p={8} flex={1} align={'center'} justify={'center'}>
           <Stack spacing={4} w={'full'} maxW={'md'}>
             <Heading fontSize={'2xl'}>Log in to your account</Heading>
             <FormControl id="email">
               <FormLabel>Email address</FormLabel>
-              <Input type="email" />
+              <Input type="email" onChange={(e) => setEmail(e.target.value)}/>
             </FormControl>
             <FormControl id="password">
               <FormLabel>Password</FormLabel>
-              <Input type="password" />
+              <Input type="password" onChange={(e) => setPassword(e.target.value)}/>
             </FormControl>
             <Stack spacing={6}>
               <Stack
@@ -40,9 +85,15 @@ import Navbar from '../../navbar/Navbar';
                 <Checkbox>Remember me</Checkbox>
                 <Link color={'blue.500'}>Forgot password?</Link>
               </Stack>
-              <Button colorScheme={'blue'} variant={'solid'}>
+              <Button colorScheme={'blue'} variant={'solid'}
+              onClick={handleSubmit}>
                 Log in
               </Button>
+              <Button variant={'solid'}
+              onClick={handleGoogle}>
+                Log in with Google
+              </Button>
+              {error && <span>{error}</span>}
             </Stack>
             <Stack>
             <Link to="/signup" color={'blue.500'}>Don´t have account?</Link>
@@ -60,9 +111,7 @@ import Navbar from '../../navbar/Navbar';
         </Flex>
       </Stack>
       <div>
-        <Footer2>
-
-        </Footer2>
+        <Footer2/>
       </div>
       </div>
     );

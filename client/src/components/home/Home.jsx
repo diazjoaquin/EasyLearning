@@ -13,13 +13,13 @@ import Categorys from "../categorys/Categorys"
 import { useEffect } from "react";
 import { getAllCourses } from "../../redux/actions/index.js";
 import { useDispatch, useSelector } from "react-redux";
+import { getAuth } from "firebase/auth";
 
 
 export default function Home() {
 
     // carrousel: 
     const courses = useSelector(state => state.courses);
-    console.log(courses);
     const [coursesPerPage] = useState(3);
     const [currentPage, setCurrentPage] = useState(1);
     const last = currentPage * coursesPerPage;
@@ -37,8 +37,11 @@ export default function Home() {
         currentPage > 1 ? setCurrentPage(currentPage - 1) : setCurrentPage(1);
     }
 
-    // cards:
+    //firebase auth
+    const auth = getAuth();
+    const user = auth.currentUser;
 
+    // cards:
     const dispatch = useDispatch();
 
     

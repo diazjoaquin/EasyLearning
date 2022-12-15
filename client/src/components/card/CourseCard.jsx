@@ -24,7 +24,7 @@ const CourseCard = ({ id, teacher, name, description, rating, price, categories 
         <Card maxW='sm'>
             <CardBody>
                 <iframe id="ytplayer" type="text/html" title="yt" width="300" height="200"
-                    src="http://www.youtube.com/embed/M7lc1UVf-VE?autoplay=0&origin=http://example.com"
+                    // src="http://www.youtube.com/embed/M7lc1UVf-VE?autoplay=0&origin=http://example.com"
                 />
                 <Stack mt='6' spacing='3'>
                     <Link to={`/detail/${id}`}>

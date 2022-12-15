@@ -15,18 +15,18 @@ import Detail from "./components/detail/CourseDetail";
 
 function App() {
   return (
-    <ChakraProvider>
-      <Route exact path="/" component={Home} />
-      <Route exact path="/cart" component={Cart} />
-      <Route exact path="/blog" component={Blog} />
-      <Route exact path="/contact" component={Contact} />
-      <Route exact path="/signup" component={Signup} />
-      <Route exact path="/login" component={Login} />
-      <Route exact path="/course" component={Course} />
-      <Route exact path="/about" component={About} />
-      <Route exact path="/detail/:id" component={Detail} />
-      <Route exact path="/detail/:id/videos" component={Videos} />
-    </ChakraProvider>
+      <ChakraProvider>
+        <Route exact path="/" component={Home} />
+        <Route exact path="/cart" component={Cart} />
+        <Route exact path="/blog" component={Blog} />
+        <Route exact path="/contact" component={Contact} />
+        <Route exact path="/signup" component={Signup} />
+        <Route exact path="/login" component={Login} />
+        <Route exact path="/course" component={Course} />
+        <Route exact path="/about" component={About} />
+        <Route exact path="/detail/:id" component={Detail} />
+        <Route exact path="/detail/:id/videos" component={Videos} />
+      </ChakraProvider>
   );
 }
 

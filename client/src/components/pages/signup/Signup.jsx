@@ -1,5 +1,5 @@
-
 import Navbar from "../../navbar/Navbar";
+import { Link, useHistory } from "react-router-dom";
 import {
   Flex,
   Box,
@@ -14,26 +14,39 @@ import {
   Heading,
   Text,
   useColorModeValue,
-  Link,
 } from '@chakra-ui/react';
 import { useState } from 'react';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
-import Footer2 from "../../footer/Footer2"
+import Footer2 from "../../footer/Footer2";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../../firebase-config";
+
 
 export default function SignupCard() {
+
   const [showPassword, setShowPassword] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const history = useHistory();
 
-
-
-  // export default function SignUp() {
+  const handleSubmit = async () => {
+    try {
+      await createUserWithEmailAndPassword(auth, email, password);
+      setError("");
+      setTimeout(function(){
+        history.push("/");
+      }, 2000);
+    } catch (error) {
+      setError(error.message);
+      console.log(error.message);
+    }
+  }
+  
     return (
       <div>
-        <Navbar>
-
-        </Navbar>
-
+        <Navbar/>
         <div>
-
           <Flex
             minH={'100vh'}
             align={'center'}
@@ -56,26 +69,26 @@ export default function SignupCard() {
                 <Stack spacing={4}>
                   <HStack>
                     <Box>
-                      <FormControl id="firstName" isRequired>
-                        <FormLabel>First Name</FormLabel>
-                        <Input type="text" />
+                      <FormControl id="fullName" isRequired>
+                        <FormLabel>Full Name</FormLabel>
+                        <Input type="text"/>
                       </FormControl>
                     </Box>
                     <Box>
-                      <FormControl id="lastName">
-                        <FormLabel>Last Name</FormLabel>
-                        <Input type="text" />
+                      <FormControl id="phoneNumber">
+                        <FormLabel>Phone Number</FormLabel>
+                        <Input type="number" />
                       </FormControl>
                     </Box>
                   </HStack>
                   <FormControl id="email" isRequired>
                     <FormLabel>Email address</FormLabel>
-                    <Input type="email" />
+                    <Input type="email" id="email" onChange={(e) => setEmail(e.target.value)}/>
                   </FormControl>
                   <FormControl id="password" isRequired>
                     <FormLabel>Password</FormLabel>
                     <InputGroup>
-                      <Input type={showPassword ? 'text' : 'password'} />
+                      <Input type={showPassword ? 'text' : 'password'} id="password" onChange={(e) => setPassword(e.target.value)}/>
                       <InputRightElement h={'full'}>
                         <Button
                           variant={'ghost'}
@@ -95,29 +108,26 @@ export default function SignupCard() {
                       color={'white'}
                       _hover={{
                         bg: 'blue.500',
-                      }}>
+                      }}
+                      onClick={handleSubmit}
+                      >
                       Sign up
                     </Button>
+                    {error && <span>{error}</span>}
                   </Stack>
                   <Stack pt={6}>
                     <Text align={'center'}>
-                      Already a user? <Link color={'blue.400'}>Login</Link>
+                      Already a user? <Link color={'blue.400'} to={'/login'}>Login</Link>
                     </Text>
                   </Stack>
                 </Stack>
               </Box>
             </Stack>
           </Flex>
-  
-
         </div>
         <div>
-          <Footer2>
-
-          </Footer2>
+          <Footer2/>
         </div>
       </div>
     )
-
-
-  }
+  };

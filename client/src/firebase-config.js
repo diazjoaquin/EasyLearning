@@ -1,4 +1,14 @@
-export default {
+import { initializeApp } from 'firebase/app';
+import { getAuth } from "firebase/auth";
+import { GoogleAuthProvider } from "firebase/auth";
+
+export const provider = new GoogleAuthProvider();
+provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
+provider.setCustomParameters({
+        'login_hint': 'user@example.com'
+      });
+
+export const firebaseConfig = {
     
         apiKey: "AIzaSyD48-m6BpBJXVQanmLp7aBWWFUSHUNedLg",
         authDomain: "easylearning-fp.firebaseapp.com",
@@ -10,3 +20,8 @@ export default {
         measurementId: "G-ZSCERXL0XX",
 
 };
+
+const app = initializeApp(firebaseConfig);
+
+export const auth = getAuth(app);
+

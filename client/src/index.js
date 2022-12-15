@@ -10,7 +10,7 @@ import axios from 'axios';
 
 // firebase:
 import { FirebaseAppProvider } from 'reactfire';
-import firebaseConfig from './firebase-config';
+import { firebaseConfig } from './firebase-config';
 
 axios.defaults.baseURL = "http://localhost:3001";
 // axios.defaults.baseURL = "";
