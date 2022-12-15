@@ -18,7 +18,7 @@ import {
   DrawerCloseButton,
 } from '@chakra-ui/react';
 
-import { RiArrowGoBackLine} from "react-icons/ri";
+import { RiArrowGoBackLine } from "react-icons/ri";
 
 export default function Detail() {
 
@@ -48,124 +48,124 @@ export default function Detail() {
   // "https://www.youtube.com/watch?v=DinilgacaWs"
   // ]
 
-  
-    const { isOpen, onOpen, onClose } = useDisclosure()
-    const btnRef = React.useRef()
+
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  const btnRef = React.useRef()
 
 
-    return (
-      <>
-        <div>
-          <Navbar />
-          <Link style={{ textDecoration: 'none' }} to='/course'>
+  return (
+    <>
+      <div>
+        <Navbar />
+        <Link style={{ textDecoration: 'none' }} to='/course'>
           <Button colorScheme='blue' leftIcon={<RiArrowGoBackLine />}>Back</Button>
-            {/* <button className="back">Back</button> */}
-          </Link>
+          {/* <button className="back">Back</button> */}
+        </Link>
 
-          {
-            myCourse ?
-              <div className={style.content}>
-                <div className={style.header}>
-                  
-                  <Box borderWidth='1px' borderRadius='lg' overflow='hidden'>
-                    <Center h='100px' color='black'>
-                      <h1 className={style.title}>{`${myCourse?.name}`}</h1>
-                    </ Center>
-                    <Box>
-                      <Center>
+        {
+          myCourse ?
+            <div className={style.content}>
+              <div className={style.header}>
+
+                <Box borderWidth='1px' borderRadius='lg' overflow='hidden'>
+                  <Center h='100px' color='black'>
+                    <h1 className={style.title}>{`${myCourse?.name}`}</h1>
+                  </ Center>
+                  <Box>
+                    <Center>
                       <Image src="https://www.unapiquitos.edu.pe/contenido/opiniones/recursos/docenteClases.jpg" />
-                      </Center>
-                    </Box>
-                    <Box>
-                      <Center>
-                        <Box p='6'>
-                          <Box display='flex' alignItems='baseline'>
-                            <Badge borderRadius='full' px='2' colorScheme='teal'>
-                              New
-                            </Badge>
-                            <Box
-                              color='gray.500'
-                              fontWeight='semibold'
-                              letterSpacing='wide'
-                              fontSize='xs'
-                              textTransform='uppercase'
-                              ml='2'
-                            ><h3>Teacher:{myCourse?.teacher}</h3>
-
-                            </Box>
-                          </Box>
-                          <Box fontWeight='semibold' textTransform='uppercase' >
-                            <p>Descripcion:{myCourse?.description}</p>
-                          </Box>
-                          <Box>
-                            <Link to={`/detail/${id}/videos`}>
-                              <button>Ver todos los videos de este curso</button>
-                            </Link>
-                            {/* <Button ref={btnRef} colorScheme='teal' onClick={onOpen}>
-                              Open
-                            </Button> */}
-                            <Drawer
-                              isOpen={isOpen}
-                              placement='right'
-                              onClose={onClose}
-                              finalFocusRef={btnRef}
-                            ></Drawer>
-
-
-                            <Drawer
-                              isOpen={isOpen}
-                              placement='right'
-                              onClose={onClose}
-                              finalFocusRef={btnRef}
-                            >
-                              <DrawerOverlay />
-                              <DrawerContent>
-                                <DrawerCloseButton />
-                                <DrawerHeader>Create your account</DrawerHeader>
-
-                                <DrawerBody>
-                                  <Input placeholder='Type here...' />
-                                </DrawerBody>
-
-                                <DrawerFooter>
-                                  <Button variant='outline' mr={3} onClick={onClose}>
-                                    Cancel
-                                  </Button>
-                                  <Button colorScheme='blue'>Save</Button>
-                                </DrawerFooter>
-                              </DrawerContent>
-                            </Drawer>
-
-
-                            {/* <Video videos={myCourse.video}/> */}
-                          </Box>
-                          <Box>
-
-                            <h3> <strong> Category: </strong> </h3>
-                            
-                            {myCourse.categories?.map((e, i) => <h1 key={i}>{e.name}</h1>)}
+                    </Center>
+                  </Box>
+                  <Box>
+                    <Center>
+                      <Box p='6'>
+                        <Box display='flex' alignItems='baseline'>
+                          <Badge borderRadius='full' px='2' colorScheme='teal'>
+                            New
+                          </Badge>
+                          <Box
+                            color='gray.500'
+                            fontWeight='semibold'
+                            letterSpacing='wide'
+                            fontSize='xs'
+                            textTransform='uppercase'
+                            ml='2'
+                          ><h3>Teacher:{myCourse?.teacher}</h3>
 
                           </Box>
                         </Box>
-                      </Center>
-                    </Box>
-                    {/* <h3>Teacher:{myCourse?.teacher}</h3>
+                        <Box fontWeight='semibold' textTransform='uppercase' >
+                          <p>Descripcion:{myCourse?.description}</p>
+                        </Box>
+                        <Box>
+                          <Link to={`/detail/${id}/videos`}>
+                            <button>Ver todos los videos de este curso</button>
+                          </Link>
+                          {/* <Button ref={btnRef} colorScheme='teal' onClick={onOpen}>
+                              Open
+                            </Button> */}
+                          <Drawer
+                            isOpen={isOpen}
+                            placement='right'
+                            onClose={onClose}
+                            finalFocusRef={btnRef}
+                          ></Drawer>
+
+
+                          <Drawer
+                            isOpen={isOpen}
+                            placement='right'
+                            onClose={onClose}
+                            finalFocusRef={btnRef}
+                          >
+                            <DrawerOverlay />
+                            <DrawerContent>
+                              <DrawerCloseButton />
+                              <DrawerHeader>Create your account</DrawerHeader>
+
+                              <DrawerBody>
+                                <Input placeholder='Type here...' />
+                              </DrawerBody>
+
+                              <DrawerFooter>
+                                <Button variant='outline' mr={3} onClick={onClose}>
+                                  Cancel
+                                </Button>
+                                <Button colorScheme='blue'>Save</Button>
+                              </DrawerFooter>
+                            </DrawerContent>
+                          </Drawer>
+
+
+                          {/* <Video videos={myCourse.video}/> */}
+                        </Box>
+                        <Box>
+
+                          <h3> <strong> Category: </strong> </h3>
+
+                          {myCourse.categories?.map((e, i) => <h1 key={i}>{e.name}</h1>)}
+
+                        </Box>
+                      </Box>
+                    </Center>
+                  </Box>
+                  {/* <h3>Teacher:{myCourse?.teacher}</h3>
                     <br /> */}
 
-                    <br />
-                    <div>
-                    </div>
-                    <br />
-                    <div>
-                    </div>
-                  </Box>
-                </div>
+                  <br />
+                  <div>
+                  </div>
+                  <br />
+                  <div>
+                  </div>
+                </Box>
               </div>
-              : <p>Loading..</p>
-          }
+            </div>
+            : <p>Loading..</p>
+        }
 
-          <Footer2 />
-        </div >
-      </>
-    )
-  }
+        <Footer2 />
+      </div >
+    </>
+  )
+}

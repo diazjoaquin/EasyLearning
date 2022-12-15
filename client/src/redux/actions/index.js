@@ -17,6 +17,7 @@ export const DELETE_COURSE_FROM_CART = "DELETE_COURSE_FROM_CART";
 export const FILTERS = "FILTERS";
 export const ORDER_BY_NAME = "ORDER_BY_NAME";
 export const ORDER_BY_RATING = "ORDER_BY_RATING";
+export const RESET_FILTERS = "RESET_FILTERS";
 
 // create & mannage course:
 export const CREATE_COURSE = "CREATE_COURSE";
@@ -116,6 +117,16 @@ export const filters = (payload) => async (dispatch) => {
   }
 };
 
+export const resetFilters = () => async (dispatch) => {
+  try {
+    return dispatch({
+      type: RESET_FILTERS,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const orderByName = (payload) => async (dispatch) => {
   try {
     return dispatch({
@@ -195,3 +206,4 @@ export const getAllCoursesByTeacher = (userId) => {
     }
   };
 };
+
