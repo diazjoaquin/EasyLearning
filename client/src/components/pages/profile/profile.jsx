@@ -98,26 +98,20 @@ const Profile = () => {
               </AccordionItem>
             </Accordion>
           </ GridItem>
-
-
-          {/* Si, userCoruseCreated es <= 3, renderizar 3 tarjetas de los cursos */}
-          <Box w="auto" display="flex" flexDirection="column" alignItems="center" mt="10" border='1px' borderColor='gray.400' borderRadius="10">
-            <Link to="/cursosCreados">
-              <Button mt='5' colorScheme='blackAlpha'>Courses Created</Button>
+          <Box w="auto" display="flex" flexDirection="column" mt="10" border='1px' borderColor='gray.400' borderRadius="10">
+            <Link to="/formCourse">
+              <Button ml='2' mt='2' display="flex" justifySelf='flex-start' colorScheme='blackAlpha'>Create new course</Button>
             </Link>
-            <GridItem gap='20' colSpan={2} display="flex" flexDirection="row" alignItems="center" mt="5" mb='5'>
+            <GridItem gap='20' colSpan={2} display="flex" flexDirection="row" alignItems="center" justifyContent='center' mt="5" mb='5'>
               {coursesCreateUser.map(e => (
                 <CourseCard key={e.id} id={e.id} teacher={e.teacher} name={e.name} description={e.description} rating={e.rating} price={e.price} image={e.image} categories={e.categories} />
               ))}
-              <Box display="flex" flexDirection="column">
-                <Link to="/cursosCreados">
-                  <Button mt='5' colorScheme='blackAlpha'>Show more</Button>
-                </Link>
-                <Link to="/formCourse">
-                  <Button mt='5' colorScheme='blackAlpha'>Create new course</Button>
-                </Link>
-              </Box>
             </ GridItem>
+            <Box display="flex" flexDirection='row-reverse' >
+              <Link to="/cursosCreados">
+                <Button mb='2' mr='2' colorScheme='blackAlpha'>Show more</Button>
+              </Link>
+            </Box>
           </Box>
           <GridItem colSpan={4} bg='tomato' />
         </Grid>

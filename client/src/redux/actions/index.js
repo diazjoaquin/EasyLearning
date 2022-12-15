@@ -6,6 +6,7 @@ export const GET_COURSE_BY_NAME = "GET_COURSE_BY_NAME";
 export const GET_COURSE_DETAIL = "GET_COURSE_DETAIL";
 export const CLEAR_DETAIL = "CLEAR_DETAIL";
 export const GET_CATEGORIES = "GET_CATEGORIES";
+export const COURSES_BY_TEACHER = "COURSES_BY_TEACHER";
 
 // cart:
 export const ADD_TO_CART = "ADD_TO_CART";
@@ -203,3 +204,20 @@ export const postReview = (payload) => {
     }
   };
 };
+
+export const getAllCoursesByTeacher = (userId) => {
+  return async function (dispatch) {
+    try {
+      const response = await axios.get(
+        `http://localhost:3001/getAllCoursesByTeacher/${userId}`
+      );
+      return dispatch({
+        type: COURSES_BY_TEACHER,
+        payload: response.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+

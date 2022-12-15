@@ -43,6 +43,7 @@ export default function Course() {
                 price={course.price}
                 rating={course.rating}
                 categories={course.categories}
+                image={course.image}
               />)
           })
         }
