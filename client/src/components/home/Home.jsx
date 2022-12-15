@@ -13,7 +13,6 @@ import Categorys from "../categorys/Categorys"
 import { useEffect } from "react";
 import { getAllCourses } from "../../redux/actions/index.js";
 import { useDispatch, useSelector } from "react-redux";
-import { getAuth } from "firebase/auth";
 
 
 export default function Home() {
@@ -36,10 +35,6 @@ export default function Home() {
         e.preventDefault();
         currentPage > 1 ? setCurrentPage(currentPage - 1) : setCurrentPage(1);
     }
-
-    //firebase auth
-    const auth = getAuth();
-    const user = auth.currentUser;
 
     // cards:
     const dispatch = useDispatch();

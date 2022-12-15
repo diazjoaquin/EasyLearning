@@ -14,6 +14,7 @@ import Footer2 from '../../footer/Footer2';
 import Navbar from '../../navbar/Navbar';
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { useAuth } from '../../context/Auth-context.js';
 
 //firebase
 import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
@@ -49,13 +50,13 @@ import { auth, provider } from '../../../firebase-config';
     // });
   }
 
+    const { login } = useAuth(); 
+
     const handleSubmit =  async () => {
+      setError("");
       try {
-        await signInWithEmailAndPassword(auth, email, password);
-        setError("");
-        setTimeout(function(){
-          history.push("/");
-        }, 2000); 
+        await login(email, password);
+        history.push("/");
       } catch (error) {
         setError(error.message);
         console.log(error.message);

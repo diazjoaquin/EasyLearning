@@ -18,8 +18,7 @@ import {
 import { useState } from 'react';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import Footer2 from "../../footer/Footer2";
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../../firebase-config";
+import { useAuth } from "../../context/Auth-context";
 
 
 export default function SignupCard() {
@@ -30,10 +29,12 @@ export default function SignupCard() {
   const [error, setError] = useState("");
   const history = useHistory();
 
-  const handleSubmit = async () => {
+  const { signup } = useAuth();
+
+  const handleSubmit = async (e) => {
+    setError("");
     try {
-      await createUserWithEmailAndPassword(auth, email, password);
-      setError("");
+      await signup(email, password)
       setTimeout(function(){
         history.push("/");
       }, 2000);

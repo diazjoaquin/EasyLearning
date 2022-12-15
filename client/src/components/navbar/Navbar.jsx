@@ -2,18 +2,20 @@ import { Link } from "react-router-dom";
 import style from "./Navbar.module.css"
 import Logo from "../../image/logoE.png"
 import { Button } from '@chakra-ui/react'
-import { getAuth, signOut } from "firebase/auth";
+import { signOut } from "firebase/auth";
 import { Avatar } from '@chakra-ui/react';
+import { useAuth } from "../context/Auth-context";
+import { auth } from "../../firebase-config";
 
 export default function Navbar() {
 
-    const auth = getAuth();
-    const user = auth.currentUser;
 
+    const { user, logout, loading } = useAuth();
     const handleLogout = async () => {
-        // promise
-        await signOut(auth);
+        await logout(auth);
     };
+
+    if (loading) {return <h1>Loading ...</h1>}
 
     return (
         <div className={style.navcont}>
