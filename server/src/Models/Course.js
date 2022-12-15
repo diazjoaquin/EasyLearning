@@ -26,6 +26,11 @@ module.exports = (sequelize) => {
         type: DataTypes.INTEGER,
         defaultValue: null,
       },
+      image: {
+        type: DataTypes.TEXT,
+        defaultValue:
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8pD3SpnL0eQJ2kczwprcvJ0An1Ykgw5ggRw&usqp=CAU",
+      },
     },
     { timestamps: false }
   );
