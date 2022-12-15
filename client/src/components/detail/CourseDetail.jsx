@@ -7,16 +7,10 @@ import "./CourseDetail.module.css";
 import Navbar from "../navbar/Navbar";
 import Footer2 from "../footer/Footer2";
 import style from "../detail/CourseDetail.module.css";
-
-
 // import CardReview from "../Review/cardReview";
 // import PostReview from "../Review/postReview";
 import {
-  Center,
-  Box,
-  Badge,
   Button,
-  Image,
   Accordion,
   AccordionIcon,
   AccordionButton,
@@ -76,21 +70,6 @@ export default function Detail() {
                         </ButtonGroup>
                       </div>
                     </div>
-
-                    
-
-                    {/* <img src="https://www.unapiquitos.edu.pe/contenido/opiniones/recursos/docenteClases.jpg" /> */}
-                    {/* Teacher: */}
-
-                    {/* <h3>{myCourse?.teacher}</h3>
-                          <h3>
-                          {" "}
-                          <strong> Category: </strong>{" "}
-                        </h3> */}
-
-                    {/* {myCourse.categories?.map((e, i) => (
-                          <h1 key={i}>{e.name}</h1>
-                        ))} */}
                   </div>
                 </div>
                 <br />
