@@ -11,6 +11,8 @@ const createCommentVideo = require("./createComment_Video/createComment_Video.js
 const createVideo = require("./createVideo/createVideo.js");
 const createReview = require("./createReview/createReview.js");
 const test = require("./test/test.js");
+const getReviews = require("./getReviews/getReviews.js");
+const getUsers = require("./getUsers/getUsers.js");
 
 router.use("/getAllCourses", getAllCourses);
 router.use("/getDetail", getDetail);
@@ -23,5 +25,7 @@ router.use("/createCommentVideo", createCommentVideo);
 router.use("/createVideo", createVideo);
 router.use("/createReview", createReview);
 router.use("/test", test);
+router.use("/getReviews", getReviews);
+router.use("/getUsers", getUsers); 
 
 module.exports = router;
