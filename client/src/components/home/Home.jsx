@@ -25,7 +25,7 @@ export default function Home() {
     const first = last - coursesPerPage;
     const currentCourses = courses?.slice(first, last);
     const numOfPages = courses.length / coursesPerPage;
-
+    
     const handleNext = (e) => {
         e.preventDefault();
         currentPage < numOfPages ? setCurrentPage(currentPage + 1) : setCurrentPage(1);
@@ -39,14 +39,14 @@ export default function Home() {
     // cards:
 
     const dispatch = useDispatch();
-
-
     useEffect(() => {
         if (!courses.length) {
             dispatch(getAllCourses())
         }
     }, [dispatch]);
-
+    
+    
+    
     // const ListHeader = ({children}) => {
     //     return (
     //         <Text fontWeight={'500'} fontSize={'lg'} mb={2}>

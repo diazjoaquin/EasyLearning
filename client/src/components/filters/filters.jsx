@@ -77,9 +77,9 @@ const Filters = ({ update, setUpdate }) => {
                 <div>
                     <select name="price" onChange={handleChange}>
                         <option value="prices">Prices</option>
-                        <option value="0-100">0-100</option>
-                        <option value="101-500">101-500</option>
-                        <option value="+500">+500</option>
+                        <option value="uno">0-25</option>
+                        <option value="dos">26-50</option>
+                        <option value="tres">+50</option>
                     </select>
                 </div>
                 <h5>By Teachers</h5>

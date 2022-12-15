@@ -94,11 +94,13 @@ const rootReducer = (state = initialState, action) => {
         );
       }
       if (action.payload.price) {
-        filtros = filtros.filter(
-          (e) => parseInt(action.payload.price) === e.price
-        );
+        console.log(action.payload.price);
+        action.payload.price === "uno"
+          ? (filtros = filtros.filter((e) => e.price <= 25))
+          : action.payload.price === "dos"
+          ? (filtros = filtros.filter((e) => e.price > 25 && e.price <= 50))
+          : (filtros = filtros.filter((e) => e.price > 50));
       }
-      console.log(filtros);
       if (action.payload.teacher) {
         filtros = filtros.filter((e) => action.payload.teacher === e.teacher);
       }
