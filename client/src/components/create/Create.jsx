@@ -55,10 +55,9 @@ const Create = () => {
   })
 
   const [inputVideo, setInputVideo] = useState({
-    name: '',
+    nameVideo: '',
     urlVideo: "",
     description: "",
-    courseId: ""
   })
 
   const [errors, setErrors] = useState({})
@@ -101,13 +100,11 @@ const Create = () => {
       video: [...input.video, inputVideo]
     })
     setInputVideo({
-      name: '',
+      nameVideo: '',
       urlVideo: "",
       description: "",
-      courseId: ""
     })
     document.getElementById("formVideo").reset()
-    // formVideo.reset()
   }
 
   const handelDelete = (e) => {
@@ -136,13 +133,15 @@ const Create = () => {
       dispatch(getCategories())
     setErrors(validate(input))
     setErrorsVideo(validateVideo(inputVideo, input))
+    console.log(errorsVideo);
   }, [dispatch, input, inputVideo])
 
   return (
     <div>
       <Navbar />
       <Box display='flex'>
-        <Box display='flex' justifyContent="center" my="5" w='45%'  >
+        <Box display='flex' flexDirection='column' alignItems='center' justifyContent="center" my="5" w='45%'  >
+          <Text fontSize='3xl'>Create Course</Text>
           <Box w="85%" border="1px" borderRadius="20" p="10">
             <Link to='/profile'>
               <Button rightIcon={<ArrowBackIcon />} fontSize='30' size='30' colorScheme='teal' variant='outline' />
@@ -198,14 +197,20 @@ const Create = () => {
                 <form id="formVideo">
                   <FormLabel display="flex" justifyContent="center">Video:</FormLabel>
                   <FormLabel>Name:</FormLabel>
-                  <Input name="name" onChange={handelChangeVideo} />
+                  <Input name="nameVideo" onChange={handelChangeVideo} />
+                  {errorsVideo.nameVideo && <Text fontSize='10px' color='red'>
+                    {errorsVideo.nameVideo}
+                  </Text>}
                   <FormLabel>Description:</FormLabel>
                   <Input name="description" onChange={handelChangeVideo} />
+                  {errorsVideo.description && <Text fontSize='10px' color='red'>
+                    {errorsVideo.description}
+                  </Text>}
                   <FormLabel>urlVideo:</FormLabel>
                   <Input name="urlVideo" onChange={handelChangeVideo} />
-                  <FormLabel>courseId:</FormLabel>
-                  <Text>(hardCode por el momento, tendria que tener una logica de obtener el id que se le genere al curso que se esta creando, para poder relacionarle los videos)</Text>
-                  <Input name="courseId" onChange={handelChangeVideo} />
+                  {errorsVideo.urlVideo && <Text fontSize='10px' color='red'>
+                    {errorsVideo.urlVideo}
+                  </Text>}
                   <Box display="flex" flexDirection="row-reverse">
                     <Button mt={4} colorScheme='teal' onClick={handelSubmitVideo} disabled={Object.keys(errorsVideo).length ? true : false}>
                       Add Video
@@ -221,16 +226,17 @@ const Create = () => {
             </FormControl>
           </Box>
         </Box >
-        <Box w='65%' my="5" display='flex' justifyContent='center' h='-webkit-fit-content' >
+        <Box w='65%' my="5" display='flex' flexDirection='column' alignItems='center' justifyContent='center' h='-webkit-fit-content' >
+          <Text fontSize='3xl'>List Videos</Text>
           <Box border='1px' display='grid' gridTemplateColumns='repeat(2, 1fr)' gridAutoRows='200px' justifyContent='center' w='95%' borderRadius='25' py='5' gap='10'>
 
             {
               input.video?.map((e, i) => (
-                <Box w='90%' h='200' bg='red' key={i} borderRadius='20' display='flex' flexDirection='column' alignItems='center' justifyContent='center' ml='5' textAlign='center' whiteSpace='initial' overflow='hidden'>
+                <Box w='90%' h='200' bg='gray.100' key={i} borderRadius='20' display='flex' flexDirection='column' alignItems='center' justifyContent='center' ml='5' textAlign='center' whiteSpace='initial' overflow='hidden'>
                   <h1>{e.name}</h1>
                   <h4>{e.description}</h4>
                   <h6>{e.urlVideo}</h6>
-                  <Button colorScheme='red' m='2' onClick={() => handelDeleteVideo(e.name)}> Deleted Video </Button>
+                  <Button colorScheme='red' m='2' onClick={() => handelDeleteVideo(e.name)}> X </Button>
                 </Box>
               ))
             }
