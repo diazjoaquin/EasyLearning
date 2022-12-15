@@ -51,6 +51,7 @@ const Filters = ({ update, setUpdate }) => {
         setUpdate(!update);
     }
 
+
     function handleReset(e){
         dispatch(resetFilters());
     }
@@ -75,10 +76,10 @@ const Filters = ({ update, setUpdate }) => {
                 <h5>By Price</h5>
                 <div>
                     <select name="price" onChange={handleChange}>
-                        <option value="prices">P</option>
-                        <option value="100">100</option>
-                        <option value="200">200</option>
-                        <option value="500">500</option>
+                        <option value="prices">Prices</option>
+                        <option value="0-100">0-100</option>
+                        <option value="101-500">101-500</option>
+                        <option value="+500">+500</option>
                     </select>
                 </div>
                 <h5>By Teachers</h5>

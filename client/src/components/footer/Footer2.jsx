@@ -17,8 +17,11 @@ import { FaTwitter, FaYoutube } from 'react-icons/fa';
 import { BiMailSend } from 'react-icons/bi';
 // import Logo from "../../image/easylearning.png"
 import { Button, ButtonGroup } from '@chakra-ui/react'
-import { FaFacebook, FaLinkedin, FaInstagram } from "react-icons/fa"
-import Logo from "../footer/easylearning.png"
+import { FaFacebook, FaLinkedin, FaInstagram } from "react-icons/fa";
+import Logo from "./easylearning.png";
+import style from "./Footer2.module.css";
+
+
 
 
 
@@ -69,8 +72,8 @@ export default function Footer2() {
                     templateColumns={{ sm: '1fr 1fr', md: '2fr 1fr 1fr 2fr' }}
                     spacing={8}>
                     <Stack spacing={6}>
-                        <Box>
-                            <img src="Logo" alt="logo" />
+                        <Box size="xs">
+                            <img width="270px" src={Logo} alt="logo" />
                         </Box>
                         <Text fontSize={'sm'}>
                             © 2022 easyLearning. All rights reserved
@@ -92,7 +95,13 @@ export default function Footer2() {
 
                             <Button colorScheme='facebook' leftIcon={<FaFacebook />}> <a href="https://es-la.facebook.com/" target="_blank">Facebook</a></Button>
                             <Button colorScheme="linkedin" leftIcon={<FaLinkedin />} > <a href="https://www.linkedin.com/feed/" target="_blank">Linkedin</a></Button>
-                            <Button colorScheme="instagram" leftIcon={<FaInstagram />}> <a href="https://www.instagram.com/" target="_blank">Instagram</a></Button>
+                            {/* <Button  leftIcon={<FaInstagram />}> <a href="https://www.instagram.com/" target="_blank">Instagram</a></Button> */}
+                            
+                            
+                            <button className={style.ib}> 
+                            <a href="https://www.instagram.com/" target="_blank"><FaInstagram/>Instagram 
+                            </a>
+                            </button>
 
 
 
