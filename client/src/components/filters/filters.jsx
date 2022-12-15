@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { filters, getAllCourses, getCategories, orderByName, orderByRating } from "../../redux/actions";
+import { filters, getAllCourses, getCategories, orderByName, orderByRating, resetFilters } from "../../redux/actions";
 import style from './Filters.module.css';
 import { Button } from "@chakra-ui/button";
 
@@ -47,7 +47,12 @@ const Filters = ({ update, setUpdate }) => {
         setUpdate(!update);
     }
 
-    return (
+
+    function handleReset(e){
+        dispatch(resetFilters());
+    }
+
+    return(
         <div className={style.cont}>
             <div className={style.filters}>
                 <h4>Filters:</h4>
@@ -86,6 +91,8 @@ const Filters = ({ update, setUpdate }) => {
                     onClick={handleClick}>
                     Aplicar Filtros
                 </Button>
+                <Button colorScheme='teal' variant='link'
+                onClick={handleReset}>Reset filters</Button>
             </div>
 
 

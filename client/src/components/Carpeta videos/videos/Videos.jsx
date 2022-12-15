@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getCourseDetail } from "../../../redux/actions";
-import Comments from "../comments/Comments";
 import Navbar from '../../navbar/Navbar.jsx';
 import Footer2 from "../../footer/Footer2.jsx";
 import CardVideo from "./cardVideo/cardVideo";

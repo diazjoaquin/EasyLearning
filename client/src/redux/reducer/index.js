@@ -16,6 +16,7 @@ import {
   GET_REVIEWS,
   FILTERS,
   COURSES_BY_TEACHER,
+  RESET_FILTERS,
 } from "../actions";
 
 const initialState = {
@@ -125,6 +126,11 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         courses: byRating,
+      };
+    case RESET_FILTERS:
+      return {
+        ...state,
+        courses: state.filter,
       };
     case CREATE_COURSE:
       return {
