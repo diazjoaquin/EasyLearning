@@ -1,12 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { getAllUsers } from "../../redux/actions";
-// import { useAuth0 } from "@auth0/auth0-react";
 import { useDispatch, useSelector } from "react-redux";
-// import "./addReview.module.css";
 import { FormControl, FormLabel, Input, Button, FormErrorMessage, Select, Card } from '@chakra-ui/react';
-// import { AiFillStar, AiOutlineStar } from "react-icons/ai";
-// import { StarIcon } from "@chakra-ui/icons";
 import { useParams } from "react-router-dom";
 
 const PostReview = ({update, setUpdate}) => {
@@ -22,11 +18,10 @@ const PostReview = ({update, setUpdate}) => {
 
     const [errors, setErrors] = useState({});
     const dispatch = useDispatch();
-    // const {user} = useAuth0();
+    
     const allUser = useSelector((state) => state.allUsers);
     console.log(allUser)
 
-    // const usuario = user && allUser.find(u => u.email === user.email)
 
     useEffect(() => {
         dispatch(getAllUsers())

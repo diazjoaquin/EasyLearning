@@ -217,10 +217,10 @@ export const getAllCoursesByTeacher = (userId) => {
     }
   };
 };
-      console.log(error)
-//     } 
-//   }
-// };
+//       console.log(error)
+// //     } 
+// //   }
+// // };
 
 export const getAllUsers = () => {
   return async function (dispatch) {

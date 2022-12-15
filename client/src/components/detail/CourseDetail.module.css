@@ -25,11 +25,16 @@
     padding: 10px;
 }
 
+.miniature{
+    margin-right: 50px;
+}
+
 .grid{
     display: grid;
     grid-template-columns: 1fr 1fr;
     justify-content: space-between;
     font-size: small;
+    justify-items: end;
 }
 
 
