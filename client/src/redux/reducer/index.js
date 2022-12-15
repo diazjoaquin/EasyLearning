@@ -17,6 +17,7 @@ import {
   FILTERS,
   RESET_FILTERS,
   COURSES_BY_TEACHER,
+  GET_ALL_USERS,
 } from "../actions";
 
 const initialState = {
@@ -25,6 +26,7 @@ const initialState = {
   courseDetail: {},
   categories: [],
   cart: [],
+  allReviews: [],
   reviews: [],
   allUsers: [],
   coursesCreateUser: [],
@@ -147,16 +149,18 @@ const rootReducer = (state = initialState, action) => {
     case GET_REVIEWS:
       return {
         ...state,
+        reviews: action.payload
+        // allReviews: action.payload
       };
-    case POST_REVIEW:
+    // case POST_REVIEW:
+    //   return {
+    //     ...state,
+    //   };
+    case GET_ALL_USERS:
       return {
         ...state,
-      };
-    case COURSES_BY_TEACHER:
-      return {
-        ...state,
-        coursesCreateUser: action.payload,
-      };
+        allUsers: action.payload
+      }
     default:
       return {
         ...state,
