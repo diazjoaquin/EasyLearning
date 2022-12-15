@@ -9,7 +9,7 @@ import { FormControl, FormLabel, Input, Button, FormErrorMessage, Select, Card }
 // import { StarIcon } from "@chakra-ui/icons";
 import { useParams } from "react-router-dom";
 
-const PostReview = ({courseId}) => {
+const PostReview = ({update, setUpdate}) => {
     
     const params = useParams();
     const [input, setInput] = useState({
@@ -20,24 +20,23 @@ const PostReview = ({courseId}) => {
         comments:''
     });
 
-
     const [errors, setErrors] = useState({ });
     const dispatch = useDispatch();
     // const {user} = useAuth0();
     const allUser = useSelector((state) => state.allUsers);
     console.log(allUser)
 
-    const usuario = user && allUser.find(u => u.email === user.email)
+    // const usuario = user && allUser.find(u => u.email === user.email)
 
     useEffect(() => {
         dispatch(getAllUsers())
-        if(usuario){
-            setInput({
-                userId: usuario.id,
-                courseId: courseId
-            })
-        }
-    }, [usuario, dispatch]);
+        // if(usuario){
+        //     setInput({
+        //         userId: usuario.id,
+        //         courseId: courseId
+        //     })
+        // }
+    }, [dispatch, update]);
 
 
     function validate(input) {
@@ -76,6 +75,7 @@ const PostReview = ({courseId}) => {
         })
         await axios.post("/createReview", input);
         console.log(input)
+        setUpdate(!update)
     }
 
     return ( 

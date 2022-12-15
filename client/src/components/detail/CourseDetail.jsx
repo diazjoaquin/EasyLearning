@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { getCourseDetail, getReviews } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -29,17 +29,22 @@ export default function Detail() {
 
   const { id } = useParams();
 
+  const [update, setUpdate] = useState();
+
   const myCourse = useSelector(state => state.courseDetail)
   useEffect(() => {
     dispatch(getCourseDetail(id));
     dispatch(getReviews(id))
-  }, [dispatch, id])
+  }, [dispatch, id, update])
 
     const { isOpen, onOpen, onClose } = useDisclosure()
     const btnRef = React.useRef()
 
     const allReviews = useSelector((state) => state.reviews);
     console.log(allReviews);
+
+    
+
 
     return (
       <>
@@ -167,7 +172,10 @@ export default function Detail() {
         </SimpleGrid>
         <Box 
         padding={5}>
-        <PostReview/>
+        <PostReview
+        update = {update}
+        setUpdate = {setUpdate}
+        />
         </Box>
         <Footer2 />
         </div >
