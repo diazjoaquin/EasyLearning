@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { getCourseDetail } from "../../redux/actions";
+import { getCourseDetail, getReviews } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
@@ -7,7 +7,7 @@ import './CourseDetail.module.css';
 import Navbar from "../navbar/Navbar";
 import Footer2 from "../footer/Footer2";
 import style from "../detail/CourseDetail.module.css";
-import { Center, Square, Circle, Box, Badge, useDisclosure, Button, Input, Image } from '@chakra-ui/react';
+import { Center, Square, Circle, Box, Badge, useDisclosure, Button, Input, Image, Heading, SimpleGrid, Divider} from '@chakra-ui/react';
 import {
   Drawer,
   DrawerBody,
@@ -19,6 +19,9 @@ import {
 } from '@chakra-ui/react';
 
 import { RiArrowGoBackLine} from "react-icons/ri";
+import CardReview from "../Review/cardReview";
+import PostReview from "../Review/postReview";
+
 
 export default function Detail() {
 
@@ -29,29 +32,14 @@ export default function Detail() {
   const myCourse = useSelector(state => state.courseDetail)
   useEffect(() => {
     dispatch(getCourseDetail(id));
+    dispatch(getReviews(id))
   }, [dispatch, id])
 
-
-  // "category": "Bebe de benja", varias categorias? 
-  // "description": "The best course to learn how to create your first repository on GitHub.",
-  // "name": "El mejor curso de tu vida",
-  // "rating": "4.5",
-  // "students": [
-  // "German",
-  // "Bianca",
-  // "Fermin"
-  // ],
-  // "teacher": "Franco Cartucho",
-  // "video": [
-  // "https://www.youtube.com/watch?v=C6IjS7jKnjQ",
-  // "https://www.youtube.com/watch?v=vlCXdvcgiE0",
-  // "https://www.youtube.com/watch?v=DinilgacaWs"
-  // ]
-
-  
     const { isOpen, onOpen, onClose } = useDisclosure()
     const btnRef = React.useRef()
 
+    const allReviews = useSelector((state) => state.reviews);
+    console.log(allReviews);
 
     return (
       <>
@@ -163,8 +151,25 @@ export default function Detail() {
               </div>
               : <p>Loading..</p>
           }
-
-          <Footer2 />
+         <Divider paddingTop={5}/>
+         <Heading padding={5}>Reviews</Heading>
+         <SimpleGrid 
+         spacing={4} templateColumns='repeat(auto-fill, minmax(200px, 1fr))' padding={5}
+         >
+          { allReviews? allReviews.map((r, index) => {
+            return(
+            <CardReview
+            key={index}
+            user={r.user.fullName}
+            score={r.score}
+            comments={r.comments}
+            />)}) : <p>No reviews</p>}
+        </SimpleGrid>
+        <Box 
+        padding={5}>
+        <PostReview/>
+        </Box>
+        <Footer2 />
         </div >
       </>
     )

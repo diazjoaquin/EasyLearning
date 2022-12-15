@@ -1,20 +1,31 @@
 import React from 'react';
-import Rating from "@mui/material";
+import { Card, CardHeader, Heading, CardBody, Text, CardFooter, } from '@chakra-ui/react';
+import { StarIcon } from '@chakra-ui/icons'
 
 const CardReview = ({ user, score, comments}) => {
     return (
-        <div style={{}}>
-            <div style={{marginLeft:'10px', display: 'inline-block', width: '20%'}}>
-                <p>{user}</p>
-            </div>
-            <div style={{marginLeft:'30px', display: 'inline-block', flexDirection: 'column', width: '25%', flexWrap: 'wrap', textAlign: 'left', justifyContent: 'center' }}>
-                <Rating name="read-only" value={score} readOnly />
-            </div>
-            <div style={{ marginLeft:'10px', display: 'inline-block',padding:'5px', wordWrap: 'break-word', width: '45%',  justifyContent: 'center', alignItems: 'center' }}>
-                <p>{comments}</p>
-            </div>
-        </div>
-    );
-};
+        <>
+        <Card>
+        <CardHeader>
+          <Heading size='md'>{user}</Heading>
+        </CardHeader>
+        <CardBody>
+          <Text>{comments}</Text>
+        </CardBody>
+        <CardFooter>
+        {Array(5)
+            .fill('')
+            .map((_, i) => (
+              <StarIcon
+                value={score}
+                key={i}
+                color={i < score ? 'teal.500' : 'gray.300'}
+              />
+            ))}
+        </CardFooter>
+       </Card>
+        </>
+       );
+    };
 
-export default CardReview
+export default CardReview;

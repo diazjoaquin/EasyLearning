@@ -15,6 +15,7 @@ import {
   DELETE_COURSE_FROM_CART,
   GET_REVIEWS,
   FILTERS,
+  GET_ALL_USERS,
 } from "../actions";
 
 const initialState = {
@@ -23,6 +24,7 @@ const initialState = {
   courseDetail: {},
   categories: [],
   cart: [],
+  allReviews: [],
   reviews: [],
   allUsers: [],
 };
@@ -140,11 +142,17 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         reviews: action.payload
+        // allReviews: action.payload
       };
-    case POST_REVIEW:
+    // case POST_REVIEW:
+    //   return {
+    //     ...state,
+    //   };
+    case GET_ALL_USERS:
       return {
         ...state,
-      };
+        allUsers: action.payload
+      }
     default:
       return {
         ...state,

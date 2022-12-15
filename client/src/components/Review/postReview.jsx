@@ -1,37 +1,43 @@
 import React, { useEffect, useState } from "react";
-import { postReview } from "../../redux/actions";
-import { useAuth0 } from "@auth0/auth0-react";
+import axios from "axios";
+import { getAllUsers } from "../../redux/actions";
+// import { useAuth0 } from "@auth0/auth0-react";
 import { useDispatch, useSelector } from "react-redux";
-import "./addReview.module.css";
-import { Box, FormControl, FormLabel, Input, Button, FormErrorMessage } from '@chakra-ui/react';
-import Rating from '@mui/material/Rating';
-
+// import "./addReview.module.css";
+import { FormControl, FormLabel, Input, Button, FormErrorMessage, Select, Card } from '@chakra-ui/react';
+// import { AiFillStar, AiOutlineStar } from "react-icons/ai";
+// import { StarIcon } from "@chakra-ui/icons";
+import { useParams } from "react-router-dom";
 
 const PostReview = ({courseId}) => {
+    
+    const params = useParams();
     const [input, setInput] = useState({
-        userId: 0, 
-        courseId: 0, 
+        userId: 5, 
+        courseId: parseInt(params.id), 
         score:0, 
         title:'', 
         comments:''
     });
 
+
     const [errors, setErrors] = useState({ });
     const dispatch = useDispatch();
-    const {user} = useAuth0();
+    // const {user} = useAuth0();
     const allUser = useSelector((state) => state.allUsers);
+    console.log(allUser)
 
     const usuario = user && allUser.find(u => u.email === user.email)
 
     useEffect(() => {
-
+        dispatch(getAllUsers())
         if(usuario){
             setInput({
                 userId: usuario.id,
                 courseId: courseId
             })
         }
-    }, [usuario]);
+    }, [usuario, dispatch]);
 
 
     function validate(input) {
@@ -62,57 +68,37 @@ const PostReview = ({courseId}) => {
         }));
     }
 
-    function handleSubmit(e) {
+   async function handleSubmit(e) {
         e.preventDefault();
-        if (input.title.length > 1
-            && !errors.hasOwnProperty("title") //devuelve un buleano si el objeto tiene la propiedad especificada 
-            && !errors.hasOwnProperty("score")
-            && !errors.hasOwnProperty("comments")
-        ) {
-            if(input.userId > 0){
-                // console.log(input);
-                dispatch(postReview(input))
-                alert("Thank you for your review!")
-                setInput({
-                    title: "",
-                    score: 0,
-                    comments: "",
-                })
-            } else {alert("You must login.")}
-        }
+        setInput({
+            ...input, 
+            score: parseInt(input.score)
+        })
+        await axios.post("/createReview", input);
+        console.log(input)
     }
 
     return ( 
-        <Box 
+        <Card 
         maxW='sm' 
         borderWidth='1px' 
         borderRadius='lg' 
         overflow='hidden'
-        onSubmit={(e) => handleSubmit(e)}
         >
-          <FormControl isRequired>
-            <FormLabel>Rating: </FormLabel>
-            {/* <Input
-              type = "number"
-              value= {input.score}
-              name = "score"
-              onChange={(e) => handleChange(e)}
-            /> */}
-            <Rating  
-            defaultValue={2.5} precision={0.5} size="large"
-            id="outlined-helperText"
-            label="Puntuación:"
-            htmlFor="score"
-            value={input.score}
+          <FormControl  onSubmit={(e) => handleSubmit(e)} isRequired>
+            <FormLabel>Rate: </FormLabel>
+            <Select 
+            placeholder='Select a rating'
+            name='score'
             onChange={(e) => handleChange(e)}
-            name="score"
-            type="number"
-            InputLabelProps={{
-            shrink: true,
-            }}
-            />
-
-             <FormErrorMessage> { errors.score && ( <p>{errors.score}</p> )}</FormErrorMessage>
+            >
+            <option onChange={e => handleChange(e)} value={1}>1</option>
+            <option onChange={e => handleChange(e)} value={2}>2</option>
+            <option onChange={e => handleChange(e)} value={3}>3</option>
+            <option onChange={e => handleChange(e)} value={4}>4</option>
+            <option onChange={e => handleChange(e)} value={5}>5</option>
+            </Select>
+            <FormErrorMessage> { errors.score && ( <p>{errors.score}</p> )}</FormErrorMessage>
 
              <FormLabel>Add a title: </FormLabel>
               <Input
@@ -136,59 +122,11 @@ const PostReview = ({courseId}) => {
             mt={4}
             colorScheme='teal'
             // isLoading={props.isSubmitting}
-            type='submit'
+            // type='submit'
+            onClick={(e) => handleSubmit(e)}
             > Submit </Button>
           </FormControl>
-        </Box>
-
-
-        // <div>
-        //     <h1>Rate your course!</h1>
-        //         <form  onSubmit={(e) => handleSubmit(e)} >
-        //         <div>
-        //         <label>Rating : </label>
-        //             <input
-        //             type = "number"
-        //             value= {input.score}
-        //             name = "score"
-        //             onChange={(e) => handleChange(e)}
-        //             />
-        //               { errors.score && (
-        //             <p>{errors.score}</p>
-        //         )}
-        //         </div>
-
-        //         <div>
-        //         <label>Add a title: </label>
-        //             <input
-        //             type = "text"
-        //             value= {input.title}
-        //             name = "title"
-        //             onChange={(e) => handleChange(e)}
-        //             />
-        //               { errors.title && (
-        //             <p>{errors.title}</p>
-        //         )}
-        //         </div>
-
-        //         <div>
-        //         <label>Add your comments: </label>
-        //             <input
-        //             type = "text"
-        //             value= {input.comments}
-        //             name = "comments"
-        //             onChange={(e) => handleChange(e)}
-        //             />
-        //               { errors.comments && (
-        //             <p>{errors.comments}</p>
-        //         )}
-        //         </div>
-        //         <button type="submit">Send Review</button>
-        //         <div>
-
-        //         </div>
-        //     </form>
-        //     </div>
+        </Card>
 
     )            
 }

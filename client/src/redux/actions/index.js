@@ -29,6 +29,10 @@ export const CREATE_VIDEO = "CREATE_VIDEO";
 export const DELETE_VIDEO = "DELETE_VIDEO";
 export const POST_REVIEW = "POST_REVIEW";
 
+//users 
+export const GET_ALL_USERS = "GET_ALL_USERS";
+
+
 
 
 export const getAllCourses = () => async (dispatch) => {
@@ -162,28 +166,39 @@ export const deleteCourse = (id) => async (dispatch) => {
   } catch (error) {}
 };
 
-export const postReview = (payload) => {
-  return async function (dispatch) {
-    try {
-      var json = await axios.post("/createReview", payload);
-      return json;
-    } catch (error) {
-      console.log(error);
-    }
-  }
-};
+// export const postReview = (payload) => {
+//   return async function (dispatch) {
+//     try {
+//       var json = await axios.post("/createReview", payload);
+//       return json;
+//     } catch (error) {
+//       console.log(error);
+//     }
+//   }
+// };
 
 export const getReviews = (id) => {
   return async function (dispatch) {
     try {
-      var json = await axios.get( "/" + id );
+      var reviews = await axios.get( "/getReviews/" + id );
       return dispatch({
          type: GET_REVIEWS,
-         payload: json.data,
+         payload: reviews.data,
       })
     } catch (error) {
       console.log(error)
     } 
+  }
+};
+
+export const getAllUsers = () => {
+  return async function (dispatch) {
+      var json = await axios.get('/getUsers');
+      return dispatch({
+          type: GET_ALL_USERS,
+          payload: json.data,
+
+      })
   }
 }
 
