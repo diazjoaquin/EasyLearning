@@ -7,6 +7,7 @@ export const GET_COURSE_DETAIL = "GET_COURSE_DETAIL";
 export const CLEAR_DETAIL = "CLEAR_DETAIL";
 export const GET_CATEGORIES = "GET_CATEGORIES";
 export const COURSES_BY_TEACHER = "COURSES_BY_TEACHER";
+export const GET_TEACHERS = "GET_TEACHERS";
 
 // cart:
 export const ADD_TO_CART = "ADD_TO_CART";
@@ -78,6 +79,18 @@ export const getCategories = () => async (dispatch) => {
       payload: categories.data,
     });
   } catch (error) {}
+};
+
+export const getTeachers = () => async (dispatch) => {
+  try {
+    const teachers = await axios.get("/getAllTeachers");
+    return dispatch({
+      type: GET_TEACHERS,
+      payload: teachers.data,
+    });
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export const addToCart = (payload) => async (dispatch) => {
@@ -220,4 +233,3 @@ export const getAllCoursesByTeacher = (userId) => {
     }
   };
 };
-

@@ -6,8 +6,8 @@ import { useEffect } from 'react';
 import { getAllCourses } from "../../../redux/actions/index.js";
 import style from './Course.module.css';
 import Filters from "../../filters/filters.jsx";
-import Footer2 from "../../footer/Footer2";
-import { Link } from "react-router-dom";
+import Footer2 from "../../footer/Footer2"
+import SearchBar from "../../searchbar/SearchBar.jsx";
 
 
 export default function Course() {
@@ -26,9 +26,7 @@ export default function Course() {
   return (
     <div>
       <Navbar />
-      <Link to={"/create"}>
-      <button>Create</button>
-      </Link>
+      <SearchBar/>
       <Filters update={update} setUpdate={setUpdate} />
       <div className={style.cards}>
         {

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Navbar from '../navbar/Navbar';
 import style from "./Home.module.css"
-import SearchBar from "../searchbar/SearchBar.jsx";
+// import SearchBar from "../searchbar/SearchBar.jsx";
 import CourseCard from '../card/CourseCard.jsx';
 import { Heading, Box, Text, Image } from '@chakra-ui/react'
 import mainpicture from "../../image/maintextimage.png"
@@ -25,7 +25,7 @@ export default function Home() {
     const first = last - coursesPerPage;
     const currentCourses = courses?.slice(first, last);
     const numOfPages = courses.length / coursesPerPage;
-
+    
     const handleNext = (e) => {
         e.preventDefault();
         currentPage < numOfPages ? setCurrentPage(currentPage + 1) : setCurrentPage(1);
@@ -39,14 +39,14 @@ export default function Home() {
     // cards:
 
     const dispatch = useDispatch();
-
-
     useEffect(() => {
         if (!courses.length) {
             dispatch(getAllCourses())
         }
     }, [dispatch]);
-
+    
+    
+    
     // const ListHeader = ({children}) => {
     //     return (
     //         <Text fontWeight={'500'} fontSize={'lg'} mb={2}>
@@ -71,8 +71,8 @@ export default function Home() {
                         300 Instructor & Institutions</Heading>
                     <Text fontSize='xl'> Varius version have envolved over the years, sometimes by accident,
                     </Text>
-                    <SearchBar>
-                    </SearchBar>
+                    {/* <SearchBar>
+                    </SearchBar> */}
                 </Box>
 
                 <div>
