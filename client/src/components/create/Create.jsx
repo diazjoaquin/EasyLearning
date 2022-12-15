@@ -176,7 +176,7 @@ const Create = () => {
                     {input.category?.map((e) => (
                       <Tag size={"md"} key={e} variant='subtle' colorScheme='cyan'>
                         <TagLabel>{e}</TagLabel>
-                        <Tooltip hasArrow label="deleted" placement="top">
+                        <Tooltip hasArrow label="delete" placement="top">
                           <Button name={e} onClick={handelDelete} bg='transparent' color='black' _hover={{ background: "transparent" }}> X </Button>
                         </Tooltip>
                       </Tag>
@@ -221,13 +221,12 @@ const Create = () => {
             </FormControl>
           </Box>
         </Box >
-        <Box w='65%' my="5" display='flex' justifyContent='center'>
-          <Box border='1px' display='flex' justifyContent='center' w='95%' borderRadius='25' gap='10' py='5' flexWrap='wrap'>
+        <Box w='65%' my="5" display='flex' justifyContent='center' h='-webkit-fit-content' >
+          <Box border='1px' display='grid' gridTemplateColumns='repeat(2, 1fr)' gridAutoRows='200px' justifyContent='center' w='95%' borderRadius='25' py='5' gap='10'>
 
             {
               input.video?.map((e, i) => (
-                <Box w='90%' h='200' bg='red' key={i} borderRadius='20' display='flex' flexDirection='column' alignItems='center' justifyContent='center' m='0' textAlign='center' whiteSpace='initial' overflow='hidden'>
-                  <h1 > {i + 1}</h1>
+                <Box w='90%' h='200' bg='red' key={i} borderRadius='20' display='flex' flexDirection='column' alignItems='center' justifyContent='center' ml='5' textAlign='center' whiteSpace='initial' overflow='hidden'>
                   <h1>{e.name}</h1>
                   <h4>{e.description}</h4>
                   <h6>{e.urlVideo}</h6>
