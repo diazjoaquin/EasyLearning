@@ -14,15 +14,15 @@ export function validate(input) {
 
 export function validateVideo(inputVideo, inputCourse) {
   const errors = {};
-  if (inputVideo.name < 3) errors.name = "A name for the video is required";
-  if (inputVideo.urlVideo < 3)
+  if (inputVideo.nameVideo?.length <= 3)
+    errors.nameVideo = "A name for the video is required";
+  if (inputVideo.urlVideo?.length <= 3)
     errors.urlVideo = "A urlVideo for the video is required";
-  if (inputVideo.description < 3)
+  else if (!inputVideo.urlVideo.includes("www."))
+    errors.urlVideo = "The url must have www.";
+  else if (!inputVideo.urlVideo.includes(".com"))
+    errors.urlVideo = "The url must have .com";
+  if (inputVideo.description?.length <= 3)
     errors.description = "A description for the video is required";
-  // if (
-  //   inputCourse.video.length >= 1 &&
-  //   inputCourse.video?.map((e) => e.name === inputVideo.name)
-  // )
-  //   errors.name = "There is already a video with that name";
   return errors;
 }

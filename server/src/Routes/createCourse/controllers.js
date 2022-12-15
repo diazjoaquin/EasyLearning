@@ -1,4 +1,4 @@
-const { Course, Category } = require("../../db.js");
+const { Course, Category, Video } = require("../../db.js");
 const { Op } = require("sequelize");
 
 const createCourse = async ({
@@ -7,6 +7,7 @@ const createCourse = async ({
   category,
   teacher,
   price,
+  video, //Array de objetos video {    name: '',    urlVideo: "",    description: "",    courseId: ""}
 }) => {
   try {
     if (name && description && category && teacher) {
@@ -19,17 +20,27 @@ const createCourse = async ({
           price,
         },
       });
-
+      console.log("El array", video);
       //Si el curso fue creado
       if (createdCourse) {
-        //Si agrega mas de una categoria, esto tendria que ser un map.
-        const [categoryDB, createdCategory] = await Category.findOrCreate({
-          where: { name: { [Op.iLike]: category } },
-          defaults: {
-            name: category.slice(0, 1).toUpperCase().concat(category.slice(1)),
-          },
+        //Agregando sus categorias al curso
+        category.map(async (e) => {
+          const [categoryDB, createdCategory] = await Category.findOrCreate({
+            where: { name: { [Op.iLike]: e } },
+            defaults: {
+              name: e.slice(0, 1).toUpperCase().concat(e.slice(1)),
+            },
+          });
+          await course.addCategory(categoryDB);
         });
-        await course.addCategory(categoryDB);
+
+        //Agregando sus videos al curso
+        video.map(async (e) => {
+          await Video.create({
+            ...e,
+            courseId: course.id,
+          });
+        });
       }
 
       return createdCourse
