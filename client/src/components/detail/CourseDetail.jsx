@@ -43,6 +43,7 @@ export default function Detail() {
     dispatch(getCourseDetail(id));
     dispatch(getReviews(id))
   }, [dispatch, id, update]);
+  console.log("fermin", myCourse);
 
   const allReviews = useSelector((state) => state.reviews);
 
@@ -61,7 +62,7 @@ export default function Detail() {
             <div className={style.container}>
               <div>
                 <span className={style.titulo}>
-                  {`${myCourse?.name}`} {`${myCourse.rating}`}
+                  {`${myCourse?.name}`} {`${myCourse?.rating}`}
                 </span>
                 <div>
                   <div>
@@ -69,7 +70,7 @@ export default function Detail() {
                       <p>Descripcion:{myCourse?.description}</p>
                       <div className={style.miniature}>
                         <img src="https://www.unapiquitos.edu.pe/contenido/opiniones/recursos/docenteClases.jpg" />
-                        <p class="text-title">{`${"$" + myCourse.price}`}</p>
+                        <p class="text-title">{`${"$" + myCourse?.price}`}</p>
                         <ButtonGroup spacing="2">
                           <Button variant="solid" colorScheme="blue">
                             Buy now
@@ -100,7 +101,7 @@ export default function Detail() {
                       </AccordionButton>
                     </h2>
                     <AccordionPanel pb={4}>
-                      {myCourse.videos?.map((e, i) => (
+                      {myCourse?.videos?.map((e, i) => (
                         <Card
                           direction={{ base: "column", sm: "row" }}
                           overflow="hidden"

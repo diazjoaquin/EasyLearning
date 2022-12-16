@@ -17,7 +17,7 @@ const getCourseById = async (id) => {
         },
         {
           model: Video,
-          attributes: ["id", "urlVideo", "description"],
+          attributes: ["id", "urlVideo", "description", "nameVideo"],
           include: {
             model: Comments,
           },
