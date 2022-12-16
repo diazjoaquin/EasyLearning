@@ -18,14 +18,15 @@ import { useDispatch, useSelector } from "react-redux";
 export default function Home() {
 
     // carrousel: 
-    const courses = useSelector(state => state.courses);
+    let courses = useSelector(state => state.courses);
+    courses = courses?.sort((a, b) => b.rating - a.rating)?.slice(0, 15)
     const [coursesPerPage] = useState(3);
     const [currentPage, setCurrentPage] = useState(1);
     const last = currentPage * coursesPerPage;
     const first = last - coursesPerPage;
     const currentCourses = courses?.slice(first, last);
     const numOfPages = courses.length / coursesPerPage;
-    
+
     const handleNext = (e) => {
         e.preventDefault();
         currentPage < numOfPages ? setCurrentPage(currentPage + 1) : setCurrentPage(1);
@@ -43,9 +44,9 @@ export default function Home() {
             dispatch(getAllCourses())
         }
     }, [dispatch]);
-    
-    
-    
+
+
+
     // const ListHeader = ({children}) => {
     //     return (
     //         <Text fontWeight={'500'} fontSize={'lg'} mb={2}>
@@ -116,7 +117,7 @@ export default function Home() {
 
             <div>
                 <Categories />
-                
+
             </div>
 
             <div>
