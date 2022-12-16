@@ -37,7 +37,6 @@ export default function Home() {
     }
 
     // cards:
-
     const dispatch = useDispatch();
     useEffect(() => {
         if (!courses.length) {
