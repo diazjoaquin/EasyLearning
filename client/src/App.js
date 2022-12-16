@@ -18,6 +18,8 @@ import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 // require("dotenv").config();
 // process.env.REACT_APP_PAYPAL_CLIENT_ID
 
+
+
 function App() {
   return (
     <PayPalScriptProvider options={{ "client-id" : "ARjP3IEG_UlE_vM5S-HxokNsAdUIkcck3Jr_O3cS3WLaL0sD85BCGoe5-FG2qbOj9DBy0R4RdTdD-BlD"}}>
