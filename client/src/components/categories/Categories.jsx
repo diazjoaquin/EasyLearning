@@ -1,15 +1,15 @@
 import React from 'react';
 import { SimpleGrid, Box, Text, Heading, Button } from '@chakra-ui/react';
-import style from "./Categorys.module.css"
+import style from "./Categories.module.css"
 
 
-export default function Categorys() {
+export default function Categories() {
     return (
-        <div className={style.categorys}>
+        <div className={style.categories}>
             {/* <Text fontSize='xl'>
                         START TO SUCCESS
                     </Text> */}
-            <Heading mb={4}>Most Popular Categorys</Heading>
+            <Heading mb={4}>Most Popular Categories</Heading>
             <Text fontSize='xl'> Varius version have envolved over the years, sometimes by accident,
             </Text>
             <br>

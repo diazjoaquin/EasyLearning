@@ -41,10 +41,6 @@ const Create = () => {
   const dispatch = useDispatch();
   const history = useHistory()
   const categories = useSelector(s => s.categories)
-
-
-
-
   const [input, setInput] = useState({
     name: "",
     description: "",
@@ -53,6 +49,7 @@ const Create = () => {
     category: [],
     price: null
   })
+
 
   const [inputVideo, setInputVideo] = useState({
     nameVideo: '',
