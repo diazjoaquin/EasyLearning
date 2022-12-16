@@ -13,7 +13,6 @@ import Navbar from "../../navbar/Navbar"
 import Footer2 from "../../footer/Footer2.jsx"
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-// import axios from "axios"
 import { useDispatch, useSelector } from 'react-redux'
 import { getAllCoursesByTeacher } from '../../../redux/actions'
 import CourseCard from '../../card/CourseCard'
