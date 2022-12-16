@@ -21,6 +21,7 @@ import {
 import { RiArrowGoBackLine} from "react-icons/ri";
 import CardReview from "../Review/cardReview";
 import PostReview from "../Review/postReview";
+import Checkout from "../paypal/checkout";
 
 
 export default function Detail() {
@@ -177,6 +178,10 @@ export default function Detail() {
         setUpdate = {setUpdate}
         />
         </Box>
+        <Box>
+        <Checkout/>
+        </Box>
+        
         <Footer2 />
         </div >
       </>
