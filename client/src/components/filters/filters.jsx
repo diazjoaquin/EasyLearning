@@ -51,8 +51,7 @@ const Filters = ({ update, setUpdate }) => {
         dispatch(resetFilters());
     }
 
-    
-    return (
+    return(
         <div className={style.cont}>
             <div className={style.filters}>
                 <h4>Filters:</h4>
@@ -63,7 +62,7 @@ const Filters = ({ update, setUpdate }) => {
                         {
                             categories?.map(e => {
                                 return (
-                                    <option value={e.name}>{e.name}</option>
+                                    <option value={e}>{e}</option>
                                 )
                             })
                         }

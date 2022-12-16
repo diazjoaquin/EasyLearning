@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
-import { createCourse, getCategories } from "../../redux/actions/index"
+import { getCategories } from "../../redux/actions/index"
 import Navbar from "../navbar/Navbar.jsx"
 import Footer2 from "../footer/Footer2.jsx"
 import {
@@ -9,156 +9,235 @@ import {
   FormLabel,
   Input,
   Box,
-  Button
+  Button,
+  Text,
+  Alert,
+  AlertIcon,
+  HStack,
+  Tag,
+  TagLabel,
+  Tooltip,
+  Select,
 } from '@chakra-ui/react'
+import { ArrowBackIcon } from '@chakra-ui/icons'
+import axios from "axios"
+import { validate, validateVideo } from "./validate";
 
-
-function validateForm(input) {
-  let errors = {} //manejo de errores form
-
-  //verifico name
-  if (!input.name) {
-    errors.name = "You must type a name";
-  } else {
-    errors.name = "";
-  }
-  //verifico description 
-  if (!input.description) {
-    errors.description = "You must type a description";
-  } else {
-    errors.description = "";
-  }
-  //verifico teacher
-  if (!input.teacher) {
-    errors.teacher = "You must type a teacher";
-  } else {
-    errors.teacher = "";
-  }
-  //verifico category
-  if (!input.category) {
-    errors.category = "You must type a category";
-  } else {
-    errors.category = "";
-  }
-  //verifico videos
-  /* if (!input.video) {
-      errors.video = "You must upload a video";
-  } else {
-      errors.video = "";
-  } */
-}
+//FALTAN VALIDACIONES EN EL FORMULARIO DEL VIDEO
+//FALTAN VALIDACIONES EN EL FORMULARIO DEL VIDEO
+//FALTAN VALIDACIONES EN EL FORMULARIO DEL VIDEO
+//FALTAN VALIDACIONES EN EL FORMULARIO DEL VIDEO
+//FALTAN VALIDACIONES EN EL FORMULARIO DEL VIDEO
+//FALTAN VALIDACIONES EN EL FORMULARIO DEL VIDEO
+//FALTAN VALIDACIONES EN EL FORMULARIO DEL VIDEO
+//FALTAN VALIDACIONES EN EL FORMULARIO DEL VIDEO
 const Create = () => {
   const dispatch = useDispatch();
+  const history = useHistory()
+  const categories = useSelector(s => s.categories)
 
-  const history = useHistory();
 
-  const category = useSelector((state) => state.categories).sort(
-    function (a, b) {
-      if (a < b) return -1;
-      else return 1;
-    }
-  )
 
-  // const [errors, setError] = useState({})
-
-  // const [newInput, setNewInput] = useState({ name: "" })
 
   const [input, setInput] = useState({
     name: "",
     description: "",
-    teacher: "",
-    // video: [],
+    teacher: "Fermin", //De momento es hardcode, hasta que tengamos el login y sepamos cual es el user que esta creando el curso.
+    video: [],
     category: [],
     price: null
   })
-  // function addCategory(e) {
-  //   setInput({
-  //     ...input,
-  //     category: [...category, e.target.value]
-  //   })
-  // }
 
-  // function handleChange2(e) {
-  //   setNewInput({
-  //     ...newInput,
-  //     [e.target.name]: e.target.value
-  //   })
-  // }
-  // function handleChange(e) {
-  //   setInput({
-  //     ...input,
-  //     [e.target.name]: e.target.value,
-  //   });
-  //   setError(
-  //     validateForm({
-  //       ...input,
-  //       [e.target.name]: e.target.value,
-  //     })
-  //   )
-  // }
-  // function handleSelect(e) {
-  //   setInput({
-  //     ...input,
-  //     category: [...input.category, e.target.value],
-  //   });
-  // }
-  // function handleSubmit(e) {
-  //   e.preventDefault();
-  //   if (
-  //     !errors.name &&
-  //     !errors.description &&
-  //     !errors.teacher &&
-  //     !errors.category//&&
-  //     //!errors.video
-  //   ) {
-  //     alert("Your course has been created succesfully");
-  //     dispatch(createCourse(input))
-  //     setInput({
-  //       name: "",
-  //       description: "",
-  //       teacher: "",
-  //       //video: [],
-  //       category: [],
-  //     })
-  //   } else {
-  //     return alert("Someting went wrong. Please try aaing.")
-  //   }
-  //   history.push("/")
-  // }
+  const [inputVideo, setInputVideo] = useState({
+    nameVideo: '',
+    urlVideo: "",
+    description: "",
+  })
 
-  // useEffect(() => {
-  //   dispatch(getCategories())
-  // }, [dispatch])
+  const [errors, setErrors] = useState({})
 
-  // "name": "Curso de Fermin5",
-  // "description": "nada de description",
-  // "category": "programmin",
-  // "teacher": "Fermin",
-  // "price": 100
+  const [errorsVideo, setErrorsVideo] = useState({})
 
-  const handelChange = () => { }
+  const handelChange = (e) => {
+    if (e.target.value === 'category') return
+    if (e.target.name === "category") {
+      if (!input.category.includes(e.target.value)) {
+        setInput({
+          ...input,
+          [e.target.name]: [...input[e.target.name], e.target.value]
+        })
+      }
+    } else {
+      setInput({
+        ...input,
+        [e.target.name]: e.target.value
+      })
+    }
+  }
+
+  const handelChangeVideo = (e) => {
+    setInputVideo({
+      ...inputVideo,
+      [e.target.name]: e.target.value
+    })
+  }
+
+  const handelSubmit = async () => {
+    const response = await axios.post("http://localhost:3001/createCourse", input)
+    alert(response.data)
+    history.push("/profile")
+  }
+
+  const handelSubmitVideo = () => {
+    setInput({
+      ...input,
+      video: [...input.video, inputVideo]
+    })
+    setInputVideo({
+      nameVideo: '',
+      urlVideo: "",
+      description: "",
+    })
+    document.getElementById("formVideo").reset()
+  }
+
+  const handelDelete = (e) => {
+    const name = e.target.name
+    const index = input.category.findIndex(e => e === name)
+    let categories = input.category
+    categories.splice(index, 1)
+    setInput({
+      ...input,
+      category: categories
+    })
+  }
+
+  const handelDeleteVideo = (name) => {
+    const index = input.video.findIndex(e => e.name === name)
+    let videos = input.video
+    videos.splice(index, 1)
+    setInput({
+      ...input,
+      video: videos
+    })
+  }
+
+  useEffect(() => {
+    if (!categories.length)
+      dispatch(getCategories())
+    setErrors(validate(input))
+    setErrorsVideo(validateVideo(inputVideo, input))
+    console.log(errorsVideo);
+  }, [dispatch, input, inputVideo])
 
   return (
     <div>
       <Navbar />
-      <Box display='flex' justifyContent="center" my="20" >
-        <h1>Falta hardcodear el teacher</h1>
-        <Box w="50%" border="1px" borderRadius="20" p="10">
-          <FormControl display='flex' flexDirection="column" alignItems="center" >
-            <FormLabel>Name:</FormLabel>
-            <Input name="name" onChange={handelChange} />
-            <FormLabel>Description:</FormLabel>
-            <Input name="description" onChange={handelChange} />
-            <FormLabel>Category:</FormLabel>
-            <Input name="category" onChange={handelChange} />
-            <FormLabel>Price:</FormLabel>
-            <Input name="price" onChange={handelChange} />
-            <Button mt={4} colorScheme='teal' type='submit' >
-              Submit
-            </Button>
-          </FormControl>
+      <Box display='flex'>
+        <Box display='flex' flexDirection='column' alignItems='center' justifyContent="center" my="5" w='45%'  >
+          <Text fontSize='3xl'>Create Course</Text>
+          <Box w="85%" border="1px" borderRadius="20" p="10">
+            <Link to='/profile'>
+              <Button rightIcon={<ArrowBackIcon />} fontSize='30' size='30' colorScheme='teal' variant='outline' />
+            </Link>
+            <h1>Falta hardcodear el teacher</h1>
+            <FormControl display='flex' flexDirection="column" alignItems="center" >
+              <FormLabel>Name:</FormLabel>
+              <Input name="name" onChange={handelChange} autoComplete='off' />
+              {errors["name"] && <Alert justifyContent='center' status='error' bg='transparent' color='red'>
+                <AlertIcon />
+                {errors.name}
+              </Alert>}
+              <FormLabel>Description:</FormLabel>
+              <Input name="description" onChange={handelChange} autoComplete='off' />
+              {errors["description"] && <Alert justifyContent='center' mt='3' mb='6' status='error' bg='transparent' color='red'>
+                <AlertIcon />
+                {errors.description}
+              </Alert>}
+              <FormLabel>Category:</FormLabel>
+              <Select name="category" onChange={handelChange}>
+                <option value="category">Select categories</option>
+                {categories.map((e, i) => (
+                  <option key={i} value={e}>
+                    {e}
+                  </option>
+                ))}
+              </Select>
+              {input.category?.length !== 0 &&
+                <Box my='5' border='1px' borderRadius="20" p='5'>
+                  <HStack spacing={4} display="flex" flexWrap="wrap" justifyContent="center" gap='2'>
+                    {input.category?.map((e) => (
+                      <Tag size={"md"} key={e} variant='subtle' colorScheme='cyan'>
+                        <TagLabel>{e}</TagLabel>
+                        <Tooltip hasArrow label="delete" placement="top">
+                          <Button name={e} onClick={handelDelete} bg='transparent' color='black' _hover={{ background: "transparent" }}> X </Button>
+                        </Tooltip>
+                      </Tag>
+                    ))}
+                  </HStack>
+                </Box>
+              }
+              {errors["category"] && <Alert justifyContent='center' status='error' bg='transparent' color='red'>
+                <AlertIcon />
+                {errors.category}
+              </Alert>}
+              <FormLabel>Price:</FormLabel>
+              <Input name="price" onChange={handelChange} autoComplete='off' />
+              {errors["price"] && <Alert w='80%' justifyContent='center' status='error' bg='transparent' color='red'>
+                <AlertIcon />
+                {errors.price}
+              </Alert>}
+              <Box border="1px" borderRadius="20" p="10" my="10">
+                <form id="formVideo">
+                  <FormLabel display="flex" justifyContent="center">Video:</FormLabel>
+                  <FormLabel>Name:</FormLabel>
+                  <Input name="nameVideo" onChange={handelChangeVideo} />
+                  {errorsVideo.nameVideo && <Text fontSize='10px' color='red'>
+                    {errorsVideo.nameVideo}
+                  </Text>}
+                  <FormLabel>Description:</FormLabel>
+                  <Input name="description" onChange={handelChangeVideo} />
+                  {errorsVideo.description && <Text fontSize='10px' color='red'>
+                    {errorsVideo.description}
+                  </Text>}
+                  <FormLabel>urlVideo:</FormLabel>
+                  <Input name="urlVideo" onChange={handelChangeVideo} />
+                  {errorsVideo.urlVideo && <Text fontSize='10px' color='red'>
+                    {errorsVideo.urlVideo}
+                  </Text>}
+                  <Box display="flex" flexDirection="row-reverse">
+                    <Button mt={4} colorScheme='teal' onClick={handelSubmitVideo} disabled={Object.keys(errorsVideo).length ? true : false}>
+                      Add Video
+                    </Button>
+                  </Box>
+                </form>
+
+              </Box>
+              <Text textAlign="center">(Todos estos datos se podran modificar luego de crear el curso.)</Text>
+              <Button mt={4} colorScheme='teal' onClick={handelSubmit} disabled={Object.keys(errors).length ? true : false}>
+                Submit
+              </Button>
+            </FormControl>
+          </Box>
+        </Box >
+        <Box w='65%' my="5" display='flex' flexDirection='column' alignItems='center' justifyContent='center' h='-webkit-fit-content' >
+          <Text fontSize='3xl'>List Videos</Text>
+          <Box border='1px' display='grid' gridTemplateColumns='repeat(2, 1fr)' gridAutoRows='200px' justifyContent='center' w='95%' borderRadius='25' py='5' gap='10'>
+
+            {
+              input.video?.map((e, i) => (
+                <Box w='90%' h='200' bg='gray.100' key={i} borderRadius='20' display='flex' flexDirection='column' alignItems='center' justifyContent='center' ml='5' textAlign='center' whiteSpace='initial' overflow='hidden'>
+                  <h1>{e.name}</h1>
+                  <h4>{e.description}</h4>
+                  <h6>{e.urlVideo}</h6>
+                  <Button colorScheme='red' m='2' onClick={() => handelDeleteVideo(e.name)}> X </Button>
+                </Box>
+              ))
+            }
+
+          </Box>
         </Box>
-      </Box>
+      </Box >
       <Footer2 />
     </div >
   )

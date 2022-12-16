@@ -1,4 +1,5 @@
 // const { Category } = require("../../db.js");
+const axios = require("axios");
 
 // const getCategories = async () => {
 //   try {
@@ -15,9 +16,10 @@ const { Category } = require("../../db.js");
 
 const getCategories = async () => {
   try {
-    let categoriesDB = await Category.findAll();
-    categoriesDB = categoriesDB.map((e) => e.name);
-    return categoriesDB;
+    let categories = await axios.get(
+      `https://categories-api-850bf-default-rtdb.firebaseio.com/categories.json`
+    );
+    return categories.data;
   } catch (error) {
     return error;
   }

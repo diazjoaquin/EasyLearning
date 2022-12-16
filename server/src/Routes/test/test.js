@@ -397,10 +397,10 @@ router.post("/", async (req, res) => {
       const listReviewsCoursesDB = await Review.bulkCreate(listReviewsCourses);
 
       //Create Rating Course
-      for (let i = 0; i < 5; i++) {
+      for (let i = 0; i < 6; i++) {
         const obj = {
-          userId: i + 1,
-          courseId: i + 1,
+          userId: i,
+          courseId: i,
           score: Math.round(Math.random() * 5),
           title: `Title review course${i + 1}`,
           comments: "Comment review course",
