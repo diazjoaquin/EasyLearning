@@ -124,7 +124,6 @@ const Create = () => {
       dispatch(getCategories())
     setErrors(validate(input))
     setErrorsVideo(validateVideo(inputVideo, input))
-    console.log(errorsVideo);
   }, [dispatch, input, inputVideo])
 
   return (
