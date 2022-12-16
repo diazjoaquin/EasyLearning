@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { getAllUsers } from "../../redux/actions";
+import { getAllUsers } from "../../redux/actions/index.js"
 import { useDispatch, useSelector } from "react-redux";
 import { FormControl, FormLabel, Input, Button, FormErrorMessage, Select, Card } from '@chakra-ui/react';
 import { useParams } from "react-router-dom";

@@ -18,6 +18,8 @@ import {
   RESET_FILTERS,
   COURSES_BY_TEACHER,
   GET_ALL_USERS,
+  GET_TEACHERS,
+  GET_ORDERS, //add
 } from "../actions";
 
 const initialState = {
@@ -29,7 +31,9 @@ const initialState = {
   allReviews: [],
   reviews: [],
   allUsers: [],
+  allOrders: [], //add
   coursesCreateUser: [],
+  teachers: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -49,6 +53,11 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         categories: action.payload,
+      };
+    case GET_TEACHERS:
+      return {
+        ...state,
+        teachers: action.payload,
       };
     case GET_COURSE_DETAIL:
       return {
@@ -82,19 +91,23 @@ const rootReducer = (state = initialState, action) => {
         cart: buy,
       };
     case FILTERS:
-      let filtros;
+      let filtros = state.filter;
       if (action.payload.category) {
-        filtros = state.filter.filter((e) =>
+        filtros = filtros.filter((e) =>
           e.categories.includes(action.payload.category)
         );
       }
       if (action.payload.price) {
-        filtros = filtros.filter(
-          (e) => parseInt(action.payload.price) === e.price
-        );
+        console.log(action.payload.price);
+        action.payload.price === "uno"
+          ? (filtros = filtros.filter((e) => e.price <= 25))
+          : action.payload.price === "dos"
+          ? (filtros = filtros.filter((e) => e.price > 25 && e.price <= 50))
+          : (filtros = filtros.filter((e) => e.price > 50));
       }
-      // if (action.payload.teacher) {
-      // }
+      if (action.payload.teacher) {
+        filtros = filtros.filter((e) => action.payload.teacher === e.teacher);
+      }
       return {
         ...state,
         courses: filtros,
@@ -160,12 +173,23 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         allUsers: action.payload
-      }
+      };
+        case GET_ORDERS: //add
+      return {
+        ...state,
+        allOrders: action.payload,
+      };
+    
+      case GET_ALL_USERS:
+        return {
+          ...state,
+          allUsers: action.payload
+        }
     default:
       return {
         ...state,
       };
   }
-};
+}
 
 export default rootReducer;

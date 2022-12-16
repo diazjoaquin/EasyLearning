@@ -7,11 +7,13 @@ export const GET_COURSE_DETAIL = "GET_COURSE_DETAIL";
 export const CLEAR_DETAIL = "CLEAR_DETAIL";
 export const GET_CATEGORIES = "GET_CATEGORIES";
 export const COURSES_BY_TEACHER = "COURSES_BY_TEACHER";
+export const GET_TEACHERS = "GET_TEACHERS";
 
 // cart:
 export const ADD_TO_CART = "ADD_TO_CART";
 export const BUY_NOW = "BUY_NOW";
 export const DELETE_COURSE_FROM_CART = "DELETE_COURSE_FROM_CART";
+export const GET_ORDERS = "GET_ORDERS";
 
 // filtering & ordering:
 export const FILTERS = "FILTERS";
@@ -84,6 +86,18 @@ export const getCategories = () => async (dispatch) => {
   } catch (error) {}
 };
 
+export const getTeachers = () => async (dispatch) => {
+  try {
+    const teachers = await axios.get("/getAllTeachers");
+    return dispatch({
+      type: GET_TEACHERS,
+      payload: teachers.data,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const addToCart = (payload) => async (dispatch) => {
   try {
     return dispatch({
@@ -110,6 +124,19 @@ export const buyNow = (payload) => async (dispatch) => {
     });
   } catch (error) {}
 };
+
+export const getOrders = () => async(dispatch) =>{
+const orders = await axios.get("/orders")//hacer ruta
+try {
+  return dispatch({
+    type: GET_ORDERS,
+    payload: orders.data,
+  });
+} catch (error) {
+  
+}
+}
+
 
 export const filters = (payload) => async (dispatch) => {
   try {
@@ -217,10 +244,6 @@ export const getAllCoursesByTeacher = (userId) => {
     }
   };
 };
-//       console.log(error)
-// //     } 
-// //   }
-// // };
 
 export const getAllUsers = () => {
   return async function (dispatch) {
@@ -228,7 +251,6 @@ export const getAllUsers = () => {
       return dispatch({
           type: GET_ALL_USERS,
           payload: json.data,
-
-      })
-  }
-}
+        })
+      }
+    }
