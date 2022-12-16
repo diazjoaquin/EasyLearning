@@ -64,11 +64,13 @@ Course.belongsToMany(Category, {
   timestamps: false,
 });
 
-//TABLA REVIEWS
+//TABLA REVIEWS Course y User
 //Course tiene muchos reviews
 Course.hasMany(Review);
 //Review pertenece a un solo curso
 Review.belongsTo(Course);
+User.hasOne(Review);
+Review.belongsTo(User);
 
 //TABLA VIDEO
 //Course tiene muchos videos
