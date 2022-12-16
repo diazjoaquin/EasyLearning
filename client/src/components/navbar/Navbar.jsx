@@ -56,7 +56,9 @@ export default function Navbar() {
                     <Link to='/profile'>
                       <MenuItem>My Account</MenuItem>
                     </Link>
-                    <MenuItem onClick={handleLogout}> Log out </MenuItem>
+                    <Link to='/'>
+                      <MenuItem onClick={handleLogout}> Log out </MenuItem>
+                    </Link>
                   </MenuGroup>
                 </MenuList>
               </Menu>
