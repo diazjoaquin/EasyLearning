@@ -5,7 +5,6 @@ module.exports = (sequelize) => {
     "course",
     {
       teacher: {
-        // type: DataTypes.INTEGER,
         type: DataTypes.STRING,
         allowNull: false,
       },
