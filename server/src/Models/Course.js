@@ -30,6 +30,9 @@ module.exports = (sequelize) => {
         defaultValue:
           "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8pD3SpnL0eQJ2kczwprcvJ0An1Ykgw5ggRw&usqp=CAU",
       },
+      students: {
+        type: DataTypes.ARRAY(DataTypes.INTEGER),
+      },
     },
     { timestamps: false }
   );
