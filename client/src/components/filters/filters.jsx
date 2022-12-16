@@ -28,7 +28,6 @@ const Filters = ({ update, setUpdate }) => {
       dispatch(getTeachers())
     }
     dispatch(filters(filterValue));
-    console.log("ejecutando el effect");
   }, [dispatch, filterValue])
 
   function handleChange(e) {
@@ -55,11 +54,6 @@ const Filters = ({ update, setUpdate }) => {
     }
   }
 
-  function handleClick(e) {
-    dispatch(filters(filterValue));
-    setUpdate(!update);
-  }
-
   function handleSort(e) {
     dispatch(orderByName(e.target.value))
     setUpdate(!update);
@@ -73,6 +67,9 @@ const Filters = ({ update, setUpdate }) => {
 
   function handleReset(e) {
     dispatch(resetFilters());
+    document.getElementById("1").selected = "selected"
+    document.getElementById("2").selected = "selected"
+    document.getElementById("3").selected = "selected"
   }
 
   return (
@@ -82,7 +79,7 @@ const Filters = ({ update, setUpdate }) => {
         <h5>By Categories</h5>
         <div className={style.categories}>
           <select name="category" onChange={handleChange}>
-            <option>Categories</option>
+            <option id="1">Categories</option>
             {
               categories?.map(e => {
                 return (
@@ -95,7 +92,7 @@ const Filters = ({ update, setUpdate }) => {
         <h5>By Price</h5>
         <div>
           <select name="price" onChange={handleChange}>
-            <option>Prices</option>
+            <option id="2">Prices</option>
             <option value="uno">0-25</option>
             <option value="dos">26-50</option>
             <option value="tres">+50</option>
@@ -104,7 +101,7 @@ const Filters = ({ update, setUpdate }) => {
         <h5>By Teachers</h5>
         <div>
           <select name="teacher" onChange={handleChange}>
-            <option>Select teacher</option>
+            <option id="3">Select teacher</option>
             {
               teachers?.map(e => {
                 return (
