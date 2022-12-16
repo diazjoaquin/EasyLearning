@@ -28,12 +28,12 @@ function App() {
         <Route exact path="/course" component={Course} />
         <Route exact path="/about" component={About} />
         <Route exact path="/detail/:id" 
-        component={
+        element={
           <ProtectedRoutes>
           <Detail/>
           </ProtectedRoutes>
           }/>
-        <Route exact path="/detail/:id/videos" component={Videos} />
+        <Route exact path="/detail/:id/videos" component={Videos}/>
       </ChakraProvider>
       </AuthProvider>
   );

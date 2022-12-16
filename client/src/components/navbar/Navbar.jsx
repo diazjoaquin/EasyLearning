@@ -9,11 +9,12 @@ import { auth } from "../../firebase-config";
 
 export default function Navbar() {
 
-
     const { user, logout, loading } = useAuth();
     const handleLogout = async () => {
         await logout(auth);
     };
+
+    console.log(user);
 
     if (loading) {return <h1>Loading ...</h1>}
 
