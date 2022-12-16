@@ -39,10 +39,10 @@ export default function Home() {
     // cards:
     const dispatch = useDispatch();
 
-    
-    useEffect(() =>{
+
+    useEffect(() => {
         if (!courses.length) {
-        dispatch(getAllCourses())
+            dispatch(getAllCourses())
         }
     }, [dispatch]);
 
@@ -55,7 +55,7 @@ export default function Home() {
     // };
 
     return (
-        
+
         <div>
             <div className={style.bg}>
                 <Navbar>
@@ -100,10 +100,11 @@ export default function Home() {
                                     name={course.name}
                                     teacher={course.teacher}
                                     id={course.id}
-                                    Description={course.description}
+                                    // description={course.description}
                                     price={course.price}
-                                    Rating={course.rating}
-                                    categories={course.categories[0].name}
+                                    rating={course.rating}
+                                    categories={course.categories}
+                                    image={course.image}
                                 />)
                         })
                     }
@@ -134,6 +135,6 @@ export default function Home() {
             </div>
 
         </div>
-        
+
     );
 }

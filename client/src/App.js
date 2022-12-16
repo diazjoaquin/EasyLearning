@@ -14,6 +14,8 @@ import About from "./components/pages/about/About";
 import Detail from "./components/detail/CourseDetail";
 import {AuthProvider} from './components/context/Auth-context.js';
 import { ProtectedRoutes } from "./components/context/ProtectedRoutes";
+import Profile from "./components/pages/profile/profile";
+import Create from "./components/create/Create";
 
 function App() {
   return (
@@ -34,6 +36,8 @@ function App() {
           </ProtectedRoutes>
           }/>
         <Route exact path="/detail/:id/videos" component={Videos}/>
+        <Route exact path="/profile" component={Profile} />
+        <Route exact path="/formCourse" component={Create} />
       </ChakraProvider>
       </AuthProvider>
   );

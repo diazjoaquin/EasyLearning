@@ -19,8 +19,6 @@ async function createReview(courseId, reviewData) {
       where: { courseId },
     });
 
-    console.log("Sin actualizar: ", course.rating);
-
     //Calculacion de promedio del raiting del curso
     let prueba = listReviewsCourse.map((e) => e.dataValues.score);
     let cant = prueba.length;
@@ -32,8 +30,6 @@ async function createReview(courseId, reviewData) {
     course.rating = promedio;
     await course.save({ fields: ["rating"] });
     await course.reload();
-
-    console.log("actualizado: ", course.rating);
 
     return course;
   } catch (error) {
