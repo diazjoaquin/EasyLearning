@@ -5,7 +5,8 @@ import { getCourseDetail } from "../../../redux/actions";
 import Navbar from '../../navbar/Navbar.jsx';
 import Footer2 from "../../footer/Footer2.jsx";
 import CardVideo from "./cardVideo/cardVideo";
-import s from "./Videos.module.css"
+import s from "./Videos.module.css";
+import { Box } from '@chakra-ui/react';
 
 
 
@@ -23,12 +24,16 @@ const Videos = () => {
   return (
     <>
       <Navbar />
+      <div>
+
+      </div>
       <div className={s.containerAll}>
         {
           videos?.map((e, i) => {
             return (
               <div key={i}>
-                <CardVideo urlVideo={e.urlVideo} comments={e.comments} description={e.description} i={i + 1} videoId={e.id} />
+                <CardVideo
+                  urlVideo={e.urlVideo} comments={e.comments} description={e.description} i={i + 1} videoId={e.id} />
               </div>
             )
           })

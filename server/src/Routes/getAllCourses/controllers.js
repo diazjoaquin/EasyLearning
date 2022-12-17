@@ -1,4 +1,3 @@
-// const axios = require("axios");
 const { Course, Category, Review, Video, Comments } = require("../../db.js");
 
 const getAllCourses = async () => {
