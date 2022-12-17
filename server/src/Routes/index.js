@@ -16,6 +16,7 @@ const test = require("./test/test.js");
 const getReviews = require("./getReviews/getReviews.js");
 const getUsers = require("./getUsers/getUsers.js");
 const getAllTeachers = require("./getAllTeachers/getAllTeachers.js");
+const getUserByEmail = require("./getUserByEmail/getUserByEmail.js");
 
 router.use("/getAllCourses", getAllCourses);
 router.use("/getDetail", getDetail);
@@ -31,7 +32,8 @@ router.use("/getAllCoursesByTeacher", getAllCoursesByTeacher);
 router.use("/getCoursesByStudent", getCoursesByStudent);
 router.use("/test", test);
 router.use("/getReviews", getReviews);
-router.use("/getUsers", getUsers); 
+router.use("/getUsers", getUsers);
 router.use("/getAllTeachers", getAllTeachers);
+router.use("/getUserByEmail", getUserByEmail);
 
 module.exports = router;
