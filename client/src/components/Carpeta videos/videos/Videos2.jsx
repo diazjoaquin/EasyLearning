@@ -1,13 +1,18 @@
 import React, { useEffect } from "react";
-// import { getCourseDetail } from "../../redux/actions";
-import { useDispatch, useSelector } from "react-redux";
+import { getCourseDetail } from "../../../redux/actions";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import Navbar from "../../navbar/Navbar";
 import Footer2 from "../../footer/Footer2";
-import { Box, Center, Text, Button } from '@chakra-ui/react';
+import { Box, Center, Text, Button, Drawer, DrawerBody, DrawerFooter, DrawerHeader, DrawerOverlay, DrawerContent, DrawerCloseButton, Input} from '@chakra-ui/react';
 import Comments from "../comments/Comments";
 import { RiArrowGoBackLine } from "react-icons/ri";
+import { useDispatch, useSelector } from "react-redux";
+import { useDisclosure } from '@chakra-ui/react';
+import DrawerExample from "./VideoDrawer";
+
+
+
 
 
 const dv = { nameVideo: "Curso Santi", urlVideo: "https://youtu.be/M7lc1UVf-VE", description: " Hasta que franquito termine, he creado un objeto con algunas props para ver si funcioanan la descripcion, Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem quibusdam, natus voluptatibus quod inventore libero vitae rerum asperiores minima, nisi vero ratione quo laudantium earum ducimus in nobis suscipit. Laudantium?", review: "Muy bueno", }
@@ -15,11 +20,23 @@ const dv = { nameVideo: "Curso Santi", urlVideo: "https://youtu.be/M7lc1UVf-VE",
 
 
 
-export default function detailVideo() {
+
+export default function DetailVideo() {
+    
+    const dispatch = useDispatch();
+    
+    const { id } = useParams();
+    
+    const myCourse = useSelector(state => state.courseDetail)
+    useEffect(() => {
+        dispatch(getCourseDetail(id));
+    }, [dispatch, id])
+   
 
 
     return (
         <>
+            
             <Navbar />
             <Link style={{ textDecoration: 'none' }} to='/course'>
                 <Button colorScheme='blue' leftIcon={<RiArrowGoBackLine />}>Back</Button>
@@ -30,16 +47,17 @@ export default function detailVideo() {
                 <Box maxW='800px' borderWidth='1px' borderRadius='lg' overflow='hidden'>
                     <Box name="Name Video" >
                         <Center>
-                            <Box size='lg' fontSize='50px' >
-                                {dv.nameVideo}
+                            <Box borderWidth='1px' size='lg' fontSize='36px' alignItems="center" >
+                                {/* {dv.nameVideo} */}
+                                {myCourse.name}
                             </Box>
-                            <br>
-                            </br>
+                            <br/>
+                            <br/>
                         </Center>
 
                         <Box >
                             <Center>
-                                <Text fontSize='36px'> {dv.description}</Text>
+                                <Text fontSize='24px'> {myCourse?.description}</Text>
                             </Center>
                             <br>
                             </br>
@@ -66,6 +84,15 @@ export default function detailVideo() {
                 </Box>
 
             </Center>
+
+            <Box>
+                <Center>
+                <DrawerExample/>
+                <Link style={{ textDecoration: 'none' }} to='/editcourse'>
+                <Button>Edit Course</Button>
+                </Link>
+                </Center>
+            </Box>
 
             <Footer2 />
 

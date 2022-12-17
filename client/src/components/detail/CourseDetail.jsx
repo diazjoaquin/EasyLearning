@@ -56,6 +56,7 @@ export default function Detail() {
   return (
     <>
       <div>
+        
         <Navbar />
         <Link style={{ textDecoration: 'none' }} to='/course'>
           <Button colorScheme='blue' leftIcon={<RiArrowGoBackLine />}>Back</Button>
@@ -71,9 +72,9 @@ export default function Detail() {
                   <Center h='100px' color='black'>
                     <h1 className={style.title}>{`${myCourse?.name}`}</h1>
                   </ Center>
-                  <Box>
+                  <Box >
                     <Center>
-                      <Image src="https://www.unapiquitos.edu.pe/contenido/opiniones/recursos/docenteClases.jpg" />
+                      <Image src={`${myCourse.image}`}/>
                     </Center>
                   </Box>
                   <Box>
@@ -97,10 +98,12 @@ export default function Detail() {
                         <Box fontWeight='semibold' textTransform='uppercase' >
                           <p>Descripcion:{myCourse?.description}</p>
                         </Box>
+                        
                         <Box>
-                          <Link to={`/detail/${id}/videos`}>
-                            <button>Ver todos los videos de este curso</button>
+                          <Link to={`/detailVideo/${id}`}>
+                            <Button>Ver todos los videos de este curso</Button>
                           </Link>
+
                           {/* <Button ref={btnRef} colorScheme='teal' onClick={onOpen}>
                               Open
                             </Button> */}
@@ -140,7 +143,6 @@ export default function Detail() {
                           {/* <Video videos={myCourse.video}/> */}
                         </Box>
                         <Box>
-
                           <h3> <strong> Category: </strong> </h3>
 
                           {myCourse.categories?.map((e, i) => <h1 key={i}>{e.name}</h1>)}
