@@ -98,7 +98,6 @@ const rootReducer = (state = initialState, action) => {
         );
       }
       if (action.payload.price) {
-        console.log(action.payload.price);
         action.payload.price === "uno"
           ? (filtros = filtros.filter((e) => e.price <= 25))
           : action.payload.price === "dos"
@@ -162,7 +161,7 @@ const rootReducer = (state = initialState, action) => {
     case GET_REVIEWS:
       return {
         ...state,
-        reviews: action.payload
+        reviews: action.payload,
         // allReviews: action.payload
       };
     // case POST_REVIEW:
@@ -172,24 +171,24 @@ const rootReducer = (state = initialState, action) => {
     case GET_ALL_USERS:
       return {
         ...state,
-        allUsers: action.payload
+        allUsers: action.payload,
       };
-        case GET_ORDERS: //add
+    case GET_ORDERS: //add
       return {
         ...state,
         allOrders: action.payload,
       };
-    
-      case GET_ALL_USERS:
-        return {
-          ...state,
-          allUsers: action.payload
-        }
+
+    case GET_ALL_USERS:
+      return {
+        ...state,
+        allUsers: action.payload,
+      };
     default:
       return {
         ...state,
       };
   }
-}
+};
 
 export default rootReducer;

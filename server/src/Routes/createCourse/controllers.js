@@ -20,7 +20,6 @@ const createCourse = async ({
           price,
         },
       });
-      console.log("El array", video);
       //Si el curso fue creado
       if (createdCourse) {
         //Agregando sus categorias al curso
