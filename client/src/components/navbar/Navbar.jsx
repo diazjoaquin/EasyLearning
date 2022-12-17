@@ -14,7 +14,6 @@ export default function Navbar() {
         await logout(auth);
     };
 
-    console.log(user);
 
     if (loading) {return <h1>Loading ...</h1>}
 

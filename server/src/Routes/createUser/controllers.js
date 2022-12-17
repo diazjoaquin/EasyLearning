@@ -8,19 +8,17 @@ const createUser = async ({
   avatar,
 }) => {
   try {
+    phoneNumber = parseInt(phoneNumber);
     //Create user
-    const [userDB, createdUserDB] = await User.findOrCreate({
-      where: { fullName },
-      defaults: {
+    const userDB = await User.create({
         fullName,
         password,
         phoneNumber,
         emailAddress,
         avatar,
-      },
     });
 
-    return createdUserDB
+    return userDB
       ? "Usuario creado."
       : "Ya existe un usuario con ese nombre.";
   } catch (error) {
