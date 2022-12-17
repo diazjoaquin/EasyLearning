@@ -15,35 +15,49 @@ import {
   Text,
   useColorModeValue,
 } from '@chakra-ui/react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import Footer2 from "../../footer/Footer2";
 import { useAuth } from "../../context/Auth-context";
+import axios from "axios";
 
 
 export default function SignupCard() {
 
   const [showPassword, setShowPassword] = useState(false);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const history = useHistory();
+  const [form, setForm] = useState({
+    fullName: "",
+    phoneNumber: 0,
+    emailAddress: "",
+    password: ""
+  })
 
-  const { signup } = useAuth();
+  const { signup, user } = useAuth();
 
   const handleSubmit = async (e) => {
     setError("");
     try {
-      await signup(email, password)
-      setTimeout(function(){
-        history.push("/");
-      }, 2000);
+      await signup(form.emailAddress, form.password);
+      // console.log(user);
+      if (user) {
+        await axios.post("/createUser", form);
+      }
+      history.push("/");
     } catch (error) {
       setError(error.message);
       console.log(error.message);
     }
   }
   
+  const handleChange = (e) => {
+    e.preventDefault();
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value
+    });  
+  }
     return (
       <div>
         <Navbar/>
@@ -72,24 +86,24 @@ export default function SignupCard() {
                     <Box>
                       <FormControl id="fullName" isRequired>
                         <FormLabel>Full Name</FormLabel>
-                        <Input type="text"/>
+                        <Input name="fullName" type="text" onChange={(e) => handleChange(e)}/>
                       </FormControl>
                     </Box>
                     <Box>
                       <FormControl id="phoneNumber">
                         <FormLabel>Phone Number</FormLabel>
-                        <Input type="number" />
+                        <Input type="number" name="phoneNumber" onChange={(e) => handleChange(e)}/>
                       </FormControl>
                     </Box>
                   </HStack>
                   <FormControl id="email" isRequired>
                     <FormLabel>Email address</FormLabel>
-                    <Input type="email" id="email" onChange={(e) => setEmail(e.target.value)}/>
+                    <Input type="email" name="emailAddress" onChange={(e) => handleChange(e)}/>
                   </FormControl>
                   <FormControl id="password" isRequired>
                     <FormLabel>Password</FormLabel>
                     <InputGroup>
-                      <Input type={showPassword ? 'text' : 'password'} id="password" onChange={(e) => setPassword(e.target.value)}/>
+                      <Input type={showPassword ? 'text' : 'password'} name="password" onChange={(e) => handleChange(e)}/>
                       <InputRightElement h={'full'}>
                         <Button
                           variant={'ghost'}
