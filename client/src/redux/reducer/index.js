@@ -20,6 +20,7 @@ import {
   GET_ALL_USERS,
   GET_TEACHERS,
   GET_ORDERS, //add
+  
 } from "../actions";
 
 const initialState = {
@@ -185,6 +186,14 @@ const rootReducer = (state = initialState, action) => {
           ...state,
           allUsers: action.payload
         }
+
+        case COURSES_BY_TEACHER:
+          console.log(action.payload);
+          return {
+            ...state,
+            coursesCreateUser: action.payload
+            
+          }
     default:
       return {
         ...state,
