@@ -184,6 +184,13 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         allUsers: action.payload,
       };
+
+    case COURSES_BY_TEACHER:
+      console.log(action.payload);
+      return {
+        ...state,
+        coursesCreateUser: action.payload,
+      };
     default:
       return {
         ...state,

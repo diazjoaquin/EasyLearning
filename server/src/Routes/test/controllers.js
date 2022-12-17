@@ -9,9 +9,11 @@ const {
   Comments,
 } = require("../../db.js");
 const axios = require("axios");
+const { createReview } = require("../createReview/controllers.js");
 
 //ruta para mockear toda la data, tiene que ser ejecutada una unica sola vez, sino rompe todo.
-router.post("/", async (req, res) => {
+
+const test = async () => {
   try {
     const coursesDB = await Course.findAll();
     if (!coursesDB.length) {
@@ -21,35 +23,35 @@ router.post("/", async (req, res) => {
           fullName: "Fermin",
           password: "1234",
           phoneNumber: 12345,
-          emailAddress: "Fermin@gmail.com",
+          emailAddress: "fermin@gmail.com",
           avatar: "urlAvatar",
         },
         {
           fullName: "Joaco",
           password: "1234",
           phoneNumber: 12345,
-          emailAddress: "Joaco@gmail.com",
+          emailAddress: "joaco@gmail.com",
           avatar: "urlAvatar",
         },
         {
           fullName: "Santi",
           password: "1234",
           phoneNumber: 12345,
-          emailAddress: "Santi@gmail.com",
+          emailAddress: "santi@gmail.com",
           avatar: "urlAvatar",
         },
         {
           fullName: "Franco",
           password: "1234",
           phoneNumber: 12345,
-          emailAddress: "Franco@gmail.com",
+          emailAddress: "franco@gmail.com",
           avatar: "urlAvatar",
         },
         {
           fullName: "Benja",
           password: "1234",
           phoneNumber: 12345,
-          emailAddress: "Benja@gmail.com",
+          emailAddress: "benja@gmail.com",
           avatar: "urlAvatar",
         },
       ];
@@ -396,10 +398,7 @@ router.post("/", async (req, res) => {
       ];
 
       //Create Users
-      // const listUsersDB = await User.bulkCreate(listUsers);
-      listUsers.map(async (e) => {
-        await axios.post("http://localhost:3001/createUser", e);
-      });
+      const listUsersDB = await User.bulkCreate(listUsers);
 
       //Create Courses
       const listCoursesDB = await Course.bulkCreate(listCourses);
@@ -416,11 +415,7 @@ router.post("/", async (req, res) => {
       await listCoursesDB[3].addCategory(listCategoriesDB[5]);
 
       //Create Videos
-      // const listVideosDB = await Video.bulkCreate(listVideos);
-      let arr = listVideos.map((e) => {
-        axios.post("http://localhost:3001/createVideo", e);
-      });
-      await Promise.all(arr);
+      const listVideosDB = await Video.bulkCreate(listVideos);
 
       //Create Comments Videos
       const listCommentVideosDB = await Comments.bulkCreate(listCommentVideos);
@@ -428,26 +423,22 @@ router.post("/", async (req, res) => {
       //Create Reviews Course
       const listReviewsCoursesDB = await Review.bulkCreate(listReviewsCourses);
 
-      //Create Rating Course
       for (let i = 0; i < 6; i++) {
-        const obj = {
+        createReview(i, {
           userId: i,
-          courseId: i,
           score: Math.round(Math.random() * 5),
           title: `Title review course${i + 1}`,
           comments: "This course is very good",
-        };
-        await axios.post("http://localhost:3001/createReview", obj);
+        });
       }
 
-      res.json(`Successfully created courses`);
+      return `Successfully created courses`;
     }
-    res.json(
-      `[ERROR]: Tu base de datos ya contiene info, limpia TODA la base de datos para volver a ejecutar test.`
-    );
+    return `[ERROR]: Tu base de datos ya contiene info, limpia TODA la base de datos para volver a ejecutar test.`;
   } catch (error) {
-    res.json(error);
+    console.log(error);
+    return error;
   }
-});
+};
 
-module.exports = router;
+module.exports = { test };
