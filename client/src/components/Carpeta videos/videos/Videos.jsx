@@ -57,13 +57,13 @@ export default function DetailVideo() {
             </Box>
             <br>
             </br>
-            <Box fontSize='36px' >
+            {/* <Box fontSize='36px' >
               {myCourse?.review}
             </Box>
             <br>
-            </br>
+            </br> */}
             <Box fontSize='24px'>
-              <Comments />
+              <Comments videoId={Vd?.id} comments={Vd?.comments}/>
             </Box>
           </Box>
         </Box>

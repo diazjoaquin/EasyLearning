@@ -30,7 +30,6 @@ export const DELETE_REVIEW = "DELETE_REVIEW";
 export const GET_VIDEOS = "GET_VIDEOS";
 export const CREATE_VIDEO = "CREATE_VIDEO";
 export const DELETE_VIDEO = "DELETE_VIDEO";
-export const POST_COMMENT = "POST_COMMENT";
 
 //users
 export const GET_ALL_USERS = "GET_ALL_USERS";
@@ -196,17 +195,6 @@ export const deleteCourse = (id) => async (dispatch) => {
       type: DELETE_COURSE,
     });
   } catch (error) {}
-};
-
-export const postComment = (payload) => {
-  return async function (dispatch) {
-    try {
-      var json = await axios.post("/createCommentVideo", payload);
-      return json;
-    } catch (error) {
-      console.log(error);
-    }
-  };
 };
 
 export const getReviews = (id) => {

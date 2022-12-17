@@ -15,6 +15,7 @@ import { AuthProvider } from "./components/context/Auth-context.js";
 // import { ProtectedRoutes } from "./components/context/ProtectedRoutes";
 import Profile from "./components/pages/profile/profile";
 import Create from "./components/create/Create";
+import ShowMoreCourses from "./components/pages/profile/ShowMoreCourses";
 
 //Paypal
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
@@ -43,6 +44,7 @@ function App() {
           <Route exact path="/detailVideo/:courseId/:id" component={Videos} />
           <Route exact path="/profile" component={Profile} />
           <Route exact path="/formCourse" component={Create} />
+          <Route exact path="/cursosCreados" component={ShowMoreCourses} />
         </ChakraProvider>
       </PayPalScriptProvider>
     </AuthProvider>

@@ -36,7 +36,7 @@ const Profile = () => {
   }
   useEffect(() => {
     //Previamente, obtener el id del usuario logeado. Por el momento es hardcode
-    dispatch(getAllCoursesByTeacher(1))
+    dispatch(getAllCoursesByTeacher(1)) //id hardcodeado
   }, [])
 
   const handleChange = (e) => {
