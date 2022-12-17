@@ -18,12 +18,6 @@ import {
   TagLabel,
   Tooltip,
   Select,
-  SimpleGrid,
-  Card,
-  CardHeader,
-  Heading,
-  CardBody,
-  CardFooter
 } from '@chakra-ui/react'
 import { ArrowBackIcon } from '@chakra-ui/icons'
 import axios from "axios"

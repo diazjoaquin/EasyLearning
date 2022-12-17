@@ -1,12 +1,10 @@
 const { DataTypes } = require("sequelize");
-const { patch } = require("../routes");
 
 module.exports = (sequelize) => {
   sequelize.define(
     "course",
     {
       teacher: {
-        // type: DataTypes.INTEGER,
         type: DataTypes.STRING,
         allowNull: false,
       },

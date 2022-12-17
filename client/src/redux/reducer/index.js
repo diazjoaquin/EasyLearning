@@ -17,6 +17,7 @@ import {
   FILTERS,
   RESET_FILTERS,
   COURSES_BY_TEACHER,
+  GET_ALL_USERS,
   GET_TEACHERS,
   GET_ORDERS, //add
 } from "../actions";
@@ -27,6 +28,7 @@ const initialState = {
   courseDetail: {},
   categories: [],
   cart: [],
+  allReviews: [],
   reviews: [],
   allUsers: [],
   allOrders: [], //add
@@ -160,26 +162,34 @@ const rootReducer = (state = initialState, action) => {
     case GET_REVIEWS:
       return {
         ...state,
+        reviews: action.payload
+        // allReviews: action.payload
       };
-    case POST_REVIEW:
+    // case POST_REVIEW:
+    //   return {
+    //     ...state,
+    //   };
+    case GET_ALL_USERS:
       return {
         ...state,
+        allUsers: action.payload
       };
-    case GET_ORDERS: //add
+        case GET_ORDERS: //add
       return {
         ...state,
         allOrders: action.payload,
       };
-    case COURSES_BY_TEACHER:
-      return {
-        ...state,
-        coursesCreateUser: action.payload,
-      };
+    
+      case GET_ALL_USERS:
+        return {
+          ...state,
+          allUsers: action.payload
+        }
     default:
       return {
         ...state,
       };
   }
-};
+}
 
 export default rootReducer;
