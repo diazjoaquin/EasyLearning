@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { getCourseDetail } from "../../../redux/actions";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
@@ -17,13 +17,14 @@ export default function DetailVideo() {
 
   const dispatch = useDispatch();
   const myCourse = useSelector(state => state.courseDetail)
+  const [update, setUpdate] = useState(false)
 
   let Vd = myCourse?.videos?.filter(e => e.id == id)
   Vd = Vd && Vd[0]
 
   useEffect(() => {
     dispatch(getCourseDetail(courseId));
-  }, [dispatch, id])
+  }, [dispatch, id, update])
 
   return (
     <>
@@ -57,13 +58,13 @@ export default function DetailVideo() {
             </Box>
             <br>
             </br>
-            <Box fontSize='36px' >
+            {/* <Box fontSize='36px' >
               {myCourse?.review}
             </Box>
             <br>
-            </br>
+            </br> */}
             <Box fontSize='24px'>
-              <Comments />
+              <Comments update={update} setUpdate={setUpdate} videoId={Vd?.id} comments={Vd?.comments} />
             </Box>
           </Box>
         </Box>

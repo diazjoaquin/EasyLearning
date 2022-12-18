@@ -7,20 +7,19 @@ import CourseCard from "../../card/CourseCard";
 const ShowMoreCourses = () => {
   const dispatch = useDispatch();
   useEffect(() => {
-      dispatch(getAllCoursesByTeacher(1)); //id hardcodeado
-    }, [dispatch]);
-    let cursos = useSelector((state) => state.coursesCreateUser);
-    console.log(cursos);
+    dispatch(getAllCoursesByTeacher(1)); //id hardcodeado
+  }, [dispatch]);
+  let cursos = useSelector((state) => state.coursesCreateUser);
 
   return (
-   <>
-   <Navbar/>
-    <div>
-    
-      {
-        cursos?.map(e=> {
-            return(
-                <CourseCard
+    <>
+      <Navbar />
+      <div>
+
+        {
+          cursos?.map(e => {
+            return (
+              <CourseCard
                 key={e.id}
                 name={e.name}
                 teacher={e.teacher}
@@ -32,9 +31,9 @@ const ShowMoreCourses = () => {
                 image={e.image}
               />
             )
-        })
-      }
-    </div>
+          })
+        }
+      </div>
     </>
   );
 };

@@ -11,7 +11,6 @@ import {
   CREATE_COURSE,
   DELETE_COURSE,
   ARCHIVE_COURSE,
-  POST_REVIEW,
   DELETE_COURSE_FROM_CART,
   GET_REVIEWS,
   FILTERS,
@@ -178,15 +177,7 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         allOrders: action.payload,
       };
-
-    case GET_ALL_USERS:
-      return {
-        ...state,
-        allUsers: action.payload,
-      };
-
     case COURSES_BY_TEACHER:
-      console.log(action.payload);
       return {
         ...state,
         coursesCreateUser: action.payload,

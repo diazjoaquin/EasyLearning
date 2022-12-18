@@ -9,8 +9,8 @@ import Footer2 from "../footer/Footer2";
 import style from "../detail/CourseDetail.module.css";
 
 
-import CardReview from "../Review/cardReview";
-import PostReview from "../Review/postReview";
+import CardReview from "../review/cardReview";
+import PostReview from "../review/postReview";
 import {
   Box,
   Button,
@@ -28,6 +28,7 @@ import {
   Divider,
   SimpleGrid
 } from "@chakra-ui/react";
+import Checkout from "../paypal/checkout";
 
 import { RiArrowGoBackLine } from "react-icons/ri";
 
@@ -69,7 +70,8 @@ export default function Detail() {
                       <p>Descripcion:{myCourse?.description}</p>
                       <div className={style.miniature}>
                         <img src="https://www.unapiquitos.edu.pe/contenido/opiniones/recursos/docenteClases.jpg" />
-                        <p class="text-title">{`${"$" + myCourse?.price}`}</p>
+                        <p className="text-title">{`${"$" + myCourse?.price}`}</p>
+                        <p>Teacher:{myCourse?.teacher}</p>
                         <ButtonGroup spacing="2">
                           <Button variant="solid" colorScheme="blue">
                             Buy now
@@ -152,6 +154,10 @@ export default function Detail() {
             setUpdate={setUpdate}
           />
         </Box>
+        <Box>
+          <Checkout />
+        </Box>
+
         <Footer2 />
       </div >
     </>
