@@ -19,6 +19,7 @@ export default function Navbar() {
   const { user, logout, loading } = useAuth();
   const handleLogout = async () => {
     await logout(auth);
+    localStorage.removeItem("user")
   };
 
   if (loading) { return <h1>Loading ...</h1> }
