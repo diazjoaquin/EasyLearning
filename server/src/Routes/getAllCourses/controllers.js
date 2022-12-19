@@ -21,7 +21,7 @@ const getAllCourses = async () => {
         },
         {
           model: Video,
-          attributes: ["id", "urlVideo", "description"],
+          attributes: ["id", "urlVideo", "description", "nameVideo"],
         },
       ],
       order: [[{ model: Video }, "id", "ASC"]],
