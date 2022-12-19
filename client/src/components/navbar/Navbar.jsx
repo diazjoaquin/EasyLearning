@@ -42,12 +42,6 @@ export default function Navbar() {
                                 <p>{cart && (cart.length)}</p><img src={Cart}/>
                             </Button>
                         </Link>
-                        {user && <Avatar src='https://bit.ly/broken-link' bg='teal.500' size='sm'/>}
-                        {user && <Button colorScheme='teal' variant='solid'
-                        onClick={handleLogout}>
-                                Log Out
-                            </Button>}
-
                         {!user && <Link to="/signup">
                           <Button colorScheme='teal' variant='solid'>
                             Sign Up
