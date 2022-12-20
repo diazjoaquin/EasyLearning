@@ -8,19 +8,23 @@ const createUser = async ({
   avatar,
 }) => {
   try {
-    phoneNumber = parseInt(phoneNumber);
+    emailAddress = emailAddress.toLowerCase();
+
     //Create user
-    const userDB = await User.create({
+    const [userDB, createdUserDB] = await User.findOrCreate({
+      where: { emailAddress },
+      defaults: {
         fullName,
         password,
-        phoneNumber,
+        phoneNumber: parseInt(phoneNumber),
         emailAddress,
         avatar,
+      },
     });
 
-    return userDB
+    return createdUserDB
       ? "Usuario creado."
-      : "Ya existe un usuario con ese nombre.";
+      : "Ya existe un usuario con ese email.";
   } catch (error) {
     return error;
   }

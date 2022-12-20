@@ -1,17 +1,15 @@
 const { Video } = require("../../db.js");
 
-const createVideo = async ({ urlVideo, description, courseId }) => {
+const createVideo = async ({ urlVideo, description, courseId, nameVideo }) => {
   try {
-    const [videoDB, createdVideoDB] = await Video.findOrCreate({
-      where: { urlVideo },
-      defaults: {
-        urlVideo,
-        description,
-        courseId,
-      },
+    const videoDB = await Video.create({
+      nameVideo,
+      urlVideo,
+      description,
+      courseId,
     });
 
-    return createdVideoDB ? "Video creado." : "Ya existe un video con esa url.";
+    return "Video creado.";
   } catch (error) {
     return error;
   }

@@ -23,6 +23,7 @@ import CourseCard from '../../card/CourseCard'
 const Profile = () => {
 
   const dispatch = useDispatch()
+  const userDB = JSON.parse(localStorage.getItem("user"))
   const [user, setUser] = useState({
     fullName: "",
     password: "",
@@ -36,7 +37,7 @@ const Profile = () => {
   }
   useEffect(() => {
     //Previamente, obtener el id del usuario logeado. Por el momento es hardcode
-    dispatch(getAllCoursesByTeacher(1))
+    dispatch(getAllCoursesByTeacher(userDB.id)) //id hardcodeado
   }, [])
 
   const handleChange = (e) => {

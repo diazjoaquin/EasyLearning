@@ -9,9 +9,11 @@ const {
   Comments,
 } = require("../../db.js");
 const axios = require("axios");
+const { createReview } = require("../createReview/controllers.js");
 
 //ruta para mockear toda la data, tiene que ser ejecutada una unica sola vez, sino rompe todo.
-router.post("/", async (req, res) => {
+
+const test = async () => {
   try {
     const coursesDB = await Course.findAll();
     if (!coursesDB.length) {
@@ -21,35 +23,35 @@ router.post("/", async (req, res) => {
           fullName: "Fermin",
           password: "1234",
           phoneNumber: 12345,
-          emailAddress: "Fermin@gmail.com",
+          emailAddress: "fermin@gmail.com",
           avatar: "urlAvatar",
         },
         {
           fullName: "Joaco",
           password: "1234",
           phoneNumber: 12345,
-          emailAddress: "Joaco@gmail.com",
+          emailAddress: "joaco@gmail.com",
           avatar: "urlAvatar",
         },
         {
           fullName: "Santi",
           password: "1234",
           phoneNumber: 12345,
-          emailAddress: "Santi@gmail.com",
+          emailAddress: "santi@gmail.com",
           avatar: "urlAvatar",
         },
         {
           fullName: "Franco",
           password: "1234",
           phoneNumber: 12345,
-          emailAddress: "Franco@gmail.com",
+          emailAddress: "franco@gmail.com",
           avatar: "urlAvatar",
         },
         {
           fullName: "Benja",
           password: "1234",
           phoneNumber: 12345,
-          emailAddress: "Benja@gmail.com",
+          emailAddress: "benja@gmail.com",
           avatar: "urlAvatar",
         },
       ];
@@ -136,128 +138,153 @@ router.post("/", async (req, res) => {
       //Lista de Videos
       const listVideos = [
         {
+          nameVideo: "Name video 1",
           urlVideo: "www.youtube.com (video1)",
-          description: "description video",
+          description: "description video 1",
           courseId: 1,
         },
         {
+          nameVideo: "Name video 2",
           urlVideo: "www.youtube.com (video2)",
-          description: "description video",
+          description: "description video 2",
           courseId: 1,
         },
         {
+          nameVideo: "Name video 3",
           urlVideo: "www.youtube.com (video3)",
-          description: "description video",
+          description: "description video 3",
           courseId: 1,
         },
         {
+          nameVideo: "Name video 4",
           urlVideo: "www.youtube.com (video4)",
-          description: "description video",
+          description: "description video 4",
           courseId: 1,
         },
         {
+          nameVideo: "Name video 5",
           urlVideo: "www.youtube.com (video5)",
-          description: "description video",
+          description: "description video 5",
           courseId: 1,
         },
         {
+          nameVideo: "Name video 1",
           urlVideo: "www.youtube.com (video1)",
-          description: "description video",
+          description: "description video 1",
           courseId: 2,
         },
         {
+          nameVideo: "Name video 2",
           urlVideo: "www.youtube.com (video2)",
-          description: "description video",
+          description: "description video 2",
           courseId: 2,
         },
         {
+          nameVideo: "Name video 3",
           urlVideo: "www.youtube.com (video3)",
-          description: "description video",
+          description: "description video 3",
           courseId: 2,
         },
         {
+          nameVideo: "Name video 4",
           urlVideo: "www.youtube.com (video4)",
-          description: "description video",
+          description: "description video 4",
           courseId: 2,
         },
         {
+          nameVideo: "Name video 5",
           urlVideo: "www.youtube.com (video5)",
-          description: "description video",
+          description: "description video 5",
           courseId: 2,
         },
         {
+          nameVideo: "Name video 1",
           urlVideo: "www.youtube.com (video1)",
-          description: "description video",
+          description: "description video 1",
           courseId: 3,
         },
         {
+          nameVideo: "Name video 2",
           urlVideo: "www.youtube.com (video2)",
-          description: "description video",
+          description: "description video 2",
           courseId: 3,
         },
         {
+          nameVideo: "Name video 3",
           urlVideo: "www.youtube.com (video3)",
-          description: "description video",
+          description: "description video 3",
           courseId: 3,
         },
         {
+          nameVideo: "Name video 4",
           urlVideo: "www.youtube.com (video4)",
-          description: "description video",
+          description: "description video 4",
           courseId: 3,
         },
         {
+          nameVideo: "Name video 5",
           urlVideo: "www.youtube.com (video5)",
-          description: "description video",
+          description: "description video 5",
           courseId: 3,
         },
         {
+          nameVideo: "Name video 1",
           urlVideo: "www.youtube.com (video1)",
-          description: "description video",
+          description: "description video 1",
           courseId: 4,
         },
         {
+          nameVideo: "Name video 2",
           urlVideo: "www.youtube.com (video2)",
-          description: "description video",
+          description: "description video 2",
           courseId: 4,
         },
         {
+          nameVideo: "Name video 3",
           urlVideo: "www.youtube.com (video3)",
-          description: "description video",
+          description: "description video 3",
           courseId: 4,
         },
         {
+          nameVideo: "Name video 4",
           urlVideo: "www.youtube.com (video4)",
-          description: "description video",
+          description: "description video 4",
           courseId: 4,
         },
         {
+          nameVideo: "Name video 5",
           urlVideo: "www.youtube.com (video5)",
-          description: "description video",
+          description: "description video 5",
           courseId: 4,
         },
         {
+          nameVideo: "Name video 1",
           urlVideo: "www.youtube.com (video1)",
-          description: "description video",
+          description: "description video 1",
           courseId: 5,
         },
         {
+          nameVideo: "Name video 2",
           urlVideo: "www.youtube.com (video2)",
-          description: "description video",
+          description: "description video 2",
           courseId: 5,
         },
         {
+          nameVideo: "Name video 3",
           urlVideo: "www.youtube.com (video3)",
-          description: "description video",
+          description: "description video 3",
           courseId: 5,
         },
         {
+          nameVideo: "Name video 4",
           urlVideo: "www.youtube.com (video4)",
-          description: "description video",
+          description: "description video 4",
           courseId: 5,
         },
         {
+          nameVideo: "Name video 5",
           urlVideo: "www.youtube.com (video5)",
-          description: "description video",
+          description: "description video 5",
           courseId: 5,
         },
       ];
@@ -268,31 +295,31 @@ router.post("/", async (req, res) => {
           videoId: 1,
           userId: 1,
           title: "Titulo video",
-          description: "Este video esta muy bueno.",
+          description: "This video is very good",
         },
         {
           videoId: 2,
           userId: 2,
           title: "Titulo video",
-          description: "Este video esta muy bueno.",
+          description: "This video is very good",
         },
         {
           videoId: 3,
           userId: 3,
           title: "Titulo video",
-          description: "Este video esta muy bueno.",
+          description: "This video is very good",
         },
         {
           videoId: 4,
           userId: 4,
           title: "Titulo video",
-          description: "Este video esta muy bueno.",
+          description: "This video is very good",
         },
         {
           videoId: 5,
           userId: 5,
           title: "Titulo video",
-          description: "Este video esta muy bueno.",
+          description: "This video is very good",
         },
       ];
 
@@ -303,70 +330,70 @@ router.post("/", async (req, res) => {
           courseId: 1,
           score: 5,
           title: "Title review course",
-          comments: "Comment review course",
+          comments: "This course is very good",
         },
         {
           userId: 2,
           courseId: 1,
           score: 3,
           title: "Title review course",
-          comments: "Comment review course",
+          comments: "This course is very good",
         },
         {
           userId: 1,
           courseId: 2,
           score: 5,
           title: "Title review course",
-          comments: "Comment review course",
+          comments: "This course is very good",
         },
         {
           userId: 2,
           courseId: 2,
           score: 3,
           title: "Title review course",
-          comments: "Comment review course",
+          comments: "This course is very good",
         },
         {
           userId: 1,
           courseId: 3,
           score: 5,
           title: "Title review course",
-          comments: "Comment review course",
+          comments: "This course is very good",
         },
         {
           userId: 2,
           courseId: 3,
           score: 3,
           title: "Title review course",
-          comments: "Comment review course",
+          comments: "This course is very good",
         },
         {
           userId: 1,
           courseId: 4,
           score: 5,
           title: "Title review course",
-          comments: "Comment review course",
+          comments: "This course is very good",
         },
         {
           userId: 2,
           courseId: 4,
           score: 3,
           title: "Title review course",
-          comments: "Comment review course",
+          comments: "This course is very good",
         },
         {
           userId: 1,
           courseId: 5,
           score: 5,
           title: "Title review course",
-          comments: "Comment review course",
+          comments: "This course is very good",
         },
         {
           userId: 2,
           courseId: 5,
           score: 3,
           title: "Title review course",
-          comments: "Comment review course",
+          comments: "This course is very good",
         },
       ];
 
@@ -396,26 +423,22 @@ router.post("/", async (req, res) => {
       //Create Reviews Course
       const listReviewsCoursesDB = await Review.bulkCreate(listReviewsCourses);
 
-      //Create Rating Course
       for (let i = 0; i < 6; i++) {
-        const obj = {
+        createReview(i, {
           userId: i,
-          courseId: i,
           score: Math.round(Math.random() * 5),
           title: `Title review course${i + 1}`,
-          comments: "Comment review course",
-        };
-        await axios.post("http://localhost:3001/createReview", obj);
+          comments: "This course is very good",
+        });
       }
 
-      res.json(`Successfully created courses`);
+      return `Successfully created courses`;
     }
-    res.json(
-      `[ERROR]: Tu base de datos ya contiene info, limpia TODA la base de datos para volver a ejecutar test.`
-    );
+    return `[ERROR]: Tu base de datos ya contiene info, limpia TODA la base de datos para volver a ejecutar test.`;
   } catch (error) {
-    res.json(error);
+    console.log(error);
+    return error;
   }
-});
+};
 
-module.exports = router;
+module.exports = { test };

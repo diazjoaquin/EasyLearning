@@ -34,11 +34,12 @@ import { validate, validateVideo } from "./validate";
 const Create = () => {
   const dispatch = useDispatch();
   const history = useHistory()
+  const userDB = JSON.parse(localStorage.getItem("user"))
   const categories = useSelector(s => s.categories)
   const [input, setInput] = useState({
     name: "",
     description: "",
-    teacher: "Fermin", //De momento es hardcode, hasta que tengamos el login y sepamos cual es el user que esta creando el curso.
+    teacher: userDB.fullName, //De momento es hardcode, hasta que tengamos el login y sepamos cual es el user que esta creando el curso.
     video: [],
     category: [],
     price: null
