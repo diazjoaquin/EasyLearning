@@ -7,6 +7,7 @@ const {
   User,
   Video,
   Comments,
+  ReviewPage,
 } = require("../../db.js");
 const axios = require("axios");
 const { createReview } = require("../createReview/controllers.js");
@@ -397,6 +398,40 @@ const test = async () => {
         },
       ];
 
+      const listReviewsPage = [
+        {
+          score: 5,
+          userId: 1,
+          title: "Excelent page",
+          comments: "10/10",
+        },
+        {
+          score: 4,
+          userId: 2,
+          title: "Good page",
+          comments: "I love the variety of courses that the site has.",
+        },
+        {
+          score: 3,
+          userId: 3,
+          title: "Good page",
+          comments: "Very good site and courses",
+        },
+        {
+          score: 2,
+          userId: 4,
+          title: "Good page",
+          comments: "Good site",
+        },
+        {
+          score: 1,
+          userId: 5,
+          title: "Bad page",
+          comments:
+            "I didn't like this site very much and the prices are very expensive.",
+        },
+      ];
+
       //Create Users
       const listUsersDB = await User.bulkCreate(listUsers);
 
@@ -422,6 +457,9 @@ const test = async () => {
 
       //Create Reviews Course
       const listReviewsCoursesDB = await Review.bulkCreate(listReviewsCourses);
+
+      //Create ReviewsPage
+      const listReviewsPageDB = await ReviewPage.bulkCreate(listReviewsPage);
 
       for (let i = 0; i < 6; i++) {
         createReview(i, {
