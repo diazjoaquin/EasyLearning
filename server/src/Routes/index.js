@@ -16,6 +16,7 @@ const getReviews = require("./getReviews/getReviews.js");
 const getUsers = require("./getUsers/getUsers.js");
 const getAllTeachers = require("./getAllTeachers/getAllTeachers.js");
 const getUserByEmail = require("./getUserByEmail/getUserByEmail.js");
+const getAllReviewPage = require("./getAllReviewPage/getAllReviewPage.js");
 
 router.use("/getAllCourses", getAllCourses);
 router.use("/getDetail", getDetail);
@@ -33,5 +34,6 @@ router.use("/getReviews", getReviews);
 router.use("/getUsers", getUsers);
 router.use("/getAllTeachers", getAllTeachers);
 router.use("/getUserByEmail", getUserByEmail);
+router.use("/getAllReviewPage", getAllReviewPage);
 
 module.exports = router;

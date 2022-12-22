@@ -2,7 +2,7 @@ const { DataTypes, NOW } = require("sequelize");
 
 module.exports = (sequelize) => {
   sequelize.define(
-    "reviewsPage",
+    "reviewPage",
     {
       title: {
         type: DataTypes.STRING,
