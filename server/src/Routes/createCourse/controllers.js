@@ -1,8 +1,8 @@
 const { Course, Category, Video } = require("../../db.js");
 const { Op } = require("sequelize");
-const { uploadImage } = require("../../cloudinary.js");
-const cloudinary = require("cloudinary").v2;
-const fs = require("fs-extra");
+// const { uploadImage } = require("../../cloudinary.js");
+// const cloudinary = require("cloudinary").v2;
+// const fs = require("fs-extra");
 
 const createCourse = async (
   {
