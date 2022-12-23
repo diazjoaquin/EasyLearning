@@ -131,10 +131,6 @@ export default function Home() {
                 </Hola>
             </div>
 
-            {/* <div>
-                <ReviewPage/>
-            </div> */}
-
             <div>
                 <Footer2>
                 </Footer2>
