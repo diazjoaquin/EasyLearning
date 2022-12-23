@@ -18,6 +18,9 @@ import {
   TagLabel,
   Tooltip,
   Select,
+  Stack,
+  RadioGroup,
+  Radio
 } from '@chakra-ui/react'
 import { ArrowBackIcon } from '@chakra-ui/icons'
 import axios from "axios"
@@ -36,10 +39,13 @@ const Create = () => {
   const history = useHistory()
   const userDB = JSON.parse(localStorage.getItem("user"))
   const categories = useSelector(s => s.categories)
+  const [value, setValue] = useState('1')
+  const [file, setFile] = useState(null)
+
   const [input, setInput] = useState({
     name: "",
     description: "",
-    teacher: userDB.fullName, //De momento es hardcode, hasta que tengamos el login y sepamos cual es el user que esta creando el curso.
+    teacher: userDB?.fullName,
     video: [],
     category: [],
     price: null
@@ -57,8 +63,13 @@ const Create = () => {
   const [errorsVideo, setErrorsVideo] = useState({})
 
   const handelChange = (e) => {
-    if (e.target.value === 'category') return
+    if (e.target.name === "Thumbnail") {
+      if (value === "1")
+        return setFile(e.target.value)
+      return setFile(e.target.files[0])
+    }
     if (e.target.name === "category") {
+      if (e.target.value === 'category') return
       if (!input.category.includes(e.target.value)) {
         setInput({
           ...input,
@@ -81,9 +92,25 @@ const Create = () => {
   }
 
   const handelSubmit = async () => {
-    const response = await axios.post("http://localhost:3001/createCourse", input)
-    alert(response.data)
-    history.push("/profile")
+    const formdata = new FormData();
+    formdata.append("image", file);
+    formdata.append("name", input.name);
+    formdata.append("description", input.description);
+    formdata.append("teacher", input.teacher);
+    formdata.append("video", input.video);
+    formdata.append("category", input.category);
+    formdata.append("price", input.price);
+
+
+    let response = await axios
+      .post("http://localhost:3001/createCourse", formdata)
+      .catch((err) => console.error(err));
+    console.log(response.data);
+
+
+    // document.getElementById("Thumbnail").value = null
+    // setFile(null)
+    // history.push("/profile")
   }
 
   const handelSubmitVideo = () => {
@@ -127,6 +154,8 @@ const Create = () => {
     setErrorsVideo(validateVideo(inputVideo, input))
   }, [dispatch, input, inputVideo])
 
+
+
   return (
     <div>
       <Navbar />
@@ -137,16 +166,27 @@ const Create = () => {
             <Link to='/profile'>
               <Button rightIcon={<ArrowBackIcon />} fontSize='30' size='30' colorScheme='teal' variant='outline' />
             </Link>
-            <h1>Falta hardcodear el teacher</h1>
-            <FormControl display='flex' flexDirection="column" alignItems="center" >
+            <FormControl >
               <FormLabel>Name:</FormLabel>
-              <Input name="name" onChange={handelChange} autoComplete='off' />
+              <Input defaultValue="peperoni" name="name" onChange={handelChange} autoComplete='off' />
               {errors["name"] && <Alert justifyContent='center' status='error' bg='transparent' color='red'>
                 <AlertIcon />
                 {errors.name}
               </Alert>}
+              <FormLabel>Thumbnail of course:</FormLabel>
+              {
+                value === "1"
+                  ? <input name="Thumbnail" onChange={handelChange} autoComplete='off' />
+                  : <input type="file" id="Thumbnail" name="Thumbnail" onChange={handelChange} />
+              }
+              <RadioGroup onChange={setValue} value={value}>
+                <Stack direction='row'>
+                  <Radio value='1'>Url</Radio>
+                  <Radio value='2'>File</Radio>
+                </Stack>
+              </RadioGroup>
               <FormLabel>Description:</FormLabel>
-              <Input name="description" onChange={handelChange} autoComplete='off' />
+              <Input defaultValue="peperoni" name="description" onChange={handelChange} autoComplete='off' />
               {errors["description"] && <Alert justifyContent='center' mt='3' mb='6' status='error' bg='transparent' color='red'>
                 <AlertIcon />
                 {errors.description}
@@ -179,7 +219,7 @@ const Create = () => {
                 {errors.category}
               </Alert>}
               <FormLabel>Price:</FormLabel>
-              <Input name="price" onChange={handelChange} autoComplete='off' />
+              <Input defaultValue={12} name="price" onChange={handelChange} autoComplete='off' />
               {errors["price"] && <Alert w='80%' justifyContent='center' status='error' bg='transparent' color='red'>
                 <AlertIcon />
                 {errors.price}
@@ -210,8 +250,8 @@ const Create = () => {
                 </form>
 
               </Box>
-              <Text textAlign="center">(Todos estos datos se podran modificar luego de crear el curso.)</Text>
-              <Button mt={4} colorScheme='teal' onClick={handelSubmit} disabled={Object.keys(errors).length ? true : false}>
+              <Text textAlign="center">Todos estos datos se podran modificar luego de crear el curso.</Text>
+              <Button mt={4} colorScheme='teal' disabled={Object.keys(errors).length ? true : false} onClick={handelSubmit}>
                 Submit
               </Button>
             </FormControl>

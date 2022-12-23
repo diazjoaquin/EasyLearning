@@ -1,21 +1,28 @@
 const { Router } = require("express");
 const router = Router();
 const { createCourse } = require("./controllers");
-const fileUpload = require("express-fileupload");
+const multer = require("multer");
+const path = require("path");
 
-router.post(
-  "/",
-  fileUpload({
-    useTempFiles: true,
-    tempFileDir: "./upload",
-  }),
-  async (req, res) => {
-    try {
-      res.json(await createCourse(req.body, req.files));
-    } catch (error) {
-      res.json(error);
-    }
+const diskStorage = multer.diskStorage({
+  destination: path.join(__dirname, "../../upload"),
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + "-" + file.originalname);
+  },
+});
+
+const fileUpload = multer({
+  storage: diskStorage,
+}).single("image");
+
+router.post("/", fileUpload, async (req, res) => {
+  try {
+    console.log(req.file);
+    console.log("el body: ", req.body);
+    res.json(await createCourse(req.body, req.file));
+  } catch (error) {
+    res.json(error);
   }
-);
+});
 
 module.exports = router;
