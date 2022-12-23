@@ -18,9 +18,6 @@ import {
   TagLabel,
   Tooltip,
   Select,
-  Stack,
-  RadioGroup,
-  Radio
 } from '@chakra-ui/react'
 import { ArrowBackIcon } from '@chakra-ui/icons'
 import axios from "axios"
@@ -39,7 +36,6 @@ const Create = () => {
   const history = useHistory()
   const userDB = JSON.parse(localStorage.getItem("user"))
   const categories = useSelector(s => s.categories)
-  const [value, setValue] = useState('1')
   const [file, setFile] = useState(null)
 
   const [input, setInput] = useState({
@@ -48,7 +44,7 @@ const Create = () => {
     teacher: userDB?.fullName,
     video: [],
     category: [],
-    price: null
+    price: null,
   })
 
 
@@ -64,8 +60,6 @@ const Create = () => {
 
   const handelChange = (e) => {
     if (e.target.name === "Thumbnail") {
-      if (value === "1")
-        return setFile(e.target.value)
       return setFile(e.target.files[0])
     }
     if (e.target.name === "category") {
@@ -105,12 +99,8 @@ const Create = () => {
     let response = await axios
       .post("http://localhost:3001/createCourse", formdata)
       .catch((err) => console.error(err));
-    console.log(response.data);
 
-
-    // document.getElementById("Thumbnail").value = null
-    // setFile(null)
-    // history.push("/profile")
+    history.push("/profile")
   }
 
   const handelSubmitVideo = () => {
@@ -168,25 +158,15 @@ const Create = () => {
             </Link>
             <FormControl >
               <FormLabel>Name:</FormLabel>
-              <Input defaultValue="peperoni" name="name" onChange={handelChange} autoComplete='off' />
+              <Input name="name" onChange={handelChange} autoComplete='off' />
               {errors["name"] && <Alert justifyContent='center' status='error' bg='transparent' color='red'>
                 <AlertIcon />
                 {errors.name}
               </Alert>}
               <FormLabel>Thumbnail of course:</FormLabel>
-              {
-                value === "1"
-                  ? <input name="Thumbnail" onChange={handelChange} autoComplete='off' />
-                  : <input type="file" id="Thumbnail" name="Thumbnail" onChange={handelChange} />
-              }
-              <RadioGroup onChange={setValue} value={value}>
-                <Stack direction='row'>
-                  <Radio value='1'>Url</Radio>
-                  <Radio value='2'>File</Radio>
-                </Stack>
-              </RadioGroup>
+              <Input type="file" id="Thumbnail" name="Thumbnail" onChange={handelChange} />
               <FormLabel>Description:</FormLabel>
-              <Input defaultValue="peperoni" name="description" onChange={handelChange} autoComplete='off' />
+              <Input name="description" onChange={handelChange} autoComplete='off' />
               {errors["description"] && <Alert justifyContent='center' mt='3' mb='6' status='error' bg='transparent' color='red'>
                 <AlertIcon />
                 {errors.description}
@@ -219,13 +199,13 @@ const Create = () => {
                 {errors.category}
               </Alert>}
               <FormLabel>Price:</FormLabel>
-              <Input defaultValue={12} name="price" onChange={handelChange} autoComplete='off' />
+              <Input type='number' name="price" onChange={handelChange} autoComplete='off' />
               {errors["price"] && <Alert w='80%' justifyContent='center' status='error' bg='transparent' color='red'>
                 <AlertIcon />
                 {errors.price}
               </Alert>}
               <Box border="1px" borderRadius="20" p="10" my="10">
-                <form id="formVideo">
+                <FormControl id="formVideo">
                   <FormLabel display="flex" justifyContent="center">Video:</FormLabel>
                   <FormLabel>Name:</FormLabel>
                   <Input name="nameVideo" onChange={handelChangeVideo} />
@@ -247,7 +227,7 @@ const Create = () => {
                       Add Video
                     </Button>
                   </Box>
-                </form>
+                </FormControl>
 
               </Box>
               <Text textAlign="center">Todos estos datos se podran modificar luego de crear el curso.</Text>

@@ -104,9 +104,12 @@ const Profile = () => {
               <Button ml='2' mt='2' display="flex" justifySelf='flex-start' colorScheme='blackAlpha'>Create new course</Button>
             </Link>
             <GridItem gap='20' colSpan={2} display="flex" flexDirection="row" alignItems="center" justifyContent='center' mt="5" mb='5'>
-              {coursesCreateUser.length && coursesCreateUser?.map(e => (
-                <CourseCard key={e.id} id={e.id} teacher={e.teacher} name={e.name} description={e.description} rating={e.rating} price={e.price} image={e.image} categories={e.categories} />
-              ))}
+              {
+                coursesCreateUser.length ? coursesCreateUser?.map(e => (
+                  <CourseCard key={e.id} id={e.id} teacher={e.teacher} name={e.name} description={e.description} rating={e.rating} price={e.price} image={e.image} categories={e.categories} />
+                ))
+                  : undefined
+              }
             </ GridItem>
             <Box display="flex" flexDirection='row-reverse' >
               <Link to="/cursosCreados">

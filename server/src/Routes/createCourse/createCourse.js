@@ -17,8 +17,6 @@ const fileUpload = multer({
 
 router.post("/", fileUpload, async (req, res) => {
   try {
-    console.log(req.file);
-    console.log("el body: ", req.body);
     res.json(await createCourse(req.body, req.file));
   } catch (error) {
     res.json(error);

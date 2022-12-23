@@ -1,7 +1,6 @@
 const { Course, Category, Video } = require("../../db.js");
 const { Op } = require("sequelize");
 const { uploadImage } = require("../../cloudinary.js");
-const cloudinary = require("cloudinary").v2;
 const fs = require("fs-extra");
 
 const createCourse = async (
@@ -12,6 +11,7 @@ const createCourse = async (
     teacher,
     price,
     video, //Array de objetos video {    name: '',    urlVideo: "",    description: "",    courseId: ""}
+    image,
   },
   file
 ) => {
@@ -38,12 +38,13 @@ const createCourse = async (
         course.image_public_id = result.public_id;
         fs.unlink(file.path);
         await course.save();
-      }
+      } else if (image) course.image = image;
       //en el caso que sea un video
       // if (files?.video) {
       // }
 
       //Agregando sus categorias al curso
+      category = category.split(",");
       category.map(async (e) => {
         const [categoryDB, createdCategory] = await Category.findOrCreate({
           where: { name: { [Op.iLike]: e } },
