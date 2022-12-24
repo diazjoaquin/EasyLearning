@@ -4,19 +4,19 @@ import {
   GET_CATEGORIES,
   GET_COURSE_DETAIL,
   CLEAR_DETAIL,
-  ADD_TO_CART,
   BUY_NOW,
   ORDER_BY_NAME,
   ORDER_BY_RATING,
   CREATE_COURSE,
   DELETE_COURSE,
   ARCHIVE_COURSE,
-  DELETE_COURSE_FROM_CART,
   GET_REVIEWS,
   FILTERS,
   RESET_FILTERS,
   COURSES_BY_TEACHER,
   GET_ALL_USERS,
+  ADD_TO_CART,
+  DELETE_FROM_CART,
   GET_TEACHERS,
   GET_ORDERS, //add
 } from "../actions";
@@ -26,14 +26,20 @@ const initialState = {
   filter: [],
   courseDetail: {},
   categories: [],
-  cart: [],
   allReviews: [],
   reviews: [],
   allUsers: [],
+  cart: [],
   allOrders: [], //add
   coursesCreateUser: [],
   teachers: [],
 };
+
+if(localStorage.getItem("cart")){
+  initialState.cart =  JSON.parse(localStorage.getItem("cart"));
+} else {
+  initialState.cart = [];
+}
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -68,20 +74,7 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         courseDetail: [],
       };
-    case ADD_TO_CART:
-      let addToCart = state.courses;
-      let cart = addToCart.filter(
-        (course) => course.idCourse === action.payload
-      );
-      return {
-        ...state,
-        cart: [...state.cart, cart],
-      };
-    case DELETE_COURSE_FROM_CART:
-      return {
-        ...state,
-        cart: state.cart.filter((course) => course.idCourse !== action.payload),
-      };
+
     case BUY_NOW:
       let buyNow = state.courses;
       let buy = buyNow.filter((course) => course.idCourse === action.payload);
@@ -89,6 +82,7 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         cart: buy,
       };
+
     case FILTERS:
       let filtros = state.filter;
       if (action.payload.category) {
@@ -110,6 +104,7 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         courses: filtros,
       };
+
     case ORDER_BY_NAME:
       const byName =
         action.payload === "A-Z"
@@ -160,18 +155,23 @@ const rootReducer = (state = initialState, action) => {
     case GET_REVIEWS:
       return {
         ...state,
-        reviews: action.payload,
-        // allReviews: action.payload
+        reviews: action.payload
       };
-    // case POST_REVIEW:
-    //   return {
-    //     ...state,
-    //   };
     case GET_ALL_USERS:
       return {
         ...state,
-        allUsers: action.payload,
+        allUsers: action.payload
       };
+    case ADD_TO_CART:
+			return {
+        ...state,
+				cart: action.payload
+			};
+		case DELETE_FROM_CART:
+			return {
+        ...state,
+				cart: [...action.payload]
+			};
     case GET_ORDERS: //add
       return {
         ...state,
