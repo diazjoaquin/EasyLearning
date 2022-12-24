@@ -12,11 +12,13 @@ import {
   ARCHIVE_COURSE,
   GET_REVIEWS,
   FILTERS,
+  RESET_FILTERS,
+  COURSES_BY_TEACHER,
   GET_ALL_USERS,
   ADD_TO_CART,
   DELETE_FROM_CART,
- 
- 
+  GET_TEACHERS,
+  GET_ORDERS, //add
 } from "../actions";
 
 const initialState = {
@@ -28,6 +30,9 @@ const initialState = {
   reviews: [],
   allUsers: [],
   cart: [],
+  allOrders: [], //add
+  coursesCreateUser: [],
+  teachers: [],
 };
 
 if(localStorage.getItem("cart")){
@@ -54,6 +59,11 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         categories: action.payload,
       };
+    case GET_TEACHERS:
+      return {
+        ...state,
+        teachers: action.payload,
+      };
     case GET_COURSE_DETAIL:
       return {
         ...state,
@@ -74,16 +84,21 @@ const rootReducer = (state = initialState, action) => {
       };
 
     case FILTERS:
-      let filtros;
+      let filtros = state.filter;
       if (action.payload.category) {
-        filtros = state.filter.filter((e) =>
+        filtros = filtros.filter((e) =>
           e.categories.includes(action.payload.category)
         );
       }
       if (action.payload.price) {
-        filtros = filtros.filter(
-          (e) => parseInt(action.payload.price) === e.price
-        );
+        action.payload.price === "uno"
+          ? (filtros = filtros.filter((e) => e.price <= 25))
+          : action.payload.price === "dos"
+          ? (filtros = filtros.filter((e) => e.price > 25 && e.price <= 50))
+          : (filtros = filtros.filter((e) => e.price > 50));
+      }
+      if (action.payload.teacher) {
+        filtros = filtros.filter((e) => action.payload.teacher === e.teacher);
       }
       return {
         ...state,
@@ -120,6 +135,11 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         courses: byRating,
       };
+    case RESET_FILTERS:
+      return {
+        ...state,
+        courses: state.filter,
+      };
     case CREATE_COURSE:
       return {
         ...state,
@@ -152,6 +172,16 @@ const rootReducer = (state = initialState, action) => {
         ...state,
 				cart: [...action.payload]
 			};
+    case GET_ORDERS: //add
+      return {
+        ...state,
+        allOrders: action.payload,
+      };
+    case COURSES_BY_TEACHER:
+      return {
+        ...state,
+        coursesCreateUser: action.payload,
+      };
     default:
       return {
         ...state,

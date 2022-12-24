@@ -7,6 +7,7 @@ import { getAllCourses } from "../../../redux/actions/index.js";
 import style from './Course.module.css';
 import Filters from "../../filters/filters.jsx";
 import Footer2 from "../../footer/Footer2"
+import SearchBar from "../../searchbar/SearchBar.jsx";
 
 
 export default function Course() {
@@ -25,6 +26,7 @@ export default function Course() {
   return (
     <div>
       <Navbar />
+      <SearchBar/>
       <Filters update={update} setUpdate={setUpdate} />
       <div className={style.cards}>
         {
@@ -39,6 +41,7 @@ export default function Course() {
                 price={course.price}
                 rating={course.rating}
                 categories={course.categories}
+                image={course.image}
               />)
           })
         }

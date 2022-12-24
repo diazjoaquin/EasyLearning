@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Navbar from '../navbar/Navbar';
 import style from "./Home.module.css"
-import SearchBar from "../searchbar/SearchBar.jsx";
+// import SearchBar from "../searchbar/SearchBar.jsx";
 import CourseCard from '../card/CourseCard.jsx';
 import { Heading, Box, Text, Image } from '@chakra-ui/react'
 import mainpicture from "../../image/maintextimage.png"
@@ -9,7 +9,7 @@ import { Icon, ArrowLeftIcon, ArrowRightIcon } from '@chakra-ui/icons';
 import Footer2 from "../footer/Footer2";
 import Hola from "../testimonials/Testimonials"
 import BasicStatistics from "../statistic/Statistics"
-import Categorys from "../categorys/Categorys"
+import Categories from "../categories/Categories" //cambio de "categorys"
 import { useEffect } from "react";
 import { getAllCourses } from "../../redux/actions/index.js";
 import { useDispatch, useSelector } from "react-redux";
@@ -18,7 +18,8 @@ import { useDispatch, useSelector } from "react-redux";
 export default function Home() {
 
     // carrousel: 
-    const courses = useSelector(state => state.courses);
+    let courses = useSelector(state => state.courses);
+    courses = courses?.sort((a, b) => b.rating - a.rating)?.slice(0, 15)
     const [coursesPerPage] = useState(3);
     const [currentPage, setCurrentPage] = useState(1);
     const last = currentPage * coursesPerPage;
@@ -37,15 +38,14 @@ export default function Home() {
     }
 
     // cards:
-
     const dispatch = useDispatch();
-
-    
-    useEffect(() =>{
+    useEffect(() => {
         if (!courses.length) {
-        dispatch(getAllCourses())
+            dispatch(getAllCourses())
         }
     }, [dispatch]);
+
+
 
     // const ListHeader = ({children}) => {
     //     return (
@@ -56,7 +56,7 @@ export default function Home() {
     // };
 
     return (
-        
+
         <div>
             <div className={style.bg}>
                 <Navbar>
@@ -71,8 +71,8 @@ export default function Home() {
                         300 Instructor & Institutions</Heading>
                     <Text fontSize='xl'> Varius version have envolved over the years, sometimes by accident,
                     </Text>
-                    <SearchBar>
-                    </SearchBar>
+                    {/* <SearchBar>
+                    </SearchBar> */}
                 </Box>
 
                 <div>
@@ -101,10 +101,11 @@ export default function Home() {
                                     name={course.name}
                                     teacher={course.teacher}
                                     id={course.id}
-                                    Description={course.description}
+                                    // description={course.description}
                                     price={course.price}
-                                    Rating={course.rating}
-                                    categories={course.categories[0].name}
+                                    rating={course.rating}
+                                    categories={course.categories}
+                                    image={course.image}
                                 />)
                         })
                     }
@@ -115,8 +116,8 @@ export default function Home() {
             <br />
 
             <div>
-                <Categorys>
-                </Categorys>
+                <Categories />
+
             </div>
 
             <div>
@@ -135,6 +136,6 @@ export default function Home() {
             </div>
 
         </div>
-        
+
     );
 }
