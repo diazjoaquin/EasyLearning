@@ -11,16 +11,16 @@ const CreateReviewPage = () => {
     })
     const [errors, setErrors] = useState({});
 
-    function validate(input) {
+    function validate(form) {
         let errors = {};
 
-        if (!input.title) {
+        if (!form.title) {
             errors.title = "Please add a title.";
         }
-        if (!input.score) {
+        if (!form.score) {
             errors.score = "Please add a score";
         }
-        if (!input.comments) {
+        if (!form.comments) {
             errors.comments = "Please add your comments";
         }
         return errors
@@ -40,12 +40,18 @@ const CreateReviewPage = () => {
     }
 
     async function handleSubmit(e) {
-        e.preventDefault();
         setForm({
             ...form,
             score: parseInt(form.score)
         })
-        await axios.post("/createReview", form);
+
+        let alert = await axios.post("/createReviewPage", form);
+
+        if(alert.data.msg === "error"){
+            alert("Solo peudes crear una reseña")
+        } else {
+            alert("Reseña creada")
+        }
     }
 
     return(

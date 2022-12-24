@@ -6,7 +6,7 @@ const createReviewPage = async (reviewData) => {
     if (!score || !title || !userId || !comments) {
       throw new Error("Falta enviar datos obligatorios de la reseña");
     }
-    let [review, boolean] = await ReviewPage.findOrCreate({
+    let [review, created] = await ReviewPage.findOrCreate({
       where: {
         userId,
       },
@@ -18,6 +18,10 @@ const createReviewPage = async (reviewData) => {
       },
     });
 
+    if (!created) {
+      return { msg: "error" };
+    }
+
     const user = await User.findOne({
       where: {
         id: userId,
@@ -25,6 +29,7 @@ const createReviewPage = async (reviewData) => {
     });
 
     await review.setUser(user);
+    return { msg: "ok" };
   } catch (error) {
     throw new Error(error);
   }

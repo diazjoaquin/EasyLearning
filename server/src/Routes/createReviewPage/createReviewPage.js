@@ -10,8 +10,7 @@ router.post("/", async (req, res) => {
       comments: req.body.comments,
       userId: req.body.userId,
     };
-    await createReviewPage(reviewData);
-    return res.json("review creada");
+    return res.json(await createReviewPage(reviewData));
   } catch (err) {
     return res.json(err.message);
   }
