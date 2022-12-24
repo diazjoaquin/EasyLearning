@@ -17,7 +17,6 @@ const getUsers = require("./getUsers/getUsers.js");
 const getAllTeachers = require("./getAllTeachers/getAllTeachers.js");
 const { updateUser } = require("./updateUser/controller.js");
 const getUserByEmail = require("./getUserByEmail/getUserByEmail.js");
-const { updateUser } = require("./updateUser/controller.js");
 const getAllReviewPage = require("./getAllReviewPage/getAllReviewPage.js");
 const createReviewPage = require("./createReviewPage/createReviewPage.js");
 
@@ -38,7 +37,6 @@ router.use("/getUsers", getUsers);
 router.use("/getAllTeachers", getAllTeachers);
 router.use("/updateUser", updateUser);
 router.use("/getUserByEmail", getUserByEmail);
-router.use("/updateUser", updateUser);
 router.use("/getAllReviewPage", getAllReviewPage);
 router.use("/createReviewPage", createReviewPage);
 
