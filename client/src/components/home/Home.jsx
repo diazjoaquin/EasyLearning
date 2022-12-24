@@ -13,7 +13,7 @@ import Categories from "../categories/Categories" //cambio de "categorys"
 import { useEffect } from "react";
 import { getAllCourses } from "../../redux/actions/index.js";
 import { useDispatch, useSelector } from "react-redux";
-import ReviewPage from "../reviewsPage/ReviewPage";
+import CreateReviewPage from "../createReviewPage/CreateReviewPage";
 
 
 export default function Home() {
@@ -129,6 +129,10 @@ export default function Home() {
             <div>
                 <Hola>
                 </Hola>
+            </div>
+            
+            <div>
+                <CreateReviewPage/>
             </div>
 
             <div>
