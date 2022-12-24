@@ -1,6 +1,6 @@
 // import style from './CourseCard.module.css';
 // import { useHistory } from 'react-router-dom
-import { Card, CardBody, CardFooter, Stack, Heading, Text, Divider, ButtonGroup, Button } from '@chakra-ui/react';
+import { Card, CardBody, CardFooter, Stack, Heading, Text, Divider, ButtonGroup, Button, Img } from '@chakra-ui/react';
 import { useDispatch } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
 import { addToCart, buyNow } from '../../redux/actions/index.js';
@@ -20,14 +20,10 @@ const CourseCard = ({ id, teacher, name, rating, price, categories, image }) => 
     // history.push('/purchase');
   }
 
-
   return (
     <Card maxW='sm'>
       <CardBody>
-        <img src={image} alt={`image-couse${id}`} />
-        {/* <iframe id="ytplayer" type="text/html" title="yt" width="300" height="200"
-                    src="http://www.youtube.com"
-                /> */}
+        <Img src={image} alt={`image-couse${id}`} />
         <Stack mt='6' spacing='3'>
           <Link to={`/detail/${id}`}>
             <Heading size='md'>{name}</Heading>

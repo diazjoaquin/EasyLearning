@@ -52,14 +52,6 @@ export default function SplitScreen() {
     // });
   }
 
-  //falta desloguear automatico si cierra la pestaña
-  //falta desloguear automatico si cierra la pestaña
-  //falta desloguear automatico si cierra la pestaña
-  //falta desloguear automatico si cierra la pestaña
-  //falta desloguear automatico si cierra la pestaña
-  //falta desloguear automatico si cierra la pestaña
-  //falta desloguear automatico si cierra la pestaña
-
   const { login } = useAuth();
 
   const handleSubmit = async () => {
