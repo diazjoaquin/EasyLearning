@@ -7,7 +7,7 @@ const Comments = ({ videoId, comments, update, setUpdate }) => {
   const userDB = JSON.parse(localStorage.getItem("user"))
   const [comment, setComment] = useState({
     videoId,
-    userId: userDB.id,
+    userId: userDB?.id,
     title: "",
     description: "",
   })
@@ -50,7 +50,7 @@ const Comments = ({ videoId, comments, update, setUpdate }) => {
         comments?.map((el, i) => {
           return (
             <div key={i}>
-              <h1>{userDB.fullName}</h1>
+              <h1>{userDB?.fullName}</h1>
               <p>Titulo: {el.title}</p>
               <p>{el.description}</p>
             </div>

@@ -12,6 +12,7 @@ import {
   MenuList,
   MenuItem,
   MenuGroup,
+  Box,
 } from '@chakra-ui/react'
 import { useSelector } from "react-redux";
 
@@ -20,6 +21,9 @@ export default function Navbar() {
   const cart = useSelector((state) => state.cart);
 
   const { user, logout, loading } = useAuth();
+
+  const userDB = user && JSON.parse(localStorage.getItem("user"))
+
   const handleLogout = async () => {
     await logout(auth);
     localStorage.removeItem("user")
@@ -77,9 +81,12 @@ export default function Navbar() {
         </Link> 
             {user &&
               <Menu>
-                <MenuButton >
-                  <Avatar src='https://bit.ly/broken-link' bg='teal.500' size='sm' />
-                </MenuButton>
+                <Box display='flex' gap='5'>
+                  <h1>{userDB?.fullName.split(" ")[0]}</h1>
+                  <MenuButton>
+                    <Avatar src='https://bit.ly/broken-link' bg='teal.500' size='sm' />
+                  </MenuButton>
+                </Box>
                 <MenuList>
                   <MenuGroup title='Profile'>
                     <Link to='/profile'>

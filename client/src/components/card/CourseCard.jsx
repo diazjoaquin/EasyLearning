@@ -1,5 +1,7 @@
-import React from "react";
-import { Card, CardBody, CardFooter, Stack, Heading, Text, Divider, ButtonGroup, Button } from '@chakra-ui/react';
+// import style from './CourseCard.module.css';
+// import { useHistory } from 'react-router-dom
+
+import { Card, CardBody, CardFooter, Stack, Heading, Text, Divider, ButtonGroup, Button, Img } from '@chakra-ui/react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
 import { addToCart, buyNow } from '../../redux/actions/index.js';
@@ -7,7 +9,8 @@ import { addToCart, buyNow } from '../../redux/actions/index.js';
 
 
 const CourseCard = ({ id, teacher, name, description, rating, price, categories, image }) => {
-   
+
+    const location = useLocation();
     const coursesInCart = useSelector((state) => state.cart)
     console.log(coursesInCart);
 
