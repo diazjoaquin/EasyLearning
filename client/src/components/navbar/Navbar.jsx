@@ -16,7 +16,6 @@ import {
   MenuGroup,
   Box,
 } from '@chakra-ui/react'
-import { useSelector } from "react-redux";
 
 export default function Navbar() {
 
