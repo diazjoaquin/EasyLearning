@@ -19,7 +19,6 @@ export default function Home() {
 
     // carrousel: 
     const courses = useSelector(state => state.courses);
-    console.log(courses);
     const [coursesPerPage] = useState(3);
     const [currentPage, setCurrentPage] = useState(1);
     const last = currentPage * coursesPerPage;

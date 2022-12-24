@@ -1,24 +1,29 @@
-// import style from './CourseCard.module.css';
-// import { useHistory } from 'react-router-dom
+import React from "react";
 import { Card, CardBody, CardFooter, Stack, Heading, Text, Divider, ButtonGroup, Button } from '@chakra-ui/react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { addToCart, buyNow } from '../../redux/actions/index.js';
+import { toast } from "react-toastify";
+
 
 const CourseCard = ({ id, teacher, name, description, rating, price, categories }) => {
+   
+    const coursesInCart = useSelector((state) => state.cart)
+    console.log(coursesInCart);
+
+   const handleAddToCart = () => {
+        dispatch(addToCart({
+            id,
+            teacher,
+            name,
+            description,
+            rating,
+            price,
+            categories
+        }));
+  }
 
     const dispatch = useDispatch();
-    // const history = useHistory();
-
-    const handleAddToCart = (idCourse) => {
-        dispatch(addToCart(idCourse));
-    }
-
-    const handleBuyNow = (idCourse) => {
-        dispatch(buyNow(idCourse));
-        // history.push('/purchase');
-    }
-
 
     return (
         <Card maxW='sm'>
@@ -50,12 +55,13 @@ const CourseCard = ({ id, teacher, name, description, rating, price, categories 
             <Divider />
             <CardFooter>
                 <ButtonGroup spacing='2'>
-                    <Button variant='solid' colorScheme='blue'
-                        onClick={handleBuyNow(id)}>
+                    <Button variant='solid' colorScheme='blue' >
+                        {/* // onClick={handleBuyNow(id)}> */}
+            
                         Buy now
                     </Button>
                     <Button variant='ghost' colorScheme='blue'
-                        onClick={handleAddToCart(id)}>
+                        onClick={() => handleAddToCart()}>
                         Add to cart
                     </Button>
                 </ButtonGroup>

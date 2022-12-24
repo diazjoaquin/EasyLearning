@@ -21,8 +21,6 @@ import {
 import { RiArrowGoBackLine} from "react-icons/ri";
 import CardReview from "../Review/cardReview";
 import PostReview from "../Review/postReview";
-import Checkout from "../paypal/checkout";
-
 
 export default function Detail() {
 
@@ -33,6 +31,7 @@ export default function Detail() {
   const [update, setUpdate] = useState();
 
   const myCourse = useSelector(state => state.courseDetail)
+  
   useEffect(() => {
     dispatch(getCourseDetail(id));
     dispatch(getReviews(id))
@@ -53,7 +52,6 @@ export default function Detail() {
           <Navbar />
           <Link style={{ textDecoration: 'none' }} to='/course'>
           <Button colorScheme='blue' leftIcon={<RiArrowGoBackLine />}>Back</Button>
-            {/* <button className="back">Back</button> */}
           </Link>
 
           {
@@ -178,10 +176,6 @@ export default function Detail() {
         setUpdate = {setUpdate}
         />
         </Box>
-        <Box>
-        <Checkout/>
-        </Box>
-        
         <Footer2 />
         </div >
       </>

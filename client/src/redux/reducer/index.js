@@ -4,18 +4,19 @@ import {
   GET_CATEGORIES,
   GET_COURSE_DETAIL,
   CLEAR_DETAIL,
-  ADD_TO_CART,
   BUY_NOW,
   ORDER_BY_NAME,
   ORDER_BY_RATING,
   CREATE_COURSE,
   DELETE_COURSE,
   ARCHIVE_COURSE,
-  POST_REVIEW,
-  DELETE_COURSE_FROM_CART,
   GET_REVIEWS,
   FILTERS,
   GET_ALL_USERS,
+  ADD_TO_CART,
+  DELETE_FROM_CART,
+ 
+ 
 } from "../actions";
 
 const initialState = {
@@ -23,11 +24,17 @@ const initialState = {
   filter: [],
   courseDetail: {},
   categories: [],
-  cart: [],
   allReviews: [],
   reviews: [],
   allUsers: [],
+  cart: [],
 };
+
+if(localStorage.getItem("cart")){
+  initialState.cart =  JSON.parse(localStorage.getItem("cart"));
+} else {
+  initialState.cart = [];
+}
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -57,20 +64,7 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         courseDetail: [],
       };
-    case ADD_TO_CART:
-      let addToCart = state.courses;
-      let cart = addToCart.filter(
-        (course) => course.idCourse === action.payload
-      );
-      return {
-        ...state,
-        cart: [...state.cart, cart],
-      };
-    case DELETE_COURSE_FROM_CART:
-      return {
-        ...state,
-        cart: state.cart.filter((course) => course.idCourse !== action.payload),
-      };
+
     case BUY_NOW:
       let buyNow = state.courses;
       let buy = buyNow.filter((course) => course.idCourse === action.payload);
@@ -78,6 +72,7 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         cart: buy,
       };
+
     case FILTERS:
       let filtros;
       if (action.payload.category) {
@@ -90,12 +85,11 @@ const rootReducer = (state = initialState, action) => {
           (e) => parseInt(action.payload.price) === e.price
         );
       }
-      // if (action.payload.teacher) {
-      // }
       return {
         ...state,
         courses: filtros,
       };
+
     case ORDER_BY_NAME:
       const byName =
         action.payload === "A-Z"
@@ -142,17 +136,22 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         reviews: action.payload
-        // allReviews: action.payload
       };
-    // case POST_REVIEW:
-    //   return {
-    //     ...state,
-    //   };
     case GET_ALL_USERS:
       return {
         ...state,
         allUsers: action.payload
-      }
+      };
+    case ADD_TO_CART:
+			return {
+        ...state,
+				cart: action.payload
+			};
+		case DELETE_FROM_CART:
+			return {
+        ...state,
+				cart: [...action.payload]
+			};
     default:
       return {
         ...state,
