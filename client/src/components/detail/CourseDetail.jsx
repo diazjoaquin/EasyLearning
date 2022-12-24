@@ -28,7 +28,6 @@ import {
   Divider,
   SimpleGrid
 } from "@chakra-ui/react";
-import Checkout from "../paypal/checkout";
 
 import { RiArrowGoBackLine } from "react-icons/ri";
 
@@ -154,10 +153,6 @@ export default function Detail() {
             setUpdate={setUpdate}
           />
         </Box>
-        <Box>
-          <Checkout />
-        </Box>
-
         <Footer2 />
       </div >
     </>
