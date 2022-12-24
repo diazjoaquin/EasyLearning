@@ -1,17 +1,19 @@
-import React from "react";
+import React, {useEffect}from "react";
 import PaypalCheckoutButton from "./paypalCheckoutButton";
 
-const Checkout = () => {
+const Checkout = ({totalCartPrice, description}) => {
     //en el componente carrito. 
     //orden de compra 
     const product = {
-        description: "Crush Course AWS by Bianca",
-        price: 2000
+        description: description,
+        price: totalCartPrice,
     };
 
     return (
         <div className="paypal-button-container">
-        <PaypalCheckoutButton product={product} />
+        <PaypalCheckoutButton 
+        product={product} 
+        />
       </div>
     )
 };
