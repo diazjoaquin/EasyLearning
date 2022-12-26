@@ -16,7 +16,7 @@ const getReviews = require("./getReviews/getReviews.js");
 const getUsers = require("./getUsers/getUsers.js");
 const getAllTeachers = require("./getAllTeachers/getAllTeachers.js");
 const getUserByEmail = require("./getUserByEmail/getUserByEmail.js");
-const { updateUser } = require("./updateUser/controller.js");
+const updateUser = require("./updateUser/updateUser.js");
 
 router.use("/getAllCourses", getAllCourses);
 router.use("/getDetail", getDetail);
