@@ -8,30 +8,30 @@ import { addToCart, buyNow } from '../../redux/actions/index.js';
 
 
 
-const CourseCard = ({ id, teacher, name, description, rating, price, categories, image }) => {
+const CourseCard = ({ id, teacherName, name, description, rating, price, categories, image }) => {
 
     const location = useLocation();
     const coursesInCart = useSelector((state) => state.cart)
     console.log(coursesInCart);
 
-   const handleAddToCart = () => {
+    const handleAddToCart = () => {
         dispatch(addToCart({
             id,
-            teacher,
+            teacherName,
             name,
             description,
             rating,
             price,
             categories
         }));
-  }
+    }
 
     const dispatch = useDispatch();
 
     return (
         <Card maxW='sm'>
             <CardBody>
-            <img src={image} alt={`image-couse${id}`} />
+                <img src={image} alt={`image-couse${id}`} />
                 <Stack mt='6' spacing='3'>
                     <Link to={`/detail/${id}`}>
                         <Heading size='md'>{name}</Heading>
@@ -46,32 +46,36 @@ const CourseCard = ({ id, teacher, name, description, rating, price, categories,
                         Categories: {categories?.map(e => `${e} `)}
                     </Text>
                     <Text>
-                        Teacher: {teacher}
+                        Teacher: {teacherName}
                     </Text>
-                    <Text>
-                        Rating: {rating}
-                    </Text>
+                    {
+                        rating
+                            ? <Text>
+                                Rating: {rating}
+                            </Text>
+                            : undefined
+                    }
                 </Stack>
             </CardBody>
             <Divider />
             <CardFooter>
-            {location.pathname !== "/profile" ?
-                <ButtonGroup spacing='2'>
-                    <Button variant='solid' colorScheme='blue' >
-                        {/* // onClick={handleBuyNow(id)}> */}
-            
-                        Buy now
+                {location.pathname !== "/profile" ?
+                    <ButtonGroup spacing='2'>
+                        <Button variant='solid' colorScheme='blue' >
+                            {/* // onClick={handleBuyNow(id)}> */}
+
+                            Buy now
+                        </Button>
+                        <Button variant='ghost' colorScheme='blue'
+                            onClick={() => handleAddToCart()}>
+                            Add to cart
+                        </Button>
+                    </ButtonGroup>
+                    :
+                    <Button variant='ghost' colorScheme='blue'>
+                        Modify Course
                     </Button>
-                    <Button variant='ghost' colorScheme='blue'
-                        onClick={() => handleAddToCart()}>
-                        Add to cart
-                    </Button>
-                </ButtonGroup>
-                     :
-                     <Button variant='ghost' colorScheme='blue'>
-                       Modify Course
-                     </Button>
-                   }
+                }
             </CardFooter>
         </Card>
     )

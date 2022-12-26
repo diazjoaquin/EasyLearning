@@ -99,7 +99,8 @@ export default function Home() {
                                 <CourseCard
                                     key={course.id}
                                     name={course.name}
-                                    teacher={course.teacher}
+                                    teacherId={course.teacherId}
+                                    teacherName={course.teacherName}
                                     id={course.id}
                                     // description={course.description}
                                     price={course.price}

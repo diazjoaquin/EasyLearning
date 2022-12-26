@@ -35,7 +35,7 @@ export default function Course() {
               <CourseCard
                 key={course.id}
                 name={course.name}
-                teacher={course.teacher}
+                teacherName={course.teacherName}
                 id={course.id}
                 Description={course.description}
                 price={course.price}
