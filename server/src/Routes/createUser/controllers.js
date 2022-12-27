@@ -10,11 +10,11 @@ const createUser = async ({
   try {
     //Create user
     const [userDB, createdUserDB] = await User.findOrCreate({
-      where: { fullName },
+      where: { emailAddress },
       defaults: {
         fullName,
         password,
-        phoneNumber,
+        phoneNumber: parseInt(phoneNumber),
         emailAddress,
         avatar,
       },
@@ -22,7 +22,7 @@ const createUser = async ({
 
     return createdUserDB
       ? "Usuario creado."
-      : "Ya existe un usuario con ese nombre.";
+      : "Ya existe un usuario con ese email.";
   } catch (error) {
     return error;
   }
