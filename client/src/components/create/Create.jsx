@@ -41,7 +41,8 @@ const Create = () => {
   const [input, setInput] = useState({
     name: "",
     description: "",
-    teacher: userDB?.fullName,
+    teacherId: userDB?.id,
+    teacherName: userDB?.fullName,
     video: [],
     category: [],
     price: null,
@@ -90,7 +91,8 @@ const Create = () => {
     formdata.append("image", file);
     formdata.append("name", input.name);
     formdata.append("description", input.description);
-    formdata.append("teacher", input.teacher);
+    formdata.append("teacherId", input.teacherId);
+    formdata.append("teacherName", input.teacherName);
     formdata.append("video", input.video);
     formdata.append("category", input.category);
     formdata.append("price", input.price);

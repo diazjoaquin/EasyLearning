@@ -84,17 +84,16 @@ const test = async () => {
         {
           name: "Marketing Research: support your marketing decisions",
           description: `The course is intended as a practical step by step guide to market research, to provide a structure for those who plan to undertake a research project or may wish to commission an agency to conduct research on their behalf. Each of the stages of the market research process are covered individually- starting with an understanding that market research is not the same as " see what you can find" on a particular topic or issue- but rather a structured and systematic approach to building a picture which can support business decisions, form part of a business development or act as a foundation for marketing strategy.`,
-          // category: 1,
-          teacher: "Fermin", //Desde el front llegaria como id y tenemos que enviarlo a la base de datos como nombre.
+          teacherId: 1,
+          teacherName: "Fermin",
           price: Math.round(Math.random() * 100),
         },
         {
           name: "Adventures in Classical Music—Music Appreciation for All!",
           description: `Music appreciation for the 21st century. Learn about Classical Music in the Western world from the Middle Ages to the present.  
-
         Youll begin with an introduction to the various elements of music -- for example, melody, rhythm, pitch and harmony – to give you the basics and vocabulary of music theory to understand and appreciate any type of music.  You’ll then explore the History of Classical Music through its various stylistic periods, from medieval chant right up to the current cutting edge. Anyone interested in classical music will benefit from this course. `,
-          // category: 2,
-          teacher: "Joaco", //Desde el front llegaria como id y tenemos que enviarlo a la base de datos como nombre.
+          teacherId: 2,
+          teacherName: "Joaco",
           price: Math.round(Math.random() * 100),
         },
         {
@@ -108,8 +107,8 @@ const test = async () => {
         A step-by-step guide on photoshop workspace, every single tool and its function(s). After we've established the essentials, we can now build on our foundation. In the next part of the photoshop course, we head into a basic Photoshop Portrait Retouching Course. From here the following lectures will deal with the more advanced photoshop techniques to really improve your Photoshop skills and the pace at which you work.
         
         I've added a bonus lecture towards the end of the course. That focuses on what & how when it comes to using a Wacom tablet in photoshop. I've also added a bonus lecture that focuses on the next steps. Where to find more free photoshop lectures and how to progress with your photoshop workflow.`,
-          // category: 3,
-          teacher: "Santi", //Desde el front llegaria como id y tenemos que enviarlo a la base de datos como nombre.
+          teacherId: 3,
+          teacherName: "Santi",
           price: Math.round(Math.random() * 100),
         },
         {
@@ -119,8 +118,8 @@ const test = async () => {
         And the graveyard of business startups is littered with companies that failed to grasp that most important, essential skill - the art of persuasion.
         
         That's what this course delivers in spades. The ability to get people to say 'YES'.`,
-          // category: 5,
-          teacher: "Franco", //Desde el front llegaria como id y tenemos que enviarlo a la base de datos como nombre.
+          teacherId: 4,
+          teacherName: "Franco",
           price: Math.round(Math.random() * 100),
         },
         {
@@ -130,8 +129,8 @@ const test = async () => {
         Learn how to use Linkedin for business, how to use Linkedin for job searches and get tips on how to use Linkedin for social recruiting in this comprehensive online social media training course packed with training videos and tutorials by the coauthor of the first book on B2B social media.
         
         Leverage the world's largest online professional network with more than 200 million members in over 200 countries and territories, 2 million company pages and corporate hiring managers from 85 of the Fortune 100.`,
-          // category: 5,
-          teacher: "Benja", //Desde el front llegaria como id y tenemos que enviarlo a la base de datos como nombre.
+          teacherId: 5,
+          teacherName: "Benja",
           price: Math.round(Math.random() * 100),
         },
       ];

@@ -20,7 +20,11 @@ module.exports = (sequelize) => {
         type: DataTypes.TEXT,
         allowNull: false,
       },
-      teacher: {
+      teacherId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      teacherName: {
         type: DataTypes.STRING,
         allowNull: false,
       },

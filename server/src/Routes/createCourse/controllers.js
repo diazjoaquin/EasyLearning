@@ -8,7 +8,8 @@ const createCourse = async (
     name,
     description,
     category,
-    teacher,
+    teacherId,
+    teacherName,
     price,
     video, //Array de objetos video {    name: '',    urlVideo: "",    description: "",    courseId: ""}
     image,
@@ -22,7 +23,8 @@ const createCourse = async (
       defaults: {
         name,
         description,
-        teacher,
+        teacherId: parseInt(teacherId),
+        teacherName,
         price,
       },
     });

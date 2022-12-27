@@ -35,8 +35,8 @@ const initialState = {
   teachers: [],
 };
 
-if(localStorage.getItem("cart")){
-  initialState.cart =  JSON.parse(localStorage.getItem("cart"));
+if (localStorage.getItem("cart")) {
+  initialState.cart = JSON.parse(localStorage.getItem("cart"));
 } else {
   initialState.cart = [];
 }
@@ -98,7 +98,9 @@ const rootReducer = (state = initialState, action) => {
           : (filtros = filtros.filter((e) => e.price > 50));
       }
       if (action.payload.teacher) {
-        filtros = filtros.filter((e) => action.payload.teacher === e.teacher);
+        filtros = filtros.filter(
+          (e) => action.payload.teacher === e.teacherName
+        );
       }
       return {
         ...state,
@@ -155,23 +157,23 @@ const rootReducer = (state = initialState, action) => {
     case GET_REVIEWS:
       return {
         ...state,
-        reviews: action.payload
+        reviews: action.payload,
       };
     case GET_ALL_USERS:
       return {
         ...state,
-        allUsers: action.payload
+        allUsers: action.payload,
       };
     case ADD_TO_CART:
-			return {
+      return {
         ...state,
-				cart: action.payload
-			};
-		case DELETE_FROM_CART:
-			return {
+        cart: action.payload,
+      };
+    case DELETE_FROM_CART:
+      return {
         ...state,
-				cart: [...action.payload]
-			};
+        cart: [...action.payload],
+      };
     case GET_ORDERS: //add
       return {
         ...state,

@@ -41,9 +41,9 @@ export default function Home() {
     // cards:
     const dispatch = useDispatch();
     useEffect(() => {
-        if (!courses.length) {
-            dispatch(getAllCourses())
-        }
+        // if (!courses.length) {
+        dispatch(getAllCourses())
+        // }
     }, [dispatch]);
 
 
@@ -100,7 +100,8 @@ export default function Home() {
                                 <CourseCard
                                     key={course.id}
                                     name={course.name}
-                                    teacher={course.teacher}
+                                    teacherId={course.teacherId}
+                                    teacherName={course.teacherName}
                                     id={course.id}
                                     // description={course.description}
                                     price={course.price}
