@@ -8,8 +8,6 @@ const createUser = async ({
   avatar,
 }) => {
   try {
-    emailAddress = emailAddress.toLowerCase();
-
     //Create user
     const [userDB, createdUserDB] = await User.findOrCreate({
       where: { emailAddress },

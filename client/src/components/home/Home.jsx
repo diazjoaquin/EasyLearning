@@ -13,6 +13,7 @@ import Categories from "../categories/Categories" //cambio de "categorys"
 import { useEffect } from "react";
 import { getAllCourses } from "../../redux/actions/index.js";
 import { useDispatch, useSelector } from "react-redux";
+import CreateReviewPage from "../createReviewPage/CreateReviewPage";
 
 
 export default function Home() {
@@ -40,9 +41,9 @@ export default function Home() {
     // cards:
     const dispatch = useDispatch();
     useEffect(() => {
-        if (!courses.length) {
-            dispatch(getAllCourses())
-        }
+        // if (!courses.length) {
+        dispatch(getAllCourses())
+        // }
     }, [dispatch]);
 
 
@@ -99,7 +100,8 @@ export default function Home() {
                                 <CourseCard
                                     key={course.id}
                                     name={course.name}
-                                    teacher={course.teacher}
+                                    teacherId={course.teacherId}
+                                    teacherName={course.teacherName}
                                     id={course.id}
                                     // description={course.description}
                                     price={course.price}
@@ -128,6 +130,10 @@ export default function Home() {
             <div>
                 <Hola>
                 </Hola>
+            </div>
+            
+            <div>
+                <CreateReviewPage/>
             </div>
 
             <div>

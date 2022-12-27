@@ -12,12 +12,13 @@ const createVideo = require("./createVideo/createVideo.js");
 const createReview = require("./createReview/createReview.js");
 const getAllCoursesByTeacher = require("./getAllCoursesByTeacher/getAllCoursesByTeacher.js");
 const getCoursesByStudent = require("./getCoursesByStudent/getCoursesByStudent.js");
-// const test = require("./test/controllers.js");
 const getReviews = require("./getReviews/getReviews.js");
 const getUsers = require("./getUsers/getUsers.js");
 const getAllTeachers = require("./getAllTeachers/getAllTeachers.js");
-const getUserByEmail = require("./getUserByEmail/getUserByEmail.js");
+const getAllReviewPage = require("./getAllReviewPage/getAllReviewPage.js");
+const createReviewPage = require("./createReviewPage/createReviewPage.js");
 const updateUser = require("./updateUser/updateUser.js");
+const getUserByEmail = require("./getUserByEmail/getUserByEmail.js");
 
 router.use("/getAllCourses", getAllCourses);
 router.use("/getDetail", getDetail);
@@ -34,8 +35,9 @@ router.use("/getCoursesByStudent", getCoursesByStudent);
 router.use("/getReviews", getReviews);
 router.use("/getUsers", getUsers);
 router.use("/getAllTeachers", getAllTeachers);
-router.use("/getUserByEmail", getUserByEmail);
 router.use("/updateUser", updateUser);
-// router.use("/test", test);
+router.use("/getUserByEmail", getUserByEmail);
+router.use("/getAllReviewPage", getAllReviewPage);
+router.use("/createReviewPage", createReviewPage);
 
 module.exports = router;

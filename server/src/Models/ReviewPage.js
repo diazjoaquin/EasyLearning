@@ -2,7 +2,7 @@ const { DataTypes, NOW } = require("sequelize");
 
 module.exports = (sequelize) => {
   sequelize.define(
-    "review",
+    "reviewPage",
     {
       title: {
         type: DataTypes.STRING,
@@ -20,10 +20,10 @@ module.exports = (sequelize) => {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
-      date: {
-        type: DataTypes.DATEONLY,
-        defaultValue: NOW,
-      },
+      // date: {
+      //   type: DataTypes.DATEONLY,
+      //   defaultValue: NOW,
+      // },
     },
     { timestamps: false }
   );

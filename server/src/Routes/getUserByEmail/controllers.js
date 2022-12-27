@@ -1,10 +1,10 @@
 const { User } = require("../../db.js");
 const { Op } = require("sequelize");
 
-async function getUserByEmail({ email }) {
+async function getUserByEmail({ email: emailAddress }) {
   try {
     const id = await User.findOne({
-      where: { emailAddress: email },
+      where: { emailAddress: { [Op.iLike]: emailAddress } },
     });
     return id;
   } catch (error) {

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { PayPalButtons } from "@paypal/react-paypal-js";
 
 const PaypalCheckoutButton = (props) => {
@@ -6,7 +6,6 @@ const PaypalCheckoutButton = (props) => {
 
     const [paidFor, setPaidFor] = useState(false); 
     const [error, setError] = useState(null); 
-
     const handleApprove = (orderId) => {
         //call backend function to fulfill order
 
@@ -28,6 +27,7 @@ const PaypalCheckoutButton = (props) => {
         alert(error);
       }
 
+      
     return (
     <PayPalButtons
     style={{
@@ -60,11 +60,16 @@ const PaypalCheckoutButton = (props) => {
                         value: product.price
                     }
                 }
-            ]
+            ] 
+            
           });
-        }}
+      }
+    }
+
     onApprove= {async(data, actions) => {
         const order = await actions.order.capture();
+        
+        console.log(order);
 
         handleApprove(data.orderID);
     }}
@@ -72,8 +77,11 @@ const PaypalCheckoutButton = (props) => {
         setError(err);
         console.error("PayPal Checkout onError", err);
       }}
+
+    forceReRender={[product.price]}
     />
 );
+
 };
 
 export default PaypalCheckoutButton;
