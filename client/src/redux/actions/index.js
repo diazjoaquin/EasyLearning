@@ -1,5 +1,5 @@
 import axios from "axios";
-
+import { toast } from "react-toastify";
 // courses
 export const GET_ALL_COURSES = "GET_ALL_COURSES";
 export const GET_COURSE_BY_NAME = "GET_COURSE_BY_NAME";
@@ -8,12 +8,6 @@ export const CLEAR_DETAIL = "CLEAR_DETAIL";
 export const GET_CATEGORIES = "GET_CATEGORIES";
 export const COURSES_BY_TEACHER = "COURSES_BY_TEACHER";
 export const GET_TEACHERS = "GET_TEACHERS";
-
-// cart:
-export const ADD_TO_CART = "ADD_TO_CART";
-export const BUY_NOW = "BUY_NOW";
-export const DELETE_COURSE_FROM_CART = "DELETE_COURSE_FROM_CART";
-export const GET_ORDERS = "GET_ORDERS";
 
 // filtering & ordering:
 export const FILTERS = "FILTERS";
@@ -26,18 +20,21 @@ export const CREATE_COURSE = "CREATE_COURSE";
 export const DELETE_COURSE = "DELETE_COURSE";
 export const ARCHIVE_COURSE = "ARCHIVE_COURSE";
 export const GET_REVIEWS = "GET_REVIEWS";
-export const CREATE_REVIEW = "CREATE_REVIEW";
 export const DELETE_REVIEW = "DELETE_REVIEW";
 export const GET_VIDEOS = "GET_VIDEOS";
 export const CREATE_VIDEO = "CREATE_VIDEO";
 export const DELETE_VIDEO = "DELETE_VIDEO";
-export const POST_REVIEW = "POST_REVIEW";
 
-//users 
+//users
 export const GET_ALL_USERS = "GET_ALL_USERS";
 
+//carrito
+export const BUY_NOW = "BUY_NOW";
+export const ADD_TO_CART = "ADD_TO_CART";
+export const DELETE_FROM_CART = "DELETE_FROM_CART";
+export const TOTAL_CART = "TOTAL_CART";
 
-
+export const GET_ORDERS = " GET_ORDERS";
 
 export const getAllCourses = () => async (dispatch) => {
   try {
@@ -99,24 +96,6 @@ export const getTeachers = () => async (dispatch) => {
   }
 };
 
-export const addToCart = (payload) => async (dispatch) => {
-  try {
-    return dispatch({
-      type: ADD_TO_CART,
-      payload,
-    });
-  } catch (error) {}
-};
-
-export const clearFromCart = (payload) => async (dispatch) => {
-  try {
-    return dispatch({
-      type: DELETE_COURSE_FROM_CART,
-      payload,
-    });
-  } catch (error) {}
-};
-
 export const buyNow = (payload) => async (dispatch) => {
   try {
     return dispatch({
@@ -126,18 +105,15 @@ export const buyNow = (payload) => async (dispatch) => {
   } catch (error) {}
 };
 
-export const getOrders = () => async(dispatch) =>{
-const orders = await axios.get("/orders")//hacer ruta
-try {
-  return dispatch({
-    type: GET_ORDERS,
-    payload: orders.data,
-  });
-} catch (error) {
-  
-}
-}
-
+export const getOrders = () => async (dispatch) => {
+  const orders = await axios.get("/orders"); //hacer ruta
+  try {
+    return dispatch({
+      type: GET_ORDERS,
+      payload: orders.data,
+    });
+  } catch (error) {}
+};
 
 export const filters = (payload) => async (dispatch) => {
   try {
@@ -205,25 +181,14 @@ export const deleteCourse = (id) => async (dispatch) => {
   } catch (error) {}
 };
 
-// export const postReview = (payload) => {
-//   return async function (dispatch) {
-//     try {
-//       var json = await axios.post("/createReview", payload);
-//       return json;
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   }
-// };
-
 export const getReviews = (id) => {
   return async function (dispatch) {
     try {
-      var reviews = await axios.get( "/getReviews/" + id );
+      var reviews = await axios.get("/getReviews/" + id);
       return dispatch({
-         type: GET_REVIEWS,
-         payload: reviews.data,
-      })
+        type: GET_REVIEWS,
+        payload: reviews.data,
+      });
     } catch (error) {
       console.log(error);
     }
@@ -248,10 +213,63 @@ export const getAllCoursesByTeacher = (userId) => {
 
 export const getAllUsers = () => {
   return async function (dispatch) {
-      var json = await axios.get('/getUsers');
-      return dispatch({
-          type: GET_ALL_USERS,
-          payload: json.data,
-        })
-      }
-    }
+    var json = await axios.get("/getUsers");
+    return dispatch({
+      type: GET_ALL_USERS,
+      payload: json.data,
+    });
+  };
+};
+
+export const addToCart = (data) => async (dispatch) => {
+  // if cart already exists in local storage, use it, otherwise set to empty array
+  const cart = localStorage.getItem("cart")
+    ? JSON.parse(localStorage.getItem("cart"))
+    : [];
+
+  // check if duplicates
+  const duplicates = cart.filter((cartItem) => cartItem.id === data.id);
+
+  // if no duplicates, proceed
+  if (duplicates.length === 0) {
+    // prep product data
+    const courseToAdd = {
+      ...data,
+      // count: 1,
+    };
+
+    // add product data to cart
+    cart.push(courseToAdd);
+    toast.success("Course added to cart", {
+      position: "bottom-left",
+    });
+
+    // add cart to local storage
+    localStorage.setItem("cart", JSON.stringify(cart));
+
+    // add cart to redux
+    dispatch({
+      type: ADD_TO_CART,
+      payload: cart,
+    });
+  } else {
+    toast.error("Course already in cart", {
+      position: "bottom-left",
+    });
+  }
+};
+
+export const deleteFromCart = (product) => async (dispatch) => {
+  const cart = localStorage.getItem("cart")
+    ? JSON.parse(localStorage.getItem("cart"))
+    : [];
+
+  const updatedCart = cart.filter((cartItem) => cartItem.id !== product.id);
+
+  localStorage.setItem("cart", JSON.stringify(updatedCart));
+
+  dispatch({
+    type: DELETE_FROM_CART,
+    payload: updatedCart,
+  });
+};

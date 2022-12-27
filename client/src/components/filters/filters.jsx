@@ -81,9 +81,9 @@ const Filters = ({ update, setUpdate }) => {
           <select name="category" onChange={handleChange}>
             <option id="1">Categories</option>
             {
-              categories?.map(e => {
+              categories?.map((e, i) => {
                 return (
-                  <option value={e}>{e}</option>
+                  <option key={`A${i}`} value={e}>{e}</option>
                 )
               })
             }
@@ -103,9 +103,9 @@ const Filters = ({ update, setUpdate }) => {
           <select name="teacher" onChange={handleChange}>
             <option id="3">Select teacher</option>
             {
-              teachers?.map(e => {
+              teachers?.map((e, i) => {
                 return (
-                  <option value={e}>{e}</option>
+                  <option key={`B${i}`} value={e}>{e}</option>
                 )
               })
             }

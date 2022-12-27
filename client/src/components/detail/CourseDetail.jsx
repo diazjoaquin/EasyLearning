@@ -43,7 +43,6 @@ export default function Detail() {
     dispatch(getCourseDetail(id));
     dispatch(getReviews(id))
   }, [dispatch, id, update]);
-  console.log("fermin", myCourse);
 
   const allReviews = useSelector((state) => state.reviews);
 
@@ -70,7 +69,8 @@ export default function Detail() {
                       <p>Descripcion:{myCourse?.description}</p>
                       <div className={style.miniature}>
                         <img src="https://www.unapiquitos.edu.pe/contenido/opiniones/recursos/docenteClases.jpg" />
-                        <p class="text-title">{`${"$" + myCourse?.price}`}</p>
+                        <p className="text-title">{`${"$" + myCourse?.price}`}</p>
+                        <p>Teacher:{myCourse?.teacherName}</p>
                         <ButtonGroup spacing="2">
                           <Button variant="solid" colorScheme="blue">
                             Buy now
@@ -90,71 +90,72 @@ export default function Detail() {
               </div>
             </div>
             <div>
-            <Accordion allowMultiple>
-                  <AccordionItem>
-                    <h2>
-                      <AccordionButton>
-                        <Button flex="1" variant="ghost" leftIcon>
-                          Video
-                        </Button>
-                        <AccordionIcon />
-                      </AccordionButton>
-                    </h2>
-                    <AccordionPanel pb={4}>
-                      {myCourse?.videos?.map((e, i) => (
-                        <Card
-                          direction={{ base: "column", sm: "row" }}
-                          overflow="hidden"
-                          variant="outline"
-                          key={i}
-                        >
-                          <Stack>
-                            <CardBody>
-                              <Heading size="sm">{e.title}</Heading>
-                              <Text py="2">
-                                {e.name}
-                                {e.description}
-                                <Link to={`/detailVideo/${e.id}`}>
-                                  <button>{e.urlVideo}</button>
-                                </Link>
-                                {e.teacher}
-                              </Text>
-                            </CardBody>
-                          </Stack>
-                        </Card>
-                      ))}
-                    </AccordionPanel>
-                  </AccordionItem>
-                </Accordion>
+              <Accordion allowMultiple>
+                <AccordionItem>
+                  <h2>
+                    <AccordionButton>
+                      <Button flex="1" variant="ghost" leftIcon>
+                        Video
+                      </Button>
+                      <AccordionIcon />
+                    </AccordionButton>
+                  </h2>
+                  <AccordionPanel pb={4}>
+                    {myCourse?.videos?.map((e, i) => (
+                      <Card
+                        direction={{ base: "column", sm: "row" }}
+                        overflow="hidden"
+                        variant="outline"
+                        key={i}
+                      >
+                        <Stack>
+                          <CardBody>
+                            <Heading size="sm">{e.title}</Heading>
+                            <Text py="2">
+                              {e.name}
+                              {e.description}
+                              <Link to={`/detailVideo/${e.courseId}/${e.id}`}>
+                                <button>{e.urlVideo}</button>
+                              </Link>
+                              {e.teacher}
+                            </Text>
+                          </CardBody>
+                        </Stack>
+                      </Card>
+                    ))}
+                  </AccordionPanel>
+                </AccordionItem>
+              </Accordion>
             </div>
           </div>
         ) : (
           <p>Loading..</p>
         )}
-         <Divider paddingTop={5}/>
-         <Heading padding={5}>Reviews</Heading>
-         <SimpleGrid 
-         spacing={4} templateColumns='repeat(auto-fill, minmax(200px, 1fr))' padding={5}
-         >
-          { allReviews ? allReviews.map((r, index) => {
-            return(
-            <CardReview
-            key={index}
-            user={r.user.fullName}
-            score={r.score}
-            comments={r.comments}
-            />)}) : <p>No reviews</p>}
+        <Divider paddingTop={5} />
+        <Heading padding={5}>Reviews</Heading>
+        <SimpleGrid
+          spacing={4} templateColumns='repeat(auto-fill, minmax(200px, 1fr))' padding={5}
+        >
+          {allReviews ? allReviews.map((r, index) => {
+            return (
+              <CardReview
+                key={index}
+                user={r.user.fullName}
+                score={r.score}
+                comments={r.comments}
+              />)
+          }) : <p>No reviews</p>}
         </SimpleGrid>
-        <Box 
-        padding={5}>
-        <PostReview
-        update = {update}
-        setUpdate = {setUpdate}
-        />
+        <Box
+          padding={5}>
+          <PostReview
+            update={update}
+            setUpdate={setUpdate}
+          />
         </Box>
         <Footer2 />
-        </div >
-      </>
-    )
-  }
-             
+      </div >
+    </>
+  )
+}
+

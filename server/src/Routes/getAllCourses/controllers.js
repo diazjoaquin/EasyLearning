@@ -14,10 +14,6 @@ const getAllCourses = async () => {
         {
           model: Review,
           attributes: ["id", "title", "comments", "score", "userId"],
-          // include: {
-          //   model: User,
-          //   attributes: ["fullName"],
-          // },
         },
         {
           model: Video,
@@ -29,7 +25,8 @@ const getAllCourses = async () => {
 
     coursesDB = coursesDB.map((e) => ({
       id: e.id,
-      teacher: e.teacher,
+      teacherId: e.teacherId,
+      teacherName: e.teacherName,
       name: e.name,
       description: e.description,
       rating: e.rating,
