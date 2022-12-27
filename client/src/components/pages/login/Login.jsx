@@ -1,34 +1,36 @@
 import {
-    Button,
-    Checkbox,
-    Flex,
-    FormControl,
-    FormLabel,
-    Heading,
-    Input,
-    Link,
-    Stack,
-    Image,
-  } from '@chakra-ui/react';
+  Button,
+  Checkbox,
+  Flex,
+  FormControl,
+  FormLabel,
+  Heading,
+  Input,
+  Link,
+  Stack,
+  Image,
+} from '@chakra-ui/react';
 import Footer2 from '../../footer/Footer2';
 import Navbar from '../../navbar/Navbar';
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useAuth } from '../../context/Auth-context.js';
+import axios from "axios"
+
 
 //firebase
 import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { auth, provider } from '../../../firebase-config';
 
-  
-  export default function SplitScreen() {
 
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [error, setError] = useState("");
-    const history = useHistory();
+export default function SplitScreen() {
 
-    // google access:
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const history = useHistory();
+
+  // google access:
   const handleGoogle = () => {
     // signInWithPopup(auth, provider)
     //   .then((result) => {
@@ -50,33 +52,43 @@ import { auth, provider } from '../../../firebase-config';
     // });
   }
 
-    const { login } = useAuth(); 
+  //falta desloguear automatico si cierra la pestaña
+  //falta desloguear automatico si cierra la pestaña
+  //falta desloguear automatico si cierra la pestaña
+  //falta desloguear automatico si cierra la pestaña
+  //falta desloguear automatico si cierra la pestaña
+  //falta desloguear automatico si cierra la pestaña
+  //falta desloguear automatico si cierra la pestaña
 
-    const handleSubmit =  async () => {
-      setError("");
-      try {
-        await login(email, password);
-        history.push("/");
-      } catch (error) {
-        setError(error.message);
-        console.log(error.message);
-      }
-    };
+  const { login } = useAuth();
 
-    return (
-      <div>
-        <Navbar/>
+  const handleSubmit = async () => {
+    setError("");
+    try {
+      await login(email, password);
+      let response = await axios.get(`http://localhost:3001/getUserByEmail?email=${email}`)
+      localStorage.setItem("user", JSON.stringify(response.data))
+      history.push("/");
+    } catch (error) {
+      setError(error.message);
+      console.log(error.message);
+    }
+  };
+
+  return (
+    <div>
+      <Navbar />
       <Stack minH={'100vh'} direction={{ base: 'column', md: 'row' }}>
         <Flex p={8} flex={1} align={'center'} justify={'center'}>
           <Stack spacing={4} w={'full'} maxW={'md'}>
             <Heading fontSize={'2xl'}>Log in to your account</Heading>
             <FormControl id="email">
               <FormLabel>Email address</FormLabel>
-              <Input type="email" onChange={(e) => setEmail(e.target.value)}/>
+              <Input type="email" onChange={(e) => setEmail(e.target.value)} />
             </FormControl>
             <FormControl id="password">
               <FormLabel>Password</FormLabel>
-              <Input type="password" onChange={(e) => setPassword(e.target.value)}/>
+              <Input type="password" onChange={(e) => setPassword(e.target.value)} />
             </FormControl>
             <Stack spacing={6}>
               <Stack
@@ -87,22 +99,22 @@ import { auth, provider } from '../../../firebase-config';
                 <Link color={'blue.500'}>Forgot password?</Link>
               </Stack>
               <Button colorScheme={'blue'} variant={'solid'}
-              onClick={handleSubmit}>
+                onClick={handleSubmit}>
                 Log in
               </Button>
               <Button variant={'solid'}
-              onClick={handleGoogle}>
+                onClick={handleGoogle}>
                 Log in with Google
               </Button>
               {error && <span>{error}</span>}
             </Stack>
             <Stack>
-            <Link to="/signup" color={'blue.500'}>Don´t have account?</Link>
+              <Link to="/signup" color={'blue.500'}>Don´t have account?</Link>
             </Stack>
           </Stack>
         </Flex>
         <Flex flex={1} >
-          <Image width="500px" height="500px" 
+          <Image width="500px" height="500px"
             alt={'Login Image'}
             objectFit={'cover'}
             src={
@@ -112,8 +124,8 @@ import { auth, provider } from '../../../firebase-config';
         </Flex>
       </Stack>
       <div>
-        <Footer2/>
+        <Footer2 />
       </div>
-      </div>
-    );
-  }
+    </div>
+  );
+}

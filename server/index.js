@@ -1,10 +1,12 @@
 const server = require("./src/app.js");
+require('dotenv').config();
 const { conn } = require("./src/db.js");
-const axios = require("axios");
+const { test } = require("./src/Routes/test/controllers.js");
+const port = process.env.PORT || 3001;
 
 conn.sync({ force: false }).then(async () => {
-  server.listen(3001, () => {
-    console.log("Server listening at 3001");
+  await test();
+  server.listen(port, () => {
+    console.log(`Server listening at ${port}`);
   });
-  await axios.post("http://localhost:3001/test");
 });

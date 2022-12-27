@@ -12,11 +12,12 @@ const createVideo = require("./createVideo/createVideo.js");
 const createReview = require("./createReview/createReview.js");
 const getAllCoursesByTeacher = require("./getAllCoursesByTeacher/getAllCoursesByTeacher.js");
 const getCoursesByStudent = require("./getCoursesByStudent/getCoursesByStudent.js");
-const test = require("./test/test.js");
+// const test = require("./test/controllers.js");
 const getReviews = require("./getReviews/getReviews.js");
 const getUsers = require("./getUsers/getUsers.js");
 const getAllTeachers = require("./getAllTeachers/getAllTeachers.js");
-const { updateUser } = require("./updateUser/controller.js");
+const getUserByEmail = require("./getUserByEmail/getUserByEmail.js");
+const updateUser = require("./updateUser/updateUser.js");
 
 router.use("/getAllCourses", getAllCourses);
 router.use("/getDetail", getDetail);
@@ -30,10 +31,11 @@ router.use("/createVideo", createVideo);
 router.use("/createReview", createReview);
 router.use("/getAllCoursesByTeacher", getAllCoursesByTeacher);
 router.use("/getCoursesByStudent", getCoursesByStudent);
-router.use("/test", test);
 router.use("/getReviews", getReviews);
-router.use("/getUsers", getUsers); 
+router.use("/getUsers", getUsers);
 router.use("/getAllTeachers", getAllTeachers);
+router.use("/getUserByEmail", getUserByEmail);
 router.use("/updateUser", updateUser);
+// router.use("/test", test);
 
 module.exports = router;
