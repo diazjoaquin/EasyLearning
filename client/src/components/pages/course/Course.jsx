@@ -17,16 +17,16 @@ export default function Course() {
   const [update, setUpdate] = useState(false);
 
   useEffect(() => {
-    if (!courses.length) {
-      dispatch(getAllCourses());
-    }
+    // if (!courses.length) {
+    dispatch(getAllCourses());
+    // }
   }, [dispatch])
 
 
   return (
     <div>
       <Navbar />
-      <SearchBar/>
+      <SearchBar />
       <Filters update={update} setUpdate={setUpdate} />
       <div className={style.cards}>
         {
@@ -35,7 +35,7 @@ export default function Course() {
               <CourseCard
                 key={course.id}
                 name={course.name}
-                teacher={course.teacher}
+                teacherName={course.teacherName}
                 id={course.id}
                 Description={course.description}
                 price={course.price}

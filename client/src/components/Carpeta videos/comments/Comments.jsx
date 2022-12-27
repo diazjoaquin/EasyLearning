@@ -1,12 +1,15 @@
 import { useState } from "react";
 import axios from "axios";
 import { Button } from "@chakra-ui/react";
+import { useParams } from "react-router-dom";
 
 
 const Comments = ({ videoId, comments, update, setUpdate }) => {
+  const params = useParams()
+  const { id } = params
   const userDB = JSON.parse(localStorage.getItem("user"))
   const [comment, setComment] = useState({
-    videoId,
+    videoId: id,
     userId: userDB?.id,
     title: "",
     description: "",
@@ -50,9 +53,11 @@ const Comments = ({ videoId, comments, update, setUpdate }) => {
         comments?.map((el, i) => {
           return (
             <div key={i}>
-              <h1>{userDB?.fullName}</h1>
+              <hr />
+              <h1>User: {el.userId}</h1>
               <p>Titulo: {el.title}</p>
-              <p>{el.description}</p>
+              <p>Comment: {el.description}</p>
+              <hr />
             </div>
           )
         })

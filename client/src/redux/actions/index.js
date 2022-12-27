@@ -9,9 +9,6 @@ export const GET_CATEGORIES = "GET_CATEGORIES";
 export const COURSES_BY_TEACHER = "COURSES_BY_TEACHER";
 export const GET_TEACHERS = "GET_TEACHERS";
 
-
-
-
 // filtering & ordering:
 export const FILTERS = "FILTERS";
 export const ORDER_BY_NAME = "ORDER_BY_NAME";
@@ -37,8 +34,7 @@ export const ADD_TO_CART = "ADD_TO_CART";
 export const DELETE_FROM_CART = "DELETE_FROM_CART";
 export const TOTAL_CART = "TOTAL_CART";
 
-export const GET_ORDERS = " GET_ORDERS"
-
+export const GET_ORDERS = " GET_ORDERS";
 
 export const getAllCourses = () => async (dispatch) => {
   try {
@@ -217,66 +213,63 @@ export const getAllCoursesByTeacher = (userId) => {
 
 export const getAllUsers = () => {
   return async function (dispatch) {
-      var json = await axios.get('/getUsers');
-      return dispatch({
-          type: GET_ALL_USERS,
-          payload: json.data,
-
-      })
-  }
+    var json = await axios.get("/getUsers");
+    return dispatch({
+      type: GET_ALL_USERS,
+      payload: json.data,
+    });
+  };
 };
 
-export const addToCart = data => async dispatch => {
-	// if cart already exists in local storage, use it, otherwise set to empty array
-	const cart = localStorage.getItem('cart')
-		? JSON.parse(localStorage.getItem('cart'))
-		: [];
+export const addToCart = (data) => async (dispatch) => {
+  // if cart already exists in local storage, use it, otherwise set to empty array
+  const cart = localStorage.getItem("cart")
+    ? JSON.parse(localStorage.getItem("cart"))
+    : [];
 
-	// check if duplicates
-	const duplicates = cart.filter(cartItem => cartItem.id === data.id);
+  // check if duplicates
+  const duplicates = cart.filter((cartItem) => cartItem.id === data.id);
 
-	// if no duplicates, proceed
-	if (duplicates.length === 0) {
-		// prep product data
-		const courseToAdd = {
-			...data,
-			// count: 1,
-		};
+  // if no duplicates, proceed
+  if (duplicates.length === 0) {
+    // prep product data
+    const courseToAdd = {
+      ...data,
+      // count: 1,
+    };
 
-		// add product data to cart
-		cart.push(courseToAdd);
+    // add product data to cart
+    cart.push(courseToAdd);
     toast.success("Course added to cart", {
       position: "bottom-left",
     });
 
-		// add cart to local storage
-		localStorage.setItem('cart', JSON.stringify(cart));
+    // add cart to local storage
+    localStorage.setItem("cart", JSON.stringify(cart));
 
-		// add cart to redux
-		dispatch({
-			type: ADD_TO_CART,
-			payload: cart,
-		});
-	} else {
-      toast.error("Course already in cart", {
+    // add cart to redux
+    dispatch({
+      type: ADD_TO_CART,
+      payload: cart,
+    });
+  } else {
+    toast.error("Course already in cart", {
       position: "bottom-left",
-      });
+    });
   }
 };
 
-export const deleteFromCart = product => async dispatch => {
-	const cart = localStorage.getItem('cart')
-		? JSON.parse(localStorage.getItem('cart'))
-		: [];
+export const deleteFromCart = (product) => async (dispatch) => {
+  const cart = localStorage.getItem("cart")
+    ? JSON.parse(localStorage.getItem("cart"))
+    : [];
 
-	const updatedCart = cart.filter(cartItem => cartItem.id !== product.id);
+  const updatedCart = cart.filter((cartItem) => cartItem.id !== product.id);
 
-	localStorage.setItem('cart', JSON.stringify(updatedCart));
+  localStorage.setItem("cart", JSON.stringify(updatedCart));
 
-	dispatch({
-		type: DELETE_FROM_CART,
-		payload: updatedCart,
-	});
+  dispatch({
+    type: DELETE_FROM_CART,
+    payload: updatedCart,
+  });
 };
-
-

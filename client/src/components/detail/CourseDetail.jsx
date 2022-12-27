@@ -70,7 +70,7 @@ export default function Detail() {
                       <div className={style.miniature}>
                         <img src="https://www.unapiquitos.edu.pe/contenido/opiniones/recursos/docenteClases.jpg" />
                         <p className="text-title">{`${"$" + myCourse?.price}`}</p>
-                        <p>Teacher:{myCourse?.teacher}</p>
+                        <p>Teacher:{myCourse?.teacherName}</p>
                         <ButtonGroup spacing="2">
                           <Button variant="solid" colorScheme="blue">
                             Buy now
