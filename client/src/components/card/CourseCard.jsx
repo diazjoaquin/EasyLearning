@@ -1,6 +1,5 @@
-// import style from './CourseCard.module.css';
+import style from './CourseCard.module.css';
 // import { useHistory } from 'react-router-dom
-
 import { Card, CardBody, CardFooter, Stack, Heading, Text, Divider, ButtonGroup, Button, Img } from '@chakra-ui/react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
@@ -31,7 +30,7 @@ const CourseCard = ({ id, teacherName, name, description, rating, price, categor
     return (
         <Card maxW='sm'>
             <CardBody>
-                <img src={image} alt={`image-couse${id}`} />
+                <div className={style.imgcont}><img src={image} alt={`image-couse${id}`} /></div>
                 <Stack mt='6' spacing='3'>
                     <Link to={`/detail/${id}`}>
                         <Heading size='md'>{name}</Heading>
@@ -39,11 +38,8 @@ const CourseCard = ({ id, teacherName, name, description, rating, price, categor
                     <Text>
                         {description}
                     </Text>
-                    <Text color='blue.600' fontSize='2xl'>
-                        ${price}
-                    </Text>
                     <Text>
-                        Categories: {categories?.map(e => `${e} `)}
+                        Categories: {categories?.map(e => `${e}. `)}
                     </Text>
                     <Text>
                         Teacher: {teacherName}
@@ -55,6 +51,9 @@ const CourseCard = ({ id, teacherName, name, description, rating, price, categor
                             </Text>
                             : undefined
                     }
+                    <Text color='blue.600' fontSize='2xl'>
+                        ${price}
+                    </Text>
                 </Stack>
             </CardBody>
             <Divider />
