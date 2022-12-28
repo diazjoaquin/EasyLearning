@@ -2,13 +2,16 @@ import React from 'react';
 import { Card, CardHeader, Heading, CardBody, Text, CardFooter, } from '@chakra-ui/react';
 import { StarIcon } from '@chakra-ui/icons'
 
-const CardReview = ({ user, score, comments}) => {
+const CardReview = ({ user, score, comments, title}) => {
     return (
         <>
         <Card>
         <CardHeader>
           <Heading size='md'>{user}</Heading>
         </CardHeader>
+        <CardBody>
+          <Text>{title}</Text>
+        </CardBody>
         <CardBody>
           <Text>{comments}</Text>
         </CardBody>
