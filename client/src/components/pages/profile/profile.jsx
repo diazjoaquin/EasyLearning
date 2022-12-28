@@ -1,58 +1,32 @@
 import {
-  Box, Heading, Grid, GridItem, Accordion,
-  AccordionItem,
-  AccordionButton,
-  AccordionIcon,
-  AccordionPanel,
-  FormControl,
-  FormLabel,
-  Input,
+  Box, Heading, Grid, GridItem,
   Button,
 } from '@chakra-ui/react'
 import Navbar from "../../navbar/Navbar"
 import Footer2 from "../../footer/Footer2.jsx"
 import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
-// import axios from "axios"
+import { Link, useHistory } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAllCoursesByTeacher } from '../../../redux/actions'
 import CourseCard from '../../card/CourseCard'
-
-
+import FormUpdateUser from '../../formUpdateUser/formUpdateUser'
 
 const Profile = () => {
+  const userDB = JSON.parse(localStorage.getItem("user"));
+  const history = useHistory();
+  const dispatch = useDispatch();
+  const [update, setUpdate] = useState(false);
+  let coursesCreateUser = useSelector(s => s.coursesCreateUser);
 
-  const dispatch = useDispatch()
-  const [user, setUser] = useState({
-    fullName: "",
-    password: "",
-    phoneNumber: "",
-    emailAddress: "",
-    avatar: ""
-  })
-  let coursesCreateUser = useSelector(s => s.coursesCreateUser)
-  if (coursesCreateUser.length > 3) {
-    coursesCreateUser = coursesCreateUser.slice(0, 3)
+  !userDB && history.push("/")
+
+  if (coursesCreateUser?.length > 3) {
+    coursesCreateUser = coursesCreateUser?.slice(0, 3)
   }
+
   useEffect(() => {
-    //Previamente, obtener el id del usuario logeado. Por el momento es hardcode
-    dispatch(getAllCoursesByTeacher(1))
-  }, [])
-
-  const handleChange = (e) => {
-    setUser({
-      ...user,
-      [e.target.name]: e.target.value
-    })
-  }
-
-  const handleSubmit = () => {
-    // await axios.patch("/userUpdate", user)
-  }
-
-  const handelDeletUser = () => {
-    // await axios.delete("/userDelete", user)
-  }
+    dispatch(getAllCoursesByTeacher(userDB?.id))
+  }, [update])
 
   return (
     <>
@@ -68,44 +42,19 @@ const Profile = () => {
             <Box>
               <Heading>Profile</Heading>
             </Box>
-            <Accordion allowMultiple>
-              <AccordionItem>
-                <h2>
-                  <AccordionButton>
-                    <Box as="span" flex='1' textAlign='left'>
-                      Configure User
-                    </Box>
-                    <AccordionIcon />
-                  </AccordionButton>
-                </h2>
-                <AccordionPanel pb={4}>
-                  <FormControl border='1px' borderColor='gray.400' display="flex" flexDirection="column" alignItems="center" borderRadius="10">
-                    <FormLabel>FullName:</FormLabel>
-                    <Input name="fullName" defaultValue={"Pepito Gomez"} onChange={handleChange} textAlign="center" w="90%" />
-                    <FormLabel>Password:</FormLabel>
-                    <Input name="password" defaultValue={"12345"} onChange={handleChange} textAlign="center" w="90%" />
-                    <FormLabel>PhoneNumber:</FormLabel>
-                    <Input name="phoneNumber" defaultValue={"123400123"} onChange={handleChange} textAlign="center" w="90%" />
-                    <FormLabel>EmailAddress:</FormLabel>
-                    <Input name="emailAddress" defaultValue={"pepitog@gmail.com"} onChange={handleChange} textAlign="center" w="90%" />
-                    <FormLabel>Avatar:</FormLabel>
-                    <Input name="avatar" defaultValue={"urlAvatar"} onChange={handleChange} textAlign="center" w="90%" />
-                    <Button colorScheme='pink' variant='solid' mt="5" onClick={handelDeletUser}>Delete Acount</Button>
-                    <br />
-                    <Button colorScheme='whatsapp' variant='solid' mb="5" onClick={handleSubmit}>Save changes</Button>
-                  </FormControl>
-                </AccordionPanel>
-              </AccordionItem>
-            </Accordion>
+            <FormUpdateUser update={update} setUpdate={setUpdate} />
           </ GridItem>
           <Box w="auto" display="flex" flexDirection="column" mt="10" border='1px' borderColor='gray.400' borderRadius="10">
             <Link to="/formCourse">
               <Button ml='2' mt='2' display="flex" justifySelf='flex-start' colorScheme='blackAlpha'>Create new course</Button>
             </Link>
             <GridItem gap='20' colSpan={2} display="flex" flexDirection="row" alignItems="center" justifyContent='center' mt="5" mb='5'>
-              {coursesCreateUser.map(e => (
-                <CourseCard key={e.id} id={e.id} teacher={e.teacher} name={e.name} description={e.description} rating={e.rating} price={e.price} image={e.image} categories={e.categories} />
-              ))}
+              {
+                coursesCreateUser.length ? coursesCreateUser?.map(e => (
+                  <CourseCard key={e.id} id={e.id} teacherName={e.teacherName} name={e.name} description={e.description} rating={e.rating} price={e.price} image={e.image} categories={e.categories} />
+                ))
+                  : undefined
+              }
             </ GridItem>
             <Box display="flex" flexDirection='row-reverse' >
               <Link to="/cursosCreados">
@@ -122,3 +71,4 @@ const Profile = () => {
 }
 
 export default Profile;
+

@@ -18,12 +18,6 @@ import {
   TagLabel,
   Tooltip,
   Select,
-  SimpleGrid,
-  Card,
-  CardHeader,
-  Heading,
-  CardBody,
-  CardFooter
 } from '@chakra-ui/react'
 import { ArrowBackIcon } from '@chakra-ui/icons'
 import axios from "axios"
@@ -40,14 +34,18 @@ import { validate, validateVideo } from "./validate";
 const Create = () => {
   const dispatch = useDispatch();
   const history = useHistory()
+  const userDB = JSON.parse(localStorage.getItem("user"))
   const categories = useSelector(s => s.categories)
+  const [file, setFile] = useState(null)
+
   const [input, setInput] = useState({
     name: "",
     description: "",
-    teacher: "Fermin", //De momento es hardcode, hasta que tengamos el login y sepamos cual es el user que esta creando el curso.
+    teacherId: userDB?.id,
+    teacherName: userDB?.fullName,
     video: [],
     category: [],
-    price: null
+    price: null,
   })
 
 
@@ -62,8 +60,11 @@ const Create = () => {
   const [errorsVideo, setErrorsVideo] = useState({})
 
   const handelChange = (e) => {
-    if (e.target.value === 'category') return
+    if (e.target.name === "Thumbnail") {
+      return setFile(e.target.files[0])
+    }
     if (e.target.name === "category") {
+      if (e.target.value === 'category') return
       if (!input.category.includes(e.target.value)) {
         setInput({
           ...input,
@@ -86,8 +87,21 @@ const Create = () => {
   }
 
   const handelSubmit = async () => {
-    const response = await axios.post("http://localhost:3001/createCourse", input)
-    alert(response.data)
+    const formdata = new FormData();
+    formdata.append("image", file);
+    formdata.append("name", input.name);
+    formdata.append("description", input.description);
+    formdata.append("teacherId", input.teacherId);
+    formdata.append("teacherName", input.teacherName);
+    formdata.append("video", input.video);
+    formdata.append("category", input.category);
+    formdata.append("price", input.price);
+
+
+    let response = await axios
+      .post("http://localhost:3001/createCourse", formdata)
+      .catch((err) => console.error(err));
+
     history.push("/profile")
   }
 
@@ -130,8 +144,9 @@ const Create = () => {
       dispatch(getCategories())
     setErrors(validate(input))
     setErrorsVideo(validateVideo(inputVideo, input))
-    console.log(errorsVideo);
   }, [dispatch, input, inputVideo])
+
+
 
   return (
     <div>
@@ -143,14 +158,15 @@ const Create = () => {
             <Link to='/profile'>
               <Button rightIcon={<ArrowBackIcon />} fontSize='30' size='30' colorScheme='teal' variant='outline' />
             </Link>
-            <h1>Falta hardcodear el teacher</h1>
-            <FormControl display='flex' flexDirection="column" alignItems="center" >
+            <FormControl >
               <FormLabel>Name:</FormLabel>
               <Input name="name" onChange={handelChange} autoComplete='off' />
               {errors["name"] && <Alert justifyContent='center' status='error' bg='transparent' color='red'>
                 <AlertIcon />
                 {errors.name}
               </Alert>}
+              <FormLabel>Thumbnail of course:</FormLabel>
+              <Input type="file" id="Thumbnail" name="Thumbnail" onChange={handelChange} />
               <FormLabel>Description:</FormLabel>
               <Input name="description" onChange={handelChange} autoComplete='off' />
               {errors["description"] && <Alert justifyContent='center' mt='3' mb='6' status='error' bg='transparent' color='red'>
@@ -185,13 +201,13 @@ const Create = () => {
                 {errors.category}
               </Alert>}
               <FormLabel>Price:</FormLabel>
-              <Input name="price" onChange={handelChange} autoComplete='off' />
+              <Input type='number' name="price" onChange={handelChange} autoComplete='off' />
               {errors["price"] && <Alert w='80%' justifyContent='center' status='error' bg='transparent' color='red'>
                 <AlertIcon />
                 {errors.price}
               </Alert>}
               <Box border="1px" borderRadius="20" p="10" my="10">
-                <form id="formVideo">
+                <FormControl id="formVideo">
                   <FormLabel display="flex" justifyContent="center">Video:</FormLabel>
                   <FormLabel>Name:</FormLabel>
                   <Input name="nameVideo" onChange={handelChangeVideo} />
@@ -213,11 +229,11 @@ const Create = () => {
                       Add Video
                     </Button>
                   </Box>
-                </form>
+                </FormControl>
 
               </Box>
-              <Text textAlign="center">(Todos estos datos se podran modificar luego de crear el curso.)</Text>
-              <Button mt={4} colorScheme='teal' onClick={handelSubmit} disabled={Object.keys(errors).length ? true : false}>
+              <Text textAlign="center">Todos estos datos se podran modificar luego de crear el curso.</Text>
+              <Button mt={4} colorScheme='teal' disabled={Object.keys(errors).length ? true : false} onClick={handelSubmit}>
                 Submit
               </Button>
             </FormControl>

@@ -4,19 +4,27 @@ import { useDispatch, useSelector } from "react-redux";
 import Navbar from "../navbar/Navbar";
 import Footer2 from "../footer/Footer2";
 import { RiArrowGoBackLine } from "react-icons/ri";
-import { Link, useHistory } from "react-router-dom";
-import { getCategories } from "../../redux/actions/index"
+import { Link, useHistory, useParams } from "react-router-dom";
+import { getCategories, getCourseDetail } from "../../redux/actions/index"
 import axios from "axios";
 import { validate, validateVideo } from "../create/validate";
+
 
 
 const prueba = { name: "Curso de santi el capo", video: <iframe width="560" height="315" src="https://www.youtube.com/embed/H_vEJt5Id_I" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>, description: "this is a video explaining how to crate a authenticator component in react using Firebase, Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsa facere ea officiis sapiente nemo. Repellendus enim esse libero ea sequi aspernatur quo! Corporis eveniet in id dolores! Nobis, illum corporis., Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsa facere ea officiis sapiente nemo. Repellendus enim esse libero ea sequi aspernatur quo! Corporis eveniet in id dolores! Nobis, illum corporis.", }
 
 
 export default function EditCourse() {
+
+    const { id, courseId } = useParams();
+
+
     const dispatch = useDispatch();
     const history = useHistory()
     const categories = useSelector(s => s.categories)
+    const myCourse = useSelector(state => state.courseDetail)
+
+    console.log("ger",myCourse);
 
     // definimos el estado del formulario con un objeto que contendrá las propiedades necesarias para almacenar los valores de los campos del formulario
     // aca deberiamos traernos los valores por id del curso
@@ -112,6 +120,8 @@ export default function EditCourse() {
 
 
     useEffect(() => {
+        dispatch(getCourseDetail(courseId));
+
         if (!categories.length)
             dispatch(getCategories())
         setErrors(validate(ecState))
@@ -135,11 +145,12 @@ export default function EditCourse() {
                             <Box padding="13px" borderWidth='1px' borderRadius='lg'>
                                 <Text> Course Name: <Button title="Un buen título puede atraer a más usuarios. Cuando escribas títulos para tus vídeos, te recomendamos que incluyas las palabras clave que creas que tu audiencia puede usar al buscar vídeos como los tuyos.">?</Button> </Text>
                                 <Input
+                                    defaultValue={myCourse?.name}
                                     type="text"
                                     id="name"
                                     name="name"
                                     fontSize='24px'
-                                    value={ecState.name}
+                                    
                                     onChange={handleChange}
                                 >
                                 </Input>
@@ -149,10 +160,10 @@ export default function EditCourse() {
                             <Box padding="13px" maxW="800px" borderWidth='1px' borderRadius='lg'>
                                 <Text>Description: <Button title="Escribir descripciones con palabras clave puede ayudar a que los usuarios encuentren más fácilmente tus vídeos cuando hagan búsquedas. Puedes resumir el contenido del vídeo y añadir algunas palabras clave al principio de la descripción.">?</Button></Text>
                                 <Input
+                                    defaultValue={myCourse?.description}
                                     type="text"
                                     id="coursedescription"
                                     name="description"
-                                    value={ecState.description}
                                     onChange={handleChange}
                                 >
                                 </Input>
@@ -249,12 +260,12 @@ export default function EditCourse() {
                         </form>
                     </Box>
                 </Box>
-                
+
             </Box>
 
             <Box>
                 <Center>
-                    <Link to={`/course`}>
+                    <Link to={`/profile`}>
                         <Button title="click to dischard changes">Cancel</Button>
                     </Link>
                     <Button type="submit" title="click to save changes">Save</Button>

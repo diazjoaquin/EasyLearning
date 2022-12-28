@@ -1,4 +1,4 @@
-const { DataTypes } = require("sequelize");
+const { DataTypes, NOW } = require("sequelize");
 
 module.exports = (sequelize) => {
   sequelize.define(
@@ -20,10 +20,10 @@ module.exports = (sequelize) => {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
-      // students: {
-      //   type: DataTypes.ARRAY(DataTypes.INTEGER),
-      //   allowNull: false,
-      // },
+      date: {
+        type: DataTypes.DATEONLY,
+        defaultValue: NOW,
+      },
     },
     { timestamps: false }
   );
