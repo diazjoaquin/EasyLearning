@@ -4,12 +4,12 @@ import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import Navbar from "../../navbar/Navbar";
 import Footer2 from "../../footer/Footer2";
-import { Box, Center, Text, Button, Drawer, DrawerBody, DrawerFooter, DrawerHeader, DrawerOverlay, DrawerContent, DrawerCloseButton, Input} from '@chakra-ui/react';
+import { Box, Center, Text, Button, Drawer, DrawerBody, DrawerFooter, DrawerHeader, DrawerOverlay, DrawerContent, DrawerCloseButton, Input } from '@chakra-ui/react';
 import Comments from "../comments/Comments";
 import { RiArrowGoBackLine } from "react-icons/ri";
 import { useDispatch, useSelector } from "react-redux";
 import { useDisclosure } from '@chakra-ui/react';
-import DrawerExample from "./VideoDrawer";
+
 
 
 
@@ -22,21 +22,21 @@ const dv = { nameVideo: "Curso Santi", urlVideo: "https://youtu.be/M7lc1UVf-VE",
 
 
 export default function DetailVideo() {
-    
+
     const dispatch = useDispatch();
-    
+
     const { id } = useParams();
-    
+
     const myCourse = useSelector(state => state.courseDetail)
     useEffect(() => {
         dispatch(getCourseDetail(id));
     }, [dispatch, id])
-   
+
 
 
     return (
         <>
-            
+
             <Navbar />
             <Link style={{ textDecoration: 'none' }} to='/course'>
                 <Button colorScheme='blue' leftIcon={<RiArrowGoBackLine />}>Back</Button>
@@ -51,8 +51,8 @@ export default function DetailVideo() {
                                 {/* {dv.nameVideo} */}
                                 {myCourse.name}
                             </Box>
-                            <br/>
-                            <br/>
+                            <br />
+                            <br />
                         </Center>
 
                         <Box >
@@ -87,10 +87,10 @@ export default function DetailVideo() {
 
             <Box>
                 <Center>
-                <DrawerExample/>
-                <Link style={{ textDecoration: 'none' }} to='/editcourse'>
-                <Button>Edit Course</Button>
-                </Link>
+
+                    <Link style={{ textDecoration: 'none' }} to={`/editcourse`} >
+                        <Button>Edit Course</Button>
+                    </Link>
                 </Center>
             </Box>
 
