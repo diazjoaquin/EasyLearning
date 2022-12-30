@@ -68,15 +68,16 @@ export default function DetailVideo() {
             </Box>
           </Box>
         </Box>
-      </Center>
-      {/* <Box>
+        {/* <Box>
                 <Center>
                 <DrawerExample/>
                 <Link style={{ textDecoration: 'none' }} to='/editcourse'>
                 <Button>Edit Course</Button>
                 </Link>
                 </Center>
-            </Box> */}
+              </Box> */}
+        
+      </Center>
       <Footer2 />
     </>
   )

@@ -71,9 +71,12 @@ const CourseCard = ({ id, teacherName, name, description, rating, price, categor
                         </Button>
                     </ButtonGroup>
                     :
-                    <Button variant='ghost' colorScheme='blue'>
-                        Modify Course
-                    </Button>
+                    <Link style={{ textDecoration: 'none' }} to={`/editcourse/${id}`} >
+
+                        <Button variant='ghost' colorScheme='blue'>
+                            Modify Course
+                        </Button>
+                    </Link>
                 }
             </CardFooter>
         </Card>
