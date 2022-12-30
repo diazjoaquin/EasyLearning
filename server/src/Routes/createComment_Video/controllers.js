@@ -1,6 +1,6 @@
 const { Comments } = require("../../db.js");
 
-const createCommentVideo = async ({ videoId, userId, title, description }) => {
+const createCommentVideo = async ({ videoId, userId, title, description, userName }) => {
   try {
     if (videoId && userId && title && description) {
       //Antes de crear el comentario, tengo que buscar en la tabla de comentarios si ese usuario no hizo ya un comentario respecto el curso.
@@ -12,6 +12,7 @@ const createCommentVideo = async ({ videoId, userId, title, description }) => {
           userId,
           title,
           description,
+          userName,
         },
       });
 

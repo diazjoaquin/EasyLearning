@@ -142,6 +142,7 @@ export default function Detail() {
                 key={index}
                 user={r.user.fullName}
                 score={r.score}
+                title={r.title}
                 comments={r.comments}
               />)
           }) : <p>No reviews</p>}
