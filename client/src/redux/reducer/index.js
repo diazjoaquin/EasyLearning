@@ -18,7 +18,8 @@ import {
   ADD_TO_CART,
   DELETE_FROM_CART,
   GET_TEACHERS,
-  GET_ORDERS, //add
+  GET_ORDERS,
+  COURSES_BY_STUDENT, //add
 } from "../actions";
 
 const initialState = {
@@ -32,6 +33,7 @@ const initialState = {
   cart: [],
   allOrders: [], //add
   coursesCreateUser: [],
+  purchasedCourses: [],
   teachers: [],
 };
 
@@ -183,6 +185,11 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         coursesCreateUser: action.payload,
+      };
+    case COURSES_BY_STUDENT:
+      return {
+        ...state,
+        purchasedCourses: action.payload,
       };
     default:
       return {

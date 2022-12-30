@@ -7,7 +7,7 @@ import Footer2 from "../../footer/Footer2.jsx"
 import { useEffect, useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { getAllCoursesByTeacher } from '../../../redux/actions'
+import { getAllCoursesByTeacher, getCoursesByStudent } from '../../../redux/actions'
 import CourseCard from '../../card/CourseCard'
 import FormUpdateUser from '../../formUpdateUser/formUpdateUser'
 
@@ -17,6 +17,7 @@ const Profile = () => {
   const dispatch = useDispatch();
   const [update, setUpdate] = useState(false);
   let coursesCreateUser = useSelector(s => s.coursesCreateUser);
+  let purchasedCourses = useSelector(s => s.purchasedCourses);
 
   !userDB && history.push("/")
 
@@ -24,8 +25,13 @@ const Profile = () => {
     coursesCreateUser = coursesCreateUser?.slice(0, 3)
   }
 
+  if (purchasedCourses?.length > 3) {
+    purchasedCourses = purchasedCourses?.slice(0, 3)
+  }
+
   useEffect(() => {
     dispatch(getAllCoursesByTeacher(userDB?.id))
+    dispatch(getCoursesByStudent(userDB?.id))
   }, [update])
 
   return (
