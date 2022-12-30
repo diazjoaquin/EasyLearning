@@ -1,7 +1,15 @@
 const { Course, Category, Rating } = require("../../db.js");
 const { Op } = require("sequelize");
 
-const updateCourse = async ({ id, name, description, category }) => {
+const updateCourse = async ({
+  image,
+  image_public_id,
+  name,
+  description,
+  price,
+  students,
+  category,
+}) => {
   try {
     let courseDB = await Course.findOne({
       where: { id },
@@ -9,6 +17,8 @@ const updateCourse = async ({ id, name, description, category }) => {
 
     if (name) courseDB.name = name;
     if (description) courseDB.description = description;
+    if (price) courseDB.price = price;
+    if (students) courseDB.students = students;
 
     //Category
     //RESPECTO A CATEGORIA, FALTARIA HACER LA LOGICA SI LA PERSONA LE QUIERE ELIMINAR UNA CATEGORIA AL CURSO
