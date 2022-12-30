@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import style from "./Navbar.module.css"
 import Logo from "../footer/easylearning.png"
 import { Button } from '@chakra-ui/react'
+import { signOut } from "firebase/auth";
 import { Avatar } from '@chakra-ui/react';
 import { useAuth } from "../context/Auth-context";
 import { auth } from "../../firebase-config";

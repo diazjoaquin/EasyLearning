@@ -49,6 +49,7 @@ export default function Detail() {
   return (
     <>
       <div>
+        
         <Navbar />
         <Link style={{ textDecoration: "none" }} to="/course">
           <Button colorScheme="blue" leftIcon={<RiArrowGoBackLine />}>
@@ -142,6 +143,7 @@ export default function Detail() {
                 key={index}
                 user={r.user.fullName}
                 score={r.score}
+                title={r.title}
                 comments={r.comments}
               />)
           }) : <p>No reviews</p>}

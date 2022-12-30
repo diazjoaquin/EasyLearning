@@ -1,48 +1,26 @@
-import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { getAllUsers } from "../../redux/actions/index.js"
-import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
 import { FormControl, FormLabel, Input, Button, FormErrorMessage, Select, Card } from '@chakra-ui/react';
-import { useParams } from "react-router-dom";
 
-const PostReview = ({ update, setUpdate }) => {
-    const userDB = JSON.parse(localStorage.getItem("user"));
-    const params = useParams();
-    const [input, setInput] = useState({
-        userId: userDB?.id,
-        courseId: parseInt(params.id),
-        score: 0,
-        title: '',
-        comments: ''
-    });
-
+const CreateReviewPage = () => {
+    const [form, setForm] = useState({
+        userId: 1,
+        score: null,
+        title: "",
+        comments: ""
+    })
     const [errors, setErrors] = useState({});
-    const dispatch = useDispatch();
 
-    const allUser = useSelector((state) => state.allUsers);
-
-
-    useEffect(() => {
-        dispatch(getAllUsers())
-        // if(usuario){
-        //     setInput({
-        //         userId: usuario.id,
-        //         courseId: courseId
-        //     })
-        // }
-    }, [dispatch, update]);
-
-
-    function validate(input) {
+    function validate(form) {
         let errors = {};
 
-        if (!input.title) {
+        if (!form.title) {
             errors.title = "Please add a title.";
         }
-        if (!input.score) {
+        if (!form.score) {
             errors.score = "Please add a score";
         }
-        if (!input.comments) {
+        if (!form.comments) {
             errors.comments = "Please add your comments";
         }
         return errors
@@ -50,28 +28,33 @@ const PostReview = ({ update, setUpdate }) => {
 
     function handleChange(e) {
         e.preventDefault();
-        setInput({
-            ...input,
+        setForm({
+            ...form,
             [e.target.name]: e.target.value,
         });
         setErrors(validate({
-            ...input,
+            ...form,
             [e.target.name]: e.target.value
 
         }));
     }
 
     async function handleSubmit(e) {
-        e.preventDefault();
-        setInput({
-            ...input,
-            score: parseInt(input.score)
-        })
-        await axios.post("/createReview", input);
-        setUpdate(!update)
+        // setForm({
+        //     ...form,
+        //     score: parseInt(form.score)
+        // })
+        console.log("form",form)
+        let alert = await axios.post("/createReviewPage", form);
+        console.log("alert",alert.data.msg)
+        if(alert.data.msg === "error"){
+            window.alert("Solo peudes crear una reseña")
+        } else if(alert.data.msg === "ok"){
+            window.alert("Reseña creada")
+        }
     }
 
-    return (
+    return(
         <Card
             maxW='sm'
             borderWidth='1px'
@@ -96,7 +79,7 @@ const PostReview = ({ update, setUpdate }) => {
                 <FormLabel>Add a title: </FormLabel>
                 <Input
                     type="text"
-                    value={input.title}
+                    value={form.title}
                     name="title"
                     onChange={(e) => handleChange(e)}
                 />
@@ -105,7 +88,7 @@ const PostReview = ({ update, setUpdate }) => {
                 <FormLabel>Add your comments: </FormLabel>
                 <Input
                     type="text"
-                    value={input.comments}
+                    value={form.comments}
                     name="comments"
                     onChange={(e) => handleChange(e)}
                 />
@@ -120,8 +103,7 @@ const PostReview = ({ update, setUpdate }) => {
                 > Submit </Button>
             </FormControl>
         </Card>
-
     )
 }
 
-export default PostReview;
+export default CreateReviewPage;

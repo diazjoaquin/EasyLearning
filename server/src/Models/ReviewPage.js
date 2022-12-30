@@ -1,25 +1,29 @@
-const { DataTypes } = require("sequelize");
+const { DataTypes, NOW } = require("sequelize");
 
 module.exports = (sequelize) => {
   sequelize.define(
-    "comments",
+    "reviewPage",
     {
       title: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      description: {
-        type: DataTypes.STRING,
+      comments: {
+        type: DataTypes.TEXT,
+        allowNull: false,
+      },
+      score: {
+        type: DataTypes.INTEGER,
         allowNull: false,
       },
       userId: {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
-      userName: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      }
+      // date: {
+      //   type: DataTypes.DATEONLY,
+      //   defaultValue: NOW,
+      // },
     },
     { timestamps: false }
   );

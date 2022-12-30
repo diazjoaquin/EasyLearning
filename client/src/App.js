@@ -14,6 +14,7 @@ import Cart from "./components/cartComponent/cart";
 import { AuthProvider } from "./components/context/Auth-context.js";
 // import { ProtectedRoutes } from "./components/context/ProtectedRoutes";
 import Profile from "./components/pages/profile/profile";
+import EditCourse from "./components/editcourse/EditCourse2";
 import Create from "./components/create/Create";
 import ShowMoreCourses from "./components/pages/profile/ShowMoreCourses";
 
@@ -40,6 +41,8 @@ function App() {
       <Route exact path="/detail/:id" component={Detail} />
       <Route exact path="/detailVideo/:courseId/:id" component={Videos} />
       <Route exact path="/profile" component={Profile} />
+      <Route exact path="/editcourse/:courseId" component={EditCourse}/>
+      
       <Route exact path="/formCourse" component={Create} />
       <Route exact path="/cursosCreados" component={ShowMoreCourses} />
     </ChakraProvider>
