@@ -18,11 +18,7 @@ const getAllTeachers = require("./getAllTeachers/getAllTeachers.js");
 const getAllReviewPage = require("./getAllReviewPage/getAllReviewPage.js");
 const createReviewPage = require("./createReviewPage/createReviewPage.js");
 const updateUser = require("./updateUser/updateUser.js");
-<<<<<<< HEAD
 const getUserByEmail = require("./getUserByEmail/getUserByEmail.js");
-=======
-const getUserByEmail = require("./getUserByEmail/getUserByEmail.js")
->>>>>>> origin/Franco
 
 router.use("/getAllCourses", getAllCourses);
 router.use("/getDetail", getDetail);
