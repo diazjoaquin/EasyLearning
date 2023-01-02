@@ -15,18 +15,18 @@ const getCourseById = async (id) => {
       //     model: Review,
       //     attributes: ["id", "title", "comments", "score"],
       //   },
-      //   {
-      //     model: Video,
-      //     attributes: [
-      //       "courseId",
-      //       "id",
-      //       "urlVideo",
-      //       "description",
-      //       "nameVideo",
-      //     ],
+        {
+          model: Video,
+          attributes: [
+            "courseId",
+            "id",
+            "urlVideo",
+            "description",
+            "nameVideo",
+          ],
       //     include: {
       //       model: Comments,
-      //     },
+          },
       //   },
       ],
       // order: [[{ model: Video }, "id", "ASC"]],
