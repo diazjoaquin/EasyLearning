@@ -4,12 +4,14 @@ import { getAllUsers } from "../../redux/actions/index.js"
 import { useDispatch, useSelector } from "react-redux";
 import { FormControl, FormLabel, Input, Button, FormErrorMessage, Select, Card } from '@chakra-ui/react';
 import { useParams } from "react-router-dom";
+import { toast } from "react-toastify";
+import { useAuth } from "../../components/context/Auth-context";
 
 const PostReview = ({ update, setUpdate }) => {
 
     const params = useParams();
     const [input, setInput] = useState({
-        userId: 5,
+        userId: 0,
         courseId: parseInt(params.id),
         score: 0,
         title: '',
@@ -19,18 +21,20 @@ const PostReview = ({ update, setUpdate }) => {
     const [errors, setErrors] = useState({});
     const dispatch = useDispatch();
 
+    const { user } = useAuth();
     const allUser = useSelector((state) => state.allUsers);
+    console.log(allUser)
 
+    const usuario = user && allUser.find(u => u.email === user.email)
 
     useEffect(() => {
-        dispatch(getAllUsers())
-        // if(usuario){
-        //     setInput({
-        //         userId: usuario.id,
-        //         courseId: courseId
-        //     })
-        // }
-    }, [dispatch, update]);
+        // dispatch(getAllUsers())
+        if(usuario){
+            setInput({
+                userId: usuario.id,
+            })
+        }
+    }, [ update ]);
 
 
     function validate(input) {
@@ -48,6 +52,7 @@ const PostReview = ({ update, setUpdate }) => {
         return errors
     }
 
+
     function handleChange(e) {
         e.preventDefault();
         setInput({
@@ -63,10 +68,18 @@ const PostReview = ({ update, setUpdate }) => {
 
     async function handleSubmit(e) {
         e.preventDefault();
+        if (input.title.length > 1
+            && !errors.hasOwnProperty("title") //devuelve un buleano si el objeto tiene la propiedad especificada 
+            && !errors.hasOwnProperty("score")
+            && !errors.hasOwnProperty("comments")
+        )
         setInput({
             ...input,
             score: parseInt(input.score)
         })
+        toast.success("Review submitted", {
+            position: "bottom-left",
+          });
         await axios.post("/createReview", input);
         setUpdate(!update)
     }
@@ -77,21 +90,22 @@ const PostReview = ({ update, setUpdate }) => {
             borderWidth='1px'
             borderRadius='lg'
             overflow='hidden'
+            padding='10px'
         >
             <FormControl onSubmit={(e) => handleSubmit(e)} isRequired>
                 <FormLabel>Rate: </FormLabel>
                 <Select
-                    placeholder='Select a rating'
                     name='score'
                     onChange={(e) => handleChange(e)}
-                >
-                    <option onChange={e => handleChange(e)} value={1}>1</option>
-                    <option onChange={e => handleChange(e)} value={2}>2</option>
-                    <option onChange={e => handleChange(e)} value={3}>3</option>
-                    <option onChange={e => handleChange(e)} value={4}>4</option>
-                    <option onChange={e => handleChange(e)} value={5}>5</option>
+                > 
+                    <option selected hidden disabled value="">Select a rating</option>
+                    <option onChange={e => handleChange(e)} value={1}>1 ⭐</option>
+                    <option onChange={e => handleChange(e)} value={2}>2 ⭐⭐</option>
+                    <option onChange={e => handleChange(e)} value={3}>3 ⭐⭐⭐</option>
+                    <option onChange={e => handleChange(e)} value={4}>4 ⭐⭐⭐⭐</option>
+                    <option onChange={e => handleChange(e)} value={5}>5 ⭐⭐⭐⭐⭐</option>
                 </Select>
-                <FormErrorMessage> {errors.score && (<p>{errors.score}</p>)}</FormErrorMessage>
+                <FormErrorMessage>{errors.score && (<p>{errors.score}</p>)}</FormErrorMessage>
 
                 <FormLabel>Add a title: </FormLabel>
                 <Input
@@ -112,10 +126,9 @@ const PostReview = ({ update, setUpdate }) => {
                 <FormErrorMessage> {errors.comments && (<p>{errors.comments}</p>)}</FormErrorMessage>
 
                 <Button
+                    disabled={input.errors}
                     mt={4}
                     colorScheme='teal'
-                    // isLoading={props.isSubmitting}
-                    // type='submit'
                     onClick={(e) => handleSubmit(e)}
                 > Submit </Button>
             </FormControl>

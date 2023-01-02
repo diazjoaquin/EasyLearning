@@ -1,10 +1,10 @@
 // import style from './CourseCard.module.css';
-// import { useHistory } from 'react-router-dom
-
+import { useHistory } from 'react-router-dom';
 import { Card, CardBody, CardFooter, Stack, Heading, Text, Divider, ButtonGroup, Button, Img } from '@chakra-ui/react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
 import { addToCart, buyNow } from '../../redux/actions/index.js';
+
 
 
 
@@ -13,6 +13,8 @@ const CourseCard = ({ id, teacher, name, description, rating, price, categories,
     const location = useLocation();
     const coursesInCart = useSelector((state) => state.cart)
     console.log(coursesInCart);
+
+    let history = useHistory();
 
    const handleAddToCart = () => {
         dispatch(addToCart({
@@ -56,12 +58,14 @@ const CourseCard = ({ id, teacher, name, description, rating, price, categories,
             <Divider />
             <CardFooter>
             {location.pathname !== "/profile" ?
+                
                 <ButtonGroup spacing='2'>
-                    <Button variant='solid' colorScheme='blue' >
-                        {/* // onClick={handleBuyNow(id)}> */}
-            
+                  <Link to={"/cart"}>
+                    <Button variant='solid' colorScheme='blue' 
+                        onClick={() => handleAddToCart()}>
                         Buy now
                     </Button>
+                  </Link>
                     <Button variant='ghost' colorScheme='blue'
                         onClick={() => handleAddToCart()}>
                         Add to cart

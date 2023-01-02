@@ -9,9 +9,6 @@ export const GET_CATEGORIES = "GET_CATEGORIES";
 export const COURSES_BY_TEACHER = "COURSES_BY_TEACHER";
 export const GET_TEACHERS = "GET_TEACHERS";
 
-
-
-
 // filtering & ordering:
 export const FILTERS = "FILTERS";
 export const ORDER_BY_NAME = "ORDER_BY_NAME";
@@ -37,8 +34,11 @@ export const ADD_TO_CART = "ADD_TO_CART";
 export const DELETE_FROM_CART = "DELETE_FROM_CART";
 export const TOTAL_CART = "TOTAL_CART";
 
-export const GET_ORDERS = " GET_ORDERS"
+export const GET_ORDERS = " GET_ORDERS";
 
+//Review
+export const GET_SCORES = "GET_SCORES";
+export const GET_DATE = "GET_DATE";
 
 export const getAllCourses = () => async (dispatch) => {
   try {
@@ -279,4 +279,24 @@ export const deleteFromCart = product => async dispatch => {
 	});
 };
 
+export const getScores = (payload) => async dispatch => {
+  try {
+    return dispatch({
+      type: GET_SCORES,
+      payload,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
 
+export const getDate = (payload) => async dispatch => {
+  try{
+    return dispatch ({
+      type: GET_DATE,
+      payload,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+}

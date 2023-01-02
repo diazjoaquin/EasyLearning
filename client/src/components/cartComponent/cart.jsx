@@ -35,7 +35,7 @@ const Cart = () => {
         <Box>
         <Navbar/>
         <Divider
-        paddingTop={10}
+        paddingTop={5}
         />
         <Box
         padding={10}
