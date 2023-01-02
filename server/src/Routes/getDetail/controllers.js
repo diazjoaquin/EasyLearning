@@ -11,25 +11,25 @@ const getCourseById = async (id) => {
           model: Category,
           attributes: ["name"],
         },
-        {
-          model: Review,
-          attributes: ["id", "title", "comments", "score"],
-        },
-        {
-          model: Video,
-          attributes: [
-            "courseId",
-            "id",
-            "urlVideo",
-            "description",
-            "nameVideo",
-          ],
-          include: {
-            model: Comments,
-          },
-        },
+      //   {
+      //     model: Review,
+      //     attributes: ["id", "title", "comments", "score"],
+      //   },
+      //   {
+      //     model: Video,
+      //     attributes: [
+      //       "courseId",
+      //       "id",
+      //       "urlVideo",
+      //       "description",
+      //       "nameVideo",
+      //     ],
+      //     include: {
+      //       model: Comments,
+      //     },
+      //   },
       ],
-      order: [[{ model: Video }, "id", "ASC"]],
+      // order: [[{ model: Video }, "id", "ASC"]],
     });
 
     return courseDB;
