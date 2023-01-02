@@ -6,10 +6,10 @@ import { FormControl, FormLabel, Input, Button, FormErrorMessage, Select, Card }
 import { useParams } from "react-router-dom";
 
 const PostReview = ({ update, setUpdate }) => {
-
+    const userDB = JSON.parse(localStorage.getItem("user"));
     const params = useParams();
     const [input, setInput] = useState({
-        userId: 5,
+        userId: userDB?.id,
         courseId: parseInt(params.id),
         score: 0,
         title: '',

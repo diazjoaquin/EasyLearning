@@ -8,11 +8,13 @@ const Comments = ({ videoId, comments, update, setUpdate }) => {
   const params = useParams()
   const { id } = params
   const userDB = JSON.parse(localStorage.getItem("user"))
+  console.log(userDB);
   const [comment, setComment] = useState({
     videoId: id,
     userId: userDB?.id,
     title: "",
     description: "",
+    userName: userDB?.fullName,
   })
 
   const handleChange = (e) => {
@@ -54,7 +56,7 @@ const Comments = ({ videoId, comments, update, setUpdate }) => {
           return (
             <div key={i}>
               <hr />
-              <h1>User: {el.userId}</h1>
+              <h1>User: {el.userName}</h1>
               <p>Titulo: {el.title}</p>
               <p>Comment: {el.description}</p>
               <hr />

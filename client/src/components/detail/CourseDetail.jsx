@@ -28,6 +28,7 @@ import {
   Divider,
   SimpleGrid
 } from "@chakra-ui/react";
+import { StarIcon } from '@chakra-ui/icons'
 
 import { RiArrowGoBackLine } from "react-icons/ri";
 
@@ -142,6 +143,7 @@ export default function Detail() {
                 key={index}
                 user={r.user.fullName}
                 score={r.score}
+                title={r.title}
                 comments={r.comments}
               />)
           }) : <p>No reviews</p>}
