@@ -29,7 +29,7 @@ const getCourseById = async (id) => {
           },
         },
       ],
-      // order: [[{ model: Video }, "id", "ASC"]],
+      order: [[{ model: Video }, "id", "ASC"]],
     });
 
     return courseDB;

@@ -20,10 +20,10 @@ module.exports = (sequelize) => {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
-      date: {
-        type: DataTypes.DATEONLY,
-        defaultValue: NOW,
-      },
+      // date: {
+      //   type: DataTypes.DATEONLY,
+      //   defaultValue: NOW,
+      // },
     },
     { timestamps: false }
   );
