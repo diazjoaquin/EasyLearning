@@ -28,6 +28,7 @@ import {
   Divider,
   SimpleGrid
 } from "@chakra-ui/react";
+import { StarIcon } from '@chakra-ui/icons'
 
 import { RiArrowGoBackLine } from "react-icons/ri";
 

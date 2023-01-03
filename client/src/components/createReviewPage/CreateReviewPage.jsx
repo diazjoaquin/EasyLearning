@@ -3,8 +3,9 @@ import { useState } from "react";
 import { FormControl, FormLabel, Input, Button, FormErrorMessage, Select, Card } from '@chakra-ui/react';
 
 const CreateReviewPage = () => {
+    const userDB = JSON.parse(localStorage.getItem("user"));
     const [form, setForm] = useState({
-        userId: 1,
+        userId: userDB?.id,
         score: null,
         title: "",
         comments: ""

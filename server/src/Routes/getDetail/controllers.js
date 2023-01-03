@@ -24,9 +24,9 @@ const getCourseById = async (id) => {
             "description",
             "nameVideo",
           ],
-          include: {
-            model: Comments,
-          },
+          // include: {
+          //   model: Comments,
+          // },
         },
       ],
       order: [[{ model: Video }, "id", "ASC"]],

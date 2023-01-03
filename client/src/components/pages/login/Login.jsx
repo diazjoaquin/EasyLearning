@@ -15,12 +15,8 @@ import Navbar from '../../navbar/Navbar';
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useAuth } from '../../context/Auth-context.js';
-import axios from "axios"
-
-
-//firebase
-import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
-import { auth, provider } from '../../../firebase-config';
+import axios from "axios";
+import Google from './Google.jsx';
 
 
 export default function SplitScreen() {
@@ -29,28 +25,6 @@ export default function SplitScreen() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const history = useHistory();
-
-  // google access:
-  const handleGoogle = () => {
-    // signInWithPopup(auth, provider)
-    //   .then((result) => {
-    //   // This gives you a Google Access Token. You can use it to access the Google API.
-    //   const credential = GoogleAuthProvider.credentialFromResult(result);
-    //   const token = credential.accessToken;
-    //   // The signed-in user info.
-    //   const user = result.user;
-    //   // ...
-    //   }).catch((error) => {
-    //   // Handle Errors here.
-    //   const errorCode = error.code;
-    //   const errorMessage = error.message;
-    //   // The email of the user's account used.
-    //   const email = error.customData.email;
-    //   // The AuthCredential type that was used.
-    //   const credential = GoogleAuthProvider.credentialFromError(error);
-    //   // ...
-    // });
-  }
 
   const { login } = useAuth();
 
@@ -95,7 +69,7 @@ export default function SplitScreen() {
                 Log in
               </Button>
               <Button variant={'solid'}
-                onClick={handleGoogle}>
+                onClick={Google}>
                 Log in with Google
               </Button>
               {error && <span>{error}</span>}
