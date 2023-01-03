@@ -69,9 +69,14 @@ const createCourse = async (
       }
     }
 
-    return createdCourse
-      ? "Curso creado exitosamente."
-      : "Ya existe un curso con ese nombre.";
+    const response = {};
+    response.course = course;
+
+    createdCourse
+      ? (response.msg = "Curso creado exitosamente.")
+      : (response.msg = "Ya existe un curso con ese nombre.");
+
+    return response;
     // } else {
     // return {
     // message:

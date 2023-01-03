@@ -102,21 +102,23 @@ const Create = () => {
       .post("http://localhost:3001/createCourse", formdata)
       .catch((err) => console.error(err));
 
-    history.push("/profile")
+    alert(response.data.msg)
+
+    history.push(`/editcourse/${response.data.course.id}`)
   }
 
-  const handelSubmitVideo = () => {
-    setInput({
-      ...input,
-      video: [...input.video, inputVideo]
-    })
-    setInputVideo({
-      nameVideo: '',
-      urlVideo: "",
-      description: "",
-    })
-    document.getElementById("formVideo").reset()
-  }
+  // const handelSubmitVideo = () => {
+  //   setInput({
+  //     ...input,
+  //     video: [...input.video, inputVideo]
+  //   })
+  //   setInputVideo({
+  //     nameVideo: '',
+  //     urlVideo: "",
+  //     description: "",
+  //   })
+  //   document.getElementById("formVideo").reset()
+  // }
 
   const handelDelete = (e) => {
     const name = e.target.name
@@ -129,15 +131,15 @@ const Create = () => {
     })
   }
 
-  const handelDeleteVideo = (name) => {
-    const index = input.video.findIndex(e => e.name === name)
-    let videos = input.video
-    videos.splice(index, 1)
-    setInput({
-      ...input,
-      video: videos
-    })
-  }
+  // const handelDeleteVideo = (name) => {
+  //   const index = input.video.findIndex(e => e.name === name)
+  //   let videos = input.video
+  //   videos.splice(index, 1)
+  //   setInput({
+  //     ...input,
+  //     video: videos
+  //   })
+  // }
 
   useEffect(() => {
     if (!categories.length)
@@ -149,12 +151,12 @@ const Create = () => {
 
 
   return (
-    <div>
+    <Box>
       <Navbar />
-      <Box display='flex'>
-        <Box display='flex' flexDirection='column' alignItems='center' justifyContent="center" my="5" w='45%'  >
+      <Box display='flex' width='100%' margin='0' justifyContent='center'>
+        <Box display='flex' flexDirection='column' alignItems='center' justifyContent="center" w='90%'  >
           <Text fontSize='3xl'>Create Course</Text>
-          <Box w="85%" border="1px" borderRadius="20" p="10">
+          <Box display='flex' flexDirection='column' justifyItems='center' w="100%" border="1px" borderRadius="20" p="10">
             <Link to='/profile'>
               <Button rightIcon={<ArrowBackIcon />} fontSize='30' size='30' colorScheme='teal' variant='outline' />
             </Link>
@@ -206,7 +208,7 @@ const Create = () => {
                 <AlertIcon />
                 {errors.price}
               </Alert>}
-              <Box border="1px" borderRadius="20" p="10" my="10">
+              {/* <Box border="1px" borderRadius="20" p="10" my="10">
                 <FormControl id="formVideo">
                   <FormLabel display="flex" justifyContent="center">Video:</FormLabel>
                   <FormLabel>Name:</FormLabel>
@@ -231,7 +233,7 @@ const Create = () => {
                   </Box>
                 </FormControl>
 
-              </Box>
+              </Box> */}
               <Text textAlign="center">Todos estos datos se podran modificar luego de crear el curso.</Text>
               <Button mt={4} colorScheme='teal' disabled={Object.keys(errors).length ? true : false} onClick={handelSubmit}>
                 Submit
@@ -239,7 +241,7 @@ const Create = () => {
             </FormControl>
           </Box>
         </Box >
-        <Box w='65%' my="5" display='flex' flexDirection='column' alignItems='center' justifyContent='center' h='-webkit-fit-content' >
+        {/* <Box w='65%' my="5" display='flex' flexDirection='column' alignItems='center' justifyContent='center' h='-webkit-fit-content' >
           <Text fontSize='3xl'>List Videos</Text>
           <Box border='1px' display='grid' gridTemplateColumns='repeat(2, 1fr)' gridAutoRows='200px' justifyContent='center' w='95%' borderRadius='25' py='5' gap='10'>
 
@@ -255,10 +257,10 @@ const Create = () => {
             }
 
           </Box>
-        </Box>
+        </Box> */}
       </Box >
       <Footer2 />
-    </div >
+    </Box>
   )
 }
 
