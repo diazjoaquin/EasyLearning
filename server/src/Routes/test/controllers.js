@@ -87,6 +87,8 @@ const test = async () => {
           teacherId: 1,
           teacherName: "Fermin",
           price: Math.round(Math.random() * 100),
+          image:
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR24NWufPfgGcSUVtrvswMJ2FLa4b4ukIud9w&usqp=CAU",
         },
         {
           name: "Adventures in Classical Music—Music Appreciation for All!",
@@ -95,6 +97,8 @@ const test = async () => {
           teacherId: 2,
           teacherName: "Joaco",
           price: Math.round(Math.random() * 100),
+          image:
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcToqWogOMB_wu-tFExETa1ANWYcUBPk2AkGsDJiS2My20ORzu4y9PxEhZh45rRuhEOeQWY&usqp=CAU",
         },
         {
           name: "Photoshop Master Course: From Beginner to Photoshop Pro",
@@ -110,6 +114,8 @@ const test = async () => {
           teacherId: 3,
           teacherName: "Santi",
           price: Math.round(Math.random() * 100),
+          image:
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj_GdHpmBeaN7ekedpCN9-M9Iijnty6ieCWvmwr6upJoAO2uuqC22faDeO8pBGczxy_lU&usqp=CAU",
         },
         {
           name: "Sales and Persuasion Skills for Startups",
@@ -121,6 +127,8 @@ const test = async () => {
           teacherId: 4,
           teacherName: "Franco",
           price: Math.round(Math.random() * 100),
+          iamge:
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5f3htE9RJTy9hJTdUbqd71HqZfoRmPeQuFw&usqp=CAU",
         },
         {
           name: "LinkedIn Training CourseLinkedIn Training",
@@ -132,6 +140,8 @@ const test = async () => {
           teacherId: 5,
           teacherName: "Benja",
           price: Math.round(Math.random() * 100),
+          image:
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSi6Cm0MTYcZHuMrVEPANdz9K-OEFt44rA2gg&usqp=CAU",
         },
       ];
 
