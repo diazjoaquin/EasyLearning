@@ -199,7 +199,7 @@ export const getAllCoursesByTeacher = (userId) => {
   return async function (dispatch) {
     try {
       const response = await axios.get(
-        `http://localhost:3001/getAllCoursesByTeacher/${userId}`
+        `/getAllCoursesByTeacher/${userId}`
       );
       return dispatch({
         type: COURSES_BY_TEACHER,

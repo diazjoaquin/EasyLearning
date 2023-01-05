@@ -58,7 +58,7 @@ const Profile = () => {
             </ GridItem>
             <Box display="flex" flexDirection='row-reverse' >
               <Link to="/cursosCreados">
-                <Button mb='2' mr='2' colorScheme='blackAlpha'>Show more</Button>
+                <Button mb='2' mr='2' colorScheme='blackAlpha' pos='relative' bottom='0'>Show more</Button>
               </Link>
             </Box>
           </Box>

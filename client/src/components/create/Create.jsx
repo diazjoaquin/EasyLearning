@@ -99,7 +99,7 @@ const Create = () => {
 
 
     let response = await axios
-      .post("http://localhost:3001/createCourse", formdata)
+      .post("/createCourse", formdata)
       .catch((err) => console.error(err));
 
     history.push("/profile")

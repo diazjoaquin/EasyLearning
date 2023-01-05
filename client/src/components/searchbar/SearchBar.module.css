@@ -1,15 +1,9 @@
 .searchbar {
     display: flex;
     justify-content: center;
-    flex-direction: row;
     align-items: center;
-    border-radius: 10px;
-    margin-right: 1px;
-    height: 50px;
-    width: 400px;
-    margin: 1px;
-    padding: 2px;
-    border: none;
+    padding-bottom: 20px;
+    width: 100%;
        
   }
 
