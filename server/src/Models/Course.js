@@ -40,6 +40,14 @@ module.exports = (sequelize) => {
         type: DataTypes.ARRAY(DataTypes.INTEGER),
         allowNull: true,
       },
+      archieved: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: true,
+      },
+      status: {
+        type: DataTypes.ENUM("BANNED", "APPROVED", "PENDING"),
+        defaultValue: "PENDING",
+      },
     },
     { timestamps: false }
   );

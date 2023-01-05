@@ -9,6 +9,9 @@ const updateCourse = async ({
   price,
   students,
   category,
+  id,
+  archieved,
+  status,
 }) => {
   try {
     let courseDB = await Course.findOne({
@@ -19,6 +22,8 @@ const updateCourse = async ({
     if (description) courseDB.description = description;
     if (price) courseDB.price = price;
     if (students) courseDB.students = students;
+    if (archieved !== undefined) courseDB.archieved = archieved;
+    if (status !== undefined) courseDB.status = status;
 
     //Category
     //RESPECTO A CATEGORIA, FALTARIA HACER LA LOGICA SI LA PERSONA LE QUIERE ELIMINAR UNA CATEGORIA AL CURSO
@@ -31,12 +36,12 @@ const updateCourse = async ({
         },
       });
 
-      courseDB.addCategory(categoryDB);
+      courseDB.addCategory("archieved:", categoryDB);
     }
 
-    await courseDB.save({ fields: ["name", "description"] });
+    await courseDB.save();
     await courseDB.reload();
-
+    return courseDB;
     return "Actualizado";
   } catch (error) {
     return error;

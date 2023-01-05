@@ -31,18 +31,22 @@ export default function Course() {
       <div className={style.cards}>
         {
           courses.map((course) => {
-            return (
-              <CourseCard
-                key={course.id}
-                name={course.name}
-                teacherName={course.teacherName}
-                id={course.id}
-                Description={course.description}
-                price={course.price}
-                rating={course.rating}
-                categories={course.categories}
-                image={course.image}
-              />)
+            if (course.archieved === false && course.status === "APPROVED") {
+              return (
+                <CourseCard
+                  key={course.id}
+                  name={course.name}
+                  teacherName={course.teacherName}
+                  id={course.id}
+                  Description={course.description}
+                  price={course.price}
+                  rating={course.rating}
+                  categories={course.categories}
+                  image={course.image}
+                  archieved={course.archieved}
+                  status={course.status}
+                />)
+            }
           })
         }
       </div>

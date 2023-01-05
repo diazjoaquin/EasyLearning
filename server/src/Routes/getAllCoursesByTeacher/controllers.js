@@ -29,6 +29,8 @@ const getAllCoursesByTeacher = async ({ id }) => {
       price: e.price,
       image: e.image,
       categories: e.categories.map((e) => e.name),
+      archieved: e.archieved,
+      status: e.status,
     }));
 
     return listCourses;
