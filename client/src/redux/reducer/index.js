@@ -18,8 +18,10 @@ import {
   ADD_TO_CART,
   DELETE_FROM_CART,
   GET_TEACHERS,
-  GET_ORDERS,
   COURSES_BY_STUDENT, //add
+  GET_ORDERS, //add
+  GET_SCORES,
+  GET_DATE,
 } from "../actions";
 
 const initialState = {
@@ -27,8 +29,8 @@ const initialState = {
   filter: [],
   courseDetail: {},
   categories: [],
-  allReviews: [],
   reviews: [],
+  allReviews: [],
   allUsers: [],
   cart: [],
   allOrders: [], //add
@@ -160,6 +162,7 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         reviews: action.payload,
+        allReviews: action.payload,
       };
     case GET_ALL_USERS:
       return {
@@ -191,6 +194,29 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         purchasedCourses: action.payload,
       };
+    case GET_SCORES:
+      const allReviews = state.allReviews;
+      const scores =
+        action.payload === "All"
+          ? allReviews
+          : allReviews?.filter((r) => r.score == parseInt(action.payload));
+
+      return {
+        ...state,
+        reviews: scores,
+      };
+
+    case GET_DATE:
+      const allReviews2 = state.allReviews;
+      const byDate =
+        action.payload === "Newest"
+          ? allReviews2.slice().sort((a, b) => (b.date > a.date ? 1 : -1))
+          : [...allReviews2];
+      return {
+        ...state,
+        reviews: byDate,
+      };
+
     default:
       return {
         ...state,

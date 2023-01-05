@@ -1,5 +1,5 @@
 import style from './CourseCard.module.css';
-// import { useHistory } from 'react-router-dom
+import { useHistory } from 'react-router-dom';
 import { Card, CardBody, CardFooter, Stack, Heading, Text, Divider, ButtonGroup, Button, Img } from '@chakra-ui/react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
@@ -7,16 +7,18 @@ import { addToCart, buyNow } from '../../redux/actions/index.js';
 
 
 
-const CourseCard = ({ id, teacherName, name, description, rating, price, categories, image }) => {
+
+const CourseCard = ({ id, teacher, teacherName, name, description, rating, price, categories, image }) => {
 
     const location = useLocation();
     const coursesInCart = useSelector((state) => state.cart)
     console.log(coursesInCart);
 
-    const handleAddToCart = () => {
+    let history = useHistory();
+
+   const handleAddToCart = () => {
         dispatch(addToCart({
             id,
-            teacherName,
             name,
             description,
             rating,
@@ -58,26 +60,25 @@ const CourseCard = ({ id, teacherName, name, description, rating, price, categor
             </CardBody>
             <Divider />
             <CardFooter>
-                {location.pathname !== "/profile" ?
-                    <ButtonGroup spacing='2'>
-                        <Button variant='solid' colorScheme='blue' >
-                            {/* // onClick={handleBuyNow(id)}> */}
-
-                            Buy now
-                        </Button>
-                        <Button variant='ghost' colorScheme='blue'
-                            onClick={() => handleAddToCart()}>
-                            Add to cart
-                        </Button>
-                    </ButtonGroup>
-                    :
-                    <Link style={{ textDecoration: 'none' }} to={`/editcourse/${id}`} >
-
-                        <Button variant='ghost' colorScheme='blue'>
-                            Modify Course
-                        </Button>
-                    </Link>
-                }
+            {location.pathname !== "/profile" ?
+                
+                <ButtonGroup spacing='2'>
+                  <Link to={"/cart"}>
+                    <Button variant='solid' colorScheme='blue' 
+                        onClick={() => handleAddToCart()}>
+                        Buy now
+                    </Button>
+                  </Link>
+                    <Button variant='ghost' colorScheme='blue'
+                        onClick={() => handleAddToCart()}>
+                        Add to cart
+                    </Button>
+                </ButtonGroup>
+                     :
+                     <Button variant='ghost' colorScheme='blue'>
+                       Modify Course
+                     </Button>
+                   }
             </CardFooter>
         </Card>
     )

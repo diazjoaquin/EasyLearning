@@ -37,6 +37,10 @@ export const TOTAL_CART = "TOTAL_CART";
 
 export const GET_ORDERS = " GET_ORDERS";
 
+//Review
+export const GET_SCORES = "GET_SCORES";
+export const GET_DATE = "GET_DATE";
+
 export const getAllCourses = () => async (dispatch) => {
   try {
     const all = await axios.get("/getAllCourses");
@@ -285,4 +289,26 @@ export const deleteFromCart = (product) => async (dispatch) => {
     type: DELETE_FROM_CART,
     payload: updatedCart,
   });
+};
+
+export const getScores = (payload) => async (dispatch) => {
+  try {
+    return dispatch({
+      type: GET_SCORES,
+      payload,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getDate = (payload) => async (dispatch) => {
+  try {
+    return dispatch({
+      type: GET_DATE,
+      payload,
+    });
+  } catch (error) {
+    console.log(error);
+  }
 };
