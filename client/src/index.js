@@ -12,7 +12,7 @@ import axios from "axios";
 import { FirebaseAppProvider } from "reactfire";
 import { firebaseConfig } from "./firebase-config";
 
-axios.defaults.baseURL = process.env.REACT_APP_API;
+// axios.defaults.baseURL = process.env.REACT_APP_API;
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
