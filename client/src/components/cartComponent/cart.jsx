@@ -13,7 +13,7 @@ import Navbar from "../navbar/Navbar";
 import Footer2 from "../footer/Footer2";
 import { Divider } from '@chakra-ui/react';
 import { toast } from "react-toastify";
-
+import CheckoutMercadoP from "../checkoutMercadoP/checkoutMercadoP"
 
 const Cart = () => {
 
@@ -121,6 +121,7 @@ const Cart = () => {
                         <Checkout 
                         totalCartPrice={totalCartPrice}
                         />
+                        <CheckoutMercadoP/>
                         </Box>
                         </Box>
             </VStack>
