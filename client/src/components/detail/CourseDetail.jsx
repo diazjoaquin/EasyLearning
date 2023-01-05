@@ -9,8 +9,8 @@ import Footer2 from "../footer/Footer2";
 import style from "../detail/CourseDetail.module.css";
 
 
-import CardReview from "../review/cardReview";
-import PostReview from "../review/postReview";
+import CardReview from "../Review/cardReview";
+import PostReview from "../Review/postReview";
 import {
   Box,
   Button,
