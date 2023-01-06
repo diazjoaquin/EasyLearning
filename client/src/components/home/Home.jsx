@@ -3,11 +3,11 @@ import Navbar from '../navbar/Navbar';
 import style from "./Home.module.css"
 // import SearchBar from "../searchbar/SearchBar.jsx";
 import CourseCard from '../card/CourseCard.jsx';
-import { Heading, Box, Text, Image } from '@chakra-ui/react'
+import { Heading, Box, Text, Image, Center } from '@chakra-ui/react'
 import mainpicture from "../../image/maintextimage.png"
 import { Icon, ArrowLeftIcon, ArrowRightIcon } from '@chakra-ui/icons';
 import Footer2 from "../footer/Footer2";
-import Hola from "../testimonials/Testimonials"
+import Speak from "../testimonials/Testimonials"
 import BasicStatistics from "../statistic/Statistics"
 import Categories from "../categories/Categories" //cambio de "categorys"
 import { useEffect } from "react";
@@ -126,14 +126,18 @@ export default function Home() {
                 <BasicStatistics>
                 </BasicStatistics>
             </div>
-
+                    <br/>
             <div>
-                <Hola>
-                </Hola>
+                <Speak/>
+                
             </div>
             
             <div>
+                <Box>
+                <Center>
                 <CreateReviewPage/>
+                </Center>
+                </Box>
             </div>
 
             <div>

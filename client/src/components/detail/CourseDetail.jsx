@@ -26,7 +26,8 @@ import {
   Text,
   ButtonGroup,
   Divider,
-  SimpleGrid
+  SimpleGrid,
+  Center
 } from "@chakra-ui/react";
 
 import { RiArrowGoBackLine } from "react-icons/ri";
@@ -63,14 +64,17 @@ export default function Detail() {
               <div>
                 <span className={style.titulo}>
                   {`${myCourse?.name}`} {`${myCourse?.rating}`}
+                  <br/>
                 </span>
+                <br/>
                 <div>
                   <div>
                     <div className={style.grid}>
-                      <p>Descripcion:{myCourse?.description}</p>
+                      <p>{myCourse?.description}</p>
+                      
                       <div className={style.miniature}>
                         <img src="https://www.unapiquitos.edu.pe/contenido/opiniones/recursos/docenteClases.jpg" />
-                        <p className="text-title">{`${"$" + myCourse?.price}`}</p>
+                        <p className="text-title">Price: {`${"$" + myCourse?.price}`}</p>
                         <p>Teacher:{myCourse?.teacherName}</p>
                         <ButtonGroup spacing="2">
                           <Button variant="solid" colorScheme="blue">
@@ -84,12 +88,11 @@ export default function Detail() {
                     </div>
                   </div>
                 </div>
-                <br />
-                <div></div>
-                <br />
-                <div></div>
+               
               </div>
             </div>
+            
+            {/* Videos del curso */}
             <div>
               <Accordion allowMultiple>
                 <AccordionItem>
@@ -133,7 +136,9 @@ export default function Detail() {
           <p>Loading..</p>
         )}
         <Divider paddingTop={5} />
-        <Heading padding={5}>Reviews</Heading>
+        
+        <Heading padding="5">Reviews</Heading>
+        <Center>
         <SimpleGrid
           spacing={4} templateColumns='repeat(auto-fill, minmax(200px, 1fr))' padding={5}
         >
@@ -149,12 +154,13 @@ export default function Detail() {
           }) : <p>No reviews</p>}
         </SimpleGrid>
         <Box
-          padding={5}>
+          padding="5">
           <PostReview
             update={update}
             setUpdate={setUpdate}
           />
         </Box>
+        </Center>
         <Footer2 />
       </div >
     </>

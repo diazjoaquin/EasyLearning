@@ -32,37 +32,41 @@ export default function About() {
                     </Box>
                     <Box padding="25px" width="500px">
                         <Text as="p" fontSize="lg">
-
-                            We aim to offer our customers a variety of the latest [PRODUCTS CATEGORY NAME].
-                            We’ve come a long way, so we know exactly which direction to take when supplying
-                            you with high quality yet budget-friendly products. We offer all of this while
-                            providing excellent customer service and friendly support.
-
+                            Welcome to our online learning platform. We are a company dedicated to providing our students with quality and affordable education through the internet.
                         </Text>
                     </Box>
-
                     <Box padding="25px" width="500px" display="flex" flex-direction="row">
-
                         <Text as="p" fontSize="lg">
-                            We always keep an eye on the latest trends in [PRODUCTS CATEGORY NAME] and put our customers’
-                            wishes first. That is why we have satisfied customers all over the world, and are thrilled to
-                            be a part of the [PRODUCTS CATEGORY NAME] industry.
-
-
+                            Our goal is to help people acquire new skills and knowledge to improve their careers and their lives. We offer a wide range of online courses in areas such as technology, business, creativity, and soft skills.
                         </Text>
                     </Box>
 
-
-                    <Box padding="25px" width="5000px">
+                    <Box padding="25px" width="500px">
 
                         <Text as="p" fontSize="lg">
-                            The interests of our customers are always top priority for us, so we hope you will enjoy our products as much as we enjoy making them available to you.
+                            We have a team of highly qualified and experienced teachers, who have been selected for their knowledge and their ability to communicate it clearly and effectively. All of our courses are designed with a practical focus and based on the learning methodology of problem-solving.
+                        </Text>
+                    </Box>
 
+                    <Box padding="25px" width="70%">
+
+                        <Text as="p" fontSize="lg">
+                            In addition to online courses, we also offer in-person workshops and online events to help our students connect with other professionals and share knowledge. We believe that learning is a continuous process and we are committed to providing our students with the tools and support they need to achieve their goals and succeed.
+                            Our platform is easy to use and available at all times, which means you can study at your own pace and from anywhere. Additionally, our support team is available to help you with any questions or issues you may have during your course.
+                        </Text>
+                    </Box>
+
+                    <Box padding="25px" width="70%">
+
+                        <Text as="p" fontSize="lg">
+                            If you are looking for an affordable and convenient way to acquire new skills and knowledge, be sure to check out our selection of online courses. We are confident you will find something that fits your needs and helps you reach your goals. We hope to see you soon on our online learning platform!
                         </Text>
                     </Box>
 
                 </Box>
 
+                    <br/>
+                    <br/>
 
 
 
@@ -71,7 +75,7 @@ export default function About() {
             </div>
             <div className={style.aboutcontent}>
 
-                <Box position="realtive">
+                <Box >
                     <Footer2>
                     </Footer2>
                 </Box>

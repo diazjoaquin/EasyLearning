@@ -19,7 +19,7 @@
 }
 
 .titulo{
-    font-size: large;
+    font-size: 36px;
     font-weight: bold;
     margin: 0 auto;
     padding: 10px;
@@ -30,6 +30,7 @@
 }
 
 .grid{
+    font-size: 24px;
     display: grid;
     grid-template-columns: 1fr 1fr;
     justify-content: space-between;
@@ -37,9 +38,13 @@
     justify-items: end;
 }
 
+.grid p {
+    font-size: x-large;
+}
+
 
 .miniature img{
-    width: 200px;
-    height: 100px;
+    width: 800px;
+    height: 400px;
 }
 

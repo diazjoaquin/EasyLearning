@@ -3,12 +3,16 @@ import { useState } from "react";
 import { FormControl, FormLabel, Input, Button, FormErrorMessage, Select, Card } from '@chakra-ui/react';
 
 const CreateReviewPage = () => {
+    
+    const userDB = JSON.parse(localStorage.getItem("user"));
     const [form, setForm] = useState({
-        userId: 1,
+        userId: userDB?.id,
         score: null,
         title: "",
         comments: ""
     })
+        
+    
     const [errors, setErrors] = useState({});
 
     function validate(form) {
@@ -50,16 +54,20 @@ const CreateReviewPage = () => {
         if(alert.data.msg === "error"){
             window.alert("Solo peudes crear una reseña")
         } else if(alert.data.msg === "ok"){
-            window.alert("Reseña creada")
+            window.alert("Reseña creada");
+            window.location.reload()
         }
+        
     }
 
     return(
-        <Card
+        <Card 
             maxW='sm'
             borderWidth='1px'
             borderRadius='lg'
             overflow='hidden'
+            padding="2%"
+            margin="1%"
         >
             <FormControl onSubmit={(e) => handleSubmit(e)} isRequired>
                 <FormLabel>Rate: </FormLabel>
