@@ -24,7 +24,6 @@ async function createReview(courseId, reviewData) {
         userId,
       },
     });
-    console.log(createNewReview, newReview);
     await course.addReview(newReview);
 
     const listReviewsCourse = await Review.findAll({

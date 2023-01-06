@@ -31,7 +31,7 @@ export default function Course() {
       <div className={style.cards}>
         {
           courses.map((course) => {
-            if (course.archieved === false && course.status === "APPROVED") {
+            if (course.archieved === false && course.status === "APPROVED" && course.videos.length) {
               return (
                 <CourseCard
                   key={course.id}

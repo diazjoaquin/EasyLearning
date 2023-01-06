@@ -5,9 +5,6 @@ import { addToCart, buyNow } from '../../redux/actions/index.js';
 import { InfoOutlineIcon } from '@chakra-ui/icons'
 import axios from 'axios';
 
-
-
-
 const CourseCard = ({ id, teacherName, name, description, rating, price, categories, image, videos, archieved, status }) => {
   const location = useLocation();
 
@@ -24,15 +21,12 @@ const CourseCard = ({ id, teacherName, name, description, rating, price, categor
   }
 
   const handleArchieved = async () => {
-
-
     const course = {
       id,
       archieved: !archieved
     }
     await axios.patch("http://localhost:3001/updateCourse", course).then(res => console.log(res.data.archieved))
     window.location.reload()
-    // console.log(aux);
   }
 
 
@@ -43,7 +37,7 @@ const CourseCard = ({ id, teacherName, name, description, rating, price, categor
         {
           location.pathname === "/profile"
             ?
-            status === "BANNED" ? <Text color='red' textAlign='center'> < InfoOutlineIcon mr='1' />Course banned for rule violation.</Text> : status === "PENDING" ? <Text color='red' textAlign='center'> < InfoOutlineIcon mr='1' />Course pending for approval.</Text> : !videos?.length ? <Text color='red'> < InfoOutlineIcon mr='1' />Course archived because it has no videos.</Text> : archieved ? <Text color='red' textAlign='center'> < InfoOutlineIcon mr='1' />Archived course.</Text> : undefined
+            status === "BANNED" ? <Text color='red' textAlign='center'> < InfoOutlineIcon mr='1' />Course banned for rule violation.</Text> : status === "PENDING" ? <Text color='red' textAlign='center'> < InfoOutlineIcon mr='1' />Course pending for approval.</Text> : videos?.length === 0 ? <Text color='red'> < InfoOutlineIcon mr='1' />Course archived because it has no videos.</Text> : archieved ? <Text color='red' textAlign='center'> < InfoOutlineIcon mr='1' />Archived course.</Text> : undefined
             : undefined
         }
         <img src={image} alt={`image-couse${id}`} />
@@ -98,7 +92,7 @@ const CourseCard = ({ id, teacherName, name, description, rating, price, categor
               <FormLabel htmlFor='email-alerts' mb='0'>
                 Public:
               </FormLabel>
-              <Switch isChecked={archieved} onChange={handleArchieved} id='course' />
+              <Switch isChecked={archieved ? false : true} onChange={handleArchieved} id='course' />
             </FormControl>
           </Box>
         }

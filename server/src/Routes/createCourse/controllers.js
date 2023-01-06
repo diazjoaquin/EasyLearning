@@ -32,18 +32,12 @@ const createCourse = async (
     //Si el curso fue creado
     if (createdCourse) {
       if (file?.path) {
-        //en el caso que sea una imagen
-        // console.log("ubi: ", file.destination);
         const result = await uploadImage(file.path);
-        // console.log("entra al if de files ", result);
         course.image = result.secure_url;
         course.image_public_id = result.public_id;
         fs.unlink(file.path);
         await course.save();
       } else if (image) course.image = image;
-      //en el caso que sea un video
-      // if (files?.video) {
-      // }
 
       //Agregando sus categorias al curso
       category = category.split(",");

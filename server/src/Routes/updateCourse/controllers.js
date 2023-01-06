@@ -51,22 +51,25 @@ const updateCourse = async ({
     //Category
     //RESPECTO A CATEGORIA, FALTARIA HACER LA LOGICA SI LA PERSONA LE QUIERE ELIMINAR UNA CATEGORIA AL CURSO
     //LA LOGICA DEL IF DE ABAJIO, ES SOLAMENTE POR SI LA PERDONA LE QUIERE AGREGAR UNA CATEGORIA.
-    if (categories.length) {
+    if (categories?.length) {
       await Category_Course.destroy({
         where: { courseId: id },
       });
-      console.log(categories);
+
       categories.map(async (e) => {
         const categoryDB = await Category.findOne({
           where: { name: e.name },
         });
-        console.log("asd");
-        console.log("cat", categoryDB);
+
         await courseDB.addCategory(categoryDB);
       });
     }
 
-    if (videos.length) {
+    if (videos?.length) {
+      await Video.destroy({
+        where: { courseId: id },
+      });
+
       videos.map((e) =>
         Video.create({
           nameVideo: e.nameVideo,

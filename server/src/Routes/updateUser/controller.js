@@ -5,7 +5,6 @@ const updateUser = async ({ id, fullName, password, phoneNumber, avatar }) => {
     const user = await User.findOne({
       where: { id },
     });
-    console.log(user);
     if (fullName) user.fullName = fullName;
     if (password) user.password = password;
     if (phoneNumber) user.phoneNumber = phoneNumber;

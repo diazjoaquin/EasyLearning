@@ -45,7 +45,6 @@ export default function EditCourse() {
     const value = e.target.value
     if (e.target.name === "category") {
       const index = myCourse?.categories.findIndex(e => e.name === value)
-      console.log(index);
       if (index === -1) {
         myCourse.categories.push({ name: value })
       }
@@ -72,10 +71,9 @@ export default function EditCourse() {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    console.log(myCourse);
     const response = await axios.patch("http://localhost:3001/updateCourse", myCourse);
-    // alert('¡Campos actualizados con exito!');
-    // history.push("/profile")
+    alert('¡Campos actualizados con exito!');
+    history.push("/profile")
   }
 
   const handelSubmitVideo = () => {

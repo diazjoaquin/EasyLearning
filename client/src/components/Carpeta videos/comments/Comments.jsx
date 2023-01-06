@@ -8,7 +8,6 @@ const Comments = ({ videoId, comments, update, setUpdate }) => {
   const params = useParams()
   const { id } = params
   const userDB = JSON.parse(localStorage.getItem("user"))
-  console.log(userDB);
   const [comment, setComment] = useState({
     videoId: id,
     userId: userDB?.id,
