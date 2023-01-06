@@ -106,10 +106,10 @@ export default function EditCourse() {
     setErrors(validate(myCourse))
   }
 
-  const handleSave = () => {
-    setErrors(validate(myCourse))
-    setErrorsVideo(validateVideo({ nameVideo, urlVideo, description }, myCourse))
-    setUpdate(!update)
+  const handelDeleteCourse = async () => {
+    await axios.get(`http://localhost:3001/deletedCourse/${myCourse.id}`)
+    alert('¡Curso eliminado con exito!');
+    history.push("/profile")
   }
 
   useEffect(() => {
@@ -318,10 +318,10 @@ export default function EditCourse() {
       <Box>
         <Center>
           <Link to={`/profile`}>
-            <Button title="click to dischard changes">Cancel</Button>
+            <Button title="Click to cancel changes">Cancel</Button>
           </Link>
-          <Button onClick={handleSubmit} title="click to save changes">Save</Button>
-          <Button title="click to save delete course" >Delete Coruse</Button>
+          <Button onClick={handleSubmit} title="Click to save changes">Save</Button>
+          <Button onClick={handelDeleteCourse} title="Click to save delete course" >Delete Coruse</Button>
         </Center>
       </Box>
       <Footer2 />
