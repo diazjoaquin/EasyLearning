@@ -1,9 +1,7 @@
-const { Router } = require("express");
-const router = Router();
-const {postMercadoPago} = require("./controllers")
+// const { Router } = require("express");
+// const router = Router();
+// const {postMercadoPago} = require("./controllers")
 
-router.post("/", postMercadoPago)
+// router.post("/", postMercadoPago)
 
-
-
-module.exports = router;
+// module.exports = router;
