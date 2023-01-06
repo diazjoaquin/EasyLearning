@@ -16,6 +16,7 @@ import { AuthProvider } from "./components/context/Auth-context.js";
 import Profile from "./components/pages/profile/profile";
 import Create from "./components/create/Create";
 import ShowMoreCourses from "./components/pages/profile/ShowMoreCourses";
+import Verification from "./components/pages/signup/Verification.jsx";
 
 //Paypal
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
@@ -41,7 +42,8 @@ function App() {
       <Route exact path="/detailVideo/:courseId/:id" component={Videos} />
       <Route exact path="/profile" component={Profile} />
       <Route exact path="/formCourse" component={Create} />
-      <Route exact path="/cursosCreados" component={ShowMoreCourses} />
+      <Route exact path="/cursosCreados" component={ShowMoreCourses}/>
+      <Route exact path="/verification" component={Verification}/>
     </ChakraProvider>
     </PayPalScriptProvider>
     </AuthProvider>

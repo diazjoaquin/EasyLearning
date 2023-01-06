@@ -62,7 +62,6 @@ const CourseCard = ({ id, teacherName, name, description, rating, price, categor
                     <ButtonGroup spacing='2'>
                         <Button variant='solid' colorScheme='blue' >
                             {/* // onClick={handleBuyNow(id)}> */}
-
                             Buy now
                         </Button>
                         <Button variant='ghost' colorScheme='blue'
