@@ -1,5 +1,7 @@
+import style from './CourseCard.module.css';
+import { useHistory } from 'react-router-dom';
 import { Card, CardBody, CardFooter, Stack, Heading, Text, Divider, ButtonGroup, Button, FormControl, FormLabel, Switch, Box } from '@chakra-ui/react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
 import { addToCart, buyNow } from '../../redux/actions/index.js';
 import { InfoOutlineIcon } from '@chakra-ui/icons'
@@ -7,6 +9,7 @@ import axios from 'axios';
 
 const CourseCard = ({ id, teacherName, name, description, rating, price, categories, image, videos, archieved, status }) => {
   const location = useLocation();
+  const dispatch = useDispatch();
 
   const handleAddToCart = () => {
     dispatch(addToCart({
@@ -19,6 +22,8 @@ const CourseCard = ({ id, teacherName, name, description, rating, price, categor
       categories
     }));
   }
+  const coursesInCart = useSelector((state) => state.cart)
+  let history = useHistory();
 
   const handleArchieved = async () => {
     const course = {
@@ -30,7 +35,6 @@ const CourseCard = ({ id, teacherName, name, description, rating, price, categor
   }
 
 
-  const dispatch = useDispatch();
   return (
     <Card maxW='sm'>
       <CardBody>
@@ -40,6 +44,7 @@ const CourseCard = ({ id, teacherName, name, description, rating, price, categor
             status === "BANNED" ? <Text color='red' textAlign='center'> < InfoOutlineIcon mr='1' />Course banned for rule violation.</Text> : status === "PENDING" ? <Text color='red' textAlign='center'> < InfoOutlineIcon mr='1' />Course pending for approval.</Text> : videos?.length === 0 ? <Text color='red'> < InfoOutlineIcon mr='1' />Course archived because it has no videos.</Text> : archieved ? <Text color='red' textAlign='center'> < InfoOutlineIcon mr='1' />Archived course.</Text> : undefined
             : undefined
         }
+
         <img src={image} alt={`image-couse${id}`} />
         <Stack mt='6' spacing='3'>
           <Link to={`/detail/${id}`}>
@@ -47,9 +52,6 @@ const CourseCard = ({ id, teacherName, name, description, rating, price, categor
           </Link>
           <Text>
             {description}
-          </Text>
-          <Text color='blue.600' fontSize='2xl'>
-            ${price}
           </Text>
           <Text>
             Categories: {categories?.map(e => `${e} `)}
@@ -64,17 +66,25 @@ const CourseCard = ({ id, teacherName, name, description, rating, price, categor
               </Text>
               : undefined
           }
+          <Text color='blue.600' fontSize='2xl'>
+            ${price}
+          </Text>
+
+
+
         </Stack>
       </CardBody>
       <Divider />
       <CardFooter>
         {location.pathname !== "/profile" ?
-          <ButtonGroup spacing='2'>
-            <Button variant='solid' colorScheme='blue' >
-              {/* // onClick={handleBuyNow(id)}> */}
 
-              Buy now
-            </Button>
+          <ButtonGroup spacing='2'>
+            <Link to={"/cart"}>
+              <Button variant='solid' colorScheme='blue'
+                onClick={() => handleAddToCart()}>
+                Buy now
+              </Button>
+            </Link>
             <Button variant='ghost' colorScheme='blue'
               onClick={() => handleAddToCart()}>
               Add to cart

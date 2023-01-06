@@ -13,7 +13,7 @@ import Navbar from "../navbar/Navbar";
 import Footer2 from "../footer/Footer2";
 import { Divider } from '@chakra-ui/react';
 import { toast } from "react-toastify";
-
+import CheckoutMercadoP from "../checkoutMercadoP/checkoutMercadoP"
 
 const Cart = () => {
 
@@ -30,13 +30,13 @@ const Cart = () => {
     });
   }
 
-  return (
-    <Box>
-      <Navbar />
-      <Divider
-        paddingTop={10}
-      />
-      <Box
+    return(
+        <Box>
+        <Navbar/>
+        <Divider
+        paddingTop={5}
+        />
+        <Box
         padding={10}
         className="cart-container">
         <Heading>Shopping Cart</Heading>
@@ -80,50 +80,51 @@ const Cart = () => {
                 <Text as='b'>Remove</Text>
               </GridItem>
             </Grid>
-
-
-            {cart?.map(cartItem => {
-              totalCartPrice += cartItem.price
-              return (
-                <Grid templateColumns='3fr 1fr 1fr 1fr' gap={10} key={cartItem.id}>
-                  <GridItem rowSpan={2} className="course-title">{cartItem.name}</GridItem>
-                  <GridItem rowSpan={2} className="price">${cartItem.price}</GridItem>
-                  <GridItem rowSpan={2} className="course-title">
-                    <Button
-                      colorScheme='teal' variant='ghost'
-                      onClick={() => handleRemoveFromCart(cartItem)}>
-                      <DeleteIcon />
-                    </Button>
-                  </GridItem>
-                </Grid>
-              )
-            })}
-            <Box
-              padding={5}
-              borderWidth='1px' borderRadius='lg' overflow='hidden'
-              maxW='32rem'>
-              <Box>
-                <Heading md={10} size='md'>Total</Heading>
-                <Text
-                  fontSize='xl'
-                  paddingTop={2}
-                >
-                  ${totalCartPrice}
-                </Text>
-              </Box>
-              <Box paddingTop={4}>
-                <Heading
-                  md={10}
-                  size='md'
-                  paddingBottom={3}
-                >Pay with</Heading>
-                <Checkout
-                  totalCartPrice={totalCartPrice}
-                />
-              </Box>
-            </Box>
-          </VStack>
-
+            
+            
+                {cart?.map(cartItem => {
+                    totalCartPrice += cartItem.price
+                    return (
+                        <Grid templateColumns='3fr 1fr 1fr 1fr' gap={10} key={cartItem.id}>
+                        <GridItem rowSpan={2} className="course-title">{cartItem.name}</GridItem>
+                        <GridItem rowSpan={2} className="price">${cartItem.price}</GridItem>
+                        <GridItem rowSpan={2} className="course-title">
+                            <Button 
+                            colorScheme='teal' variant='ghost'
+                            onClick={() => handleRemoveFromCart(cartItem)}>
+                                <DeleteIcon/>
+                            </Button>
+                        </GridItem>
+                        </Grid>
+                    )
+                })}
+                    <Box 
+                    padding={5}
+                    borderWidth='1px' borderRadius='lg' overflow='hidden'
+                    maxW='32rem'>
+                        <Box>
+                        <Heading md={10} size='md'>Total</Heading>
+                        <Text 
+                        fontSize='xl'
+                        paddingTop={2}
+                        >
+                        ${totalCartPrice}
+                        </Text>
+                        </Box>
+                        <Box paddingTop={4}>
+                        <Heading 
+                        md={10} 
+                        size='md'
+                        paddingBottom={3}
+                        >Pay with</Heading>
+                        <Checkout 
+                        totalCartPrice={totalCartPrice}
+                        />
+                        <CheckoutMercadoP/>
+                        </Box>
+                        </Box>
+            </VStack>
+       
         )}
       </Box>
       <Footer2 />

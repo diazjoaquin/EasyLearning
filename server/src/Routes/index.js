@@ -19,7 +19,11 @@ const getAllReviewPage = require("./getAllReviewPage/getAllReviewPage.js");
 const createReviewPage = require("./createReviewPage/createReviewPage.js");
 const updateUser = require("./updateUser/updateUser.js");
 const getUserByEmail = require("./getUserByEmail/getUserByEmail.js");
+const postMercadoPago = require("./mercadoPago/mercadoPago");
+const getStatistics = require("./getStatistics/getStatistics");
 const deleteCourse = require("../Routes/deleteCourse/deleteCourse.js");
+
+// router.use("/postMercadoPago", postMercadoPago);
 
 router.use("/getAllCourses", getAllCourses);
 router.use("/getDetail", getDetail);
@@ -40,6 +44,7 @@ router.use("/updateUser", updateUser);
 router.use("/getUserByEmail", getUserByEmail);
 router.use("/getAllReviewPage", getAllReviewPage);
 router.use("/createReviewPage", createReviewPage);
+router.use("/getStatistics", getStatistics);
 router.use("/deletedCourse", deleteCourse);
 
 module.exports = router;
