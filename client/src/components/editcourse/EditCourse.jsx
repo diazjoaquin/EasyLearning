@@ -72,9 +72,10 @@ export default function EditCourse() {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    const response = await axios.put("http://localhost:3001/editcourse", ecState);
-    alert('¡Campos actualizados con exito!');
-    history.push("/course")
+    console.log(myCourse);
+    const response = await axios.patch("http://localhost:3001/updateCourse", myCourse);
+    // alert('¡Campos actualizados con exito!');
+    // history.push("/profile")
   }
 
   const handelSubmitVideo = () => {
@@ -136,8 +137,8 @@ export default function EditCourse() {
       <Text fontSize="36px">Edit Course</Text>
 
       <Box display="flex" justifyContent='center' flexDirection="row" width='100%'>
-        <Box width="85%" >
-          <form onSubmit={handleSubmit}>
+        <Box width="60%" >
+          <form>
             {errors["name"]
               ? <Text color="red.400"> Course Name: <Button title="Un buen título puede atraer a más usuarios. Cuando escribas títulos para tus vídeos, te recomendamos que incluyas las palabras clave que creas que tu audiencia puede usar al buscar vídeos como los tuyos.">?</Button> </Text>
               : <Text> Course Name: <Button title="Un buen título puede atraer a más usuarios. Cuando escribas títulos para tus vídeos, te recomendamos que incluyas las palabras clave que creas que tu audiencia puede usar al buscar vídeos como los tuyos.">?</Button> </Text>}
@@ -146,7 +147,6 @@ export default function EditCourse() {
               type="text"
               id="name"
               name="name"
-              fontSize='24px'
               autoComplete="off"
               onChange={handleChange}
             >
@@ -241,7 +241,7 @@ export default function EditCourse() {
                   <AccordionButton>
                     <Box as="span" flex='1' textAlign='left'>
                       <h2>
-                        Videos
+                        Videos {myCourse?.videos?.length ? `[${myCourse?.videos?.length}]` : undefined}
                       </h2>
                     </Box>
                     <AccordionIcon />
@@ -280,11 +280,6 @@ export default function EditCourse() {
             <AlertIcon />
             {errors.videos}
           </Alert>}
-          {
-            !myCourse?.videos?.length
-              ? <Text color='red' textAlign='center'> <InfoOutlineIcon /> You can't create a course without any videos</Text>
-              : undefined
-          }
         </Box>
 
         <Modal isOpen={isOpen} onClose={onClose}>
@@ -327,8 +322,8 @@ export default function EditCourse() {
           <Link to={`/profile`}>
             <Button title="click to dischard changes">Cancel</Button>
           </Link>
-          <Button onClick={() => handleSave()} title="click to save changes">Save</Button>
-          <Button title="click to save delete course">Delete Coruse</Button>
+          <Button onClick={handleSubmit} title="click to save changes">Save</Button>
+          <Button title="click to save delete course" >Delete Coruse</Button>
         </Center>
       </Box>
       <Footer2 />
