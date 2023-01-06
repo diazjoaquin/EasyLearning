@@ -13,29 +13,28 @@ import Navbar from "../navbar/Navbar";
 import Footer2 from "../footer/Footer2";
 import { Divider } from '@chakra-ui/react';
 import { toast } from "react-toastify";
-
+import CheckoutMercadoP from "../checkoutMercadoP/checkoutMercadoP"
 
 const Cart = () => {
 
-    const cart = useSelector((state) => state.cart);
-    console.log(cart)
+  const cart = useSelector((state) => state.cart);
 
-    let totalCartPrice = 0;
+  let totalCartPrice = 0;
 
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-    const handleRemoveFromCart = (product) => {
-        dispatch(deleteFromCart(product))
-        toast.error("Course removed from cart", {
-            position: "bottom-left",
-          });
-    }
+  const handleRemoveFromCart = (product) => {
+    dispatch(deleteFromCart(product))
+    toast.error("Course removed from cart", {
+      position: "bottom-left",
+    });
+  }
 
     return(
         <Box>
         <Navbar/>
         <Divider
-        paddingTop={10}
+        paddingTop={5}
         />
         <Box
         padding={10}
@@ -63,23 +62,23 @@ const Cart = () => {
               </Link>
             </div>
           </div>
-        ) : ( 
-        <VStack
-        paddingTop={10}
-        divider={<StackDivider borderColor='gray.200' />}
-        spacing={4}
-        align='stretch'
-        >
+        ) : (
+          <VStack
+            paddingTop={10}
+            divider={<StackDivider borderColor='gray.200' />}
+            spacing={4}
+            align='stretch'
+          >
             <Grid templateColumns='3fr 1fr 1fr 1fr' gap={10}>
-            <GridItem rowSpan={2} bold={2} className="course-title">
-            <Text as='b'>Course</Text>
-            </GridItem>
-            <GridItem rowSpan={2} className="price">
-            <Text as='b'>Price</Text>
-            </GridItem>
-            <GridItem rowSpan={2} className="course-title">
-            <Text as='b'>Remove</Text>
-            </GridItem>
+              <GridItem rowSpan={2} bold={2} className="course-title">
+                <Text as='b'>Course</Text>
+              </GridItem>
+              <GridItem rowSpan={2} className="price">
+                <Text as='b'>Price</Text>
+              </GridItem>
+              <GridItem rowSpan={2} className="course-title">
+                <Text as='b'>Remove</Text>
+              </GridItem>
             </Grid>
             
             
@@ -121,14 +120,15 @@ const Cart = () => {
                         <Checkout 
                         totalCartPrice={totalCartPrice}
                         />
+                        <CheckoutMercadoP/>
                         </Box>
                         </Box>
             </VStack>
        
         )}
-        </Box>
-        <Footer2/>
-        </Box>
-    )
+      </Box>
+      <Footer2 />
+    </Box>
+  )
 }
 export default Cart;
