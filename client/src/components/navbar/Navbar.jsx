@@ -2,11 +2,9 @@ import { Link } from "react-router-dom";
 import style from "./Navbar.module.css"
 import Logo from "../footer/easylearning.png"
 import { Button } from '@chakra-ui/react'
-import { signOut } from "firebase/auth";
 import { Avatar } from '@chakra-ui/react';
 import { useAuth } from "../context/Auth-context";
 import { auth } from "../../firebase-config";
-import Cart from "../../assets/shopping-cart.png"
 import { useSelector } from "react-redux";
 import {
   Menu,
@@ -39,20 +37,11 @@ export default function Navbar() {
         <div className={style.menu}>
           <Link to="/">Home</Link>
           <Link to="/about">About</Link>
-          <Link to="/course">Course</Link>
+          <Link to="/course">Courses</Link>
           <Link to="/blog">Blog</Link>
           <Link to="/contact">Contact</Link>
+        </div>
           <div className={style.buttons}>
-            {!user && <Link to="/login">
-              <Button colorScheme='gray'>
-                Login
-              </Button></Link>}
-
-            {!user && <Link to="/signup">
-              <Button colorScheme='teal' variant='solid'>
-                Sign Up
-              </Button>
-            </Link>}
             <Link to="/cart">
               <div className="nav-bag"
                 style={{ position: 'relative' }}
@@ -79,6 +68,16 @@ export default function Navbar() {
                 </span>
               </div>
             </Link>
+            {!user && <Link to="/login">
+              <Button colorScheme='gray'>
+                Login
+              </Button></Link>}
+
+            {!user && <Link to="/signup">
+              <Button colorScheme='teal' variant='solid'>
+                Sign Up
+              </Button>
+            </Link>}
             {user &&
               <Menu>
                 <Box display='flex' gap='5'>
@@ -102,6 +101,5 @@ export default function Navbar() {
           </div>
         </div>
       </div>
-    </div>
   )
 }
