@@ -41,21 +41,15 @@ const CreateReviewPage = () => {
     }
 
     async function handleSubmit(e) {
-        // setForm({
-        //     ...form,
-        //     score: parseInt(form.score)
-        // })
-        console.log("form",form)
         let alert = await axios.post("/createReviewPage", form);
-        console.log("alert",alert.data.msg)
-        if(alert.data.msg === "error"){
+        if (alert.data.msg === "error") {
             window.alert("Solo peudes crear una reseña")
-        } else if(alert.data.msg === "ok"){
+        } else if (alert.data.msg === "ok") {
             window.alert("Reseña creada")
         }
     }
 
-    return(
+    return (
         <Card
             maxW='sm'
             borderWidth='1px'

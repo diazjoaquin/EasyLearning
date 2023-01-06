@@ -65,19 +65,23 @@ export default function Course() {
                   handlePrevious={handlePrevious} handleNext={handleNext}/>
       <div className={style.cards}>
         {
-           currentCourses.map((course) => {
-            return (
-              <CourseCard
-                key={course.id}
-                name={course.name}
-                teacherName={course.teacherName}
-                id={course.id}
-                Description={course.description}
-                price={course.price}
-                rating={course.rating}
-                categories={course.categories}
-                image={course.image}
-              />)
+          courses.map((course) => {
+            if (course.archieved === false && course.status === "APPROVED" && course.videos.length) {
+              return (
+                <CourseCard
+                  key={course.id}
+                  name={course.name}
+                  teacherName={course.teacherName}
+                  id={course.id}
+                  Description={course.description}
+                  price={course.price}
+                  rating={course.rating}
+                  categories={course.categories}
+                  image={course.image}
+                  archieved={course.archieved}
+                  status={course.status}
+                />)
+            }
           })
         }
       </div>

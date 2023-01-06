@@ -1,11 +1,4 @@
-const {
-  Course,
-  Category,
-  // Review,
-  // Video,
-  // Comments,
-  User,
-} = require("../../db.js");
+const { Course, Category, Video, User } = require("../../db.js");
 
 const getAllCoursesByTeacher = async ({ id }) => {
   try {
@@ -15,9 +8,15 @@ const getAllCoursesByTeacher = async ({ id }) => {
     //Filtro de la trabla coruses, todos los cursos que tengan como teacher a fullNameUser
     let listCourses = await Course.findAll({
       where: { teacherId: user.id },
-      include: {
-        model: Category,
-      },
+      include: [
+        {
+          model: Category,
+        },
+        {
+          model: Video,
+          attributes: ["id", "urlVideo", "description", "nameVideo"],
+        },
+      ],
     });
 
     listCourses = listCourses.map((e) => ({
@@ -29,6 +28,9 @@ const getAllCoursesByTeacher = async ({ id }) => {
       price: e.price,
       image: e.image,
       categories: e.categories.map((e) => e.name),
+      archieved: e.archieved,
+      status: e.status,
+      videos: e.videos,
     }));
 
     return listCourses;

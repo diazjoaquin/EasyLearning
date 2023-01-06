@@ -1,3 +1,4 @@
+const { Op } = require("sequelize");
 const { Course, Review } = require("../../db.js");
 
 async function createReview(courseId, reviewData) {
@@ -12,7 +13,17 @@ async function createReview(courseId, reviewData) {
     if (!(score && title && userId))
       throw new Error("Falta enviar datos obligatorios de la reseña");
 
-    const newReview = await Review.create({ score, title, comments, userId });
+    const [newReview, createNewReview] = await Review.findOrCreate({
+      where: {
+        [Op.and]: [{ userId }, { courseId }],
+      },
+      defaults: {
+        score,
+        title,
+        comments,
+        userId,
+      },
+    });
     await course.addReview(newReview);
 
     const listReviewsCourse = await Review.findAll({

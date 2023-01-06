@@ -1,5 +1,3 @@
-const { Router } = require("express");
-const router = Router();
 const {
   Category,
   Course,
@@ -82,21 +80,31 @@ const test = async () => {
       //Lista de Cursos
       const listCourses = [
         {
+          archieved: false,
+          status: "APPROVED",
           name: "Marketing Research: support your marketing decisions",
           description: `The course is intended as a practical step by step guide to market research, to provide a structure for those who plan to undertake a research project or may wish to commission an agency to conduct research on their behalf. Each of the stages of the market research process are covered individually- starting with an understanding that market research is not the same as " see what you can find" on a particular topic or issue- but rather a structured and systematic approach to building a picture which can support business decisions, form part of a business development or act as a foundation for marketing strategy.`,
           teacherId: 1,
           teacherName: "Fermin",
           price: Math.round(Math.random() * 100),
+          image:
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR24NWufPfgGcSUVtrvswMJ2FLa4b4ukIud9w&usqp=CAU",
         },
         {
+          archieved: false,
+          status: "APPROVED",
           name: "Adventures in Classical Music—Music Appreciation for All!",
           description: `Music appreciation for the 21st century. Learn about Classical Music in the Western world from the Middle Ages to the present.  
         Youll begin with an introduction to the various elements of music -- for example, melody, rhythm, pitch and harmony – to give you the basics and vocabulary of music theory to understand and appreciate any type of music.  You’ll then explore the History of Classical Music through its various stylistic periods, from medieval chant right up to the current cutting edge. Anyone interested in classical music will benefit from this course. `,
           teacherId: 2,
           teacherName: "Joaco",
           price: Math.round(Math.random() * 100),
+          image:
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcToqWogOMB_wu-tFExETa1ANWYcUBPk2AkGsDJiS2My20ORzu4y9PxEhZh45rRuhEOeQWY&usqp=CAU",
         },
         {
+          archieved: false,
+          status: "APPROVED",
           name: "Photoshop Master Course: From Beginner to Photoshop Pro",
           description: `My approach is:
 
@@ -110,8 +118,12 @@ const test = async () => {
           teacherId: 3,
           teacherName: "Santi",
           price: Math.round(Math.random() * 100),
+          image:
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj_GdHpmBeaN7ekedpCN9-M9Iijnty6ieCWvmwr6upJoAO2uuqC22faDeO8pBGczxy_lU&usqp=CAU",
         },
         {
+          archieved: false,
+          status: "APPROVED",
           name: "Sales and Persuasion Skills for Startups",
           description: `Start-ups and entrepreneurs are a mixed bunch. But one thing the winners all have in common Is the ability to influence others. The ability to sell their ideas, sell their products, sell their service.
 
@@ -121,8 +133,12 @@ const test = async () => {
           teacherId: 4,
           teacherName: "Franco",
           price: Math.round(Math.random() * 100),
+          iamge:
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5f3htE9RJTy9hJTdUbqd71HqZfoRmPeQuFw&usqp=CAU",
         },
         {
+          archieved: false,
+          status: "PENDING",
           name: "LinkedIn Training CourseLinkedIn Training",
           description: `Learn to use Linkedin effectively and responsibly in this definitive Linkedin Training Course.
 
@@ -132,6 +148,8 @@ const test = async () => {
           teacherId: 5,
           teacherName: "Benja",
           price: Math.round(Math.random() * 100),
+          image:
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSi6Cm0MTYcZHuMrVEPANdz9K-OEFt44rA2gg&usqp=CAU",
         },
       ];
 
@@ -294,30 +312,35 @@ const test = async () => {
         {
           videoId: 1,
           userId: 1,
+          userName: "Fermin",
           title: "Titulo video",
           description: "This video is very good",
         },
         {
           videoId: 2,
           userId: 2,
+          userName: "Joaco",
           title: "Titulo video",
           description: "This video is very good",
         },
         {
           videoId: 3,
           userId: 3,
+          userName: "Santi",
           title: "Titulo video",
           description: "This video is very good",
         },
         {
           videoId: 4,
           userId: 4,
+          userName: "Franco",
           title: "Titulo video",
           description: "This video is very good",
         },
         {
           videoId: 5,
           userId: 5,
+          userName: "Benja",
           title: "Titulo video",
           description: "This video is very good",
         },

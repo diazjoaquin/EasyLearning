@@ -14,7 +14,7 @@ import Cart from "./components/cartComponent/cart";
 import { AuthProvider } from "./components/context/Auth-context.js";
 // import { ProtectedRoutes } from "./components/context/ProtectedRoutes";
 import Profile from "./components/pages/profile/profile";
-import EditCourse from "./components/editcourse/EditCourse2";
+import EditCourse from "./components/editcourse/EditCourse";
 import Create from "./components/create/Create";
 import ShowMoreCourses from "./components/pages/profile/MyCreatedCourses/ShowMoreCourses";
 import ShowMoreCourses2 from "./components/pages/profile/myCourses/ShowMoreCourses2";
