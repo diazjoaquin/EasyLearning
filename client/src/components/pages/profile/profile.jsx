@@ -17,7 +17,6 @@ const Profile = () => {
   const dispatch = useDispatch();
   const [update, setUpdate] = useState(false);
   let coursesCreateUser = useSelector(s => s.coursesCreateUser);
-
   !userDB && history.push("/")
 
   if (coursesCreateUser?.length > 3) {
@@ -51,7 +50,7 @@ const Profile = () => {
             <GridItem gap='20' colSpan={2} display="flex" flexDirection="row" alignItems="center" justifyContent='center' mt="5" mb='5'>
               {
                 coursesCreateUser.length ? coursesCreateUser?.map(e => (
-                  <CourseCard key={e.id} id={e.id} teacherName={e.teacherName} name={e.name} description={e.description} rating={e.rating} price={e.price} image={e.image} categories={e.categories} />
+                  <CourseCard key={e.id} id={e.id} teacherName={e.teacherName} name={e.name} description={e.description} rating={e.rating} price={e.price} image={e.image} categories={e.categories} archieved={e.archieved} status={e.status} videos={e.videos} />
                 ))
                   : undefined
               }

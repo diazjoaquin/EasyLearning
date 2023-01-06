@@ -28,6 +28,7 @@ import {
   Divider,
   SimpleGrid
 } from "@chakra-ui/react";
+import { StarIcon } from '@chakra-ui/icons'
 
 import { RiArrowGoBackLine } from "react-icons/ri";
 
@@ -49,6 +50,7 @@ export default function Detail() {
   return (
     <>
       <div>
+        
         <Navbar />
         <Link style={{ textDecoration: "none" }} to="/course">
           <Button colorScheme="blue" leftIcon={<RiArrowGoBackLine />}>

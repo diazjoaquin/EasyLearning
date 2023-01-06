@@ -35,6 +35,8 @@ const getAllCourses = async () => {
       reviews: e.reviews,
       videos: e.videos,
       image: e.image,
+      archieved: e.archieved,
+      status: e.status,
     }));
 
     return coursesDB.sort((a, b) => a.id - b.id);

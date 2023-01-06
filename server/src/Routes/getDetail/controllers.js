@@ -13,7 +13,7 @@ const getCourseById = async (id) => {
         },
         {
           model: Review,
-          attributes: ["id", "title", "comments", "score"],
+          //     attributes: ["id", "title", "comments", "score"],
         },
         {
           model: Video,
@@ -29,7 +29,7 @@ const getCourseById = async (id) => {
           },
         },
       ],
-      order: [[{ model: Video }, "id", "ASC"]],
+      // order: [[{ model: Video }, "id", "ASC"]],
     });
 
     return courseDB;
