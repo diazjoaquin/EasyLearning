@@ -25,7 +25,7 @@ export default function DetailVideo() {
   useEffect(() => {
     dispatch(getCourseDetail(courseId));
   }, [dispatch, id, update])
-
+  
   return (
     <>
       <Navbar />

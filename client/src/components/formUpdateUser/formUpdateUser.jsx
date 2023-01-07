@@ -31,7 +31,7 @@ export default function FormUpdateUser({ update, setUpdate }) {
   }
 
   const handleSubmit = async () => {
-    let response = await axios.patch("http://localhost:3001/updateUser", user)
+    let response = await axios.patch("/updateUser", user)
     localStorage.setItem("user", JSON.stringify(response.data))
     setUpdate(!update)
   }

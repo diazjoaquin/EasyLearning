@@ -40,8 +40,8 @@ export default function SignupCard() {
     setError("");
     try {
       await signup(form.emailAddress, form.password);
-      await axios.post("http://localhost:3001/createUser", form);
-      let response = await axios.get(`http://localhost:3001/getUserByEmail?email=${form.emailAddress}`)
+      await axios.post("/createUser", form);
+      let response = await axios.get(`/getUserByEmail?email=${form.emailAddress}`)
       localStorage.setItem("user", JSON.stringify(response.data))
       history.push("/");
     } catch (error) {

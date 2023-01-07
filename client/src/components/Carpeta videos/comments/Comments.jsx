@@ -27,7 +27,7 @@ const Comments = ({ videoId, comments, update, setUpdate }) => {
     e.preventDefault() //hay que cambiar esto por un estado local, para que se actualice solamente los comentarios cada vez que alguien comenta.
     await axios.post("http://localhost:3001/createCommentVideo", comment);
     setUpdate(!update)
-    document.getElementById("1").reset()
+    document.getElementById("1").reset()   
   }
   return (
     <div>
