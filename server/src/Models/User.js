@@ -26,6 +26,10 @@ module.exports = (sequelize) => {
         type: DataTypes.BOOLEAN,
         defaultValue: false,
       },
+      status: {
+        type: DataTypes.ENUM("ACTIVE", "BANNED", "DELETED"),
+        defaultValue: "ACTIVE",
+      },
     },
     { timestamps: false }
   );

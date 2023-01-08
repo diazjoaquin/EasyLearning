@@ -25,7 +25,7 @@ export default function DetailVideo() {
   useEffect(() => {
     dispatch(getCourseDetail(courseId));
   }, [dispatch, id, update])
-
+  
   return (
     <>
       <Navbar />
@@ -68,15 +68,16 @@ export default function DetailVideo() {
             </Box>
           </Box>
         </Box>
-      </Center>
-      {/* <Box>
+        {/* <Box>
                 <Center>
                 <DrawerExample/>
                 <Link style={{ textDecoration: 'none' }} to='/editcourse'>
                 <Button>Edit Course</Button>
                 </Link>
                 </Center>
-            </Box> */}
+              </Box> */}
+        
+      </Center>
       <Footer2 />
     </>
   )
