@@ -1,5 +1,5 @@
 import {
-  Box, Text, Button, Video, Center, Input, InputGroup, InputLeftAddon, InputRightAddon, FormControl, FormLabel, Alert, AlertIcon, HStack, Tag, TagLabel, Tooltip, Select, Accordion, AccordionItem, AccordionButton, AccordionPanel, AccordionIcon, Card, Stack, CardBody, Heading, Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, useDisclosure, Img
+  Box, Text, Button, Video, Center, Input, InputGroup, InputLeftAddon, InputRightAddon, FormControl, FormLabel, Alert, AlertIcon, HStack, Tag, TagLabel, Tooltip, Select, Accordion, AccordionItem, AccordionButton, AccordionPanel, AccordionIcon, Card, Stack, CardBody, Heading, Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, useDisclosure, Img, useToast
 } from "@chakra-ui/react";
 import { DeleteIcon, InfoOutlineIcon } from '@chakra-ui/icons'
 import React, { useEffect, useState } from "react";
@@ -18,6 +18,7 @@ export default function EditCourse() {
   const dispatch = useDispatch();
   const { courseId } = useParams();
   const { isOpen, onOpen, onClose } = useDisclosure()
+  const toast = useToast()
 
   let [nameVideo, setNameVideo] = useState("")
   let [urlVideo, setUrlVideo] = useState("")
@@ -71,8 +72,19 @@ export default function EditCourse() {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    console.log(myCourse);
     const response = await axios.patch("http://localhost:3001/updateCourse", myCourse);
-    alert('¡Campos actualizados con exito!');
+
+    if (response?.data) {
+      toast({
+        title: 'Course updated.',
+        description: "Course successfully updated.",
+        status: 'success',
+        duration: 3500,
+        isClosable: true,
+      })
+    }
+
     history.push("/profile")
   }
 
@@ -107,8 +119,16 @@ export default function EditCourse() {
   }
 
   const handelDeleteCourse = async () => {
-    await axios.get(`http://localhost:3001/deletedCourse/${myCourse.id}`)
-    alert('¡Curso eliminado con exito!');
+    const response = await axios.get(`http://localhost:3001/deletedCourse/${myCourse.id}`)
+    if (response?.data) {
+      toast({
+        title: 'Course deleted.',
+        description: "Course successfully deleted.",
+        status: 'error',
+        duration: 3500,
+        isClosable: true,
+      })
+    }
     history.push("/profile")
   }
 
