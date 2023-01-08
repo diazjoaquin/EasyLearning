@@ -1,3 +1,4 @@
+import s from "../pagination/Pagination.module.css"
 const Pagintaion = ({coursesPerPage, courses, pagination, handleNext, handlePrevious, currentPage}) => {
 
     const numOfPages = [];
@@ -7,18 +8,22 @@ const Pagintaion = ({coursesPerPage, courses, pagination, handleNext, handlePrev
     }
 
     return (
-        <div>
-            <div>
-                <div><button onClick={(e) => handlePrevious(e)}>Previous</button></div>
+        <div className={s.paginationCont}>
+            <div className={s.buttonsContainer}>
+                <div className={s.prevCont}><button className={s.prevButton} onClick={(e) => handlePrevious(e)}>«</button></div>
                 {
                     numOfPages?.map((page) => {
-                        return <button id={page} key={page} onClick={() => pagination(page)}>{page}</button>
+                        return <button className={s.pageNum} id={page} key={page} onClick={() => pagination(page)}>{page}
+                        </button>
                     })
                 }
-                <div><button onClick={(e) => handleNext(e)}>Next</button></div>
+                <div className={s.nextCont}><button className={s.nextButton} onClick={(e) => handleNext(e)}>»</button></div>
             </div>
         </div>
     )
 }
 
 export default Pagintaion
+
+
+
