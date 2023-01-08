@@ -38,7 +38,7 @@ const CourseCard = ({ id, teacherName, name, description, rating, price, categor
 
   return (
     <Card maxW='sm' bgColor={location.pathname === "/profile" ? '#BEE3F8' : undefined} width='300px'>
-      <CardBody display='flex' flexDirection='column' alignItems='center' p='3' >
+      <CardBody display='flex' flexDirection='column' alignItems='center' pt='3' >
         {
           location.pathname === "/profile"
             ?
