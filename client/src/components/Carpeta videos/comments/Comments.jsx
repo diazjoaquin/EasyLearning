@@ -7,7 +7,7 @@ import { useParams } from "react-router-dom";
 const Comments = ({ videoId, comments, update, setUpdate }) => {
   const params = useParams()
   const { id } = params
-  const userDB = JSON.parse(localStorage.getItem("user"))
+  const userDB = JSON.parse(localStorage.getItem("user"));
   const [comment, setComment] = useState({
     videoId: id,
     userId: userDB?.id,

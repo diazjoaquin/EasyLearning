@@ -9,7 +9,6 @@ import axios from 'axios';
 
 const CourseCard = ({ id, teacherName, name, description, rating, price, categories, image, videos, archieved, status, update, setUpdate }) => {
   const location = useLocation();
-  const dispatch = useDispatch();
 
   const handleAddToCart = () => {
     dispatch(addToCart({
@@ -22,8 +21,6 @@ const CourseCard = ({ id, teacherName, name, description, rating, price, categor
       categories
     }));
   }
-  const coursesInCart = useSelector((state) => state.cart)
-  let history = useHistory();
 
   const handleArchieved = async () => {
     const course = {
@@ -36,6 +33,7 @@ const CourseCard = ({ id, teacherName, name, description, rating, price, categor
   }
   // justifyContent='center' 
 
+  const dispatch = useDispatch();
   return (
     <Card maxW='sm' bgColor={location.pathname === "/profile" ? '#BEE3F8' : undefined} width='300px'>
       <CardBody display='flex' flexDirection='column' alignItems='center' pt='3' >
@@ -94,14 +92,12 @@ const CourseCard = ({ id, teacherName, name, description, rating, price, categor
       <Divider />
       <CardFooter>
         {location.pathname !== "/profile" ?
-
           <ButtonGroup spacing='2'>
-            <Link to={"/cart"}>
-              <Button variant='solid' colorScheme='blue'
-                onClick={() => handleAddToCart()}>
-                Buy now
-              </Button>
-            </Link>
+            <Button variant='solid' colorScheme='blue' >
+              {/* // onClick={handleBuyNow(id)}> */}
+
+              Buy now
+            </Button>
             <Button variant='ghost' colorScheme='blue'
               onClick={() => handleAddToCart()}>
               Add to cart

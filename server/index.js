@@ -8,3 +8,4 @@ conn.sync({ force: false }).then(async () => {
     console.log(`Server listening at ${process.env.DB_PORT}`);
   });
 });
+  
