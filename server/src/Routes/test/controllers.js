@@ -24,6 +24,7 @@ const test = async () => {
           phoneNumber: 12345,
           emailAddress: "fermin@gmail.com",
           avatar: "urlAvatar",
+          status: "BANNED",
         },
         {
           fullName: "Joaco",
@@ -31,6 +32,7 @@ const test = async () => {
           phoneNumber: 12345,
           emailAddress: "joaco@gmail.com",
           avatar: "urlAvatar",
+          status: "DELETED",
         },
         {
           fullName: "Santi",

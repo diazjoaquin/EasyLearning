@@ -6,8 +6,9 @@ import CourseCard from "../../../card/CourseCard";
 
 const ShowMoreCourses = () => {
   const dispatch = useDispatch();
+  const userDB = JSON.parse(localStorage.getItem("user"))
   useEffect(() => {
-    dispatch(getAllCoursesByTeacher(1)); //id hardcodeado
+    dispatch(getAllCoursesByTeacher(userDB?.id));
   }, [dispatch]);
   let cursos = useSelector((state) => state.coursesCreateUser);
 

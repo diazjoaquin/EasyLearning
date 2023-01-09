@@ -18,6 +18,7 @@ import EditCourse from "./components/editcourse/EditCourse";
 import Create from "./components/create/Create";
 import ShowMoreCourses from "./components/pages/profile/MyCreatedCourses/ShowMoreCourses";
 import ShowMoreCourses2 from "./components/pages/profile/myCourses/ShowMoreCourses2";
+import Verification from "./components/pages/signup/Verification.jsx";
 
 //Paypal
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
@@ -48,10 +49,10 @@ function App() {
           <Route exact path="/detailVideo/:courseId/:id" component={Videos} />
           <Route exact path="/profile" component={Profile} />
           <Route exact path="/editcourse/:courseId" component={EditCourse} />
-
           <Route exact path="/formCourse" component={Create} />
           <Route exact path="/cursosCreados" component={ShowMoreCourses} />
           <Route exact path="/cursosComprados" component={ShowMoreCourses2} />
+          <Route exact path="/verification" component={Verification}/>
         </ChakraProvider>
       </PayPalScriptProvider>
     </AuthProvider>

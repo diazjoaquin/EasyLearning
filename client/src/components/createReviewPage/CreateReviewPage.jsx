@@ -47,6 +47,7 @@ const CreateReviewPage = () => {
         } else if (alert.data.msg === "ok") {
             window.alert("Reseña creada")
         }
+        window.location.reload()
     }
 
     return (
