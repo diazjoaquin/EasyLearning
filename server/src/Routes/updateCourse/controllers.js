@@ -78,10 +78,6 @@ const updateCourse = async ({
           courseId: id,
         })
       );
-    } else {
-      await Video.destroy({
-        where: { courseId: id },
-      });
     }
 
     await courseDB.save();

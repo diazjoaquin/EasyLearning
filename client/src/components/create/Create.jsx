@@ -5,7 +5,7 @@ import { getCategories } from "../../redux/actions/index"
 import Navbar from "../navbar/Navbar.jsx"
 import Footer2 from "../footer/Footer2.jsx"
 import {
-  FormControl, FormLabel, Input, Box, Button, Text, Alert, AlertIcon, HStack, Tag, TagLabel, Tooltip, Select,
+  FormControl, FormLabel, Input, Box, Button, Text, Alert, AlertIcon, HStack, Tag, TagLabel, Tooltip, Select, useToast, Wrap, WrapItem
 } from '@chakra-ui/react'
 import { ArrowBackIcon } from '@chakra-ui/icons'
 import axios from "axios"
@@ -50,6 +50,8 @@ const Create = () => {
     }
   }
 
+  const toast = useToast()
+
   const handelSubmit = async () => {
     const formdata = new FormData();
     formdata.append("image", file);
@@ -66,9 +68,18 @@ const Create = () => {
       .post("/createCourse", formdata)
       .catch((err) => console.error(err));
 
-    alert(response.data.msg)
+    // alert(response.data.msg)
+    if (response?.data?.msg?.length) {
+      toast({
+        title: 'Course created.',
+        description: "Course successfully created.",
+        status: 'success',
+        duration: 3500,
+        isClosable: true,
+      })
+    }
 
-    history.push(`/editcourse/${response.data.course.id}`)
+    history.push(`/profile`)
   }
 
   const handelDelete = (e) => {

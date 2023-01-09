@@ -6,7 +6,7 @@ const deleteVideo = async ({ id }) => {
       where: { id },
     });
 
-    return "Video delete.";
+    return "Course delete.";
   } catch (error) {
     return error;
   }
