@@ -25,6 +25,7 @@ import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import FormUpdateUser from "./components/formUpdateUser/formUpdateUser";
 
 function App() {
   return (
@@ -52,7 +53,8 @@ function App() {
           <Route exact path="/formCourse" component={Create} />
           <Route exact path="/cursosCreados" component={ShowMoreCourses} />
           <Route exact path="/cursosComprados" component={ShowMoreCourses2} />
-          <Route exact path="/verification" component={Verification}/>
+          <Route exact path="/verification" component={Verification} />
+          <Route exact path="/settings" component={FormUpdateUser} />
         </ChakraProvider>
       </PayPalScriptProvider>
     </AuthProvider>

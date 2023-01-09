@@ -1,19 +1,21 @@
 import {
   Box, Text, Button, Video, Center, Input, InputGroup, InputLeftAddon, InputRightAddon, FormControl, FormLabel, Alert, AlertIcon, HStack, Tag, TagLabel, Tooltip, Select, Accordion, AccordionItem, AccordionButton, AccordionPanel, AccordionIcon, Card, Stack, CardBody, Heading, Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, useDisclosure, Img, useToast
 } from "@chakra-ui/react";
-import { DeleteIcon, InfoOutlineIcon, ArrowBackIcon } from '@chakra-ui/icons'
+import { DeleteIcon, ArrowBackIcon } from '@chakra-ui/icons'
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Navbar from "../navbar/Navbar";
 import Footer2 from "../footer/Footer2";
-import { RiArrowGoBackLine } from "react-icons/ri";
 import { Link, useHistory, useParams } from "react-router-dom";
 import { getCategories, getCourseDetail, clearDetail } from "../../redux/actions/index"
 import axios from "axios";
 import { validate, validateVideo } from "../create/validate";
+import Swal from 'sweetalert2'
+
+
+
 
 export default function EditCourse() {
-
   const history = useHistory()
   const dispatch = useDispatch();
   const { courseId } = useParams();
@@ -71,20 +73,29 @@ export default function EditCourse() {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    console.log(myCourse);
-    const response = await axios.patch("http://localhost:3001/updateCourse", myCourse);
+    Swal.fire({
+      title: 'Do you want to save the changes?',
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: 'Save',
+      denyButtonText: `Don't save`,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        const response = axios.patch("http://localhost:3001/updateCourse", myCourse);
+        toast({
+          title: 'Course updated.',
+          description: "Course successfully updated.",
+          status: 'success',
+          duration: 3500,
+          isClosable: true,
+        })
+        history.push("/profile")
+      } else if (result.isDenied) {
+        Swal.fire('Changes are not saved', '', 'info')
+      }
+    })
 
-    if (response?.data) {
-      toast({
-        title: 'Course updated.',
-        description: "Course successfully updated.",
-        status: 'success',
-        duration: 3500,
-        isClosable: true,
-      })
-    }
-
-    history.push("/profile")
   }
 
   const handelSubmitVideo = () => {
@@ -118,17 +129,27 @@ export default function EditCourse() {
   }
 
   const handelDeleteCourse = async () => {
-    const response = await axios.get(`http://localhost:3001/deletedCourse/${myCourse.id}`)
-    if (response?.data) {
-      toast({
-        title: 'Course deleted.',
-        description: "Course successfully deleted.",
-        status: 'error',
-        duration: 3500,
-        isClosable: true,
-      })
-    }
-    history.push("/profile")
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const response = await axios.get(`http://localhost:3001/deletedCourse/${myCourse.id}`)
+        toast({
+          title: 'Course deleted.',
+          description: "Course successfully deleted.",
+          status: 'error',
+          duration: 3500,
+          isClosable: true,
+        })
+        history.push("/profile")
+      }
+    })
   }
 
   useEffect(() => {
