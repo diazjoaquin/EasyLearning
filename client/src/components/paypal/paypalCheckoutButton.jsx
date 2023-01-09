@@ -42,14 +42,14 @@ const PaypalCheckoutButton = (props) => {
     });
 
 
-    const handleApprove = (data) => {
+    const handleApprove = async(data) => {
         if(data.status === "COMPLETED"){
           toast.success("Thank you for your purchase", {
             position: "bottom-left",
           });
-          // const shopCart = JSON.parse(localStorage.getItem("cart"));
-          // console.log(shopCart)
-          // await axios.post("/createOrder", {data, userDB});
+          const shopCart = JSON.parse(localStorage.getItem("cart"));
+          console.log(shopCart)
+          await axios.post("/createOrder", {prodd: shopCart, userDB});
           console.log("purchase done", data);
           dispatch(cleanCart());
           history.push("/")
