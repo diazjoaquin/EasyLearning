@@ -20,7 +20,8 @@ import {
   GET_TEACHERS,
   GET_ORDERS, //add
   GET_SCORES,
-  GET_DATE
+  GET_DATE,
+  CLEAN_CART
 } from "../actions";
 
 const initialState = {
@@ -204,7 +205,11 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         reviews: byDate
       }
-
+    case CLEAN_CART:
+      return {
+        ...state,
+        cart: []
+      }
     default:
       return {
         ...state,

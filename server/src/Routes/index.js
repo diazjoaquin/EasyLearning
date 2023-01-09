@@ -16,6 +16,8 @@ const getReviews = require("./getReviews/getReviews.js");
 const getUsers = require("./getUsers/getUsers.js");
 const getAllTeachers = require("./getAllTeachers/getAllTeachers.js");
 const getUserByEmail = require("./getUserByEmail/getUserByEmail.js");
+// const { createOrder, captureOrder, cancelOrder, orderDetails } = require("./paymentsPP/controllers.js");
+const createOrderPP = require("./order/controllers.js")
 
 router.use("/getAllCourses", getAllCourses);
 router.use("/getDetail", getDetail);
@@ -34,4 +36,12 @@ router.use("/getUsers", getUsers);
 router.use("/getAllTeachers", getAllTeachers);
 router.use("/getUserByEmail", getUserByEmail);
 
+
+// router.post('/create-order', createOrder);
+// router.get('/capture-order', captureOrder);
+// router.get('/cancel-order', cancelOrder);
+// router.get('/orderDetails/:order_id', orderDetails);
+// router.post('/create-order-pp', createOrderPP)
+
+// router.post('/createOrder', createOrderPP)
 module.exports = router;

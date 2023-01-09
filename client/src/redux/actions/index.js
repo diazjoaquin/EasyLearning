@@ -34,11 +34,14 @@ export const ADD_TO_CART = "ADD_TO_CART";
 export const DELETE_FROM_CART = "DELETE_FROM_CART";
 export const TOTAL_CART = "TOTAL_CART";
 
-export const GET_ORDERS = " GET_ORDERS";
+export const GET_ORDERS = "GET_ORDERS";
+
+export const CLEAN_CART = "CLEAN_CART";
 
 //Review
 export const GET_SCORES = "GET_SCORES";
 export const GET_DATE = "GET_DATE";
+
 
 export const getAllCourses = () => async (dispatch) => {
   try {
@@ -296,6 +299,18 @@ export const getDate = (payload) => async dispatch => {
       type: GET_DATE,
       payload,
     });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const cleanCart = () => async dispatch => {
+  try{
+    localStorage.setItem('cart', JSON.stringify([]));
+    return dispatch({ 
+      type: CLEAN_CART, 
+      payload: null 
+    })
   } catch (error) {
     console.log(error);
   }

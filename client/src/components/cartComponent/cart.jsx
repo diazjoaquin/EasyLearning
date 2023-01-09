@@ -15,6 +15,7 @@ import { Divider } from '@chakra-ui/react';
 import { toast } from "react-toastify";
 
 
+
 const Cart = () => {
 
     const cart = useSelector((state) => state.cart);
@@ -22,14 +23,18 @@ const Cart = () => {
 
     let totalCartPrice = 0;
 
-    const dispatch = useDispatch();
+    let totalCartItems = [];
 
+    const dispatch = useDispatch();
+   
     const handleRemoveFromCart = (product) => {
         dispatch(deleteFromCart(product))
         toast.error("Course removed from cart", {
             position: "bottom-left",
           });
     }
+
+  
 
     return(
         <Box>
@@ -81,10 +86,12 @@ const Cart = () => {
             <Text as='b'>Remove</Text>
             </GridItem>
             </Grid>
-            
-            
+
                 {cart?.map(cartItem => {
+
                     totalCartPrice += cartItem.price
+                    totalCartItems.push(cartItem.id)
+
                     return (
                         <Grid templateColumns='3fr 1fr 1fr 1fr' gap={10} key={cartItem.id}>
                         <GridItem rowSpan={2} className="course-title">{cartItem.name}</GridItem>
@@ -111,6 +118,12 @@ const Cart = () => {
                         >
                         ${totalCartPrice}
                         </Text>
+                        {/* <Text 
+                        fontSize='xl'
+                        paddingTop={2}
+                        >
+                        {totalCartItems}
+                        </Text> */}
                         </Box>
                         <Box paddingTop={4}>
                         <Heading 
@@ -118,8 +131,10 @@ const Cart = () => {
                         size='md'
                         paddingBottom={3}
                         >Pay with</Heading>
+
                         <Checkout 
                         totalCartPrice={totalCartPrice}
+                        // items={totalCartItems}
                         />
                         </Box>
                         </Box>
