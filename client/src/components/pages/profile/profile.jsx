@@ -84,23 +84,26 @@ const Profile = () => {
               </Link>
             </Box>
           </Box>
-          <GridItem colSpan={4} bg='tomato'>
-            <Box w="auto" display="flex" flexDirection="column" mt="10" border='1px' borderColor='gray.400' borderRadius="10">
-              <GridItem gap='20' colSpan={2} display="flex" flexDirection="row" alignItems="center" justifyContent='center' mt="5" mb='5'>
-                {
-                  purchasedCourses.length ? purchasedCourses?.map(e => (
-                    <CourseCard key={e.id} id={e.id} teacherName={e.teacherName} name={e.name} description={e.description} rating={e.rating} price={e.price} image={e.image} categories={e.categories} />
-                  ))
-                    : undefined
-                }
-              </ GridItem>
-              <Box display="flex" flexDirection='row-reverse' >
-                <Link to="/cursosComprados">
-                  <Button mb='2' mr='2' colorScheme='blackAlpha'>Show more</Button>
-                </Link>
+          <Box w="auto" display="flex" flexDirection="column" border='1px' borderColor='gray.400' borderRadius="10" >
+            <Heading display='flex' justifyContent='center' > Your purchased courses </Heading>
+            <GridItem colSpan={2} display="flex" flexDirection="row" alignItems="center" mb='5'>
+              <Box w="auto" mr='15px' p='10px' display="flex" justifyContent='center' width='100%' flexDirection="column" >
+                <Box display='flex' justifyContent='center' gap='10px'>
+                  {
+                    purchasedCourses.length ? purchasedCourses?.map(e => (
+                      <CourseCard key={e.id} id={e.id} teacherName={e.teacherName} name={e.name} description={e.description} rating={e.rating} price={e.price} image={e.image} categories={e.categories} />
+                    ))
+                      : undefined
+                  }
+                </Box>
               </Box>
+            </ GridItem>
+            <Box display="flex" flexDirection='row-reverse' >
+              <Link to="/cursosComprados">
+                <Button mb='2' mr='2' colorScheme='blackAlpha'>Show more</Button>
+              </Link>
             </Box>
-          </GridItem>
+          </Box>
         </Grid>
       </Box >
       <Footer2 />
