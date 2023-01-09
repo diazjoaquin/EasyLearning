@@ -58,7 +58,6 @@ const Profile = () => {
                 </Link>
               </Box>
             </Box>
-            <FormUpdateUser update={update} setUpdate={setUpdate} />
           </ GridItem>
           <Box w="auto" display="flex" flexDirection="column" border='1px' borderColor='gray.400' borderRadius="10" mr='4' >
             <Heading display='flex' justifyContent='center' > Courses you created </Heading>
