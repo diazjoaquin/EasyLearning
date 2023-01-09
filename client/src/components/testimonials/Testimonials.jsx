@@ -8,6 +8,7 @@ import {
   Container,
   Avatar,
   useColorModeValue,
+  Center,
 } from '@chakra-ui/react';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
@@ -89,7 +90,9 @@ const Testimonial = ({ children }) => {
     );
   };
   
-  export default function Hola() {
+  export default function Speak() {
+
+    
     const [data, setData] = useState()
 
     const getData = async (data, setData) =>{
@@ -116,6 +119,7 @@ const Testimonial = ({ children }) => {
             <Heading>Our Clients Speak</Heading>
             <Text>We have been working with clients around the world</Text>
           </Stack>
+          <Center>
           <Stack
             direction={{ base: 'column', md: 'row' }}
             spacing={{ base: 10, md: 4, lg: 10 }}>
@@ -142,39 +146,9 @@ const Testimonial = ({ children }) => {
               
              }
             
-            {/* <Testimonial>
-              <TestimonialContent>
-                <TestimonialHeading>Intuitive Design</TestimonialHeading>
-                <TestimonialText>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Auctor
-                  neque sed imperdiet nibh lectus feugiat nunc sem.
-                </TestimonialText>
-              </TestimonialContent>
-              <TestimonialAvatar
-                src={
-                  'https://images.unsplash.com/photo-1586297135537-94bc9ba060aa?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80'
-                }
-                name={'Jane Cooper'}
-                title={'CEO at ABC Corporation'}
-              />
-            </Testimonial>
-            <Testimonial>
-              <TestimonialContent>
-                <TestimonialHeading>Mindblowing Service</TestimonialHeading>
-                <TestimonialText>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Auctor
-                  neque sed imperdiet nibh lectus feugiat nunc sem.
-                </TestimonialText>
-              </TestimonialContent>
-              <TestimonialAvatar
-                src={
-                  'https://images.unsplash.com/photo-1586297135537-94bc9ba060aa?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80'
-                }
-                name={'Jane Cooper'}
-                title={'CEO at ABC Corporation'}
-              />
-            </Testimonial> */}
+            
           </Stack>
+          </Center>
         </Container>
       </Box>
     );

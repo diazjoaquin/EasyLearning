@@ -85,7 +85,7 @@ const PostReview = ({ update, setUpdate }) => {
     }
 
     return (
-        <Card
+        <Card padding="5"
             maxW='sm'
             borderWidth='1px'
             borderRadius='lg'

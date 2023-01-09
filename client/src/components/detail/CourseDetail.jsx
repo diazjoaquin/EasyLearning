@@ -117,12 +117,11 @@ export default function Detail({ teacher, teacherName, name, description, rating
                     </div>
                   </div>
                 </div>
-                <br />
-                <div></div>
-                <br />
-                <div></div>
+               
               </div>
             </div>
+            
+            {/* Videos del curso */}
             <div>
               <Accordion allowMultiple>
                 <AccordionItem>

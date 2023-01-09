@@ -3,7 +3,8 @@ import {
     createUserWithEmailAndPassword, 
     signInWithEmailAndPassword,
     onAuthStateChanged,
-    signOut
+    signOut,
+    sendSignInLinkToEmail,
 } from "firebase/auth";
 import { auth } from "../../firebase-config";
 
@@ -25,6 +26,16 @@ export const AuthProvider = ({children}) => {
 
     const login = async (email, password) => {
         const user = await signInWithEmailAndPassword(auth, email, password);
+    }
+
+    const email = async (email) => {
+        sendSignInLinkToEmail(auth, email)
+        .then(() => {
+        // The link was successfully sent. Inform the user.
+        // Save the email locally so you don't need to ask the user for it again
+        // if they open the link on the same device.
+        window.localStorage.setItem('emailForSignIn', email);
+        });
     }
 
     const logout = () => {

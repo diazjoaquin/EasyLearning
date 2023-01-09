@@ -10,6 +10,8 @@ const CreateReviewPage = () => {
         title: "",
         comments: ""
     })
+        
+    
     const [errors, setErrors] = useState({});
 
     function validate(form) {
@@ -44,9 +46,11 @@ const CreateReviewPage = () => {
         let alert = await axios.post("/createReviewPage", form);
         if (alert.data.msg === "error") {
             window.alert("Solo peudes crear una reseña")
-        } else if (alert.data.msg === "ok") {
-            window.alert("Reseña creada")
+        } else if(alert.data.msg === "ok"){
+            window.alert("Reseña creada");
+            window.location.reload()
         }
+        
     }
 
     return (
@@ -55,6 +59,8 @@ const CreateReviewPage = () => {
             borderWidth='1px'
             borderRadius='lg'
             overflow='hidden'
+            padding="2%"
+            margin="1%"
         >
             <FormControl onSubmit={(e) => handleSubmit(e)} isRequired>
                 <FormLabel>Rate: </FormLabel>
