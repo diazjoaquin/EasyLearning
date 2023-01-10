@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import Navbar from '../navbar/Navbar';
 import style from "./Home.module.css"
+// import SearchBar from "../searchbar/SearchBar.jsx";
 import CourseCard from '../card/CourseCard.jsx';
-import { Heading, Box, Text, Image } from '@chakra-ui/react'
+import { Heading, Box, Text, Image, Center } from '@chakra-ui/react'
 import mainpicture from "../../image/maintextimage.png"
 import { Icon, ArrowLeftIcon, ArrowRightIcon } from '@chakra-ui/icons';
 import Footer2 from "../footer/Footer2";
-import Hola from "../testimonials/Testimonials"
+import Speak from "../testimonials/Testimonials"
 import BasicStatistics from "../statistic/Statistics"
 import Categories from "../categories/Categories" //cambio de "categorys"
 import { useEffect } from "react";
@@ -17,9 +18,9 @@ import CreateReviewPage from "../createReviewPage/CreateReviewPage";
 
 export default function Home() {
 
+  // carrousel: 
   let courses = useSelector(state => state.courses);
   courses = courses?.sort((a, b) => b.rating - a.rating)?.slice(0, 15)
-
   const [coursesPerPage] = useState(3);
   const [currentPage, setCurrentPage] = useState(1);
   const last = currentPage * coursesPerPage;
@@ -37,10 +38,23 @@ export default function Home() {
     currentPage > 1 ? setCurrentPage(currentPage - 1) : setCurrentPage(1);
   }
 
+  // cards:
   const dispatch = useDispatch();
   useEffect(() => {
+    // if (!courses.length) {
     dispatch(getAllCourses())
+    // }
   }, [dispatch]);
+
+
+
+  // const ListHeader = ({children}) => {
+  //     return (
+  //         <Text fontWeight={'500'} fontSize={'lg'} mb={2}>
+  //             {children}
+  //         </Text>
+  //     );
+  // };
 
   return (
 
@@ -58,6 +72,8 @@ export default function Home() {
             300 Instructor & Institutions</Heading>
           <Text fontSize='xl'> Varius version have envolved over the years, sometimes by accident,
           </Text>
+          {/* <SearchBar>
+                    </SearchBar> */}
         </Box>
 
         <div>
@@ -72,29 +88,27 @@ export default function Home() {
       </br>
 
       <div title="carousel">
+        {/* <Carousel>
+
+                </Carousel> */}
         <div className={style.coursecont}>
           <Icon as={ArrowLeftIcon} onClick={(e) => handlePrevious(e)}
             className={style.icon} />
           {
             currentCourses.map((course) => {
-              if (course.archieved === false && course.status === "APPROVED") {
-                return (
-                  <CourseCard
-                    key={course.id}
-                    name={course.name}
-                    teacherId={course.teacherId}
-                    teacherName={course.teacherName}
-                    id={course.id}
-                    // description={course.description}
-                    price={course.price}
-                    rating={course.rating}
-                    categories={course.categories}
-                    image={course.image}
-                    videos={course.videos}
-                    archieved={course.archieved}
-                    status={course.status}
-                  />)
-              }
+              return (
+                <CourseCard
+                  key={course.id}
+                  name={course.name}
+                  teacherId={course.teacherId}
+                  teacherName={course.teacherName}
+                  id={course.id}
+                  // description={course.description}
+                  price={course.price}
+                  rating={course.rating}
+                  categories={course.categories}
+                  image={course.image}
+                />)
             })
           }
           <Icon as={ArrowRightIcon} onClick={(e) => handleNext(e)}
@@ -109,15 +123,21 @@ export default function Home() {
       </div>
 
       <div>
-        <BasicStatistics />
+        <BasicStatistics>
+        </BasicStatistics>
+      </div>
+      <br />
+      <div>
+        <Speak />
+
       </div>
 
       <div>
-        <Hola />
-      </div>
-
-      <div>
-        <CreateReviewPage />
+        <Box>
+          <Center>
+            <CreateReviewPage />
+          </Center>
+        </Box>
       </div>
 
       <div>

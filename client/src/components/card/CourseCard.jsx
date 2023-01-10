@@ -62,7 +62,7 @@ const CourseCard = ({ id, teacherName, name, description, rating, price, categor
                     </Text> : undefined
             : undefined
         }
-        <img src={image} alt={`image-couse${id}`} />
+        <img width='300' src={image} alt={`image-couse${id}`} />
 
         <Stack mt='2' spacing='2' >
           <Link to={`/detail/${id}`}>
@@ -77,6 +77,9 @@ const CourseCard = ({ id, teacherName, name, description, rating, price, categor
           <Text>
             Teacher: {teacherName}
           </Text>
+          <Text color='blue.600' fontSize='2xl'>
+            ${price}
+          </Text>
           {
             rating
               ? <Text>
@@ -84,9 +87,6 @@ const CourseCard = ({ id, teacherName, name, description, rating, price, categor
               </Text>
               : undefined
           }
-          <Text color='blue.600' fontSize='2xl'>
-            ${price}
-          </Text>
         </Stack>
       </CardBody>
       <Divider />

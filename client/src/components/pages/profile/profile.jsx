@@ -38,7 +38,6 @@ const Profile = () => {
       <Navbar />
       <Box>
         <Grid
-          h='800px'
           templateRows='repeat(2, 1fr)'
           templateColumns='15% 1fr'
           gap={4}
@@ -61,7 +60,7 @@ const Profile = () => {
           </ GridItem>
           <Box w="auto" display="flex" flexDirection="column" border='1px' borderColor='gray.400' borderRadius="10" mr='4' >
             <Heading display='flex' justifyContent='center' > Courses you created </Heading>
-            <GridItem height='100%' colSpan={2} display="flex" flexDirection="row" alignItems="center">
+            <GridItem colSpan={2} display="flex" flexDirection="row" alignItems="center">
               <Link to="/formCourse">
                 <Button
                   mx='10px'
@@ -108,7 +107,7 @@ const Profile = () => {
                   fontSize='25px'
                 > Buy  </Button>
               </Link>
-              <Box w="auto" mr='15px' p='10px' display="flex" justifyContent='center' width='100%' flexDirection="column" >
+              <Box mr='15px' p='10px' display="flex" justifyContent='center' width='100%' flexDirection="column" >
                 <Box display='flex' justifyContent='center' gap='10px'>
                   {
                     purchasedCourses.length ? purchasedCourses?.map(e => (

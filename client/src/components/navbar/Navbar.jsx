@@ -31,7 +31,9 @@ export default function Navbar() {
   return (
     <div className={style.navcont}>
       <div className={style.botones}>
-        <img className={style.logo} src={Logo} alt="Logo" />
+        <Link to="/">
+          <img title="to home page" className={style.logo} src={Logo} alt="Logo" />
+        </Link>
 
         <div className={style.menu}>
           <Link to="/">Home</Link>
