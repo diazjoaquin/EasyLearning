@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { getAllUsers } from "../../redux/actions/index.js"
 import { useDispatch, useSelector } from "react-redux";
 import { FormControl, FormLabel, Input, Button, FormErrorMessage, Select, Card } from '@chakra-ui/react';
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
-import { useAuth } from "../../components/context/Auth-context";
+import { useAuth } from "../context/Auth-context";
 
 const PostReview = ({ update, setUpdate }) => {
     const userDB = JSON.parse(localStorage.getItem("user"));
@@ -23,18 +22,17 @@ const PostReview = ({ update, setUpdate }) => {
 
     const { user } = useAuth();
     const allUser = useSelector((state) => state.allUsers);
-    console.log(allUser)
 
     const usuario = user && allUser.find(u => u.email === user.email)
 
     useEffect(() => {
         // dispatch(getAllUsers())
-        if(usuario){
+        if (usuario) {
             setInput({
                 userId: usuario.id,
             })
         }
-    }, [ update ]);
+    }, [update]);
 
 
     function validate(input) {
@@ -73,13 +71,13 @@ const PostReview = ({ update, setUpdate }) => {
             && !errors.hasOwnProperty("score")
             && !errors.hasOwnProperty("comments")
         )
-        setInput({
-            ...input,
-            score: parseInt(input.score)
-        })
+            setInput({
+                ...input,
+                score: parseInt(input.score)
+            })
         toast.success("Review submitted", {
             position: "bottom-left",
-          });
+        });
         await axios.post("/createReview", input);
         setUpdate(!update)
     }
@@ -90,14 +88,13 @@ const PostReview = ({ update, setUpdate }) => {
             borderWidth='1px'
             borderRadius='lg'
             overflow='hidden'
-            padding='10px'
         >
             <FormControl onSubmit={(e) => handleSubmit(e)} isRequired>
                 <FormLabel>Rate: </FormLabel>
                 <Select
                     name='score'
                     onChange={(e) => handleChange(e)}
-                > 
+                >
                     <option selected hidden disabled value="">Select a rating</option>
                     <option onChange={e => handleChange(e)} value={1}>1 ⭐</option>
                     <option onChange={e => handleChange(e)} value={2}>2 ⭐⭐</option>

@@ -10,8 +10,8 @@ const CreateReviewPage = () => {
         title: "",
         comments: ""
     })
-        
-    
+
+
     const [errors, setErrors] = useState({});
 
     function validate(form) {
@@ -48,9 +48,8 @@ const CreateReviewPage = () => {
             window.alert("Solo peudes crear una reseña")
         } else if(alert.data.msg === "ok"){
             window.alert("Reseña creada");
-            window.location.reload()
         }
-        
+        window.location.reload()
     }
 
     return (

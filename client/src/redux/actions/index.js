@@ -35,7 +35,9 @@ export const ADD_TO_CART = "ADD_TO_CART";
 export const DELETE_FROM_CART = "DELETE_FROM_CART";
 export const TOTAL_CART = "TOTAL_CART";
 
-export const GET_ORDERS = " GET_ORDERS";
+export const GET_ORDERS = "GET_ORDERS";
+
+export const CLEAN_CART = "CLEAN_CART";
 
 //Review
 export const GET_SCORES = "GET_SCORES";
@@ -111,7 +113,7 @@ export const buyNow = (payload) => async (dispatch) => {
 };
 
 export const getOrders = () => async (dispatch) => {
-  const orders = await axios.get("/orders"); //hacer ruta
+  const orders = await axios.get("/getOrders"); //hacer ruta
   try {
     return dispatch({
       type: GET_ORDERS,
@@ -307,6 +309,18 @@ export const getDate = (payload) => async (dispatch) => {
     return dispatch({
       type: GET_DATE,
       payload,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const cleanCart = () => async (dispatch) => {
+  try {
+    localStorage.setItem("cart", JSON.stringify([]));
+    return dispatch({
+      type: CLEAN_CART,
+      payload: null,
     });
   } catch (error) {
     console.log(error);

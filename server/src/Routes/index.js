@@ -22,8 +22,8 @@ const getUserByEmail = require("./getUserByEmail/getUserByEmail.js");
 const postMercadoPago = require("./mercadoPago/mercadoPago");
 const getStatistics = require("./getStatistics/getStatistics");
 const deleteCourse = require("../Routes/deleteCourse/deleteCourse.js");
+const getAllReviewTotal = require("../Routes/getAllReviewTotal/getAllReviewTotal.js");
 const updateUserDashboard = require("../Routes/updateUserDashboard/updateUserDashboard.js");
-const getAllReviewTotal = require("../Routes/getAllReviewTotal/getAllReviewTotal.js")
 
 // router.use("/postMercadoPago", postMercadoPago);
 

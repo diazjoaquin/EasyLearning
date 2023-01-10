@@ -1,9 +1,7 @@
-import style from './CourseCard.module.css';
-import { useHistory } from 'react-router-dom';
-import { Card, CardBody, CardFooter, Stack, Heading, Text, Divider, ButtonGroup, Button, FormControl, FormLabel, Switch, Box, Tooltip } from '@chakra-ui/react';
-import { useDispatch, useSelector } from 'react-redux';
+import { Card, CardBody, CardFooter, Stack, Heading, Text, Divider, ButtonGroup, Button, FormControl, FormLabel, Switch, Box, Tooltip, Img } from '@chakra-ui/react';
+import { useDispatch } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
-import { addToCart, buyNow } from '../../redux/actions/index.js';
+import { addToCart } from '../../redux/actions/index.js';
 import { InfoOutlineIcon } from '@chakra-ui/icons'
 import axios from 'axios';
 
@@ -29,9 +27,7 @@ const CourseCard = ({ id, teacherName, name, description, rating, price, categor
     }
     await axios.patch("http://localhost:3001/updateCourse", course).then(res => console.log(res.data.archieved))
     setUpdate(!update)
-    // window.location.reload()
   }
-  // justifyContent='center' 
 
   const dispatch = useDispatch();
   return (
@@ -62,7 +58,7 @@ const CourseCard = ({ id, teacherName, name, description, rating, price, categor
                     </Text> : undefined
             : undefined
         }
-        <img src={image} alt={`image-couse${id}`} />
+        <Img width='300' height="200" src={image} alt={`image-couse${id}`} />
 
         <Stack mt='2' spacing='2' >
           <Link to={`/detail/${id}`}>
@@ -77,6 +73,9 @@ const CourseCard = ({ id, teacherName, name, description, rating, price, categor
           <Text>
             Teacher: {teacherName}
           </Text>
+          <Text color='blue.600' fontSize='2xl'>
+            ${price}
+          </Text>
           {
             rating
               ? <Text>
@@ -84,9 +83,6 @@ const CourseCard = ({ id, teacherName, name, description, rating, price, categor
               </Text>
               : undefined
           }
-          <Text color='blue.600' fontSize='2xl'>
-            ${price}
-          </Text>
         </Stack>
       </CardBody>
       <Divider />

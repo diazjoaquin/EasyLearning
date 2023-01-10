@@ -55,6 +55,7 @@ const {
   Comments,
   ReviewPage,
   Category_Course,
+  Orderr
 } = sequelize.models;
 
 //Fermin
@@ -95,6 +96,10 @@ Video.belongsTo(Course);
 Video.hasMany(Comments);
 //Comentario perteneca a un solo video
 Comments.belongsTo(Video);
+
+ //TABLA ORDERR             
+User.belongsToMany(Orderr, {through: "User_Order", timestamps: false})
+Orderr.belongsToMany(User, {through: "User_Order", timestamps: false})
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
