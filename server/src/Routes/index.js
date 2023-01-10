@@ -19,9 +19,13 @@ const getAllReviewPage = require("./getAllReviewPage/getAllReviewPage.js");
 const createReviewPage = require("./createReviewPage/createReviewPage.js");
 const updateUser = require("./updateUser/updateUser.js");
 const getUserByEmail = require("./getUserByEmail/getUserByEmail.js")
-const postMercadoPago = require("./mercadoPago/mercadoPago")
+const postMercadoPago = require("./mercadoPago/mercadoPago");
+const createOrder  = require("./createOrder/createOrder");
+
 
 router.use("/postMercadoPago", postMercadoPago)
+
+router.use("/createOrder",  createOrder)
 
 router.use("/getAllCourses", getAllCourses);
 router.use("/getDetail", getDetail);

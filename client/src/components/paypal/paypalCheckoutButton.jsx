@@ -1,21 +1,36 @@
 import React, { useState, useEffect } from "react";
 import { PayPalButtons } from "@paypal/react-paypal-js";
+import axios from "axios";
+import { useAuth } from "../context/Auth-context";
+import { useSelector, useDispatch } from "react-redux"
+import { useHistory } from "react-router-dom";
+import { toast } from "react-toastify";
+import { cleanCart } from "../../redux/actions";
 
 const PaypalCheckoutButton = (props) => {
     const { product } = props;
-
+    const history = useHistory()
+    const dispatch = useDispatch()
     const [paidFor, setPaidFor] = useState(false); 
     const [error, setError] = useState(null); 
-    const handleApprove = (orderId) => {
-        //call backend function to fulfill order
-
-        //if response is success 
-        setPaidFor(true);
-
-    //refresh user's account 
-    // if response is error
-    // alert("Your payment was processed successfully. However, we are unable to fulfill your purchase. Please contact us for assistance.");
-    };
+    const { user } = useAuth();
+    const userDB = user && JSON.parse(localStorage.getItem("user"));
+   
+    const handleApprove = async(data) => {
+      if(data.status === "COMPLETED"){
+        toast.success("Thank you for your purchase", {
+          position: "bottom-left",
+        });
+        const shopCart = JSON.parse(localStorage.getItem("cart"));
+        
+        await axios.post("http://localhost:3001/createOrder", {shopCart, userDB});
+        console.log("purchase done", data);
+        dispatch(cleanCart());
+        history.push("/")
+      } else {
+        alert("Error")
+      }
+  }
 
     if (paidFor) {
         // Display success message, modal or redirect user to success page
@@ -38,6 +53,7 @@ const PaypalCheckoutButton = (props) => {
         shape: "pill"
       }}
     onClick={(data, actions) => {
+
         // Validate on button click, client or server side
         const hasAlreadyBoughtCourse = false;
       
@@ -48,6 +64,7 @@ const PaypalCheckoutButton = (props) => {
       
           return actions.reject();
         } else {
+          
           return actions.resolve();
         }
       }}
@@ -66,12 +83,10 @@ const PaypalCheckoutButton = (props) => {
       }
     }
 
-    onApprove= {async(data, actions) => {
-        const order = await actions.order.capture();
-        
-        console.log(order);
+    onApprove= {async (data, actions) => {
 
-        handleApprove(data.orderID);
+      return await actions.order.capture()
+      .then(data => handleApprove(data)).catch(error => console.log(error))
     }}
     onError={(err) => {
         setError(err);

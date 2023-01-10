@@ -4,6 +4,7 @@ const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME, DB_PORT } = process.env;
 const { Sequelize } = require("sequelize");
 const fs = require("fs");
 const path = require("path");
+const Order = require("./Models/Orderr");
 
 const sequelize = new Sequelize(
   `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`,
@@ -47,9 +48,15 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
-const { Category, Course, Review, User, Video, Comments, ReviewPage } =
+const { Category, Course, Review, User, Video, Comments, ReviewPage, Orderr } =
   sequelize.models;
 
+//Tabla orders - user
+
+  User.belongsToMany(Orderr, {through: "User_Order", timestamps: false})
+  Orderr.belongsToMany(User, {through: "User_Order", timestamps: false})
+  /* User.hasMany(Orderr, {as: 'Orderr', foreignKey: 'userId'})
+  Orderr.belongsTo(User) */
 //Fermin
 //muchos a muchos
 User.belongsToMany(Course, { through: "User_Course", timestamps: false });
@@ -65,6 +72,14 @@ Course.belongsToMany(Category, {
   timestamps: false,
 });
 
+/* Orderr.belongsToMany(User, {
+  through: "Order_User",
+  timestamps: false,
+});
+User.belongsToMany(Orderr, {
+  through: "Order_User",
+  timestamps: false,
+}); */
 //TABLA REVIEWS Course y User
 //Course tiene muchos reviews
 Course.hasMany(Review);

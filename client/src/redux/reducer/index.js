@@ -18,7 +18,7 @@ import {
   ADD_TO_CART,
   DELETE_FROM_CART,
   GET_TEACHERS,
-  GET_ORDERS, //add
+  GET_ORDERS,CLEAN_CART //add
 } from "../actions";
 
 const initialState = {
@@ -82,7 +82,11 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         cart: buy,
       };
-
+    case CLEAN_CART:
+      return {
+        ...state,
+        cart: []
+      };
     case FILTERS:
       let filtros = state.filter;
       if (action.payload.category) {
