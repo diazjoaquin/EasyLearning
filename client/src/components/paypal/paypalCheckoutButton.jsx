@@ -1,47 +1,59 @@
 import React, { useState, useEffect } from "react";
 import { PayPalButtons } from "@paypal/react-paypal-js";
-import axios from "axios";
-import { useAuth } from "../context/Auth-context";
+import { cleanCart } from "../../redux/actions";
 import { useSelector, useDispatch } from "react-redux"
 import { useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
-import { cleanCart } from "../../redux/actions";
+import { useAuth } from "../context/Auth-context";
+import { auth } from "../../firebase-config";
+import axios from "axios";
 
 const PaypalCheckoutButton = (props) => {
     const { product } = props;
-    const history = useHistory()
-    const dispatch = useDispatch()
+
     const [paidFor, setPaidFor] = useState(false); 
     const [error, setError] = useState(null); 
-    const { user } = useAuth();
-    const userDB = user && JSON.parse(localStorage.getItem("user"));
-   
-    const handleApprove = async(data) => {
-      if(data.status === "COMPLETED"){
-        toast.success("Thank you for your purchase", {
-          position: "bottom-left",
-        });
-        const shopCart = JSON.parse(localStorage.getItem("cart"));
-        
-        await axios.post("http://localhost:3001/createOrder", {shopCart, userDB});
-        console.log("purchase done", data);
-        dispatch(cleanCart());
-        history.push("/")
-      } else {
-        alert("Error")
-      }
-  }
+    const handleApprove = (orderId) => {
+        //call backend function to fulfill order
 
-    if (paidFor) {
-        // Display success message, modal or redirect user to success page
-        alert("Thank you for your purchase!");
-    }
+        //if response is success 
+        setPaidFor(true);
 
-    if (error) {
-        // Display error message, modal or redirect user to error page
-        alert(error);
-      }
+    //refresh user's account 
+    // if response is error
+    // alert("Your payment was processed successfully. However, we are unable to fulfill your purchase. Please contact us for assistance.");
+    };
 
+    console.log(userDB)
+    let allProducts = [];
+    cart.forEach( e=> {
+      let obj = {
+        name: e.name,
+            unit_amount: {
+                currency_code: "USD",
+                value: e.price
+            },
+            quantity: "1"
+        }
+        allProducts.push(obj)
+    });
+
+
+    const handleApprove = (data) => {
+        if(data.status === "COMPLETED"){
+          toast.success("Thank you for your purchase", {
+            position: "bottom-left",
+          });
+          // const shopCart = JSON.parse(localStorage.getItem("cart"));
+          // console.log(shopCart)
+          // await axios.post("/createOrder", {data, userDB});
+          console.log("purchase done", data);
+          dispatch(cleanCart());
+          history.push("/")
+        } else {
+          alert("Error")
+        }
+    } 
       
     return (
     <PayPalButtons
@@ -52,8 +64,8 @@ const PaypalCheckoutButton = (props) => {
         tagline: false,
         shape: "pill"
       }}
+      
     onClick={(data, actions) => {
-
         // Validate on button click, client or server side
         const hasAlreadyBoughtCourse = false;
       
@@ -68,26 +80,43 @@ const PaypalCheckoutButton = (props) => {
           return actions.resolve();
         }
       }}
-    createOrder = {(data, actions) => {
-        return actions.order.create({
+
+   
+    createOrder = { async (data, actions) => {
+        return await actions.order.create({
             purchase_units: [
-                {
-                    description: product.description,
+            {
+                    items: allProducts,
+                    intent: "CAPTURE",
+                    description: "Courses",
                     amount: {
-                        value: product.price
-                    }
-                }
-            ] 
-            
-          });
+                        value: product.price,
+                        breakdown: {
+                          item_total: {  /* Required when including the items array */
+                          currency_code: "USD",
+                          value: product.price
+                        }
+                      }
+                    },
+                    custom_id: userDB.fullName
+              }],
+          })
+          .then((orderID) => {
+            setOrderID(orderID);
+            console.log(orderID);
+            return orderID;
+          })
       }
     }
 
-    onApprove= {async (data, actions) => {
+    onApprove= {async(data, actions) => {
+        const order = await actions.order.capture();
+        
+        console.log(order);
 
-      return await actions.order.capture()
-      .then(data => handleApprove(data)).catch(error => console.log(error))
+        handleApprove(data.orderID);
     }}
+
     onError={(err) => {
         setError(err);
         console.error("PayPal Checkout onError", err);
@@ -95,7 +124,7 @@ const PaypalCheckoutButton = (props) => {
 
     forceReRender={[product.price]}
     />
-);
+); 
 
 };
 

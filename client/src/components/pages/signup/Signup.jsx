@@ -39,11 +39,13 @@ export default function SignupCard() {
   const handleSubmit = async (e) => {
     setError("");
     try {
+      history.push("/verification");
       await signup(form.emailAddress, form.password);
-      await axios.post("http://localhost:3001/createUser", form);
-      let response = await axios.get(`http://localhost:3001/getUserByEmail?email=${form.emailAddress}`)
-      localStorage.setItem("user", JSON.stringify(response.data))
-      history.push("/");
+      await axios.post("/createUser", form);
+      let response = await axios.get(`/getUserByEmail?email=${form.emailAddress}`);
+      // esto tiene que estar encriptado.
+      localStorage.setItem("user", JSON.stringify(response.data));
+      console.log(JSON.stringify(response.data));
     } catch (error) {
       setError(error.message);
       console.log(error.message);
