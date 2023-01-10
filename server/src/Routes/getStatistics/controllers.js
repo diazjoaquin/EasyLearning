@@ -21,7 +21,6 @@ const getStatistics = async () => {
     teachers = teachers?.length;
     if (teachers) data.teachers = teachers;
 
-    console.log(data);
     return data;
   } catch (error) {
     return error;

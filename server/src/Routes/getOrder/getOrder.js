@@ -1,13 +1,12 @@
 const { Router } = require("express");
 const router = Router();
-const { getStatistics } = require("./controllers");
+const { getOrders } = require("./controllers");
 
 router.get("/", async (req, res) => {
   try {
-    let result = await getStatistics();
-    res.json(result);
+    res.json(await getOrders(req.body));
   } catch (error) {
-    res.json(error);
+    console.log(error);
   }
 });
 

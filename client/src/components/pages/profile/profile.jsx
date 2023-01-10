@@ -6,7 +6,6 @@ import { Link, useHistory } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAllCoursesByTeacher, getCoursesByStudent } from '../../../redux/actions'
 import CourseCard from '../../card/CourseCard'
-import FormUpdateUser from '../../formUpdateUser/formUpdateUser'
 import { SettingsIcon } from '@chakra-ui/icons'
 
 const Profile = () => {
@@ -60,11 +59,11 @@ const Profile = () => {
           </ GridItem>
           <Box w="auto" display="flex" flexDirection="column" border='1px' borderColor='gray.400' borderRadius="10" mr='4' >
             <Heading display='flex' justifyContent='center' > Courses you created </Heading>
-            <GridItem colSpan={2} display="flex" flexDirection="row" alignItems="center">
+            <GridItem height='100%' colSpan={2} display="flex" flexDirection="row" alignItems="center">
               <Link to="/formCourse">
                 <Button
                   mx='10px'
-                  _hover='none'
+                  _hover=''
                   width='100px'
                   cursor='pointer'
                   height='100px'
@@ -96,7 +95,7 @@ const Profile = () => {
               <Link to="/course">
                 <Button
                   mx='10px'
-                  _hover='none'
+                  _hover=''
                   width='100px'
                   cursor='pointer'
                   height='100px'
