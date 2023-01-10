@@ -96,19 +96,21 @@ export default function Home() {
             className={style.icon} />
           {
             currentCourses.map((course) => {
-              return (
-                <CourseCard
-                  key={course.id}
-                  name={course.name}
-                  teacherId={course.teacherId}
-                  teacherName={course.teacherName}
-                  id={course.id}
-                  // description={course.description}
-                  price={course.price}
-                  rating={course.rating}
-                  categories={course.categories}
-                  image={course.image}
-                />)
+              if (course.status === "APPROVED" && !course.archieved) {
+                return (
+                  <CourseCard
+                    key={course.id}
+                    name={course.name}
+                    teacherId={course.teacherId}
+                    teacherName={course.teacherName}
+                    id={course.id}
+                    // description={course.description}
+                    price={course.price}
+                    rating={course.rating}
+                    categories={course.categories}
+                    image={course.image}
+                  />)
+              }
             })
           }
           <Icon as={ArrowRightIcon} onClick={(e) => handleNext(e)}
