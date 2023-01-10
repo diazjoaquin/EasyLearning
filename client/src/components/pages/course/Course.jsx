@@ -9,10 +9,11 @@ import Filters from "../../filters/filters.jsx";
 import Footer2 from "../../footer/Footer2"
 import SearchBar from "../../searchbar/SearchBar.jsx";
 import Pagination from "../pagination/Pagination";
+import { Heading } from "@chakra-ui/react";
 
 
 export default function Course() {
-
+  window.scrollTo({ top: 0, left: 0 });
   // pagination elements:
 
   const courses = useSelector(state => state.courses);
@@ -32,9 +33,9 @@ export default function Course() {
   const [update, setUpdate] = useState(false);
 
   useEffect(() => {
-    // if (!courses.length) {
-    dispatch(getAllCourses());
-    // }
+    if (!courses.length) {
+      dispatch(getAllCourses());
+    }
   }, [dispatch])
 
   // next y previous buttons:
@@ -65,24 +66,26 @@ export default function Course() {
         handlePrevious={handlePrevious} handleNext={handleNext} />
       <div className={style.cards}>
         {
-          courses.map((course) => {
-            if (course.archieved === false && course.status === "APPROVED" && course.videos.length) {
-              return (
-                <CourseCard
-                  key={course.id}
-                  name={course.name}
-                  teacherName={course.teacherName}
-                  id={course.id}
-                  Description={course.description}
-                  price={course.price}
-                  rating={course.rating}
-                  categories={course.categories}
-                  image={course.image}
-                  archieved={course.archieved}
-                  status={course.status}
-                />)
-            }
-          })
+          courses?.length
+            ? courses.map((course) => {
+              if (course.archieved === false && course.status === "APPROVED" && course.videos.length) {
+                return (
+                  <CourseCard
+                    key={course.id}
+                    name={course.name}
+                    teacherName={course.teacherName}
+                    id={course.id}
+                    Description={course.description}
+                    price={course.price}
+                    rating={course.rating}
+                    categories={course.categories}
+                    image={course.image}
+                    archieved={course.archieved}
+                    status={course.status}
+                  />)
+              }
+            })
+            : <Heading>No courses with this category</Heading>
         }
       </div>
       <Footer2 />
