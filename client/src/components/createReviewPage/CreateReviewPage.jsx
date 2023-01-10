@@ -10,6 +10,8 @@ const CreateReviewPage = () => {
         title: "",
         comments: ""
     })
+
+
     const [errors, setErrors] = useState({});
 
     function validate(form) {
@@ -56,6 +58,8 @@ const CreateReviewPage = () => {
             borderWidth='1px'
             borderRadius='lg'
             overflow='hidden'
+            padding="2%"
+            margin="1%"
         >
             <FormControl onSubmit={(e) => handleSubmit(e)} isRequired>
                 <FormLabel>Rate: </FormLabel>
