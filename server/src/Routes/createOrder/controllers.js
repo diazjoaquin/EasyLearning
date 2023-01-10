@@ -1,12 +1,14 @@
-const axios = require("axios");
 const {Orderr, User} = require("../../db")
 
 const createOrder = async(req,res) =>{
 
-    const {prodd, userDB} = req.body //array de productos
+    // const {prodd, userDB} = req.body //array de productos
     //console.log("HASTA ACA", prodd);
-
+    const prodd = req.body[0];
+    const userDB = req.body[1];
+    console.log("console", userDB)
     let user = await User.findByPk(userDB.id)
+
     console.log(prodd, user.dataValues);
     try {
 

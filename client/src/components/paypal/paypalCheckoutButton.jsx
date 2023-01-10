@@ -23,7 +23,6 @@ const PaypalCheckoutButton = (props) => {
     const [success, setSuccess] = useState(false);
 
     const cart = useSelector((state) => state.cart);
-
     const { user } = useAuth();
     const userDB = user && JSON.parse(localStorage.getItem("user"));
 
@@ -42,15 +41,16 @@ const PaypalCheckoutButton = (props) => {
     });
 
 
+    const shopCart = JSON.parse(localStorage.getItem("cart"));
     const handleApprove = async(data) => {
         if(data.status === "COMPLETED"){
           toast.success("Thank you for your purchase", {
             position: "bottom-left",
           });
-          const shopCart = JSON.parse(localStorage.getItem("cart"));
-          console.log(shopCart)
+          console.log("biancaaaaaaaaaaaaaaaaaaaaaaaa", userDB)
           await axios.post("/createOrder", {prodd: shopCart, userDB});
-          console.log("purchase done", data);
+          console.log("bianca2")
+          // console.log("purchase done", data);
           dispatch(cleanCart());
           history.push("/")
         } else {

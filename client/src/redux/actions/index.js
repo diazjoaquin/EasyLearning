@@ -113,7 +113,7 @@ export const buyNow = (payload) => async (dispatch) => {
 };
 
 export const getOrders = () => async (dispatch) => {
-  const orders = await axios.get("/orders"); //hacer ruta
+  const orders = await axios.get("/getOrders"); //hacer ruta
   try {
     return dispatch({
       type: GET_ORDERS,
