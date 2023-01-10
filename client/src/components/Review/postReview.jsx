@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { getAllUsers } from "../../redux/actions/index.js"
 import { useDispatch, useSelector } from "react-redux";
 import { FormControl, FormLabel, Input, Button, FormErrorMessage, Select, Card } from '@chakra-ui/react';
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
-import { useAuth } from "../../components/context/Auth-context";
+import { useAuth } from "../context/Auth-context";
 
 const PostReview = ({ update, setUpdate }) => {
     const userDB = JSON.parse(localStorage.getItem("user"));
@@ -89,7 +88,6 @@ const PostReview = ({ update, setUpdate }) => {
             borderWidth='1px'
             borderRadius='lg'
             overflow='hidden'
-            padding='10px'
         >
             <FormControl onSubmit={(e) => handleSubmit(e)} isRequired>
                 <FormLabel>Rate: </FormLabel>

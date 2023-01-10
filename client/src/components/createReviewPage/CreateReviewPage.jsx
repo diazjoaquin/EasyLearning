@@ -46,8 +46,8 @@ const CreateReviewPage = () => {
         let alert = await axios.post("/createReviewPage", form);
         if (alert.data.msg === "error") {
             window.alert("Solo peudes crear una reseña")
-        } else if (alert.data.msg === "ok") {
-            window.alert("Reseña creada")
+        } else if(alert.data.msg === "ok"){
+            window.alert("Reseña creada");
         }
         window.location.reload()
     }

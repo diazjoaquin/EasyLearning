@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, CardHeader, Heading, CardBody, Text, CardFooter, Stack, Divider, Box, StackDivider, VStack} from '@chakra-ui/react';
+import { Text, Divider, Box, VStack } from '@chakra-ui/react';
 import { StarIcon } from '@chakra-ui/icons'
 
 const CardReview = ({ user, score, comments, date}) => {

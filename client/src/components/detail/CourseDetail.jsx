@@ -26,8 +26,8 @@ import {
   Text,
   ButtonGroup,
   Divider,
-  SimpleGrid,
-  Center
+  Center,
+  SimpleGrid
 } from "@chakra-ui/react";
 
 import { RiArrowGoBackLine } from "react-icons/ri";
