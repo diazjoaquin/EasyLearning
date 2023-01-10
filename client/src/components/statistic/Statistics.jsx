@@ -8,6 +8,9 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react';
 
+import axios from "axios";
+import { useEffect, useState } from "react";
+
 import style from "./Statistics.module.css";
 
 interface StatsCardProps {
@@ -35,6 +38,17 @@ function StatsCard(props: StatsCardProps) {
 }
 
 export default function BasicStatistics() {
+  
+    const [state, setState] = useState();
+
+    const getStatistics = async () => {
+        setState(await axios.get("/getStatistics"))
+    }
+
+    useEffect(() => {
+        getStatistics()
+    }, [])
+
   return (
     <div>
       <div className={style.statistic}>
@@ -49,12 +63,13 @@ export default function BasicStatistics() {
           Our Achievements?
         </chakra.h1>
         <SimpleGrid columns={{ base: 2, md: 2 }} spacing={{ base: 5, lg: 8 }}>
-          <StatsCard title={'Students'} stat={'50,000+'} />
-          <StatsCard title={'Instructors'} stat={'600+'} />
-          <StatsCard title={'Videos'} stat={'10.000+'} />
-          <StatsCard title={'Users'} stat={'1.000.000+'} />
+          <StatsCard title={'Courses'} stat={state?.data?.courses} />
+          <StatsCard title={'Instructors'} stat={state?.data?.teachers} />
+          <StatsCard title={'Videos'} stat={state?.data?.videos} />
+          <StatsCard title={'Users'} stat={state?.data?.users} />
         </SimpleGrid>
       </Box>
     </div>
   );
 }
+

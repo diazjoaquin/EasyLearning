@@ -7,12 +7,13 @@ import { useParams } from "react-router-dom";
 const Comments = ({ videoId, comments, update, setUpdate }) => {
   const params = useParams()
   const { id } = params
-  const userDB = JSON.parse(localStorage.getItem("user"))
+  const userDB = JSON.parse(localStorage.getItem("user"));
   const [comment, setComment] = useState({
     videoId: id,
     userId: userDB?.id,
     title: "",
     description: "",
+    userName: userDB?.fullName,
   })
 
   const handleChange = (e) => {
@@ -26,7 +27,7 @@ const Comments = ({ videoId, comments, update, setUpdate }) => {
     e.preventDefault() //hay que cambiar esto por un estado local, para que se actualice solamente los comentarios cada vez que alguien comenta.
     await axios.post("http://localhost:3001/createCommentVideo", comment);
     setUpdate(!update)
-    document.getElementById("1").reset()
+    document.getElementById("1").reset()   
   }
   return (
     <div>
@@ -54,7 +55,7 @@ const Comments = ({ videoId, comments, update, setUpdate }) => {
           return (
             <div key={i}>
               <hr />
-              <h1>User: {el.userId}</h1>
+              <h1>User: {el.userName}</h1>
               <p>Titulo: {el.title}</p>
               <p>Comment: {el.description}</p>
               <hr />

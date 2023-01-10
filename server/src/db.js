@@ -1,6 +1,5 @@
 require("dotenv").config();
-// const { DB_USER, DB_PASSWORD, DB_HOST } = process.env;
-const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME, DB_PORT } = process.env;
+const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME } = process.env;
 const { Sequelize } = require("sequelize");
 const fs = require("fs");
 const path = require("path");
@@ -15,7 +14,7 @@ const sequelize = new Sequelize(
 
 // const sequelize = new Sequelize(DB_NAME, DB_USER, DB_PASSWORD, {
 //   host: DB_HOST,
-//   port: 5432,
+//   port: DB_PORT,
 //   dialect: "postgres",
 //   logging: false,
 //   native: false,
@@ -47,8 +46,16 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
-const { Category, Course, Review, User, Video, Comments, ReviewPage } =
-  sequelize.models;
+const {
+  Category,
+  Course,
+  Review,
+  User,
+  Video,
+  Comments,
+  ReviewPage,
+  Category_Course,
+} = sequelize.models;
 
 //Fermin
 //muchos a muchos
@@ -88,6 +95,7 @@ Video.belongsTo(Course);
 Video.hasMany(Comments);
 //Comentario perteneca a un solo video
 Comments.belongsTo(Video);
+
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');

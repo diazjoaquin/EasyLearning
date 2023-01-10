@@ -1,15 +1,16 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllCoursesByTeacher } from "../../../redux/actions";
-import Navbar from "../../navbar/Navbar"
-import CourseCard from "../../card/CourseCard";
+import { getCoursesByStudent } from "../../../../redux/actions";
+import Navbar from "../../../navbar/Navbar"
+import CourseCard from "../../../card/CourseCard";
 
-const ShowMoreCourses = () => {
+const ShowMoreCourses2 = () => {
   const dispatch = useDispatch();
+  const userDB = JSON.parse(localStorage.getItem("user"))
   useEffect(() => {
-    dispatch(getAllCoursesByTeacher(1)); //id hardcodeado
+    dispatch(getCoursesByStudent(userDB?.id));
   }, [dispatch]);
-  let cursos = useSelector((state) => state.coursesCreateUser);
+  let cursos = useSelector((state) => state.purchasedCourses);
 
   return (
     <>
@@ -38,4 +39,4 @@ const ShowMoreCourses = () => {
   );
 };
 
-export default ShowMoreCourses;
+export default ShowMoreCourses2;

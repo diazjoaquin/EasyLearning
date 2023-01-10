@@ -7,6 +7,7 @@ export const GET_COURSE_DETAIL = "GET_COURSE_DETAIL";
 export const CLEAR_DETAIL = "CLEAR_DETAIL";
 export const GET_CATEGORIES = "GET_CATEGORIES";
 export const COURSES_BY_TEACHER = "COURSES_BY_TEACHER";
+export const COURSES_BY_STUDENT = "COURSES_BY_STUDENT";
 export const GET_TEACHERS = "GET_TEACHERS";
 
 // filtering & ordering:
@@ -34,7 +35,13 @@ export const ADD_TO_CART = "ADD_TO_CART";
 export const DELETE_FROM_CART = "DELETE_FROM_CART";
 export const TOTAL_CART = "TOTAL_CART";
 
-export const GET_ORDERS = " GET_ORDERS";
+export const GET_ORDERS = "GET_ORDERS";
+
+export const CLEAN_CART = "CLEAN_CART";
+
+//Review
+export const GET_SCORES = "GET_SCORES";
+export const GET_DATE = "GET_DATE";
 
 export const getAllCourses = () => async (dispatch) => {
   try {
@@ -198,11 +205,23 @@ export const getReviews = (id) => {
 export const getAllCoursesByTeacher = (userId) => {
   return async function (dispatch) {
     try {
-      const response = await axios.get(
-        `http://localhost:3001/getAllCoursesByTeacher/${userId}`
-      );
+      const response = await axios.get(`/getAllCoursesByTeacher/${userId}`);
       return dispatch({
         type: COURSES_BY_TEACHER,
+        payload: response.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const getCoursesByStudent = (userId) => {
+  return async function (dispatch) {
+    try {
+      const response = await axios.get(`/getCoursesByStudent/${userId}`);
+      return dispatch({
+        type: COURSES_BY_STUDENT,
         payload: response.data,
       });
     } catch (error) {
@@ -272,4 +291,38 @@ export const deleteFromCart = (product) => async (dispatch) => {
     type: DELETE_FROM_CART,
     payload: updatedCart,
   });
+};
+
+export const getScores = (payload) => async (dispatch) => {
+  try {
+    return dispatch({
+      type: GET_SCORES,
+      payload,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getDate = (payload) => async (dispatch) => {
+  try {
+    return dispatch({
+      type: GET_DATE,
+      payload,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const cleanCart = () => async (dispatch) => {
+  try {
+    localStorage.setItem("cart", JSON.stringify([]));
+    return dispatch({
+      type: CLEAN_CART,
+      payload: null,
+    });
+  } catch (error) {
+    console.log(error);
+  }
 };

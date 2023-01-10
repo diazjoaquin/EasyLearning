@@ -1,3 +1,4 @@
+const { encrypt } = require("../../Helper/handleBcrypt")
 const { User } = require("../../db.js");
 
 const createUser = async ({
@@ -8,12 +9,13 @@ const createUser = async ({
   avatar,
 }) => {
   try {
+    const passwordHash = await encrypt(password)
     //Create user
     const [userDB, createdUserDB] = await User.findOrCreate({
       where: { emailAddress },
       defaults: {
         fullName,
-        password,
+        password: passwordHash,
         phoneNumber: parseInt(phoneNumber),
         emailAddress,
         avatar,

@@ -3,8 +3,9 @@ import { useState } from "react";
 import { FormControl, FormLabel, Input, Button, FormErrorMessage, Select, Card } from '@chakra-ui/react';
 
 const CreateReviewPage = () => {
+    const userDB = JSON.parse(localStorage.getItem("user"));
     const [form, setForm] = useState({
-        userId: 1,
+        userId: userDB?.id,
         score: null,
         title: "",
         comments: ""
@@ -40,21 +41,16 @@ const CreateReviewPage = () => {
     }
 
     async function handleSubmit(e) {
-        // setForm({
-        //     ...form,
-        //     score: parseInt(form.score)
-        // })
-        console.log("form",form)
         let alert = await axios.post("/createReviewPage", form);
-        console.log("alert",alert.data.msg)
-        if(alert.data.msg === "error"){
+        if (alert.data.msg === "error") {
             window.alert("Solo peudes crear una reseña")
-        } else if(alert.data.msg === "ok"){
+        } else if (alert.data.msg === "ok") {
             window.alert("Reseña creada")
         }
+        window.location.reload()
     }
 
-    return(
+    return (
         <Card
             maxW='sm'
             borderWidth='1px'

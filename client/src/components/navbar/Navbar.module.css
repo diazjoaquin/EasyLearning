@@ -1,5 +1,5 @@
 .navcont {
-  padding: 20px 0;
+  margin: 20px 0;
 }
 
 .botones {
@@ -20,12 +20,17 @@
   display: flex;
   gap: 10px;
   align-items: center;
-  margin-right: 20px;
+  justify-content: flex-end;
+  margin-right: 40px;
+}
+
+.buttons div {
+  margin-right: 5px;
 }
 
 .botones img {
   height: 50px;
-  margin-left: 20px;
+  margin-left: 40px;
 }
 
 .cart {

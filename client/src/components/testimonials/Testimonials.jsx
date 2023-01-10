@@ -94,7 +94,7 @@ const Testimonial = ({ children }) => {
 
     const getData = async (data, setData) =>{
       let reviews;
-      reviews = await axios.get("http://localhost:3001/getAllReviewPage");
+      reviews = await axios.get("/getAllReviewPage");
       reviews = reviews.data
       reviews?.sort((a, b) => b.score - a.score)
       reviews = reviews?.splice(0,3);

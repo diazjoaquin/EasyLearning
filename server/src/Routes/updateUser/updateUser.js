@@ -1,6 +1,6 @@
 const { Router } = require("express");
-const { updateUser } = require("./controller");
 const router = Router();
+const { updateUser } = require("./controller.js");
 
 router.patch("/", async (req, res) => {
   try {
