@@ -45,7 +45,6 @@ export default function SignupCard() {
       let response = await axios.get(`/getUserByEmail?email=${form.emailAddress}`);
       // esto tiene que estar encriptado.
       localStorage.setItem("user", JSON.stringify(response.data));
-      console.log(JSON.stringify(response.data));
     } catch (error) {
       setError(error.message);
       console.log(error.message);

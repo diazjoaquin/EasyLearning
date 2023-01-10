@@ -4,19 +4,19 @@ import { Link, useHistory } from "react-router-dom";
 import { getCategories } from "../../redux/actions/index"
 import Navbar from "../navbar/Navbar.jsx"
 import Footer2 from "../footer/Footer2.jsx"
-import {
-  FormControl, FormLabel, Input, Box, Button, Text, Alert, AlertIcon, HStack, Tag, TagLabel, Tooltip, Select, useToast, Wrap, WrapItem
-} from '@chakra-ui/react'
+import { FormControl, FormLabel, Input, Box, Button, Text, Alert, AlertIcon, HStack, Tag, TagLabel, Tooltip, Select, useToast, Wrap, WrapItem } from '@chakra-ui/react'
 import { ArrowBackIcon } from '@chakra-ui/icons'
 import axios from "axios"
-import { validate, validateVideo } from "./validate";
+import { validate } from "./validate";
 
 const Create = () => {
-  const dispatch = useDispatch();
+  const toast = useToast()
   const history = useHistory()
-  const userDB = JSON.parse(localStorage.getItem("user"))
-  const categories = useSelector(s => s.categories)
+  const dispatch = useDispatch();
   const [file, setFile] = useState(null)
+  const [errors, setErrors] = useState({})
+  const categories = useSelector(s => s.categories)
+  const userDB = JSON.parse(localStorage.getItem("user"))
 
   const [input, setInput] = useState({
     name: "",
@@ -27,8 +27,6 @@ const Create = () => {
     category: [],
     price: null,
   })
-
-  const [errors, setErrors] = useState({})
 
   const handelChange = (e) => {
     if (e.target.name === "Thumbnail") {
@@ -50,8 +48,6 @@ const Create = () => {
     }
   }
 
-  const toast = useToast()
-
   const handelSubmit = async () => {
     const formdata = new FormData();
     formdata.append("image", file);
@@ -63,12 +59,10 @@ const Create = () => {
     formdata.append("category", input.category);
     formdata.append("price", input.price);
 
-
     let response = await axios
       .post("/createCourse", formdata)
       .catch((err) => console.error(err));
 
-    // alert(response.data.msg)
     if (response?.data?.msg?.length) {
       toast({
         title: 'Course created.',

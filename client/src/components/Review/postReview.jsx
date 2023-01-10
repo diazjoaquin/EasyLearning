@@ -23,18 +23,17 @@ const PostReview = ({ update, setUpdate }) => {
 
     const { user } = useAuth();
     const allUser = useSelector((state) => state.allUsers);
-    console.log(allUser)
 
     const usuario = user && allUser.find(u => u.email === user.email)
 
     useEffect(() => {
         // dispatch(getAllUsers())
-        if(usuario){
+        if (usuario) {
             setInput({
                 userId: usuario.id,
             })
         }
-    }, [ update ]);
+    }, [update]);
 
 
     function validate(input) {
@@ -73,19 +72,19 @@ const PostReview = ({ update, setUpdate }) => {
             && !errors.hasOwnProperty("score")
             && !errors.hasOwnProperty("comments")
         )
-        setInput({
-            ...input,
-            score: parseInt(input.score)
-        })
+            setInput({
+                ...input,
+                score: parseInt(input.score)
+            })
         toast.success("Review submitted", {
             position: "bottom-left",
-          });
+        });
         await axios.post("/createReview", input);
         setUpdate(!update)
     }
 
     return (
-        <Card
+        <Card padding="5"
             maxW='sm'
             borderWidth='1px'
             borderRadius='lg'
@@ -97,7 +96,7 @@ const PostReview = ({ update, setUpdate }) => {
                 <Select
                     name='score'
                     onChange={(e) => handleChange(e)}
-                > 
+                >
                     <option selected hidden disabled value="">Select a rating</option>
                     <option onChange={e => handleChange(e)} value={1}>1 ⭐</option>
                     <option onChange={e => handleChange(e)} value={2}>2 ⭐⭐</option>

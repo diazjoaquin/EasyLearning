@@ -21,6 +21,11 @@ const getStatistics = async () => {
     teachers = teachers?.length;
     if (teachers) data.teachers = teachers;
 
+    if (users && teachers) {
+      let onlyStudents = users - teachers;
+      data.onlyStudents = onlyStudents;
+    }
+
     console.log(data);
     return data;
   } catch (error) {
