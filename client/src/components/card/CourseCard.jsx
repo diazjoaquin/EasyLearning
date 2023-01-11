@@ -30,11 +30,10 @@ const CourseCard = ({ id, teacherName, name, description, rating, price, categor
     setUpdate(!update)
   }
 
-
-    return (
-        <Card maxW='sm'>
-            <CardBody>
-            {
+  return (
+    <Card height='550px' maxW='sm' bgColor={location.pathname === "/profile" ? '#BEE3F8' : undefined} width='300px'>
+      <CardBody  display='flex' flexDirection='column' alignItems='center' pt='3' >
+        {
           location.pathname === "/profile"
             ?
             status === "BANNED" ? <Text color='red' textAlign='center'> < InfoOutlineIcon mr='1' />Course banned for rule violation.</Text> : status === "PENDING" ? <Text color='red' textAlign='center'> < InfoOutlineIcon mr='1' />Course pending for approval.</Text> : videos?.length === 0 ? <Text color='red'> < InfoOutlineIcon mr='1' />Course archived because it has no videos.</Text> : archieved ? <Text color='red' textAlign='center'> < InfoOutlineIcon mr='1' />Archived course.</Text> : undefined
@@ -61,49 +60,41 @@ const CourseCard = ({ id, teacherName, name, description, rating, price, categor
               </Text>
               : undefined
           }
-          <Text color='blue.600' fontSize='2xl'>
-            ${price}
-          </Text>
-
-
-                
-                </Stack>
-            </CardBody>
-            <Divider />
-            <CardFooter>
-            {location.pathname !== "/profile" ?
-                
-                <ButtonGroup spacing='2'>
-                  <Link to={"/cart"}>
+        </Stack>
+      </CardBody>
+      <Divider />
+      <CardFooter>
+        {location.pathname !== "/profile" ?
+          <ButtonGroup spacing='2'>
+            <Link to={"/cart"}>
                     <Button variant='solid' colorScheme='blue' 
                         onClick={() => handleAddToCart()}>
                         Buy now
                     </Button>
                   </Link>
-                    <Button variant='ghost' colorScheme='blue'
-                        onClick={() => handleAddToCart()}>
-                        Add to cart
-                    </Button>
-                </ButtonGroup>
-                     :                    
-                <Box display='flex'>
-                <Link style={{ textDecoration: 'none' }} to={`/editcourse/${id}`} >
-
-                  <Button variant='ghost' colorScheme='blue' >
-                    Modify Course
-                  </Button>
-                </Link>
-                <FormControl display='flex' alignItems='center' >
-                  <FormLabel htmlFor='email-alerts' mb='0'>
-                    Public:
-                  </FormLabel>
-                  <Switch isChecked={archieved ? false : true} onChange={handleArchieved} id='course' />
-                </FormControl>
-                </Box>
-                   }
-            </CardFooter>
-        </Card>
-    )
+            <Button variant='ghost' colorScheme='blue'
+              onClick={() => handleAddToCart()}>
+              Add to cart
+            </Button>
+          </ButtonGroup>
+          :
+          <Box display='flex'>
+            <Link style={{ textDecoration: 'none' }} to={`/editcourse/${id}`} >
+              <Button variant='ghost' colorScheme='blue' >
+                Modify Course
+              </Button>
+            </Link>
+            <FormControl display='flex' alignItems='center' >
+              <FormLabel htmlFor='email-alerts' mb='0'>
+                Public:
+              </FormLabel>
+              <Switch isChecked={archieved ? false : true} onChange={handleArchieved} id='course' />
+            </FormControl>
+          </Box>
+        }
+      </CardFooter>
+    </Card>
+  )
 }
 
 export default CourseCard;
