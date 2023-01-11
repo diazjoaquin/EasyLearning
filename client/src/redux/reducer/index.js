@@ -23,6 +23,7 @@ import {
   GET_SCORES,
   GET_DATE,
   CLEAN_CART,
+  
 } from "../actions";
 
 const initialState = {
@@ -190,11 +191,11 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         coursesCreateUser: action.payload,
       };
-    case COURSES_BY_STUDENT:
+    /* case COURSES_BY_STUDENT:
       return {
         ...state,
         purchasedCourses: action.payload,
-      };
+      }; */
     case GET_SCORES:
       const allReviews = state.allReviews;
       const scores =

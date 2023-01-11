@@ -51,7 +51,7 @@ const PaypalCheckoutButton = (props) => {
       toast.success("Thank you for your purchase", {
         position: "bottom-left",
       });
-      let response = await axios.post("/createOrder", { prodd: shopCart, userDB });
+      await axios.post("/createOrder", { prodd: shopCart, userDB });
       dispatch(cleanCart());
       history.push("/")
     } else {
