@@ -4,6 +4,7 @@ const op = Sequelize.Op;
 
 async function getOrders({userId}) {
     console.log(userId)
+
     let user = await User.findOne({
         where: { id: userId }, 
         include: [{model: Orderr, attributes: ['id', 'name', 'price']}]

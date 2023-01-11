@@ -112,14 +112,15 @@ export const buyNow = (payload) => async (dispatch) => {
   } catch (error) {}
 };
 
-export const getOrders = () => async (dispatch) => {
-  const orders = await axios.get("/getOrders"); //hacer ruta
+export const getOrders = (userId) => async (dispatch) => {
+  const orders = await axios.get(`/getOrders/${userId}`)
   try {
     return dispatch({
       type: GET_ORDERS,
       payload: orders.data,
     });
   } catch (error) {}
+
 };
 
 export const filters = (payload) => async (dispatch) => {
