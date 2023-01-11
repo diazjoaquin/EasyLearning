@@ -17,6 +17,8 @@ import { useHistory } from 'react-router-dom';
 import { useAuth } from '../../context/Auth-context.js';
 import axios from "axios";
 import Google from './Google.jsx';
+import { auth } from "../../../firebase-config";
+
 
 
 export default function SplitScreen() {
@@ -26,15 +28,20 @@ export default function SplitScreen() {
   const [error, setError] = useState("");
   const history = useHistory();
 
-  const { login } = useAuth();
+  const { login, logout } = useAuth();
 
   const handleSubmit = async () => {
     setError("");
     try {
       await login(email, password);
       let response = await axios.get(`/getUserByEmail?email=${email}`)
-      localStorage.setItem("user", JSON.stringify(response.data))
-      history.push("/");
+      if (response.data.status === "ACTIVE") {
+        localStorage.setItem("user", JSON.stringify(response.data))
+        history.push("/");
+      } else {
+        await logout(auth);
+        window.alert(`Acount ${response.data.status}.`)
+      }
     } catch (error) {
       setError(error.message);
       console.log(error.message);

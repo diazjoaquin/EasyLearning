@@ -82,7 +82,7 @@ export default function EditCourse() {
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
-        const response = axios.patch("http://localhost:3001/updateCourse", myCourse);
+        const response = axios.patch("/updateCourse", myCourse);
         toast({
           title: 'Course updated.',
           description: "Course successfully updated.",
@@ -139,7 +139,7 @@ export default function EditCourse() {
       confirmButtonText: 'Yes, delete it!'
     }).then(async (result) => {
       if (result.isConfirmed) {
-        const response = await axios.get(`http://localhost:3001/deletedCourse/${myCourse.id}`)
+        const response = await axios.get(`/deletedCourse/${myCourse.id}`)
         toast({
           title: 'Course deleted.',
           description: "Course successfully deleted.",
