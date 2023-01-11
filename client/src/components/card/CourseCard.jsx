@@ -4,6 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { addToCart } from '../../redux/actions/index.js';
 import { InfoOutlineIcon } from '@chakra-ui/icons'
 import axios from 'axios';
+import { useState } from 'react';
 
 const CourseCard = ({ id, teacherName, name, description, rating, price, categories, image, videos, archieved, status, update, setUpdate }) => {
   const location = useLocation();
@@ -25,7 +26,7 @@ const CourseCard = ({ id, teacherName, name, description, rating, price, categor
       id,
       archieved: !archieved
     }
-    await axios.patch("http://localhost:3001/updateCourse", course).then(res => console.log(res.data.archieved))
+    await axios.patch("/updateCourse", course).then(res => console.log(res.data.archieved))
     setUpdate(!update)
   }
 
