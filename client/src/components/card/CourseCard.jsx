@@ -6,10 +6,11 @@ import { InfoOutlineIcon } from '@chakra-ui/icons'
 import axios from 'axios';
 import { useState } from 'react';
 
-const CourseCard = ({ id, teacherName, name, description, rating, price, categories, image, videos, archieved, status, update, setUpdate }) => {
+const CourseCard = ({ id, teacherName, name, description, rating, price, categories, image, videos, archieved, status, students }) => {
   const location = useLocation();
   const dispatch = useDispatch();
   const [update, setUpdate] = useState(false)
+  const userDB = JSON.parse(localStorage.getItem("user"))
 
   const handleAddToCart = () => {
     dispatch(addToCart({
@@ -70,11 +71,13 @@ const CourseCard = ({ id, teacherName, name, description, rating, price, categor
           <ButtonGroup spacing='2'>
             <Link to={"/cart"}>
               <Button variant='solid' colorScheme='blue'
+                disabled={students?.includes(userDB?.id) ? true : false}
                 onClick={() => handleAddToCart()}>
                 Buy now
               </Button>
             </Link>
             <Button variant='ghost' colorScheme='blue'
+              disabled={students?.includes(userDB?.id) ? true : false}
               onClick={() => handleAddToCart()}>
               Add to cart
             </Button>
