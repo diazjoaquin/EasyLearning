@@ -25,10 +25,16 @@ const Comments = ({  comments, update, setUpdate }) => {
   
 
   const handleSubmit = async (e) => {
-    e.preventDefault() //hay que cambiar esto por un estado local, para que se actualice solamente los comentarios cada vez que alguien comenta.
-    await axios.post("http://localhost:3001/createCommentVideo", comment);
-    setUpdate(!update)
-    document.getElementById("1").reset()   
+    e.preventDefault()
+    if (userDB?.status === "ACTIVE") {
+      await axios.post("http://localhost:3001/createCommentVideo", comment);
+      setUpdate(!update)
+      document.getElementById("1").reset()
+    }
+    else {
+      window.alert(`Acount ${userDB?.status}`)
+    }
+
   }
   return (
     <div>

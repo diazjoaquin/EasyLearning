@@ -43,13 +43,19 @@ const CreateReviewPage = () => {
     }
 
     async function handleSubmit(e) {
-        let alert = await axios.post("/createReviewPage", form);
-        if (alert.data.msg === "error") {
-            window.alert("Solo peudes crear una reseña")
-        } else if (alert.data.msg === "ok") {
-            window.alert("Reseña creada")
+        if (userDB?.status === "ACTIVE") {
+            let alert = await axios.post("/createReviewPage", form);
+            if (alert.data.msg === "error") {
+                window.alert("Solo peudes crear una reseña")
+            } else if (alert.data.msg === "ok") {
+                window.alert("Reseña creada")
+            }
+            window.location.reload()
         }
-        window.location.reload()
+        else {
+            window.alert(`Acount ${userDB?.status}`)
+        }
+
     }
 
     return (
