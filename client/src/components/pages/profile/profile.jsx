@@ -54,6 +54,13 @@ const Profile = () => {
                 <Link to='settings'>
                   <Button rightIcon={<SettingsIcon />} display='flex' justifySelf='center' mb='2' mr='15px' colorScheme='blackAlpha' pos='relative' bottom='0'>Settings</Button>
                 </Link>
+                {
+                  userDB?.admin ?
+                    <Link to='settings'>
+                      <Button display='flex' justifySelf='center' mb='2' mr='15px' colorScheme='blackAlpha' pos='relative' bottom='0'>Dashboard</Button>
+                    </Link>
+                    : undefined
+                }
               </Box>
             </Box>
           </ GridItem>
