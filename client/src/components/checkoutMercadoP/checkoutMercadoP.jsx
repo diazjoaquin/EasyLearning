@@ -10,7 +10,7 @@ export default function CheckoutMercadoP({ total, totalprice }) {
 
   const linkMp = () => {
     axios
-      .post("http://localhost:3001/postMercadoPago", {
+      .post("/postMercadoPago", {
         prod,
       })
       .then((response) => {

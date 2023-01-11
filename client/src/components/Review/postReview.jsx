@@ -66,24 +66,29 @@ const PostReview = ({ update, setUpdate }) => {
 
     async function handleSubmit(e) {
         e.preventDefault();
-        if (input.title.length > 1
-            && !errors.hasOwnProperty("title") //devuelve un buleano si el objeto tiene la propiedad especificada 
-            && !errors.hasOwnProperty("score")
-            && !errors.hasOwnProperty("comments")
-        )
-            setInput({
-                ...input,
-                score: parseInt(input.score)
-            })
-        toast.success("Review submitted", {
-            position: "bottom-left",
-        });
-        await axios.post("/createReview", input);
-        setUpdate(!update)
+        if (userDB?.status === "ACTIVE") {
+            if (input.title.length > 1
+                && !errors.hasOwnProperty("title") //devuelve un buleano si el objeto tiene la propiedad especificada 
+                && !errors.hasOwnProperty("score")
+                && !errors.hasOwnProperty("comments")
+            )
+                setInput({
+                    ...input,
+                    score: parseInt(input.score)
+                })
+            toast.success("Review submitted", {
+                position: "bottom-left",
+            });
+            await axios.post("/createReview", input);
+            setUpdate(!update)
+        }
+        else {
+            window.alert(`Acount ${userDB?.status}`)
+        }
     }
 
     return (
-        <Card padding="5"
+        <Card
             maxW='sm'
             borderWidth='1px'
             borderRadius='lg'
