@@ -4,10 +4,12 @@ import { Link, useLocation } from 'react-router-dom';
 import { addToCart } from '../../redux/actions/index.js';
 import { InfoOutlineIcon } from '@chakra-ui/icons'
 import axios from 'axios';
+import { useState } from 'react';
 
 const CourseCard = ({ id, teacherName, name, description, rating, price, categories, image, videos, archieved, status }) => {
   const location = useLocation();
   const dispatch = useDispatch();
+  const [update, setUpdate] = useState(false)
 
   const handleAddToCart = () => {
     dispatch(addToCart({
@@ -20,7 +22,7 @@ const CourseCard = ({ id, teacherName, name, description, rating, price, categor
       categories
     }));
   }
-   
+
   const handleArchieved = async () => {
     const course = {
       id,
@@ -32,7 +34,7 @@ const CourseCard = ({ id, teacherName, name, description, rating, price, categor
 
   return (
     <Card height='550px' maxW='sm' bgColor={location.pathname === "/profile" ? '#BEE3F8' : undefined} width='300px'>
-      <CardBody  display='flex' flexDirection='column' alignItems='center' pt='3' >
+      <CardBody display='flex' flexDirection='column' alignItems='center' pt='3' >
         {
           location.pathname === "/profile"
             ?
@@ -67,11 +69,11 @@ const CourseCard = ({ id, teacherName, name, description, rating, price, categor
         {location.pathname !== "/profile" ?
           <ButtonGroup spacing='2'>
             <Link to={"/cart"}>
-                    <Button variant='solid' colorScheme='blue' 
-                        onClick={() => handleAddToCart()}>
-                        Buy now
-                    </Button>
-                  </Link>
+              <Button variant='solid' colorScheme='blue'
+                onClick={() => handleAddToCart()}>
+                Buy now
+              </Button>
+            </Link>
             <Button variant='ghost' colorScheme='blue'
               onClick={() => handleAddToCart()}>
               Add to cart
