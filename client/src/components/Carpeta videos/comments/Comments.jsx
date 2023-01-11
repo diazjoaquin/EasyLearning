@@ -27,7 +27,7 @@ const Comments = ({  comments, update, setUpdate }) => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     if (userDB?.status === "ACTIVE") {
-      await axios.post("http://localhost:3001/createCommentVideo", comment);
+      await axios.post("/createCommentVideo", comment);
       setUpdate(!update)
       document.getElementById("1").reset()
     }

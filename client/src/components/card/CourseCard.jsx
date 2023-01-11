@@ -1,6 +1,5 @@
 import { Card, CardBody, CardFooter, Stack, Heading, Text, Divider, ButtonGroup, Button, FormControl, FormLabel, Switch, Box, Tooltip, Img } from '@chakra-ui/react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
 import { addToCart } from '../../redux/actions/index.js';
 import { InfoOutlineIcon } from '@chakra-ui/icons'
@@ -21,8 +20,6 @@ const CourseCard = ({ id, teacherName, name, description, rating, price, categor
       categories
     }));
   }
-  const coursesInCart = useSelector((state) => state.cart)
-  let history = useHistory();
    
   const handleArchieved = async () => {
     const course = {

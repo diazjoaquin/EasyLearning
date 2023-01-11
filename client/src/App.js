@@ -26,7 +26,6 @@ import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import FormUpdateUser from "./components/formUpdateUser/formUpdateUser";
-// import Detail2 from "./components/detail/CourseDetail2";
 
 function App() {
   return (
