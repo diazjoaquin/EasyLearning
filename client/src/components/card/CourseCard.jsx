@@ -43,8 +43,6 @@ const CourseCard = ({ id, teacherName, name, description, rating, price, categor
             : undefined
         }
         <Img width='300' height="200" src={image} alt={`image-couse${id}`} />
-
-                <img src={image} alt={`image-couse${id}`} />
         <Stack mt='6' spacing='3'>
           <Link to={`/detail/${id}`}>
             <Heading size='md'>{name}</Heading>
