@@ -46,6 +46,7 @@ const PaypalCheckoutButton = (props) => {
     return {
       name: e.name,
       price: e.price,
+      identificador: e.id
     }
   })
   const handleApprove = async (data) => {

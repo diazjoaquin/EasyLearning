@@ -106,6 +106,7 @@ export default function Home() {
                     rating={course.rating}
                     categories={course.categories}
                     image={course.image}
+                    students={course.students}
                   />)
               }
             })

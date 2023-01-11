@@ -82,6 +82,7 @@ export default function Course() {
                     image={course.image}
                     archieved={course.archieved}
                     status={course.status}
+                    students={course.students}
                   />)
               }
             })
