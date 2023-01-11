@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getCoursesByStudent, getOrders } from "../../../../redux/actions";
+import { getOrders } from "../../../../redux/actions";
 import Navbar from "../../../navbar/Navbar"
 import CourseCard2 from "../../../card/CourseCard2";
 import { Card } from "@chakra-ui/react";

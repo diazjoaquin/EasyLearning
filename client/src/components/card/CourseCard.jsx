@@ -1,4 +1,4 @@
-import { Card, CardBody, CardFooter, Stack, Heading, Text, Divider, ButtonGroup, Button, FormControl, FormLabel, Switch, Box, Img } from '@chakra-ui/react';
+import { Card, CardBody, CardFooter, Stack, Heading, Text, Divider, ButtonGroup, Button, FormControl, FormLabel, Switch, Box, Tooltip, Img } from '@chakra-ui/react';
 import { useDispatch } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
 import { addToCart } from '../../redux/actions/index.js';
@@ -6,7 +6,7 @@ import { InfoOutlineIcon } from '@chakra-ui/icons'
 import axios from 'axios';
 import { useState } from 'react';
 
-const CourseCard = ({ id, teacherName, name, description, rating, price, categories, image, videos, archieved, status }) => {
+const CourseCard = ({ id, teacherName, name, description, rating, price, categories, image, videos, archieved, status, update, setUpdate }) => {
   const location = useLocation();
   const dispatch = useDispatch();
   const [update, setUpdate] = useState(false)

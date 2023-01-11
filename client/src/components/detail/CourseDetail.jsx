@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import Navbar from "../navbar/Navbar";
-import Footer2 from "../footer/Footer2";
+import Footer2 from "../footer/Footer2"; 
 
 import CardReview from "../review/cardReview";
 import PostReview from "../review/postReview";
@@ -39,16 +39,7 @@ import {
 import { RiArrowGoBackLine } from "react-icons/ri";
 import { StarIcon } from "@chakra-ui/icons";
 
-export default function Detail({
-  teacher,
-  teacherName,
-  name,
-  description,
-  rating,
-  price,
-  categories,
-  image,
-}) {
+export default function Detail() {
   const dispatch = useDispatch();
 
   const { id } = useParams();
@@ -134,12 +125,15 @@ export default function Detail({
                 </Text>
               </CardBody>
               <CardFooter>
-              <Link to={"/cart"}>
-                    <Button variant='solid' colorScheme='blue' 
-                        onClick={() => handleAddToCart()}>
-                        Buy now
-                    </Button>
-                  </Link>
+                <Link to={"/cart"}>
+                  <Button
+                    variant="solid"
+                    colorScheme="blue"
+                    onClick={() => handleAddToCart()}
+                  >
+                    Buy now
+                  </Button>
+                </Link>
                 <Button
                   variant="ghost"
                   colorScheme="blue"
@@ -164,26 +158,25 @@ export default function Detail({
                 </h2>
                 <AccordionPanel pb={4}>
                   {myCourse?.videos?.map((e, i) => (
-                    <Card
-                      direction={{ base: "column", sm: "row" }}
-                      overflow="hidden"
-                      variant="outline"
-                      key={i}
-                    >
-                      <Stack>
-                        <CardBody>
-                          <Heading size="sm">{e.title}</Heading>
-                          <Text py="2">
-                            {e.name}
-                            {e.description}
-                            <Link to={`/detailVideo/${e.courseId}/${e.id}`}>
-                              <button>{e.urlVideo}</button>
-                            </Link>
-                            {e.teacherName}
-                          </Text>
-                        </CardBody>
-                      </Stack>
-                    </Card>
+                    <Link to={`/detailVideo/${e.courseId}/${e.id}`}>
+                      <Card
+                        direction={{ base: "column", sm: "row" }}
+                        overflow="hidden"
+                        variant="outline"
+                        key={i}
+                      >
+                        <Stack>
+                          <CardBody>
+                            <Heading size="sm">{e.title}</Heading>
+                            <Text py="2">
+                              <Text>{e.nameVideo}</Text>
+                              <Text>{e.description}</Text>
+                              <Text>{e.urlVideo}</Text>
+                            </Text>
+                          </CardBody>
+                        </Stack>
+                      </Card>
+                    </Link>
                   ))}
                 </AccordionPanel>
               </AccordionItem>

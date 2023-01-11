@@ -34,9 +34,7 @@ export const BUY_NOW = "BUY_NOW";
 export const ADD_TO_CART = "ADD_TO_CART";
 export const DELETE_FROM_CART = "DELETE_FROM_CART";
 export const TOTAL_CART = "TOTAL_CART";
-
 export const GET_ORDERS = "GET_ORDERS";
-
 export const CLEAN_CART = "CLEAN_CART";
 
 //Review
@@ -113,14 +111,13 @@ export const buyNow = (payload) => async (dispatch) => {
 };
 
 export const getOrders = (userId) => async (dispatch) => {
-  const orders = await axios.get(`/getOrders/${userId}`)
+  const orders = await axios.get(`/getOrders/${userId}`);
   try {
     return dispatch({
       type: GET_ORDERS,
       payload: orders.data,
     });
   } catch (error) {}
-
 };
 
 export const filters = (payload) => async (dispatch) => {

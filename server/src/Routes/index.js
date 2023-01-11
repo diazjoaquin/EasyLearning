@@ -25,6 +25,8 @@ const deleteCourse = require("../Routes/deleteCourse/deleteCourse.js");
 const getAllReviewTotal = require("../Routes/getAllReviewTotal/getAllReviewTotal.js");
 const updateUserDashboard = require("../Routes/updateUserDashboard/updateUserDashboard.js");
 const deleteComments = require("./deleteComments/deleteComments.js");
+const createOrder = require("./createOrder/createOrder.js");
+const getOrders = require("./getOrder/getOrder.js");
 
 // router.use("/postMercadoPago", postMercadoPago);
 
@@ -52,5 +54,7 @@ router.use("/deletedCourse", deleteCourse);
 router.use("/updateUserDashboard", updateUserDashboard);
 router.use("/getAllReviewTotal", getAllReviewTotal);
 router.use("/deleteComments", deleteComments);
+router.use("/createOrder", createOrder);
+router.use("/getOrders", getOrders);
 
 module.exports = router;
