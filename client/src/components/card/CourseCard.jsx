@@ -6,7 +6,7 @@ import { InfoOutlineIcon } from '@chakra-ui/icons'
 import axios from 'axios';
 import { useState } from 'react';
 
-const CourseCard = ({ id, teacherName, name, description, rating, price, categories, image, videos, archieved, status, students }) => {
+const CourseCard = ({ id, teacherName, name, description, rating, price, categories, image, videos, archieved, status, students, hidden }) => {
   const location = useLocation();
   const dispatch = useDispatch();
   const [update, setUpdate] = useState(false)
@@ -71,34 +71,40 @@ const CourseCard = ({ id, teacherName, name, description, rating, price, categor
           <ButtonGroup spacing='2'>
             <Link to={"/cart"}>
               <Button variant='solid' colorScheme='blue'
+                hidden={location.pathname === "/cursosComprados"}
                 disabled={students?.includes(userDB?.id) ? true : false}
                 onClick={() => handleAddToCart()}>
                 Buy now
               </Button>
             </Link>
             <Button variant='ghost' colorScheme='blue'
+              hidden={location.pathname === "/cursosComprados"}
               disabled={students?.includes(userDB?.id) ? true : false}
               onClick={() => handleAddToCart()}>
               Add to cart
             </Button>
           </ButtonGroup>
-          :
-          <Box display='flex'>
-            <Link style={{ textDecoration: 'none' }} to={`/editcourse/${id}`} >
-              <Button variant='ghost' colorScheme='blue' >
-                Modify Course
-              </Button>
-            </Link>
-            <FormControl display='flex' alignItems='center' >
-              <FormLabel htmlFor='email-alerts' mb='0'>
-                Public:
-              </FormLabel>
-              <Switch isChecked={archieved ? false : true} onChange={handleArchieved} id='course' />
-            </FormControl>
-          </Box>
+          : !hidden ?
+            undefined
+            : <Box display='flex'>
+              <Link style={{ textDecoration: 'none' }} to={`/editcourse/${id}`} >
+                <Button variant='ghost' colorScheme='blue'  >
+                  Modify Course
+                </Button>
+              </Link>
+              <FormControl display='flex' alignItems='center' >
+                <FormLabel htmlFor='email-alerts' mb='0'>
+                  Public:
+                </FormLabel>
+                <Switch isChecked={archieved ? false : true} onChange={handleArchieved} id='course' />
+              </FormControl>
+            </Box>
+
+
+
         }
       </CardFooter>
-    </Card>
+    </Card >
   )
 }
 

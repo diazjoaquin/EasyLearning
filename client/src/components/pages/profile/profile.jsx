@@ -16,8 +16,8 @@ const Profile = () => {
   const dispatch = useDispatch();
   const [update, setUpdate] = useState(false);
   let coursesCreateUser = useSelector(s => s.coursesCreateUser);
-  //let purchasedCourses = useSelector(s => s.purchasedCourses);
-  
+  let purchasedCourses = useSelector(s => s.purchasedCourses);
+
   let orders = useSelector((state) => state.allOrders);
 
   !userDB && history.push("/")
@@ -26,18 +26,18 @@ const Profile = () => {
     coursesCreateUser = coursesCreateUser?.slice(0, 3)
   }
 
-  // if (purchasedCourses?.length > 3) {
-  //   purchasedCourses = purchasedCourses?.slice(0, 3)
-  // }
-
-  if(orders.orderrs?.length > 3) {
-    orders.orderrs = orders.orderrs?.slice(0,3)
+  if (purchasedCourses?.length > 3) {
+    purchasedCourses = purchasedCourses?.slice(0, 3)
   }
+
+  // if(orders.orderrs?.length > 3) {
+  //   orders.orderrs = orders.orderrs?.slice(0,3)
+  // }
 
   useEffect(() => {
     dispatch(getAllCoursesByTeacher(userDB?.id))
-    //dispatch(getCoursesByStudent(userDB?.id))
-    dispatch(getOrders(userDB.id))
+    dispatch(getCoursesByStudent(userDB?.id))
+    // dispatch(getOrders(userDB.id))
   }, [update])
 
   return (
@@ -93,7 +93,7 @@ const Profile = () => {
                 <Box display='flex' justifyContent='center' gap='10px'>
                   {
                     coursesCreateUser.length ? coursesCreateUser?.map(e => (
-                      <CourseCard key={e.id} id={e.id} /* teacherName={e.teacherName} */ name={e.name} description={e.description} rating={e.rating} price={e.price} image={e.image} /* categories={e.categories} */ archieved={e.archieved} status={e.status} videos={e.videos} update={update} setUpdate={setUpdate} />
+                      <CourseCard key={e.id} id={e.id} teacherName={e.teacherName} name={e.name} description={e.description.slice(0, 50) + "..."} rating={e.rating} price={e.price} image={e.image} categories={e.categories} archieved={e.archieved} status={e.status} videos={e.videos} update={update} setUpdate={setUpdate} hidden={true} />
                     ))
                       : <h1>There´s not created courses </h1>
                   }
@@ -124,15 +124,17 @@ const Profile = () => {
               <Box mr='15px' p='10px' display="flex" justifyContent='center' width='100%' flexDirection="column" >
                 <Box display='flex' justifyContent='center' gap='10px'>
                   {
-                     orders.orderrs?.length ? orders.orderrs?.map(e => (
-                      <CourseCard2 key={e.id} id={e.id}  name={e.name} price={e.price} /* teacherName={e.teacherName} *//* image={e.image} */ /* categories={e.categories} */ />
+                    // orders.orderrs?.length ? orders.orderrs?.map(e => (
+                    purchasedCourses?.length ? purchasedCourses?.map(e => (
+                      <CourseCard key={e.id} id={e.id} teacherName={e.teacherName} name={e.name} description={e.description.slice(0, 50) + "..."} rating={e.rating} price={e.price} image={e.image} categories={e.categories} archieved={e.archieved} status={e.status} videos={e.videos} update={update} setUpdate={setUpdate} />
+                      // <CourseCard2 key={e.id} id={e.id} name={e.name} price={e.price} /* teacherName={e.teacherName} *//* image={e.image} */ /* categories={e.categories} */ />
                     ))
                       : <h1>There´s no purchased courses</h1>
                   }
                 </Box>
               </Box>
               <Link to="/cursosComprados">
-                <Button  mb='2' mr='2' colorScheme='blackAlpha'>Show more</Button>
+                <Button mb='2' mr='2' colorScheme='blackAlpha'>Show more</Button>
               </Link>
             </ GridItem>
           </Box>
