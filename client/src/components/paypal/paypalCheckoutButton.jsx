@@ -40,10 +40,12 @@ const PaypalCheckoutButton = (props) => {
 
 
   let shopCart = JSON.parse(localStorage.getItem("cart"));
+  console.log(shopCart);
+
   shopCart = shopCart?.map(e => {
     return {
       name: e.name,
-      price: e.price
+      price: e.price,
     }
   })
   const handleApprove = async (data) => {
