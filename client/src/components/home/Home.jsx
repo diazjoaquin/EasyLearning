@@ -88,9 +88,6 @@ export default function Home() {
       </br>
 
       <div title="carousel">
-        {/* <Carousel>
-
-                </Carousel> */}
         <div className={style.coursecont}>
           <Icon as={ArrowLeftIcon} onClick={(e) => handlePrevious(e)}
             className={style.icon} />

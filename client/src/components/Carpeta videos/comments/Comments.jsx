@@ -4,7 +4,7 @@ import { Button } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
 
 
-const Comments = ({ videoId, comments, update, setUpdate }) => {
+const Comments = ({  comments, update, setUpdate }) => {
   const params = useParams()
   const { id } = params
   const userDB = JSON.parse(localStorage.getItem("user"));
@@ -22,11 +22,12 @@ const Comments = ({ videoId, comments, update, setUpdate }) => {
       [e.target.name]: e.target.value
     });
   }
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     if (userDB?.status === "ACTIVE") {
-      await axios.post("http://localhost:3001/createCommentVideo", comment);
+      await axios.post("/createCommentVideo", comment);
       setUpdate(!update)
       document.getElementById("1").reset()
     }

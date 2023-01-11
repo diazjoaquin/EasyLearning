@@ -4,9 +4,10 @@ import Footer2 from "../../footer/Footer2.jsx"
 import { useEffect, useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { getAllCoursesByTeacher, getCoursesByStudent } from '../../../redux/actions'
+import { getAllCoursesByTeacher, getCoursesByStudent, getOrders } from '../../../redux/actions'
 import CourseCard from '../../card/CourseCard'
 import { SettingsIcon } from '@chakra-ui/icons'
+import CourseCard2 from '../../card/CourseCard2'
 
 const Profile = () => {
   window.scrollTo({ top: 0, left: 0 });
@@ -15,7 +16,10 @@ const Profile = () => {
   const dispatch = useDispatch();
   const [update, setUpdate] = useState(false);
   let coursesCreateUser = useSelector(s => s.coursesCreateUser);
-  let purchasedCourses = useSelector(s => s.purchasedCourses);
+  //let purchasedCourses = useSelector(s => s.purchasedCourses);
+  
+  let orders = useSelector((state) => state.allOrders);
+
 
   !userDB && history.push("/")
 
@@ -23,13 +27,18 @@ const Profile = () => {
     coursesCreateUser = coursesCreateUser?.slice(0, 3)
   }
 
-  if (purchasedCourses?.length > 3) {
-    purchasedCourses = purchasedCourses?.slice(0, 3)
+  // if (purchasedCourses?.length > 3) {
+  //   purchasedCourses = purchasedCourses?.slice(0, 3)
+  // }
+
+  if(orders.orderrs?.length > 3) {
+    orders.orderrs = orders.orderrs?.slice(0,3)
   }
 
   useEffect(() => {
     dispatch(getAllCoursesByTeacher(userDB?.id))
-    dispatch(getCoursesByStudent(userDB?.id))
+    //dispatch(getCoursesByStudent(userDB?.id))
+    dispatch(getOrders(userDB.id))
   }, [update])
 
   return (
@@ -65,7 +74,7 @@ const Profile = () => {
             </Box>
           </ GridItem>
           <Box w="auto" display="flex" flexDirection="column" border='1px' borderColor='gray.400' borderRadius="10" mr='4' >
-            <Heading display='flex' justifyContent='center' > Courses you created </Heading>
+            <Heading display='flex' justifyContent='center' > Your created courses </Heading>
             <GridItem height='100%' colSpan={2} display="flex" flexDirection="row" alignItems="center">
               <Link to="/formCourse">
                 <Button
@@ -85,7 +94,7 @@ const Profile = () => {
                 <Box display='flex' justifyContent='center' gap='10px'>
                   {
                     coursesCreateUser.length ? coursesCreateUser?.map(e => (
-                      <CourseCard key={e.id} id={e.id} teacherName={e.teacherName} name={e.name} description={e.description} rating={e.rating} price={e.price} image={e.image} categories={e.categories} archieved={e.archieved} status={e.status} videos={e.videos} update={update} setUpdate={setUpdate} />
+                      <CourseCard key={e.id} id={e.id} /* teacherName={e.teacherName} */ name={e.name} description={e.description} rating={e.rating} price={e.price} image={e.image} /* categories={e.categories} */ archieved={e.archieved} status={e.status} videos={e.videos} update={update} setUpdate={setUpdate} />
                     ))
                       : <h1>There´s not created courses </h1>
                   }
@@ -116,15 +125,15 @@ const Profile = () => {
               <Box mr='15px' p='10px' display="flex" justifyContent='center' width='100%' flexDirection="column" >
                 <Box display='flex' justifyContent='center' gap='10px'>
                   {
-                    purchasedCourses.length ? purchasedCourses?.map(e => (
-                      <CourseCard key={e.id} id={e.id} teacherName={e.teacherName} name={e.name} description={e.description} rating={e.rating} price={e.price} image={e.image} categories={e.categories} />
+                     orders.orderrs?.length ? orders.orderrs?.map(e => (
+                      <CourseCard2 key={e.id} id={e.id}  name={e.name} price={e.price} /* teacherName={e.teacherName} *//* image={e.image} */ /* categories={e.categories} */ />
                     ))
                       : <h1>There´s no purchased courses</h1>
                   }
                 </Box>
               </Box>
               <Link to="/cursosComprados">
-                <Button disabled={purchasedCourses.length ? false : true} mb='2' mr='2' colorScheme='blackAlpha'>Show more</Button>
+                <Button  mb='2' mr='2' colorScheme='blackAlpha'>Show more</Button>
               </Link>
             </ GridItem>
           </Box>

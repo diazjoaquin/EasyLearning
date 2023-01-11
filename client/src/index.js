@@ -13,8 +13,8 @@ import { createStandaloneToast } from "@chakra-ui/toast";
 import { FirebaseAppProvider } from "reactfire";
 import { firebaseConfig } from "./firebase-config";
 
-// axios.defaults.baseURL = process.env.REACT_APP_API;
-axios.defaults.baseURL = "http://localhost:3001";
+axios.defaults.baseURL = process.env.REACT_APP_API;
+// axios.defaults.baseURL = "http://localhost:3001";
 
 const { ToastContainer, toast } = createStandaloneToast();
 
