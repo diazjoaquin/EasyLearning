@@ -66,7 +66,7 @@ const Profile = () => {
                 </Link>
                 {
                   userDB?.admin ?
-                    <a href="http://localhost:3002/">
+                    <a href="https://easylearning-admin.web.app/">
                       <Button display='flex' justifySelf='center' mb='2' mr='15px' colorScheme='blackAlpha' pos='relative' bottom='0'>Dashboard</Button>
                     </a>
                     : undefined

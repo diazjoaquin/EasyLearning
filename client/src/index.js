@@ -13,8 +13,8 @@ import { createStandaloneToast } from "@chakra-ui/toast";
 import { FirebaseAppProvider } from "reactfire";
 import { firebaseConfig } from "./firebase-config";
 
-// axios.defaults.baseURL = process.env.REACT_APP_API;
-axios.defaults.baseURL = "http://localhost:3001";
+axios.defaults.baseURL = process.env.REACT_APP_API;
+// axios.defaults.baseURL = "http://localhost:3001";
 
 const { ToastContainer, toast } = createStandaloneToast();
 
@@ -34,13 +34,13 @@ root.render(
   </FirebaseAppProvider>
 );
 
-toast({
-  title: "An error occurred.",
-  description: "Unable to create user account.",
-  status: "error",
-  duration: 9000,
-  isClosable: true,
-});
+// toast({
+//   title: "An error occurred.",
+//   description: "Unable to create user account.",
+//   status: "error",
+//   duration: 9000,
+//   isClosable: true,
+// });
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
