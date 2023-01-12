@@ -39,16 +39,7 @@ import {
 import { RiArrowGoBackLine } from "react-icons/ri";
 import { StarIcon } from "@chakra-ui/icons";
 
-export default function Detail({
-  teacher,
-  teacherName,
-  name,
-  description,
-  rating,
-  price,
-  categories,
-  image,
-}) {
+export default function Detail() {
   const dispatch = useDispatch();
 
   const { id } = useParams();
@@ -60,9 +51,9 @@ export default function Detail({
     dispatch(getCourseDetail(id));
     dispatch(getReviews(id));
   }, [dispatch, id, update]);
+  const userDB = JSON.parse(localStorage.getItem("user"))
 
   const allReviews = useSelector((state) => state.reviews);
-  // console.log(allReviews)
 
   const handleAddToCart = () => {
     dispatch(
@@ -134,19 +125,28 @@ export default function Detail({
                 </Text>
               </CardBody>
               <CardFooter>
-              <Link to={"/cart"}>
-                    <Button variant='solid' colorScheme='blue' 
-                        onClick={() => handleAddToCart()}>
+                {
+                  myCourse?.students?.includes(userDB?.id)
+                    ? undefined
+                    : <><Link to={"/cart"}>
+                      <Button
+                        variant="solid"
+                        colorScheme="blue"
+                        onClick={() => handleAddToCart()}
+                      >
                         Buy now
-                    </Button>
-                  </Link>
-                <Button
-                  variant="ghost"
-                  colorScheme="blue"
-                  onClick={() => handleAddToCart()}
-                >
-                  Add to cart
-                </Button>
+                      </Button>
+                    </Link>
+                      <Button
+                        variant="ghost"
+                        colorScheme="blue"
+                        onClick={() => handleAddToCart()}
+                      >
+                        Add to cart
+                      </Button>
+                    </>
+                }
+
               </CardFooter>
             </Stack>
           </Card>
@@ -164,26 +164,43 @@ export default function Detail({
                 </h2>
                 <AccordionPanel pb={4}>
                   {myCourse?.videos?.map((e, i) => (
-                    <Card
-                      direction={{ base: "column", sm: "row" }}
-                      overflow="hidden"
-                      variant="outline"
-                      key={i}
-                    >
-                      <Stack>
-                        <CardBody>
-                          <Heading size="sm">{e.title}</Heading>
-                          <Text py="2">
-                            {e.name}
-                            {e.description}
-                            <Link to={`/detailVideo/${e.courseId}/${e.id}`}>
-                              <button>{e.urlVideo}</button>
-                            </Link>
-                            {e.teacherName}
-                          </Text>
-                        </CardBody>
-                      </Stack>
-                    </Card>
+                    myCourse?.students?.includes(userDB?.id) ?
+                      <Link key={i} to={`/detailVideo/${e.courseId}/${e.id}`}>
+                        <Card
+                          direction={{ base: "column", sm: "row" }}
+                          overflow="hidden"
+                          variant="outline"
+                          key={i}
+                        >
+                          <Stack>
+                            <CardBody>
+                              <Heading size="sm">{e.title}</Heading>
+                              <Text py="2">
+                                <Text>{e.nameVideo}</Text>
+                                <Text>{e.description}</Text>
+                                <Text>{e.urlVideo}</Text>
+                              </Text>
+                            </CardBody>
+                          </Stack>
+                        </Card>
+                      </Link>
+                      :
+                      <Card
+                        direction={{ base: "column", sm: "row" }}
+                        overflow="hidden"
+                        variant="outline"
+                        key={i}
+                      >
+                        <Stack>
+                          <CardBody>
+                            <Heading size="sm">{e.title}</Heading>
+                            <Text py="2">
+                              <Text>{e.nameVideo}</Text>
+                              <Text>{e.description}</Text>
+                            </Text>
+                          </CardBody>
+                        </Stack>
+                      </Card>
                   ))}
                 </AccordionPanel>
               </AccordionItem>
@@ -254,7 +271,7 @@ export default function Detail({
           )}
         </Box>
         <Box paddingLeft={200}>
-          <PostReview update={update} setUpdate={setUpdate} />
+          <PostReview update={update} setUpdate={setUpdate} students={myCourse?.students} />
         </Box>
       </Flex>
       <Footer2 />

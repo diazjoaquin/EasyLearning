@@ -2,7 +2,6 @@ import {
     Box,
     chakra,
     Container,
-    Link,
     SimpleGrid,
     Stack,
     Text,
@@ -20,39 +19,8 @@ import { Button, ButtonGroup } from '@chakra-ui/react'
 import { FaFacebook, FaLinkedin, FaInstagram } from "react-icons/fa";
 import Logo from "./easylearning.png";
 import style from "./Footer2.module.css";
+import { Link } from "react-router-dom";
 
-
-
-
-
-const SocialButton = ({
-    children,
-    label,
-    href,
-}
-) => {
-
-    <chakra.button
-
-        bg={useColorModeValue('blackAlpha.100', 'whiteAlpha.100')}
-        rounded={'full'}
-        w={8}
-        h={8}
-        cursor={'pointer'}
-        as={'a'}
-        href={href}
-        display={'inline-flex'}
-        alignItems={'center'}
-        justifyContent={'center'}
-        transition={'background 0.3s ease'}
-        _hover={{
-            bg: useColorModeValue('blackAlpha.200', 'whiteAlpha.200'),
-        }}>
-        <VisuallyHidden>{label}</VisuallyHidden>
-        {children}
-    </chakra.button>
-
-};
 
 const ListHeader = ({ children }) => {
     return (
@@ -66,7 +34,8 @@ export default function Footer2() {
     return (
         <Box
             bg={useColorModeValue('gray.50', 'gray.900')}
-            color={useColorModeValue('gray.700', 'gray.200')}>
+            color={useColorModeValue('gray.700', 'gray.200')}
+        >
             <Container as={Stack} maxW={'6xl'} py={10}>
                 <SimpleGrid
                     templateColumns={{ sm: '1fr 1fr', md: '2fr 1fr 1fr 2fr' }}
@@ -96,11 +65,11 @@ export default function Footer2() {
                             <Button colorScheme='facebook' leftIcon={<FaFacebook />}> <a href="https://es-la.facebook.com/" target="_blank">Facebook</a></Button>
                             <Button colorScheme="linkedin" leftIcon={<FaLinkedin />} > <a href="https://www.linkedin.com/feed/" target="_blank">Linkedin</a></Button>
                             {/* <Button  leftIcon={<FaInstagram />}> <a href="https://www.instagram.com/" target="_blank">Instagram</a></Button> */}
-                            
-                            
-                            <button className={style.ib}> 
-                            <a href="https://www.instagram.com/" target="_blank"><FaInstagram/>Instagram 
-                            </a>
+
+
+                            <button className={style.ib}>
+                                <a href="https://www.instagram.com/" target="_blank"><FaInstagram />Instagram
+                                </a>
                             </button>
 
 
@@ -109,19 +78,9 @@ export default function Footer2() {
                     </Stack>
                     <Stack align={'flex-start'}>
                         <ListHeader>Company</ListHeader>
-                        <Link href={'#'}>About us</Link>
-                        <Link href={'#'}>Blog</Link>
-                        <Link href={'#'}>Contact us</Link>
-                        <Link href={'#'}>Pricing</Link>
-                        <Link href={'#'}>Testimonials</Link>
-                    </Stack>
-                    <Stack align={'flex-start'}>
-                        <ListHeader>Support</ListHeader>
-                        <Link href={'#'}>Help Center</Link>
-                        <Link href={'#'}>Terms of Service</Link>
-                        <Link href={'#'}>Legal</Link>
-                        <Link href={'#'}>Privacy Policy</Link>
-                        <Link href={'#'}>Satus</Link>
+                        <Link to='/about'>About us</Link>
+                        <Link to='/blog'>Blog</Link>
+                        <Link to='/contact'>Contact us</Link>
                     </Stack>
                     <Stack align={'flex-start'}>
                         <ListHeader>Stay up to date</ListHeader>

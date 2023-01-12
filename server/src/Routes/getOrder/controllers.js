@@ -1,18 +1,18 @@
-const {Orderr, User} = require("../../db");
+const { Orderr, User } = require("../../db");
 const Sequelize = require("sequelize");
 const op = Sequelize.Op;
 
-async function getOrders({userId}) {
-    console.log(userId)
+async function getOrders({ userId }) {
+  // console.log(userId)
 
-    let user = await User.findOne({
-        where: { id: userId }, 
-        include: [{model: Orderr, attributes: ['id', 'name', 'price']}]
-    });
+  let user = await User.findOne({
+    where: { id: userId },
+    include: [{ model: Orderr, attributes: ["id", "name", "price"] }],
+  });
 
-    if (!user) throw new Error('No user in db.');
+  if (!user) throw new Error("No user in db.");
 
-    return user;
+  return user;
 }
 
-module.exports={ getOrders }
+module.exports = { getOrders };

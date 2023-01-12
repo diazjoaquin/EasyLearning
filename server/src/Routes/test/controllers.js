@@ -158,32 +158,37 @@ const test = async () => {
       //Lista de Videos
       const listVideos = [
         {
-          nameVideo: "Name video 1",
-          urlVideo: "www.youtube.com (video1)",
+          nameVideo: "Sequelize ORM #1 Integración con ExpressJS.",
+          urlVideo:
+            "https://www.youtube.com/watch?v=5wvvyrx6Fvw&list=PLUM1vMi4p6_vUR3FVaTpsspg0zMFUG6_K&index=1&ab_channel=AZRMedia",
           description: "description video 1",
           courseId: 1,
         },
         {
-          nameVideo: "Name video 2",
-          urlVideo: "www.youtube.com (video2)",
+          nameVideo: "Sequelize ORM #2 CRUD/API básicos",
+          urlVideo:
+            "https://www.youtube.com/watch?v=5wvvyrx6Fvw&list=PLUM1vMi4p6_vUR3FVaTpsspg0zMFUG6_K&index=2&ab_channel=AZRMedia",
           description: "description video 2",
           courseId: 1,
         },
         {
-          nameVideo: "Name video 3",
-          urlVideo: "www.youtube.com (video3)",
+          nameVideo: "Sequelize ORM # 3 Validaciones en el BackEnd",
+          urlVideo:
+            "https://www.youtube.com/watch?v=f9JQUBiBWsI&list=PLUM1vMi4p6_vUR3FVaTpsspg0zMFUG6_K&index=3&ab_channel=AZRMedia",
           description: "description video 3",
           courseId: 1,
         },
         {
-          nameVideo: "Name video 4",
-          urlVideo: "www.youtube.com (video4)",
+          nameVideo: "Sequelize ORM #4 | Relaciones: hasOne & belongsTo",
+          urlVideo:
+            "https://www.youtube.com/watch?v=rUDn4ITQUFQ&list=PLUM1vMi4p6_vUR3FVaTpsspg0zMFUG6_K&index=4&ab_channel=AZRMedia",
           description: "description video 4",
           courseId: 1,
         },
         {
-          nameVideo: "Name video 5",
-          urlVideo: "www.youtube.com (video5)",
+          nameVideo: "Sequelize ORM #5 | Relaciones: hasMany & belongsTo",
+          urlVideo:
+            "https://www.youtube.com/watch?v=ocysQ07G4PQ&list=PLUM1vMi4p6_vUR3FVaTpsspg0zMFUG6_K&index=5&ab_channel=AZRMedia",
           description: "description video 5",
           courseId: 1,
         },

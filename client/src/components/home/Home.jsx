@@ -27,6 +27,7 @@ export default function Home() {
   const first = last - coursesPerPage;
   const currentCourses = courses?.slice(first, last);
   const numOfPages = courses.length / coursesPerPage;
+  const userDB = JSON.parse(localStorage.getItem("user"))
 
   const handleNext = (e) => {
     e.preventDefault();
@@ -106,6 +107,7 @@ export default function Home() {
                     rating={course.rating}
                     categories={course.categories}
                     image={course.image}
+                    students={course.students}
                   />)
               }
             })
@@ -132,11 +134,15 @@ export default function Home() {
       </div>
 
       <div>
-        <Box>
-          <Center>
-            <CreateReviewPage />
-          </Center>
-        </Box>
+        {
+          userDB ?
+            <Box>
+              <Center>
+                <CreateReviewPage />
+              </Center>
+            </Box>
+            : undefined
+        }
       </div>
 
       <div>
