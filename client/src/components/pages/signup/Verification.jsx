@@ -6,6 +6,7 @@ import {
     AlertTitle,
     AlertDescription,
   } from '@chakra-ui/react'
+import { Link } from "react-router-dom";
 
 const Verification = () => {
     
@@ -22,15 +23,16 @@ const Verification = () => {
         >
           <AlertIcon boxSize='40px' mr={0}/>
             <AlertTitle mt={4} mb={1} fontSize='lg'>
-              Thank you for registirinig!
+              Thank you for registering on EasyLearning!
             </AlertTitle>
             <AlertDescription maxWidth='sm'>
-              Please check your email and verify your email adress.
+              We send you an email of verirification.
             </AlertDescription>
             <br></br>
+            <Link to='/'>
             <Button leftIcon={<EmailIcon />} colorScheme='teal' variant='solid'>
-              Resend verification email
-            </Button>
+              Go Home!
+            </Button></Link>
           </Alert>
         </section>    
         )
