@@ -4,10 +4,12 @@ import { Link, useLocation } from 'react-router-dom';
 import { addToCart } from '../../redux/actions/index.js';
 import { InfoOutlineIcon } from '@chakra-ui/icons'
 import axios from 'axios';
+import { useState } from 'react';
 
 const CourseCard = ({ id, teacherName, name, description, rating, price, categories, image, videos, archieved, status }) => {
   const location = useLocation();
   const dispatch = useDispatch();
+  const [update, setUpdate] = useState(false);
 
   const handleAddToCart = () => {
     dispatch(addToCart({
