@@ -41,7 +41,6 @@ export default function SignupCard() {
     try {
       history.push("/verification");
       await signup(form.emailAddress, form.password);
-      // await emailVerification(user);
       await axios.post("/createUser", form);
       let response = await axios.get(`/getUserByEmail?email=${form.emailAddress}`);
       // esto tiene que estar encriptado.
