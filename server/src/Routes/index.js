@@ -27,6 +27,7 @@ const updateUserDashboard = require("../Routes/updateUserDashboard/updateUserDas
 const deleteComments = require("./deleteComments/deleteComments.js");
 const createOrder = require("./createOrder/createOrder.js");
 const getOrders = require("./getOrder/getOrder.js");
+const getAllOrders = require("./getOrders/getOrders.js");
 
 // router.use("/postMercadoPago", postMercadoPago);
 
@@ -56,5 +57,6 @@ router.use("/getAllReviewTotal", getAllReviewTotal);
 router.use("/deleteComments", deleteComments);
 router.use("/createOrder", createOrder);
 router.use("/getOrders", getOrders);
+router.use("/getAllOrders", getAllOrders);
 
 module.exports = router;
