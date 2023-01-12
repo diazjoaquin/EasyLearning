@@ -26,7 +26,7 @@ const Verification = () => {
               Thank you for registering on EasyLearning!
             </AlertTitle>
             <AlertDescription maxWidth='sm'>
-              We send you an email of verirification.
+              We have sent you a verification email
             </AlertDescription>
             <br></br>
             <Link to='/'>
