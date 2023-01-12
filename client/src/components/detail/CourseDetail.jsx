@@ -126,7 +126,7 @@ export default function Detail() {
               </CardBody>
               <CardFooter>
                 {
-                  myCourse.students.includes(userDB?.id)
+                  myCourse?.students?.includes(userDB?.id)
                     ? undefined
                     : <><Link to={"/cart"}>
                       <Button
@@ -164,7 +164,7 @@ export default function Detail() {
                 </h2>
                 <AccordionPanel pb={4}>
                   {myCourse?.videos?.map((e, i) => (
-                    myCourse?.students.includes(userDB?.id) ?
+                    myCourse?.students?.includes(userDB?.id) ?
                       <Link key={i} to={`/detailVideo/${e.courseId}/${e.id}`}>
                         <Card
                           direction={{ base: "column", sm: "row" }}
