@@ -32,7 +32,6 @@ const getStatistics = async () => {
     if (reviews[0]) data.reviewsPage = reviews[0].length;
     if (reviews[1]) data.reviewsCourse = reviews[1].length;
     if (reviews[2]) data.commentsVideo = reviews[2].length;
-    console.log(data);
     return data;
   } catch (error) {
     return error;

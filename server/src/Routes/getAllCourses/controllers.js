@@ -32,6 +32,7 @@ const getAllCourses = async () => {
       rating: e.rating,
       price: e.price,
       categories: e.categories.map((e) => e.name),
+      students: e.students,
       reviews: e.reviews,
       videos: e.videos,
       image: e.image,

@@ -135,7 +135,7 @@ const Cart = () => {
                   totalCartPrice={totalCartPrice}
                 // items={totalCartItems}
                 />
-                <CheckoutMercadoP />
+                {/* <CheckoutMercadoP /> */}
               </Box>
             </Box>
           </VStack>

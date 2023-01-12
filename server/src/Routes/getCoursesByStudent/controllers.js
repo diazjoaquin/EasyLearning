@@ -1,9 +1,13 @@
-const { Course } = require("../../db.js");
+const { Course, Category } = require("../../db.js");
 
 const getCoursesByStudent = async ({ id }) => {
   try {
-    let cursos = await Course.FindAll();
-    cursos = cursos?.map((e) => e.students.includes(id));
+    let cursos = await Course.findAll({
+      include: {
+        model: Category,
+      },
+    });
+    cursos = cursos?.filter((e) => e.students.includes(parseInt(id)));
     return cursos;
   } catch (error) {
     return error;

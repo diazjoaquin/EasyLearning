@@ -14,6 +14,7 @@ import style from "./About.module.css"
 
 
 export default function About() {
+  window.scrollTo({ top: 0, left: 0 });
   return (
     <div  >
       <Navbar>
