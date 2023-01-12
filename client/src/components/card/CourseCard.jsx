@@ -33,7 +33,7 @@ const CourseCard = ({ id, teacherName, name, description, rating, price, categor
   }
 
   return (
-    <Card height='550px' maxW='sm' bgColor={location.pathname === "/profile" || location.pathname === "/cursosCreados" || location.pathname === "/cursosComprados" ? '#BEE3F8' : undefined} width='300px'>
+    <Card height='600px' maxW='sm' bgColor={location.pathname === "/profile" || location.pathname === "/cursosCreados" || location.pathname === "/cursosComprados" ? '#BEE3F8' : undefined} width='300px'>
       <CardBody display='flex' flexDirection='column' alignItems='center' pt='3' >
         {
           location.pathname === "/profile" || location.pathname === "/cursosCreados"

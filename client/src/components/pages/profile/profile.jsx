@@ -66,9 +66,9 @@ const Profile = () => {
                 </Link>
                 {
                   userDB?.admin ?
-                    <Link to='settings'>
+                    <a href="http://localhost:3002/">
                       <Button display='flex' justifySelf='center' mb='2' mr='15px' colorScheme='blackAlpha' pos='relative' bottom='0'>Dashboard</Button>
-                    </Link>
+                    </a>
                     : undefined
                 }
               </Box>

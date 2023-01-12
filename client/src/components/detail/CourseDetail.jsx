@@ -125,22 +125,28 @@ export default function Detail() {
                 </Text>
               </CardBody>
               <CardFooter>
-                <Link to={"/cart"}>
-                  <Button
-                    variant="solid"
-                    colorScheme="blue"
-                    onClick={() => handleAddToCart()}
-                  >
-                    Buy now
-                  </Button>
-                </Link>
-                <Button
-                  variant="ghost"
-                  colorScheme="blue"
-                  onClick={() => handleAddToCart()}
-                >
-                  Add to cart
-                </Button>
+                {
+                  myCourse.students.includes(userDB?.id)
+                    ? undefined
+                    : <><Link to={"/cart"}>
+                      <Button
+                        variant="solid"
+                        colorScheme="blue"
+                        onClick={() => handleAddToCart()}
+                      >
+                        Buy now
+                      </Button>
+                    </Link>
+                      <Button
+                        variant="ghost"
+                        colorScheme="blue"
+                        onClick={() => handleAddToCart()}
+                      >
+                        Add to cart
+                      </Button>
+                    </>
+                }
+
               </CardFooter>
             </Stack>
           </Card>
