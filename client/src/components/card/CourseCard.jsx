@@ -4,12 +4,10 @@ import { Link, useLocation } from 'react-router-dom';
 import { addToCart } from '../../redux/actions/index.js';
 import { InfoOutlineIcon } from '@chakra-ui/icons'
 import axios from 'axios';
-import { useState } from 'react';
 
-const CourseCard = ({ id, teacherName, name, description, rating, price, categories, image, videos, archieved, status, students, hidden }) => {
+const CourseCard = ({ id, teacherName, name, description, rating, price, categories, image, videos, archieved, status, students, hidden, update, setUpdate }) => {
   const location = useLocation();
   const dispatch = useDispatch();
-  const [update, setUpdate] = useState(false)
   const userDB = JSON.parse(localStorage.getItem("user"))
 
   const handleAddToCart = () => {
@@ -25,6 +23,7 @@ const CourseCard = ({ id, teacherName, name, description, rating, price, categor
   }
 
   const handleArchieved = async () => {
+
     const course = {
       id,
       archieved: !archieved
@@ -34,12 +33,31 @@ const CourseCard = ({ id, teacherName, name, description, rating, price, categor
   }
 
   return (
-    <Card height='550px' maxW='sm' bgColor={location.pathname === "/profile" ? '#BEE3F8' : undefined} width='300px'>
+    <Card height='550px' maxW='sm' bgColor={location.pathname === "/profile" || location.pathname === "/cursosCreados" || location.pathname === "/cursosComprados" ? '#BEE3F8' : undefined} width='300px'>
       <CardBody display='flex' flexDirection='column' alignItems='center' pt='3' >
         {
-          location.pathname === "/profile"
+          location.pathname === "/profile" || location.pathname === "/cursosCreados"
             ?
-            status === "BANNED" ? <Text color='red' textAlign='center'> < InfoOutlineIcon mr='1' />Course banned for rule violation.</Text> : status === "PENDING" ? <Text color='red' textAlign='center'> < InfoOutlineIcon mr='1' />Course pending for approval.</Text> : videos?.length === 0 ? <Text color='red'> < InfoOutlineIcon mr='1' />Course archived because it has no videos.</Text> : archieved ? <Text color='red' textAlign='center'> < InfoOutlineIcon mr='1' />Archived course.</Text> : undefined
+            status === "BANNED" ?
+              <Text color='red' textAlign='center'>
+                <Tooltip hasArrow label='The course will not be displayed because it has been blocked/hidden for violating the rules.' placement='top'>< InfoOutlineIcon mr='1' /></Tooltip>
+                Course banned for rule violation.
+              </Text>
+              : status === "PENDING" ?
+                <Text color='red' textAlign='center' >
+                  <Tooltip hasArrow label='The course is pending approval, when approved it will appear in the course listing.' placement='top'>< InfoOutlineIcon mr='1' /></Tooltip>
+                  Course pending for approval.
+                </Text>
+                : videos?.length === 0 ?
+                  <Text color='red' textAlign='center'>
+                    <Tooltip hasArrow label='The course will not be displayed if it does not have any videos, add some videos to appear in the video list.' placement='top'>< InfoOutlineIcon mr='1' /></Tooltip>
+                    Course archived because it has no videos.
+                  </Text>
+                  : archieved ?
+                    <Text color='red' textAlign='center'>
+                      <Tooltip hasArrow label='The course is archived, it will not be displayed in the list.' placement='top'>< InfoOutlineIcon mr='1' /></Tooltip>
+                      Archived course.
+                    </Text> : undefined
             : undefined
         }
         <Img width='300' height="200" src={image} alt={`image-couse${id}`} />
@@ -63,11 +81,14 @@ const CourseCard = ({ id, teacherName, name, description, rating, price, categor
               </Text>
               : undefined
           }
+          <Text color="blue.600" fontSize="2xl">
+            {`$${price}`}
+          </Text>
         </Stack>
       </CardBody>
       <Divider />
       <CardFooter>
-        {location.pathname !== "/profile" ?
+        {location.pathname !== "/profile" && location.pathname !== "/cursosCreados" ?
           <ButtonGroup spacing='2'>
             <Link to={"/cart"}>
               <Button variant='solid' colorScheme='blue'

@@ -25,7 +25,7 @@
 //   useEffect(() => {
 //     dispatch(getCourseDetail(courseId));
 //   }, [dispatch, id, update])
-  
+
 //   return (
 //     <>
 //       <Navbar />
@@ -76,7 +76,7 @@
 //                 </Link>
 //                 </Center>
 //               </Box> */}
-        
+
 //       </Center>
 //       <Footer2 />
 //     </>
@@ -119,13 +119,13 @@ export default function DetailVideo() {
 
       <Link style={{ textDecoration: 'none' }} to='/course'>
         <Button colorScheme='blue' leftIcon={<RiArrowGoBackLine />}>Back</Button>
-        
+
       </Link>
 
       <Box>
         <Box margin="50px">
           <Center>
-            <ReactPlayer url={Vd?.urlVideo} playing controls width="60%" />
+            <ReactPlayer url={Vd?.urlVideo} controls width="60%" />
           </Center>
         </Box>
         <Box margin="50px" name="Name Video" >

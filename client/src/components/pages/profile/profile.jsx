@@ -1,16 +1,14 @@
-import { Box, Heading, Grid, GridItem, Button, } from '@chakra-ui/react'
+import { Box, Heading, Grid, GridItem, Button, Text, } from '@chakra-ui/react'
 import Navbar from "../../navbar/Navbar"
 import Footer2 from "../../footer/Footer2.jsx"
 import { useEffect, useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { getAllCoursesByTeacher, getCoursesByStudent, getOrders } from '../../../redux/actions'
+import { getAllCoursesByTeacher, getCoursesByStudent } from '../../../redux/actions'
 import CourseCard from '../../card/CourseCard'
 import { SettingsIcon } from '@chakra-ui/icons'
-import CourseCard2 from '../../card/CourseCard2'
 
 const Profile = () => {
-  window.scrollTo({ top: 0, left: 0 });
   const userDB = JSON.parse(localStorage.getItem("user"));
   const history = useHistory();
   const dispatch = useDispatch();
@@ -46,19 +44,23 @@ const Profile = () => {
       <Box>
         <Grid
           templateRows='repeat(2, 1fr)'
-          templateColumns='15% 1fr'
+          templateColumns='20% 1fr'
           gap={4}
         >
           <GridItem rowSpan={2} colSpan={1} >
             <Box height='780px' ml='4' mb='4'>
               <Box pl='4' justifyItems='center' bgColor='#20B486' borderRadius="10" height='100%'>
                 <Heading>Profile</Heading>
-                <h1>
-                  {userDB?.fullName}
-                </h1>
-                <h1>
-                  {userDB?.emailAddress}
-                </h1>
+                <Text as='b' pr='1'>
+                  Name:
+                </Text>
+                {userDB?.fullName}
+                <br />
+
+                <Text as='b' pr='1'>
+                  Email:
+                </Text>
+                {userDB?.emailAddress}
                 <Link to='settings'>
                   <Button rightIcon={<SettingsIcon />} display='flex' justifySelf='center' mb='2' mr='15px' colorScheme='blackAlpha' pos='relative' bottom='0'>Settings</Button>
                 </Link>
@@ -126,7 +128,7 @@ const Profile = () => {
                   {
                     // orders.orderrs?.length ? orders.orderrs?.map(e => (
                     purchasedCourses?.length ? purchasedCourses?.map(e => (
-                      <CourseCard key={e.id} id={e.id} teacherName={e.teacherName} name={e.name} description={e.description.slice(0, 50) + "..."} rating={e.rating} price={e.price} image={e.image} categories={e.categories} archieved={e.archieved} status={e.status} videos={e.videos} update={update} setUpdate={setUpdate} />
+                      <CourseCard key={e.id} id={e.id} teacherName={e.teacherName} name={e.name} description={e.description.slice(0, 50) + "..."} rating={e.rating} price={e.price} image={e.image} categories={e.categories.map(e => e.name)} archieved={e.archieved} status={e.status} videos={e.videos} update={update} setUpdate={setUpdate} />
                       // <CourseCard2 key={e.id} id={e.id} name={e.name} price={e.price} /* teacherName={e.teacherName} *//* image={e.image} */ /* categories={e.categories} */ />
                     ))
                       : <h1>There´s no purchased courses</h1>
