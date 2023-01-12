@@ -7,9 +7,9 @@ const createOrder = async ({ prodd, userDB }) => {
 
     prodd.map(async (e) => {
       const course = await Course.findOne({ where: { id: e.identificador } });
-      course.students =
-        !course.students.includes(user.dataValues.id) &&
-        [].concat(course.students).concat(user.dataValues.id);
+      course?.students =
+        !course?.students?.includes(user?.dataValues?.id) &&
+        [].concat(course?.students).concat(user?.dataValues?.id);
 
       await course.save();
       await course.reload();
