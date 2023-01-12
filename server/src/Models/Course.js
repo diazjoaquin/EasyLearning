@@ -38,7 +38,7 @@ module.exports = (sequelize) => {
       },
       students: {
         type: DataTypes.ARRAY(DataTypes.INTEGER),
-        allowNull: true,
+        defaultValue: [],
       },
       archieved: {
         type: DataTypes.BOOLEAN,

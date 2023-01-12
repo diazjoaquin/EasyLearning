@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { FormControl, FormLabel, Input, Button, FormErrorMessage, Select, Card } from '@chakra-ui/react';
+import { FormControl, FormLabel, Input, Button, FormErrorMessage, Select, Card, useToast } from '@chakra-ui/react';
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useAuth } from "../context/Auth-context";
 
-const PostReview = ({ update, setUpdate }) => {
+const PostReview = ({ update, setUpdate, students }) => {
     const userDB = JSON.parse(localStorage.getItem("user"));
     const params = useParams();
     const [input, setInput] = useState({
@@ -17,8 +17,9 @@ const PostReview = ({ update, setUpdate }) => {
         comments: ''
     });
 
+    const toast = useToast()
+
     const [errors, setErrors] = useState({});
-    const dispatch = useDispatch();
 
     const { user } = useAuth();
     const allUser = useSelector((state) => state.allUsers);
@@ -64,8 +65,20 @@ const PostReview = ({ update, setUpdate }) => {
         }));
     }
 
+
+
     async function handleSubmit(e) {
         e.preventDefault();
+        if (!students.includes(userDB?.id)) {
+            return toast({
+                title: 'Comment failed!',
+                description: "Cannot comment if have not purchased the course.",
+                status: 'error',
+                duration: 3500,
+                isClosable: true,
+            })
+        }
+        console.log(userDB?.status);
         if (userDB?.status === "ACTIVE") {
             if (input.title.length > 1
                 && !errors.hasOwnProperty("title") //devuelve un buleano si el objeto tiene la propiedad especificada 
@@ -76,9 +89,11 @@ const PostReview = ({ update, setUpdate }) => {
                     ...input,
                     score: parseInt(input.score)
                 })
-            toast.success("Review submitted", {
-                position: "bottom-left",
-            });
+            // toast.success("Review submitted", {
+            //     position: "bottom-left",
+            // });
+            // console.log(userDB?.status);
+
             await axios.post("/createReview", input);
             setUpdate(!update)
         }
