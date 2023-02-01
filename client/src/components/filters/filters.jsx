@@ -81,7 +81,7 @@ const Filters = ({ update, setUpdate }) => {
           <select name="category" onChange={handleChange}>
             <option id="1">Categories</option>
             {
-              categories?.map((e, i) => {
+              categories.length && categories.map((e, i) => {
                 return (
                   <option key={`A${i}`} value={e}>{e}</option>
                 )
