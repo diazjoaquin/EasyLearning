@@ -7,6 +7,8 @@ const { getCourseById } = require("./getDetail/controller");
 const {
   getAllCoursesByTeacher,
 } = require("./getAllCoursesByTeacher/controller.js");
+const { getCoursesByStudent } = require("./getCoursesByStudent/controller.js");
+
 const router = Router();
 const multer = require("multer");
 const path = require("path");
@@ -64,6 +66,14 @@ router.get("/:id", async (req, res) => {
 router.get("/teacher/:id", async (req, res) => {
   try {
     res.json(await getAllCoursesByTeacher(req.params));
+  } catch (error) {
+    res.json(error);
+  }
+});
+
+router.get("/student/:id", async (req, res) => {
+  try {
+    res.json(await getCoursesByStudent(req.params));
   } catch (error) {
     res.json(error);
   }

@@ -1,4 +1,4 @@
-const { Course, Category } = require("../../db.js");
+const { Course, Category } = require("../../../db.js");
 
 const getCoursesByStudent = async ({ id }) => {
   try {

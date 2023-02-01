@@ -43,7 +43,7 @@ export const GET_DATE = "GET_DATE";
 
 export const getAllCourses = () => async (dispatch) => {
   try {
-    const all = await axios.get("/getAllCourses");
+    const all = await axios.get("/courses");
     return dispatch({
       type: GET_ALL_COURSES,
       payload: all.data,
@@ -53,7 +53,7 @@ export const getAllCourses = () => async (dispatch) => {
 
 export const byName = (name) => async (dispatch) => {
   try {
-    const byName = await axios.get(`/getByName?name=${name}`);
+    const byName = await axios.get(`/courses?name=${name}`);
     return dispatch({
       type: GET_COURSE_BY_NAME,
       payload: byName.data,
@@ -63,7 +63,7 @@ export const byName = (name) => async (dispatch) => {
 
 export const getCourseDetail = (id) => async (dispatch) => {
   try {
-    const detail = await axios.get(`/getDetail/${id}`);
+    const detail = await axios.get(`/courses/${id}`);
     return dispatch({
       type: GET_COURSE_DETAIL,
       payload: detail.data,
@@ -91,7 +91,7 @@ export const getCategories = () => async (dispatch) => {
 
 export const getTeachers = () => async (dispatch) => {
   try {
-    const teachers = await axios.get("/getAllTeachers");
+    const teachers = await axios.get("/teachers");
     return dispatch({
       type: GET_TEACHERS,
       payload: teachers.data,
@@ -111,7 +111,7 @@ export const buyNow = (payload) => async (dispatch) => {
 };
 
 export const getOrders = (userId) => async (dispatch) => {
-  const orders = await axios.get(`/getOrders/${userId}`);
+  const orders = await axios.get(`/orders/${userId}`);
   try {
     return dispatch({
       type: GET_ORDERS,
@@ -161,7 +161,7 @@ export const orderByRating = (payload) => async (dispatch) => {
 
 export const createCourse = (form) => async (dispatch) => {
   try {
-    const data = await axios.post("/", form);
+    const data = await axios.post("/courses", form);
     return dispatch({
       type: CREATE_COURSE,
       payload: data,
@@ -179,7 +179,7 @@ export const archiveCourse = () => (dispatch) => {
 
 export const deleteCourse = (id) => async (dispatch) => {
   try {
-    await axios.delete("/");
+    await axios.delete("/courses");
     return dispatch({
       type: DELETE_COURSE,
     });
@@ -189,7 +189,7 @@ export const deleteCourse = (id) => async (dispatch) => {
 export const getReviews = (id) => {
   return async function (dispatch) {
     try {
-      var reviews = await axios.get("/getReviews/" + id);
+      var reviews = await axios.get("/reviews/" + id);
       return dispatch({
         type: GET_REVIEWS,
         payload: reviews.data,
@@ -203,7 +203,7 @@ export const getReviews = (id) => {
 export const getAllCoursesByTeacher = (userId) => {
   return async function (dispatch) {
     try {
-      const response = await axios.get(`/getAllCoursesByTeacher/${userId}`);
+      const response = await axios.get(`/courses/teacher/${userId}`);
       return dispatch({
         type: COURSES_BY_TEACHER,
         payload: response.data,
@@ -217,7 +217,7 @@ export const getAllCoursesByTeacher = (userId) => {
 export const getCoursesByStudent = (userId) => {
   return async function (dispatch) {
     try {
-      const response = await axios.get(`/getCoursesByStudent/${userId}`);
+      const response = await axios.get(`/courses/student/${userId}`);
       return dispatch({
         type: COURSES_BY_STUDENT,
         payload: response.data,
@@ -230,7 +230,7 @@ export const getCoursesByStudent = (userId) => {
 
 export const getAllUsers = () => {
   return async function (dispatch) {
-    var json = await axios.get("/getUsers");
+    var json = await axios.get("/users");
     return dispatch({
       type: GET_ALL_USERS,
       payload: json.data,

@@ -97,8 +97,8 @@ export default function Speak() {
 
   const getData = async (data, setData) => {
     let reviews;
-    reviews = await axios.get("/getAllReviewPage");
-    reviews = reviews.data
+    reviews = await axios.get("/reviewsPage");
+    reviews = reviews?.data
     reviews?.sort((a, b) => b.score - a.score)
     reviews = reviews?.splice(0, 3);
     setData(data = reviews)
