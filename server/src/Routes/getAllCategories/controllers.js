@@ -17,7 +17,7 @@ const { Category } = require("../../db.js");
 const getCategories = async () => {
   try {
     let categories = await axios.get(
-      `https://categories-api-850bf-default-rtdb.firebaseio.com/categories.json`
+      `https://categorias-api-v2-default-rtdb.firebaseio.com/categories.json`
     );
     return categories.data;
   } catch (error) {
