@@ -42,13 +42,14 @@ export default function BasicStatistics() {
     const [state, setState] = useState();
 
     const getStatistics = async () => {
-        setState(await axios.get("/getStatistics"))
-    }
-
-    useEffect(() => {
+        setState(await axios.get("/admin/statistics"))
+      }
+      
+      useEffect(() => {
         getStatistics()
-    }, [])
-
+      }, [])
+      
+      console.log(state)
   return (
     <div>
       <div className={style.statistic}>

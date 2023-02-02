@@ -8,7 +8,7 @@ const {
   ReviewPage,
 } = require("../../db.js");
 const axios = require("axios");
-const { createReview } = require("../createReview/controllers.js");
+const { createReview } = require("../reviews/createReview/controller");
 
 //ruta para mockear toda la data, tiene que ser ejecutada una unica sola vez, sino rompe todo.
 
