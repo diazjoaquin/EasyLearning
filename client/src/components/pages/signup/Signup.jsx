@@ -43,7 +43,6 @@ export default function SignupCard() {
       await signup(form.emailAddress, form.password);
       await axios.post("/createUser", form);
       let response = await axios.get(`/getUserByEmail?email=${form.emailAddress}`);
-      await emailVerification(form.emailAddress);
       // esto tiene que estar encriptado.
       localStorage.setItem("user", JSON.stringify(response.data));
     } catch (error) {
