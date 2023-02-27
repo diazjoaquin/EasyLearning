@@ -17,8 +17,6 @@ Here's the application deployed on production:
 ----
 
 ## Technologies:
-
-----
 The following technologies were used on this project:
 <div align='center'>
   🔹JavaScript
