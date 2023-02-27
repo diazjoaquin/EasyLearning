@@ -50,4 +50,4 @@ Many thanks to all my work mates, who made this experience really greatful.
 
 ## Project Status:
 
-The project is currently on stand-by, but we have some ideas but we have some ideas which we plan to add to the project in the future like dark-theme mode, full responsive desing and more.
+The project is currently on stand-by, but we have some ideas which we plan to add to the project in the future like dark-theme mode, full responsive desing and more.
